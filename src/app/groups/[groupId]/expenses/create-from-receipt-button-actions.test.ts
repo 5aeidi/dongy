@@ -38,6 +38,36 @@ function respondWith(content: string | null) {
   mockCreate.mockResolvedValue({ choices: [{ message: { content } }] })
 }
 
+const IMAGE_BYTES = Buffer.from('fake-jpeg-bytes')
+
+// The action downloads the upload and sends it inline, so `fetch` stands in
+// for the S3 storage.
+const mockFetch = jest.fn()
+
+function storageServes({
+  status = 200,
+  contentType = 'image/jpeg',
+  body = IMAGE_BYTES,
+  contentLength = String(body.length),
+}: {
+  status?: number
+  contentType?: string | null
+  body?: Buffer
+  contentLength?: string | null
+} = {}) {
+  const headers: Record<string, string | null> = {
+    'content-type': contentType,
+    'content-length': contentLength,
+  }
+  mockFetch.mockResolvedValue({
+    ok: status >= 200 && status < 300,
+    status,
+    headers: { get: (name: string) => headers[name.toLowerCase()] ?? null },
+    arrayBuffer: async () =>
+      body.buffer.slice(body.byteOffset, body.byteOffset + body.length),
+  })
+}
+
 const NOTHING_EXTRACTED = {
   amount: null,
   categoryId: null,
@@ -46,7 +76,12 @@ const NOTHING_EXTRACTED = {
 }
 
 describe('extractExpenseInformationFromImage', () => {
-  beforeEach(() => mockCreate.mockReset())
+  beforeEach(() => {
+    mockCreate.mockReset()
+    mockFetch.mockReset()
+    storageServes()
+    global.fetch = mockFetch as unknown as typeof fetch
+  })
 
   it('returns every field the model read off the receipt', async () => {
     respondWith(
@@ -128,6 +163,57 @@ describe('extractExpenseInformationFromImage', () => {
     await expect(
       extractExpenseInformationFromImage('https://evil.example/receipt.jpg'),
     ).rejects.toThrow('Invalid image URL.')
+    expect(mockCreate).not.toHaveBeenCalled()
+    expect(mockFetch).not.toHaveBeenCalled()
+  })
+
+  it('sends the image inline, so the provider never has to reach the storage', async () => {
+    respondWith(
+      JSON.stringify({
+        amount: 1,
+        categoryId: '0',
+        date: '2026-03-01',
+        title: 'x',
+      }),
+    )
+    await extractExpenseInformationFromImage(IMAGE)
+
+    expect(mockFetch).toHaveBeenCalledWith(IMAGE, { redirect: 'error' })
+    const request = mockCreate.mock.calls[0][0]
+    const imageParts = request.messages
+      .flatMap((message: { content: unknown[] }) => message.content)
+      .filter((part: { type: string }) => part.type === 'image_url')
+    expect(imageParts).toEqual([
+      {
+        type: 'image_url',
+        image_url: {
+          url: `data:image/jpeg;base64,${IMAGE_BYTES.toString('base64')}`,
+        },
+      },
+    ])
+    expect(JSON.stringify(request)).not.toContain(IMAGE)
+  })
+
+  it.each([
+    ['the storage answers with an error', { status: 404 }, '(404)'],
+    ['the file is not an image', { contentType: 'text/html' }, 'not an image'],
+    ['the file has no content type', { contentType: null }, 'not an image'],
+    [
+      'the storage declares a file that is too large',
+      { contentLength: String(16 * 1024 * 1024) },
+      'too large',
+    ],
+    [
+      'the file turns out too large without a declared length',
+      { body: Buffer.alloc(16 * 1024 * 1024), contentLength: null },
+      'too large',
+    ],
+  ])('does not call the model when %s', async (_name, storage, message) => {
+    storageServes(storage)
+    respondWith(JSON.stringify({ amount: 1 }))
+    await expect(extractExpenseInformationFromImage(IMAGE)).rejects.toThrow(
+      message,
+    )
     expect(mockCreate).not.toHaveBeenCalled()
   })
 })

@@ -18,6 +18,40 @@ const receiptResponseSchema = z.object({
   title: z.string(),
 })
 
+// Inline images are limited by providers (Gemini: ~20 MB per request), and a
+// phone photo of a receipt is far below this.
+const MAX_RECEIPT_IMAGE_BYTES = 15 * 1024 * 1024
+
+/**
+ * Download an uploaded receipt and return it as a base64 `data:` URL.
+ *
+ * The model provider cannot always fetch the upload URL itself: a private
+ * bucket, or a local S3 such as MinIO on localhost, is unreachable from its
+ * servers (Gemini answers "Cannot fetch content from the provided URL").
+ * Sending the bytes inline works with every OpenAI-compatible vision API.
+ * Callers must have checked the URL with `isAllowedUploadUrl` first.
+ */
+async function fetchImageAsDataUrl(imageUrl: string): Promise<string> {
+  // `redirect: 'error'` keeps the request on the allow-listed host.
+  const response = await fetch(imageUrl, { redirect: 'error' })
+  if (!response.ok) {
+    throw new Error(`Could not read the receipt image (${response.status}).`)
+  }
+  const contentType = response.headers.get('content-type')?.split(';')[0]
+  if (!contentType?.startsWith('image/')) {
+    throw new Error('The receipt file is not an image.')
+  }
+  const declaredLength = Number(response.headers.get('content-length'))
+  if (declaredLength > MAX_RECEIPT_IMAGE_BYTES) {
+    throw new Error('The receipt image is too large.')
+  }
+  const bytes = Buffer.from(await response.arrayBuffer())
+  if (bytes.length > MAX_RECEIPT_IMAGE_BYTES) {
+    throw new Error('The receipt image is too large.')
+  }
+  return `data:${contentType};base64,${bytes.toString('base64')}`
+}
+
 export async function extractExpenseInformationFromImage(imageUrl: string) {
   'use server'
 
@@ -35,6 +69,7 @@ export async function extractExpenseInformationFromImage(imageUrl: string) {
     throw new Error('Invalid image URL.')
   }
 
+  const imageDataUrl = await fetchImageAsDataUrl(imageUrl)
   const categories = await getCategories()
   const openai = getOpenAIClient()
 
@@ -77,7 +112,7 @@ export async function extractExpenseInformationFromImage(imageUrl: string) {
       },
       {
         role: 'user',
-        content: [{ type: 'image_url', image_url: { url: imageUrl } }],
+        content: [{ type: 'image_url', image_url: { url: imageDataUrl } }],
       },
     ],
   })
