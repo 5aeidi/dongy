@@ -49,7 +49,7 @@ describe('nextTranslationBatch', () => {
       join(dir, 'en-US.json'),
       JSON.stringify({ a: 'A', b: 'B', c: 'C', d: 'D' }, null, 2) + '\n',
     )
-    await writeFile(join(dir, 'fr-FR.json'), '{}\n')
+    await writeFile(join(dir, 'fa-IR.json'), '{}\n')
   })
 
   afterEach(async () => {
@@ -58,7 +58,7 @@ describe('nextTranslationBatch', () => {
 
   it('returns the first size missing keys and advances after set', async () => {
     const first = await nextTranslationBatch({
-      locale: 'fr-FR',
+      locale: 'fa-IR',
       size: 2,
       usages: false,
     })
@@ -69,16 +69,16 @@ describe('nextTranslationBatch', () => {
     expect(first.keys.map((k) => k.key)).toEqual(['a', 'b'])
     expect(first.guidePaths).toEqual({
       baseline: 'scripts/i18n/guides/default.md',
-      locales: { 'fr-FR': 'scripts/i18n/guides/fr-FR.md' },
+      locales: { 'fa-IR': 'scripts/i18n/guides/fa-IR.md' },
     })
     expect(first.applyTemplate).toEqual({ a: '', b: '' })
-    expect(first.setCommand).toContain('set fr-FR --file')
-    expect(first.nextCommand).toContain('next --locale fr-FR')
+    expect(first.setCommand).toContain('set fa-IR --file')
+    expect(first.nextCommand).toContain('next --locale fa-IR')
 
-    await setStrings('fr-FR', { a: 'α', b: 'β' })
+    await setStrings('fa-IR', { a: 'α', b: 'β' })
 
     const second = await nextTranslationBatch({
-      locale: 'fr-FR',
+      locale: 'fa-IR',
       size: 2,
       usages: false,
     })
@@ -87,16 +87,16 @@ describe('nextTranslationBatch', () => {
     expect(second.batch).toBe(2)
     expect(second.keys.map((k) => k.key)).toEqual(['c', 'd'])
 
-    await setStrings('fr-FR', { c: 'γ', d: 'δ' })
+    await setStrings('fa-IR', { c: 'γ', d: 'δ' })
 
     const done = await nextTranslationBatch({
-      locale: 'fr-FR',
+      locale: 'fa-IR',
       size: 2,
       usages: false,
     })
     expect(done.done).toBe(true)
     expect(done.keys).toEqual([])
     expect(done.remaining).toBe(0)
-    expect(done.checkCommand).toContain('check --locale fr-FR')
+    expect(done.checkCommand).toContain('check --locale fa-IR')
   })
 })

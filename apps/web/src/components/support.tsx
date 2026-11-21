@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button'
 
 /**
  * Shared scaffold, hero, cards, notices, and copy helpers for the community
- * support pages (`/feedback` and `/sponsor`) so they stay visually consistent
+ * support pages (`/feedback` and `/support`) so they stay visually consistent
  * with each other.
  */
 
@@ -24,7 +24,7 @@ export function SupportPageShell({ children }: { children: ReactNode }) {
 
 export function SupportPageHeader({
   icon: Icon,
-  eyebrow = 'Spliit Cloud',
+  eyebrow = 'DONGY',
   title,
   description,
   children,

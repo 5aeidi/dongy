@@ -97,9 +97,7 @@ describe('ExpensePreview', () => {
     expect(screen.getByText('$22.50')).toBeInTheDocument()
     expect(screen.getByText('25%')).toBeInTheDocument()
     expect(screen.getByText('Terrace')).toBeInTheDocument()
-    expect(
-      screen.getByRole('img', { name: 'Spliit Cloud logo' }),
-    ).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: 'DONGY logo' })).toBeInTheDocument()
     expect(screen.getByText('Defaults applied')).toBeInTheDocument()
     expect(screen.getByText('Today')).toBeInTheDocument()
     expect(screen.queryByRole('textbox')).not.toBeInTheDocument()
@@ -127,9 +125,7 @@ describe('ExpensePreview', () => {
     await waitFor(() =>
       expect(screen.getByText('Expense created')).toBeInTheDocument(),
     )
-    await user.click(
-      screen.getByRole('button', { name: 'Open in Spliit Cloud' }),
-    )
+    await user.click(screen.getByRole('button', { name: 'Open in DONGY' }))
     expect(state.widget.openExternal).toHaveBeenCalledWith(
       'https://spliit.example/groups/group-1/expenses/expense-1',
     )

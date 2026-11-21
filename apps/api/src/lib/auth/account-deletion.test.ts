@@ -131,7 +131,7 @@ describe('requestAccountDeletion', () => {
     expect(sendEmailMock).toHaveBeenCalledTimes(1)
     expect(sendEmailMock.mock.calls[0]?.[0]).toMatchObject({
       to: account.email,
-      subject: 'Your Spliit Cloud account deletion is scheduled',
+      subject: 'Your DONGY account deletion is scheduled',
       text: expect.stringContaining('September 24, 2026 at 12:00:00 PM UTC'),
     })
   })
@@ -306,7 +306,7 @@ describe('cancelAccountDeletion', () => {
     expect(sendEmailMock).toHaveBeenCalledTimes(1)
     expect(sendEmailMock.mock.calls[0]?.[0]).toMatchObject({
       to: account.email,
-      subject: 'Your Spliit Cloud account deletion was cancelled',
+      subject: 'Your DONGY account deletion was cancelled',
     })
   })
 })
@@ -488,7 +488,7 @@ describe('executeAccountDeletion success (account without groups)', () => {
     expect(sendEmailMock).toHaveBeenCalledTimes(1)
     expect(sendEmailMock.mock.calls[0]?.[0]).toMatchObject({
       to: account.email,
-      subject: 'Your Spliit Cloud account was deleted',
+      subject: 'Your DONGY account was deleted',
     })
   })
 

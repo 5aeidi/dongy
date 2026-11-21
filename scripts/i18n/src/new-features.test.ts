@@ -29,12 +29,11 @@ describe('translation guides', () => {
   it('keeps one completed guide per non-en-US locale', async () => {
     await expect(assertGuideInventory()).resolves.toBeUndefined()
     const paths = await getGuidePaths({
-      locales: ['fr-FR', 'en-GZ'],
+      locales: ['fa-IR'],
     })
     expect(paths.baseline).toBe('scripts/i18n/guides/default.md')
     expect(paths.locales).toEqual({
-      'fr-FR': 'scripts/i18n/guides/fr-FR.md',
-      'en-GZ': 'scripts/i18n/guides/en-GZ.md',
+      'fa-IR': 'scripts/i18n/guides/fa-IR.md',
     })
   })
 
@@ -70,7 +69,7 @@ describe('translation guides', () => {
     )
     await writeFile(
       join(root, 'scripts/i18n/src/families.ts'),
-      "export const LANGUAGE_FAMILIES = [{ id: 'romance', locales: ['ca'] }]\n",
+      "export const LANGUAGE_FAMILIES = [{ id: 'iranian', locales: ['fa-IR'] }]\n",
     )
     await writeFile(join(root, 'apps/web/src/messages/en-US.json'), '{}\n')
     await writeFile(
@@ -82,7 +81,7 @@ describe('translation guides', () => {
       code: 'zz',
       label: 'Test',
       flag: '🏳️',
-      family: 'romance',
+      family: 'iranian',
       guide: 'new-guide.md',
       root,
     })
@@ -108,11 +107,8 @@ describe('english-identity', () => {
   })
 
   it('allows documented locale cognates in the audit only', () => {
-    expect(isAllowedLocaleCognate('fr-FR', 'Orange')).toBe(true)
-    expect(isAllowedLocaleCognate('fr-FR', 'Violet')).toBe(true)
-    expect(isAllowedLocaleCognate('ro', 'Violet')).toBe(true)
-    expect(isAllowedLocaleCognate('de-DE', 'Orange')).toBe(false)
-    expect(isAllowedLocaleCognate('fr-FR', 'Remove participant?')).toBe(false)
+    expect(isAllowedLocaleCognate('fa-IR', 'Orange')).toBe(false)
+    expect(isAllowedLocaleCognate('fa-IR', 'Remove participant?')).toBe(false)
   })
 
   it('rejects sentence-like English copies without the flag', () => {
@@ -163,7 +159,7 @@ describe('setStrings / english guard', () => {
         2,
       ) + '\n',
     )
-    await writeFile(join(dir, 'fr-FR.json'), '{}\n')
+    await writeFile(join(dir, 'fa-IR.json'), '{}\n')
   })
 
   afterEach(async () => {
@@ -172,50 +168,50 @@ describe('setStrings / english guard', () => {
 
   it('rejects identical English on set', async () => {
     await expect(
-      setString('fr-FR', 'title', 'Remove participant?'),
+      setString('fa-IR', 'title', 'Remove participant?'),
     ).rejects.toThrow(/refusing to set title/)
   })
 
   it('accepts identical English with --allow-english', async () => {
-    const result = await setString('fr-FR', 'title', 'Remove participant?', {
+    const result = await setString('fa-IR', 'title', 'Remove participant?', {
       allowEnglish: true,
     })
     expect(result.allowEnglishKeys).toEqual(['title'])
-    const data = JSON.parse(await readFile(join(dir, 'fr-FR.json'), 'utf8'))
+    const data = JSON.parse(await readFile(join(dir, 'fa-IR.json'), 'utf8'))
     expect(data.title).toBe('Remove participant?')
   })
 
   it('auto-allows brands without the flag', async () => {
-    await setString('fr-FR', 'brand', 'GitHub')
-    const data = JSON.parse(await readFile(join(dir, 'fr-FR.json'), 'utf8'))
+    await setString('fa-IR', 'brand', 'GitHub')
+    const data = JSON.parse(await readFile(join(dir, 'fa-IR.json'), 'utf8'))
     expect(data.brand).toBe('GitHub')
   })
 
   it('batch set writes all keys and dry-run does not write', async () => {
     const dry = await setStrings(
-      'fr-FR',
+      'fa-IR',
       { title: 'Supprimer le participant ?', brand: 'GitHub' },
       { dryRun: true },
     )
     expect(dry.count).toBe(2)
     expect(dry.dryRun).toBe(true)
-    expect(JSON.parse(await readFile(join(dir, 'fr-FR.json'), 'utf8'))).toEqual(
+    expect(JSON.parse(await readFile(join(dir, 'fa-IR.json'), 'utf8'))).toEqual(
       {},
     )
 
-    const written = await setStrings('fr-FR', {
+    const written = await setStrings('fa-IR', {
       title: 'Supprimer le participant ?',
       brand: 'GitHub',
     })
     expect(written.count).toBe(2)
-    const data = JSON.parse(await readFile(join(dir, 'fr-FR.json'), 'utf8'))
+    const data = JSON.parse(await readFile(join(dir, 'fa-IR.json'), 'utf8'))
     expect(data.title).toBe('Supprimer le participant ?')
     expect(data.brand).toBe('GitHub')
   })
 
   it('batch set rejects if any entry is untranslated English', async () => {
     await expect(
-      setStrings('fr-FR', {
+      setStrings('fa-IR', {
         title: 'Remove participant?',
         brand: 'GitHub',
       }),
@@ -223,10 +219,10 @@ describe('setStrings / english guard', () => {
   })
 
   it('still rejects a documented cognate on set without the flag', async () => {
-    await expect(setString('fr-FR', 'color', 'Orange')).rejects.toThrow(
+    await expect(setString('fa-IR', 'color', 'Orange')).rejects.toThrow(
       /refusing to set color/,
     )
-    const result = await setString('fr-FR', 'color', 'Orange', {
+    const result = await setString('fa-IR', 'color', 'Orange', {
       allowEnglish: true,
     })
     expect(result.allowEnglishKeys).toEqual(['color'])
@@ -270,7 +266,7 @@ describe('packMessages', () => {
       ) + '\n',
     )
     await writeFile(
-      join(dir, 'fr-FR.json'),
+      join(dir, 'fa-IR.json'),
       JSON.stringify({ Members: { title: 'Membres' } }, null, 2) + '\n',
     )
   })
@@ -281,8 +277,7 @@ describe('packMessages', () => {
 
   it('packs missing keys with en, refs, neighbors, and limit', async () => {
     const result = await packMessages({
-      locale: 'fr-FR',
-      refs: ['es'],
+      locale: 'fa-IR',
       limit: 10,
     })
     expect(result.total).toBe(1)
@@ -290,14 +285,13 @@ describe('packMessages', () => {
     expect(result.keys[0]).toMatchObject({
       key: 'Members.remove',
       en: 'Remove participant?',
-      values: { es: '¿Eliminar participante?' },
     })
     expect(result.keys[0].neighbors['Members.title']).toBe('Membres')
   })
 
   it('changesOnly filters to introduced keys', async () => {
     const result = await packMessages({
-      locale: 'fr-FR',
+      locale: 'fa-IR',
       changesOnly: true,
       readOldEn: async () => ({
         Members: { title: 'Members', remove: 'Remove participant?' },
@@ -322,7 +316,7 @@ describe('getKeysAcrossLocales', () => {
       JSON.stringify({ hello: 'Hello' }, null, 2) + '\n',
     )
     await writeFile(
-      join(dir, 'fr-FR.json'),
+      join(dir, 'fa-IR.json'),
       JSON.stringify({ hello: 'Bonjour' }, null, 2) + '\n',
     )
   })
@@ -334,11 +328,11 @@ describe('getKeysAcrossLocales', () => {
   it('returns per-locale values with null for missing', async () => {
     const result = await getKeysAcrossLocales(
       ['hello', 'missing'],
-      ['en-US', 'fr-FR', 'de-DE'],
+      ['en-US', 'fa-IR'],
     )
     expect(result).toEqual({
-      hello: { 'en-US': 'Hello', 'fr-FR': 'Bonjour', 'de-DE': null },
-      missing: { 'en-US': null, 'fr-FR': null, 'de-DE': null },
+      hello: { 'en-US': 'Hello', 'fa-IR': 'Bonjour' },
+      missing: { 'en-US': null, 'fa-IR': null },
     })
   })
 })

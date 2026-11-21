@@ -126,7 +126,7 @@ describe('DocumentsStep', () => {
     renderStep()
     expect(
       screen.getByText(
-        /Spliit Cloud can securely copy receipt images from the original spliit\.app group/i,
+        /DONGY can securely copy receipt images from the original spliit\.app group/i,
       ),
     ).toBeInTheDocument()
   })
@@ -319,7 +319,7 @@ describe('DocumentsStep', () => {
 
     expect(
       screen.getByText(
-        /Restore the original document files embedded in this Spliit Cloud backup/i,
+        /Restore the original document files embedded in this DONGY backup/i,
       ),
     ).toBeInTheDocument()
     expect(

@@ -8,8 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { anonymizeSplitwiseCsv } from '@spliit/domain/import'
 
-const SPLITWISE_ISSUES_URL =
-  'https://github.com/antonio-ivanovski/spliit-cloud/issues'
+const SPLITWISE_ISSUES_URL = 'https://github.com/5aeidi/dongy/issues'
 
 type Status =
   | { kind: 'idle' }

@@ -18,7 +18,7 @@ export function LegalPage({
       <article className="mx-auto max-w-3xl rounded-lg border bg-card px-5 py-8 shadow-sm sm:px-10 sm:py-12">
         <header className="mb-10 border-b pb-7">
           <p className="mb-2 text-xs font-semibold tracking-[0.18em] text-muted-foreground uppercase">
-            Spliit Cloud
+            DONGY
           </p>
           <h2 className="font-rounded text-3xl font-semibold tracking-tight sm:text-4xl">
             {title}

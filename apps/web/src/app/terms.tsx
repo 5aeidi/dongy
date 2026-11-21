@@ -4,20 +4,20 @@ export default function TermsPage() {
   return (
     <LegalPage title="Terms of use">
       <p>
-        Spliit Cloud is a free, non-commercial, community-maintained project. By
+        DONGY is a free, non-commercial, community-maintained project. By
         accessing or using it, you agree to these terms.
       </p>
 
       <section>
         <h3>Use at your own discretion</h3>
         <p>
-          Spliit Cloud is provided as-is and as available. It is a convenience
-          tool for recording shared expenses, not a bank, payment service,
-          accounting system, escrow service, or source of financial advice.
-          Balances, calculations, imports, exports, notifications, and other
-          outputs may be incomplete, delayed, inaccurate, unavailable, or lost.
-          You are responsible for checking records and settling money directly
-          with the people involved.
+          DONGY is provided as-is and as available. It is a convenience tool for
+          recording shared expenses, not a bank, payment service, accounting
+          system, escrow service, or source of financial advice. Balances,
+          calculations, imports, exports, notifications, and other outputs may
+          be incomplete, delayed, inaccurate, unavailable, or lost. You are
+          responsible for checking records and settling money directly with the
+          people involved.
         </p>
       </section>
 

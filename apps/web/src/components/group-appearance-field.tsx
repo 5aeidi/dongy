@@ -104,13 +104,17 @@ function ScrollRow({
   const startFade = isRtl ? rightFade : leftFade
   const endFade = isRtl ? leftFade : rightFade
   const FADE_PX = 32
+  // DONGY: the fade is three hard steps, not a smooth ramp.
+  const F = FADE_PX
+  const fadeIn = `transparent 0 ${F / 3}px, rgb(0 0 0 / 0.33) ${F / 3}px ${(2 * F) / 3}px, rgb(0 0 0 / 0.66) ${(2 * F) / 3}px ${F}px`
+  const fadeOut = `rgb(0 0 0 / 0.66) calc(100% - ${F}px) calc(100% - ${(2 * F) / 3}px), rgb(0 0 0 / 0.33) calc(100% - ${(2 * F) / 3}px) calc(100% - ${F / 3}px), transparent calc(100% - ${F / 3}px)`
   let maskImage: string | undefined
   if (leftFade && rightFade) {
-    maskImage = `linear-gradient(to right, transparent, black ${FADE_PX}px, black calc(100% - ${FADE_PX}px), transparent)`
+    maskImage = `linear-gradient(to right, ${fadeIn}, black ${F}px calc(100% - ${F}px), ${fadeOut})`
   } else if (leftFade) {
-    maskImage = `linear-gradient(to right, transparent, black ${FADE_PX}px, black)`
+    maskImage = `linear-gradient(to right, ${fadeIn}, black ${F}px)`
   } else if (rightFade) {
-    maskImage = `linear-gradient(to right, black, black calc(100% - ${FADE_PX}px), transparent)`
+    maskImage = `linear-gradient(to right, black 0 calc(100% - ${F}px), ${fadeOut})`
   }
 
   function scrollTowardEnd() {
@@ -564,7 +568,7 @@ export function GroupAppearanceField({
                 ? { backgroundColor: customColorValue }
                 : {
                     background:
-                      'conic-gradient(#f43f5e,#f59e0b,#84cc16,#06b6d4,#8b5cf6,#f43f5e)',
+                      'linear-gradient(to right,#f43f5e 0 20%,#f59e0b 20% 40%,#84cc16 40% 60%,#06b6d4 60% 80%,#8b5cf6 80% 100%)',
                   }
             }
             className={cn(

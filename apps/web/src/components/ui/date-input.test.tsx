@@ -38,7 +38,7 @@ afterEach(async () => {
 
 describe('DateInput', () => {
   it('renders the ISO value in the app-selected locale', async () => {
-    await setUserLocale('mk-MK', { notify: false, persist: false })
+    await setUserLocale('fa-IR', { notify: false, persist: false })
 
     const { getByTestId } = render(
       <I18nProvider>
@@ -50,12 +50,12 @@ describe('DateInput', () => {
       </I18nProvider>,
     )
 
-    expect(getByTestId('date-input')).toHaveAttribute('lang', 'mk-MK')
-    expect(getByTestId('date-input')).toHaveValue('06.08.2026')
+    expect(getByTestId('date-input')).toHaveAttribute('lang', 'fa-IR')
+    expect(getByTestId('date-input')).toHaveValue('۲۰۲۶/۰۸/۰۶')
   })
 
   it('returns ISO calendar dates selected from the localized calendar', async () => {
-    await setUserLocale('mk-MK', { notify: false, persist: false })
+    await setUserLocale('fa-IR', { notify: false, persist: false })
     const onValueChange = vi.fn()
     const user = userEvent.setup()
 
@@ -72,16 +72,16 @@ describe('DateInput', () => {
 
     await user.click(screen.getByRole('button', { name: 'Expense date…' }))
     await user.click(
-      await screen.findByRole('button', { name: /07 август 2026$/u }),
+      await screen.findByRole('button', { name: / ۷ آگوست ۲۰۲۶$/u }),
     )
 
     expect(onValueChange).toHaveBeenCalledWith('2026-08-07')
-    expect(screen.getByTestId('date-input')).toHaveValue('07.08.2026')
+    expect(screen.getByTestId('date-input')).toHaveValue('۲۰۲۶/۰۸/۰۷')
   })
 
   it('opens the localized calendar in a bottom drawer on mobile', async () => {
     mediaQueryMock.mockReturnValue(false)
-    await setUserLocale('mk-MK', { notify: false, persist: false })
+    await setUserLocale('fa-IR', { notify: false, persist: false })
     const onValueChange = vi.fn()
     const user = userEvent.setup()
 
@@ -103,11 +103,11 @@ describe('DateInput', () => {
       screen.getByRole('heading', { name: 'Датум на трошок' }),
     ).toBeInTheDocument()
     expect(
-      screen.getByRole('button', { name: /07 август 2026$/u }),
+      screen.getByRole('button', { name: / ۷ آگوست ۲۰۲۶$/u }),
     ).toBeInTheDocument()
 
     await user.click(
-      screen.getByRole('button', { name: /07 август 2026$/u }),
+      screen.getByRole('button', { name: / ۷ آگوست ۲۰۲۶$/u }),
     )
 
     expect(onValueChange).toHaveBeenCalledWith('2026-08-07')
@@ -212,7 +212,7 @@ describe('DateInput', () => {
   })
 
   it('allows localized keyboard editing and clearing optional dates', async () => {
-    await setUserLocale('mk-MK', { notify: false, persist: false })
+    await setUserLocale('fa-IR', { notify: false, persist: false })
     const onValueChange = vi.fn()
     const user = userEvent.setup()
 
@@ -230,11 +230,11 @@ describe('DateInput', () => {
 
     const input = screen.getByTestId('date-input')
     await user.clear(input)
-    await user.type(input, '07.08.2026')
+    await user.type(input, '۲۰۲۶/۰۸/۰۷')
     await user.tab()
 
     expect(onValueChange).toHaveBeenLastCalledWith('2026-08-07')
-    expect(input).toHaveValue('07.08.2026')
+    expect(input).toHaveValue('۲۰۲۶/۰۸/۰۷')
 
     await user.click(screen.getByRole('button', { name: 'Исчисти датум' }))
     expect(onValueChange).toHaveBeenLastCalledWith('')

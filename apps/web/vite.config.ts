@@ -79,7 +79,7 @@ export default defineConfig({
       ],
       manifest: {
         id: '/',
-        name: 'Spliit Cloud',
+        name: 'DONGY',
         short_name: 'Spliit',
         description: 'Share expenses with friends & family',
         start_url: '/',
@@ -269,8 +269,16 @@ export default defineConfig({
     strictPort: true,
   },
   resolve: {
-    alias: {
-      '@': path.resolve(import.meta.dirname, './src'),
-    },
+    alias: [
+      // DONGY: swap lucide icons for pixel-art ones (see the shim).
+      {
+        find: /^lucide-react$/,
+        replacement: path.resolve(
+          import.meta.dirname,
+          './src/components/pixel-icons/lucide-shim.tsx',
+        ),
+      },
+      { find: '@', replacement: path.resolve(import.meta.dirname, './src') },
+    ],
   },
 })

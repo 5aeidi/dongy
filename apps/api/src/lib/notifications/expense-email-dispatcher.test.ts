@@ -121,7 +121,7 @@ describe('ExpenseEmailActivityNotificationDispatcher', () => {
     expect(sendEmailMock).toHaveBeenCalledWith(
       expect.objectContaining({
         to: 'bob@test.com',
-        subject: '[Spliit Cloud] Expense categories updated in Test Group',
+        subject: '[DONGY] Expense categories updated in Test Group',
         text: expect.stringContaining(
           'Alice updated categories for 3 expenses in Test Group.',
         ),
@@ -149,7 +149,7 @@ describe('ExpenseEmailActivityNotificationDispatcher', () => {
         expect.objectContaining({
           to: 'bob@test.com',
           subject: expect.stringContaining(
-            '[Spliit Cloud] Expense "Dinner" was added by Alice to Test Group',
+            '[DONGY] Expense "Dinner" was added by Alice to Test Group',
           ),
         }),
       )

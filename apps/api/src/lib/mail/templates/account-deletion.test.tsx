@@ -16,9 +16,7 @@ describe('account deletion emails', () => {
       executeAtLabel: 'September 24, 2026 at 2:23:00 PM UTC',
       keepDisplayName: false,
     })
-    expect(rendered.subject).toBe(
-      'Your Spliit Cloud account deletion is scheduled',
-    )
+    expect(rendered.subject).toBe('Your DONGY account deletion is scheduled')
     expect(rendered.text).toContain('September 24, 2026 at 2:23:00 PM UTC')
     expect(rendered.text).toContain('“Deleted member”')
     for (const path of [
@@ -54,9 +52,7 @@ describe('account deletion emails', () => {
 
   it('renders the cancelled notice', async () => {
     const rendered = await renderAccountDeletionCancelledEmail()
-    expect(rendered.subject).toBe(
-      'Your Spliit Cloud account deletion was cancelled',
-    )
+    expect(rendered.subject).toBe('Your DONGY account deletion was cancelled')
     expect(rendered.text).toContain(
       'account remains active and nothing was deleted',
     )
@@ -69,7 +65,7 @@ describe('account deletion emails', () => {
 
   it('renders the executed notice', async () => {
     const rendered = await renderAccountDeletionExecutedEmail()
-    expect(rendered.subject).toBe('Your Spliit Cloud account was deleted')
+    expect(rendered.subject).toBe('Your DONGY account was deleted')
     expect(rendered.text).toContain('permanently deleted')
     expect(rendered.html).toContain('account was deleted')
   })

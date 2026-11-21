@@ -113,18 +113,18 @@ function ensureUniqueShareRows(
 ) {
   const ids = rows.map((row) => row.participantId ?? row.ledgerParticipantId)
   if (new Set(ids).size !== ids.length) {
-    throw new Error(`Spliit Cloud manifest contains duplicate ${label} rows.`)
+    throw new Error(`DONGY manifest contains duplicate ${label} rows.`)
   }
 }
 
 function validateManifestReferences(manifest: SpliitGroupExportManifest) {
   const unique = (values: string[], label: string) => {
     if (new Set(values).size !== values.length) {
-      throw new Error(`Spliit Cloud manifest contains duplicate ${label} IDs.`)
+      throw new Error(`DONGY manifest contains duplicate ${label} IDs.`)
     }
   }
   if (manifest.scope.sourceId !== manifest.group.sourceId) {
-    throw new Error('Spliit Cloud manifest scope does not match its group.')
+    throw new Error('DONGY manifest scope does not match its group.')
   }
   unique(
     manifest.participants.map((participant) => participant.sourceId),
@@ -158,12 +158,10 @@ function validateManifestReferences(manifest: SpliitGroupExportManifest) {
   const documentIds = new Set(documents.map((document) => document.sourceId))
   for (const warning of manifest.warnings) {
     if (!documentIds.has(warning.documentId)) {
-      throw new Error(
-        'Spliit Cloud manifest warning references an unknown document.',
-      )
+      throw new Error('DONGY manifest warning references an unknown document.')
     }
     if (warning.path !== null && !isSafeArchivePath(warning.path)) {
-      throw new Error('Spliit Cloud manifest warning path is unsafe.')
+      throw new Error('DONGY manifest warning path is unsafe.')
     }
   }
   const participantIds = new Set(
@@ -171,9 +169,7 @@ function validateManifestReferences(manifest: SpliitGroupExportManifest) {
   )
   const ensureParticipant = (id: string) => {
     if (!participantIds.has(id)) {
-      throw new Error(
-        'Spliit Cloud manifest references an unknown participant.',
-      )
+      throw new Error('DONGY manifest references an unknown participant.')
     }
   }
   const seriesIds = new Set(
@@ -223,9 +219,7 @@ function validateManifestReferences(manifest: SpliitGroupExportManifest) {
       expense.recurringSeriesId &&
       !seriesIds.has(expense.recurringSeriesId)
     ) {
-      throw new Error(
-        'Spliit Cloud manifest references an unknown recurrence series.',
-      )
+      throw new Error('DONGY manifest references an unknown recurrence series.')
     }
     ensureUniqueShareRows(expense.paidByList, 'expense payer')
     ensureUniqueShareRows(expense.paidFor, 'expense share')
@@ -245,7 +239,7 @@ function validateManifestReferences(manifest: SpliitGroupExportManifest) {
     )
     expense.comments.forEach((comment) => {
       if (commentIds.has(comment.sourceId)) {
-        throw new Error('Spliit Cloud manifest contains duplicate comment IDs.')
+        throw new Error('DONGY manifest contains duplicate comment IDs.')
       }
       commentIds.add(comment.sourceId)
       if (comment.authorParticipantId)
@@ -342,21 +336,21 @@ async function inspectGroupManifest(
 }
 
 /**
- * Inspect a Spliit Cloud backup in the browser without synchronously inflating
- * the archive. Only the root/nested manifests and documents referenced by them
- * are retained; viewer assets and other future entries are safely ignored.
+ * Inspect a DONGY backup in the browser without synchronously inflating the
+ * archive. Only the root/nested manifests and documents referenced by them are
+ * retained; viewer assets and other future entries are safely ignored.
  */
 export async function inspectSpliitCloudBundle(
   input: Blob,
   maxDocumentBytes: number = MAX_CLOUD_DOCUMENT_BYTES,
 ): Promise<CloudBundleInspection> {
   if (input.size > MAX_CLOUD_BUNDLE_BYTES) {
-    throw new Error('This Spliit Cloud backup is too large to import.')
+    throw new Error('This DONGY backup is too large to import.')
   }
 
   const firstChunk = new Uint8Array(await input.slice(0, 4).arrayBuffer())
   if (!hasZipSignature(firstChunk)) {
-    throw new Error('This file is not a Spliit Cloud backup ZIP.')
+    throw new Error('This file is not a DONGY backup ZIP.')
   }
 
   const extracted = new Map<string, Uint8Array>()
@@ -370,7 +364,7 @@ export async function inspectSpliitCloudBundle(
   const unzip = new Unzip((entry) => {
     entryCount += 1
     if (entryCount > MAX_CLOUD_BUNDLE_ENTRIES) {
-      failure ??= new Error('This Spliit Cloud backup contains too many files.')
+      failure ??= new Error('This DONGY backup contains too many files.')
       return
     }
 
@@ -407,7 +401,7 @@ export async function inspectSpliitCloudBundle(
       expandedBytes += entry.originalSize
       if (expandedBytes > MAX_CLOUD_BUNDLE_EXPANDED_BYTES) {
         failure ??= new Error(
-          'Expanded Spliit Cloud backup data exceeds the import limit.',
+          'Expanded DONGY backup data exceeds the import limit.',
         )
         return
       }
@@ -447,7 +441,7 @@ export async function inspectSpliitCloudBundle(
             if (expandedBytes > MAX_CLOUD_BUNDLE_EXPANDED_BYTES) {
               reject(
                 new Error(
-                  'Expanded Spliit Cloud backup data exceeds the import limit.',
+                  'Expanded DONGY backup data exceeds the import limit.',
                 ),
               )
               return
@@ -494,20 +488,16 @@ export async function inspectSpliitCloudBundle(
         : new Error('Invalid ZIP bundle.')
   }
   if (failure) throw failure
-  if (!manifestBytes)
-    throw new Error('Spliit Cloud backup is missing manifest.json.')
+  if (!manifestBytes) throw new Error('DONGY backup is missing manifest.json.')
 
-  const rawManifest = parseJson(
-    manifestBytes,
-    'Spliit Cloud backup manifest.json',
-  )
+  const rawManifest = parseJson(manifestBytes, 'DONGY backup manifest.json')
   const rawScope =
     typeof rawManifest === 'object' && rawManifest !== null
       ? (rawManifest as { scope?: { type?: unknown } }).scope?.type
       : undefined
   if (rawScope !== 'GROUP' && rawScope !== 'ACCOUNT') {
     throw new Error(
-      'This Spliit Cloud backup does not contain a supported group or account scope.',
+      'This DONGY backup does not contain a supported group or account scope.',
     )
   }
 
@@ -523,18 +513,14 @@ export async function inspectSpliitCloudBundle(
   const manifestPaths = new Set<string>()
   for (const group of manifest.groups) {
     if (groupIds.has(group.sourceId)) {
-      throw new Error(
-        'Spliit Cloud account backup contains duplicate group IDs.',
-      )
+      throw new Error('DONGY account backup contains duplicate group IDs.')
     }
     if (!isSafeArchivePath(group.manifestPath)) {
-      throw new Error(
-        'Spliit Cloud account backup contains an unsafe group path.',
-      )
+      throw new Error('DONGY account backup contains an unsafe group path.')
     }
     if (manifestPaths.has(group.manifestPath)) {
       throw new Error(
-        'Spliit Cloud account backup contains duplicate group manifest paths.',
+        'DONGY account backup contains duplicate group manifest paths.',
       )
     }
     groupIds.add(group.sourceId)
@@ -544,12 +530,12 @@ export async function inspectSpliitCloudBundle(
   for (const preference of manifest.groupPreferences ?? []) {
     if (!groupIds.has(preference.groupSourceId)) {
       throw new Error(
-        'Spliit Cloud account backup references an unknown group preference.',
+        'DONGY account backup references an unknown group preference.',
       )
     }
     if (preferenceIds.has(preference.groupSourceId)) {
       throw new Error(
-        'Spliit Cloud account backup contains duplicate group preferences.',
+        'DONGY account backup contains duplicate group preferences.',
       )
     }
     preferenceIds.add(preference.groupSourceId)
@@ -558,20 +544,18 @@ export async function inspectSpliitCloudBundle(
   const identityIds = new Set<string>()
   for (const identity of manifest.identities) {
     if (identityIds.has(identity.sourceId)) {
-      throw new Error(
-        'Spliit Cloud account backup contains duplicate identities.',
-      )
+      throw new Error('DONGY account backup contains duplicate identities.')
     }
     identityIds.add(identity.sourceId)
   }
   if (manifest.account.sourceId !== manifest.scope.sourceId) {
     throw new Error(
-      'Spliit Cloud account backup account does not match its export scope.',
+      'DONGY account backup account does not match its export scope.',
     )
   }
   if (!identityIds.has(manifest.scope.sourceId)) {
     throw new Error(
-      'Spliit Cloud account backup is missing the exporting account identity.',
+      'DONGY account backup is missing the exporting account identity.',
     )
   }
 
@@ -579,31 +563,29 @@ export async function inspectSpliitCloudBundle(
   for (const index of manifest.groups) {
     const groupBytes = extracted.get(index.manifestPath)
     if (!groupBytes) {
-      throw new Error(
-        `Spliit Cloud account backup is missing ${index.manifestPath}.`,
-      )
+      throw new Error(`DONGY account backup is missing ${index.manifestPath}.`)
     }
     const groupManifest = Effect.runSync(
       parseCloudGroupManifest(parseJson(groupBytes, index.manifestPath)),
     )
     if (groupManifest.scope.sourceId !== index.sourceId) {
       throw new Error(
-        `Spliit Cloud group manifest ${index.manifestPath} does not match its index.`,
+        `DONGY group manifest ${index.manifestPath} does not match its index.`,
       )
     }
     if (groupManifest.complete !== index.complete) {
       throw new Error(
-        `Spliit Cloud group manifest ${index.manifestPath} has inconsistent completeness.`,
+        `DONGY group manifest ${index.manifestPath} has inconsistent completeness.`,
       )
     }
     if (groupManifest.group.archived !== index.archived) {
       throw new Error(
-        `Spliit Cloud group manifest ${index.manifestPath} has inconsistent archive state.`,
+        `DONGY group manifest ${index.manifestPath} has inconsistent archive state.`,
       )
     }
     if (groupManifest.group.groupType !== index.groupType) {
       throw new Error(
-        `Spliit Cloud group manifest ${index.manifestPath} has inconsistent group type.`,
+        `DONGY group manifest ${index.manifestPath} has inconsistent group type.`,
       )
     }
     for (const participant of groupManifest.participants) {
@@ -612,7 +594,7 @@ export async function inspectSpliitCloudBundle(
         !identityIds.has(participant.identity.accountId)
       ) {
         throw new Error(
-          'Spliit Cloud group manifest references an identity missing from the account directory.',
+          'DONGY group manifest references an identity missing from the account directory.',
         )
       }
     }
@@ -633,7 +615,7 @@ export async function inspectSpliitCloudBundle(
     const group = groupBySourceId.get(warning.groupSourceId)
     if (!group) {
       throw new Error(
-        'Spliit Cloud account backup warning references an unknown group.',
+        'DONGY account backup warning references an unknown group.',
       )
     }
     const documentIds = new Set(
@@ -641,11 +623,11 @@ export async function inspectSpliitCloudBundle(
     )
     if (!documentIds.has(warning.documentId)) {
       throw new Error(
-        'Spliit Cloud account backup warning references an unknown document.',
+        'DONGY account backup warning references an unknown document.',
       )
     }
     if (warning.path !== null && !isSafeArchivePath(warning.path)) {
-      throw new Error('Spliit Cloud account backup warning path is unsafe.')
+      throw new Error('DONGY account backup warning path is unsafe.')
     }
   }
 

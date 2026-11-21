@@ -54,8 +54,10 @@
     var(--color-border)
   );
   background-image: linear-gradient(
-    105deg,
-    color-mix(in oklab, var(--group-accent) 7%, transparent),
+    to right,
+    color-mix(in oklab, var(--group-accent) 7%, transparent) 0% 18.3%,
+    color-mix(in oklab, var(--group-accent) 5%, transparent) 18.3% 36.7%,
+    color-mix(in oklab, var(--group-accent) 2%, transparent) 36.7% 55%,
     transparent 55%
   );
   &:hover {
@@ -65,8 +67,10 @@
       var(--color-border)
     );
     background-image: linear-gradient(
-      105deg,
-      color-mix(in oklab, var(--group-accent) 12%, transparent),
+      to right,
+      color-mix(in oklab, var(--group-accent) 12%, transparent) 0% 20%,
+      color-mix(in oklab, var(--group-accent) 8%, transparent) 20% 40%,
+      color-mix(in oklab, var(--group-accent) 4%, transparent) 40% 60%,
       transparent 60%
     );
   }
@@ -77,8 +81,10 @@
       var(--color-border)
     );
     background-image: linear-gradient(
-      105deg,
-      color-mix(in oklab, var(--group-accent) 10%, transparent),
+      to right,
+      color-mix(in oklab, var(--group-accent) 10%, transparent) 0% 18.3%,
+      color-mix(in oklab, var(--group-accent) 7%, transparent) 18.3% 36.7%,
+      color-mix(in oklab, var(--group-accent) 3%, transparent) 36.7% 55%,
       transparent 55%
     );
     &:hover {
@@ -88,8 +94,10 @@
         var(--color-border)
       );
       background-image: linear-gradient(
-        105deg,
-        color-mix(in oklab, var(--group-accent) 16%, transparent),
+        to right,
+        color-mix(in oklab, var(--group-accent) 16%, transparent) 0% 20%,
+        color-mix(in oklab, var(--group-accent) 11%, transparent) 20% 40%,
+        color-mix(in oklab, var(--group-accent) 5%, transparent) 40% 60%,
         transparent 60%
       );
     }
@@ -113,27 +121,35 @@
 @utility group-accent-tint {
   background-image: linear-gradient(
     to right,
-    color-mix(in oklab, var(--group-accent) 15%, transparent),
-    transparent
+    color-mix(in oklab, var(--group-accent) 15%, transparent) 0% 33.3%,
+    color-mix(in oklab, var(--group-accent) 10%, transparent) 33.3% 66.7%,
+    color-mix(in oklab, var(--group-accent) 5%, transparent) 66.7% 100%,
+    transparent 100%
   );
   &:dir(rtl) {
     background-image: linear-gradient(
       to left,
-      color-mix(in oklab, var(--group-accent) 15%, transparent),
-      transparent
+      color-mix(in oklab, var(--group-accent) 15%, transparent) 0% 33.3%,
+      color-mix(in oklab, var(--group-accent) 10%, transparent) 33.3% 66.7%,
+      color-mix(in oklab, var(--group-accent) 5%, transparent) 66.7% 100%,
+      transparent 100%
     );
   }
   @variant dark {
     background-image: linear-gradient(
       to right,
-      color-mix(in oklab, var(--group-accent) 24%, transparent),
-      transparent
+      color-mix(in oklab, var(--group-accent) 24%, transparent) 0% 33.3%,
+      color-mix(in oklab, var(--group-accent) 16%, transparent) 33.3% 66.7%,
+      color-mix(in oklab, var(--group-accent) 8%, transparent) 66.7% 100%,
+      transparent 100%
     );
     &:dir(rtl) {
       background-image: linear-gradient(
         to left,
-        color-mix(in oklab, var(--group-accent) 24%, transparent),
-        transparent
+        color-mix(in oklab, var(--group-accent) 24%, transparent) 0% 33.3%,
+        color-mix(in oklab, var(--group-accent) 16%, transparent) 33.3% 66.7%,
+        color-mix(in oklab, var(--group-accent) 8%, transparent) 66.7% 100%,
+        transparent 100%
       );
     }
   }
@@ -386,7 +402,6 @@ html[data-app-mode='pwa'] body {
 .ambient-backdrop__orb {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(1px);
   will-change: transform;
 }
 
@@ -395,12 +410,24 @@ html[data-app-mode='pwa'] body {
   right: -9rem;
   width: min(34rem, 72vw);
   height: min(34rem, 72vw);
-  background: radial-gradient(
-    circle,
-    hsl(158 72% 62% / 0.16) 0%,
-    hsl(158 72% 62% / 0.07) 46%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(hsl(158 72% 62% / 0.16), hsl(158 72% 62% / 0.16)) center /
+      33.3% 33.3% no-repeat,
+    linear-gradient(
+        color-mix(
+          in oklab,
+          hsl(158 72% 62% / 0.16) 50%,
+          hsl(158 72% 62% / 0.07)
+        ),
+        color-mix(
+          in oklab,
+          hsl(158 72% 62% / 0.16) 50%,
+          hsl(158 72% 62% / 0.07)
+        )
+      )
+      center / 66.7% 66.7% no-repeat,
+    linear-gradient(hsl(158 72% 62% / 0.07), hsl(158 72% 62% / 0.07)) center /
+      100% 100% no-repeat;
   animation: ambient-drift-emerald 22s ease-in-out infinite;
 }
 
@@ -409,31 +436,51 @@ html[data-app-mode='pwa'] body {
   left: -10rem;
   width: min(31rem, 70vw);
   height: min(31rem, 70vw);
-  background: radial-gradient(
-    circle,
-    hsl(18 90% 72% / 0.13) 0%,
-    hsl(38 94% 70% / 0.06) 48%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(hsl(18 90% 72% / 0.13), hsl(18 90% 72% / 0.13)) center /
+      33.3% 33.3% no-repeat,
+    linear-gradient(
+        color-mix(in oklab, hsl(18 90% 72% / 0.13) 50%, hsl(38 94% 70% / 0.06)),
+        color-mix(in oklab, hsl(18 90% 72% / 0.13) 50%, hsl(38 94% 70% / 0.06))
+      )
+      center / 66.7% 66.7% no-repeat,
+    linear-gradient(hsl(38 94% 70% / 0.06), hsl(38 94% 70% / 0.06)) center /
+      100% 100% no-repeat;
   animation: ambient-drift-coral 26s ease-in-out infinite;
 }
 
 .dark .ambient-backdrop__orb--emerald {
-  background: radial-gradient(
-    circle,
-    hsl(158 72% 46% / 0.16) 0%,
-    hsl(158 72% 42% / 0.05) 48%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(hsl(158 72% 46% / 0.16), hsl(158 72% 46% / 0.16)) center /
+      33.3% 33.3% no-repeat,
+    linear-gradient(
+        color-mix(
+          in oklab,
+          hsl(158 72% 46% / 0.16) 50%,
+          hsl(158 72% 42% / 0.05)
+        ),
+        color-mix(
+          in oklab,
+          hsl(158 72% 46% / 0.16) 50%,
+          hsl(158 72% 42% / 0.05)
+        )
+      )
+      center / 66.7% 66.7% no-repeat,
+    linear-gradient(hsl(158 72% 42% / 0.05), hsl(158 72% 42% / 0.05)) center /
+      100% 100% no-repeat;
 }
 
 .dark .ambient-backdrop__orb--coral {
-  background: radial-gradient(
-    circle,
-    hsl(24 84% 56% / 0.11) 0%,
-    hsl(38 90% 56% / 0.04) 48%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(hsl(24 84% 56% / 0.11), hsl(24 84% 56% / 0.11)) center /
+      33.3% 33.3% no-repeat,
+    linear-gradient(
+        color-mix(in oklab, hsl(24 84% 56% / 0.11) 50%, hsl(38 90% 56% / 0.04)),
+        color-mix(in oklab, hsl(24 84% 56% / 0.11) 50%, hsl(38 90% 56% / 0.04))
+      )
+      center / 66.7% 66.7% no-repeat,
+    linear-gradient(hsl(38 90% 56% / 0.04), hsl(38 90% 56% / 0.04)) center /
+      100% 100% no-repeat;
 }
 
 /*
@@ -444,43 +491,115 @@ html[data-app-mode='pwa'] body {
  * floor as Tailwind v4.
  */
 .ambient-backdrop[data-group-tinted='true'] .ambient-backdrop__orb--emerald {
-  background: radial-gradient(
-    circle,
-    color-mix(in oklab, var(--group-accent) 16%, transparent) 0%,
-    color-mix(in oklab, var(--group-accent) 7%, transparent) 46%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(
+        color-mix(in oklab, var(--group-accent) 16%, transparent),
+        color-mix(in oklab, var(--group-accent) 16%, transparent)
+      )
+      center / 33.3% 33.3% no-repeat,
+    linear-gradient(
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--group-accent) 16%, transparent) 50%,
+          color-mix(in oklab, var(--group-accent) 7%, transparent)
+        ),
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--group-accent) 16%, transparent) 50%,
+          color-mix(in oklab, var(--group-accent) 7%, transparent)
+        )
+      )
+      center / 66.7% 66.7% no-repeat,
+    linear-gradient(
+        color-mix(in oklab, var(--group-accent) 7%, transparent),
+        color-mix(in oklab, var(--group-accent) 7%, transparent)
+      )
+      center / 100% 100% no-repeat;
 }
 
 .ambient-backdrop[data-group-tinted='true'] .ambient-backdrop__orb--coral {
-  background: radial-gradient(
-    circle,
-    color-mix(in oklab, var(--group-accent) 13%, transparent) 0%,
-    color-mix(in oklab, var(--group-accent) 6%, transparent) 48%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(
+        color-mix(in oklab, var(--group-accent) 13%, transparent),
+        color-mix(in oklab, var(--group-accent) 13%, transparent)
+      )
+      center / 33.3% 33.3% no-repeat,
+    linear-gradient(
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--group-accent) 13%, transparent) 50%,
+          color-mix(in oklab, var(--group-accent) 6%, transparent)
+        ),
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--group-accent) 13%, transparent) 50%,
+          color-mix(in oklab, var(--group-accent) 6%, transparent)
+        )
+      )
+      center / 66.7% 66.7% no-repeat,
+    linear-gradient(
+        color-mix(in oklab, var(--group-accent) 6%, transparent),
+        color-mix(in oklab, var(--group-accent) 6%, transparent)
+      )
+      center / 100% 100% no-repeat;
 }
 
 .dark
   .ambient-backdrop[data-group-tinted='true']
   .ambient-backdrop__orb--emerald {
-  background: radial-gradient(
-    circle,
-    color-mix(in oklab, var(--group-accent) 16%, transparent) 0%,
-    color-mix(in oklab, var(--group-accent) 5%, transparent) 48%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(
+        color-mix(in oklab, var(--group-accent) 16%, transparent),
+        color-mix(in oklab, var(--group-accent) 16%, transparent)
+      )
+      center / 33.3% 33.3% no-repeat,
+    linear-gradient(
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--group-accent) 16%, transparent) 50%,
+          color-mix(in oklab, var(--group-accent) 5%, transparent)
+        ),
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--group-accent) 16%, transparent) 50%,
+          color-mix(in oklab, var(--group-accent) 5%, transparent)
+        )
+      )
+      center / 66.7% 66.7% no-repeat,
+    linear-gradient(
+        color-mix(in oklab, var(--group-accent) 5%, transparent),
+        color-mix(in oklab, var(--group-accent) 5%, transparent)
+      )
+      center / 100% 100% no-repeat;
 }
 
 .dark
   .ambient-backdrop[data-group-tinted='true']
   .ambient-backdrop__orb--coral {
-  background: radial-gradient(
-    circle,
-    color-mix(in oklab, var(--group-accent) 11%, transparent) 0%,
-    color-mix(in oklab, var(--group-accent) 4%, transparent) 48%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(
+        color-mix(in oklab, var(--group-accent) 11%, transparent),
+        color-mix(in oklab, var(--group-accent) 11%, transparent)
+      )
+      center / 33.3% 33.3% no-repeat,
+    linear-gradient(
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--group-accent) 11%, transparent) 50%,
+          color-mix(in oklab, var(--group-accent) 4%, transparent)
+        ),
+        color-mix(
+          in oklab,
+          color-mix(in oklab, var(--group-accent) 11%, transparent) 50%,
+          color-mix(in oklab, var(--group-accent) 4%, transparent)
+        )
+      )
+      center / 66.7% 66.7% no-repeat,
+    linear-gradient(
+        color-mix(in oklab, var(--group-accent) 4%, transparent),
+        color-mix(in oklab, var(--group-accent) 4%, transparent)
+      )
+      center / 100% 100% no-repeat;
 }
 
 .motion-enter,
@@ -629,7 +748,20 @@ html[data-pwa-update-restart='true'] .motion-stagger > * {
 }
 
 .landing-header {
-  @apply bg-linear-to-br from-emerald-800 to-emerald-600 bg-clip-text dark:from-emerald-300 dark:to-emerald-600;
+  /* DONGY: stepped, not smooth — two hard bands like an 8-bit title. */
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-emerald-800) 0 50%,
+    var(--color-emerald-600) 50% 100%
+  );
+  background-clip: text;
+  @variant dark {
+    background-image: linear-gradient(
+      to bottom,
+      var(--color-emerald-300) 0 50%,
+      var(--color-emerald-500) 50% 100%
+    );
+  }
 }
 
 .landing-header strong {
@@ -712,4 +844,85 @@ input[type='date']::-moz-calendar-picker-indicator {
   [data-mascot-nudge='true'] {
     animation: none;
   }
+}
+
+/*
+ * DONGY 8-bit look: no rounded corners anywhere, including third-party
+ * widgets and one-off `rounded-*` utilities.
+ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-radius: 0 !important;
+  }
+
+  img[src$='.svg'][data-pixel],
+  .pixelated {
+    image-rendering: pixelated;
+  }
+}
+
+/*
+ * DONGY pixel gradients: hard-edged bands instead of smooth fades.
+ */
+@utility pixel-wash {
+  background-image: linear-gradient(
+    to bottom,
+    hsl(var(--primary) / 0.08) 0 12%,
+    hsl(var(--primary) / 0.05) 12% 24%,
+    hsl(var(--primary) / 0.025) 24% 36%,
+    transparent 36%
+  );
+}
+
+@utility pixel-wash-top {
+  background-image: linear-gradient(
+    to bottom,
+    hsl(var(--primary) / 0.1) 0 14%,
+    hsl(var(--primary) / 0.06) 14% 28%,
+    hsl(var(--primary) / 0.03) 28% 42%,
+    transparent 42%
+  );
+}
+
+@utility pixel-stripe {
+  background-image: linear-gradient(
+    to right,
+    var(--color-emerald-500) 0 33.3%,
+    hsl(var(--primary)) 33.3% 66.6%,
+    var(--color-teal-400) 66.6% 100%
+  );
+}
+
+/* Edge fades for scroll areas, in three hard steps. */
+@utility pixel-fade-r {
+  background-image: linear-gradient(
+    to right,
+    hsl(var(--background)) 0 33%,
+    hsl(var(--background) / 0.6) 33% 66%,
+    hsl(var(--background) / 0.25) 66% 100%
+  );
+}
+
+@utility pixel-fade-l {
+  background-image: linear-gradient(
+    to left,
+    hsl(var(--background)) 0 33%,
+    hsl(var(--background) / 0.6) 33% 66%,
+    hsl(var(--background) / 0.25) 66% 100%
+  );
+}
+
+@utility pixel-mask-y {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0 8%,
+    rgb(0 0 0 / 0.33) 8% 16%,
+    rgb(0 0 0 / 0.66) 16% 25%,
+    black 25% 75%,
+    rgb(0 0 0 / 0.66) 75% 84%,
+    rgb(0 0 0 / 0.33) 84% 92%,
+    transparent 92%
+  );
 }

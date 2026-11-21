@@ -11,7 +11,6 @@ import {
 } from '@/components/ambient-backdrop'
 import { ApiStatusBanner } from '@/components/api-status-banner'
 import Image from '@/components/app-image'
-import { CurrencyConverterButton } from '@/components/currency-converter/currency-converter'
 import { DocumentTitleProvider } from '@/components/document-title'
 import { HalloweenScenery } from '@/components/halloween-scenery'
 import { InstallPromotionDialog } from '@/components/install-promotion-dialog'
@@ -42,7 +41,6 @@ import { markPwaUpdateProtectionInitialized } from '@/lib/pwa-update-blockers'
 import { TRPCProvider } from '@/trpc/client'
 
 import { MergeDeviceSavedViews } from './app/groups/merge-device-saved-views'
-import { ArtFooter } from './components/footer/ArtFooter'
 
 function Content() {
   const { t } = useTranslation()
@@ -55,12 +53,6 @@ function Content() {
   const isAuthRoute = pathname.startsWith('/auth/')
   const focusedMobileRoute = isFocusedMobilePath(pathname)
   const groupTabMobileRoute = isMobileGroupTabPath(pathname)
-  const hideMobileFooter =
-    focusedMobileRoute ||
-    pathname.startsWith('/groups/') ||
-    pathname.startsWith('/expenses') ||
-    pathname.startsWith('/friends/') ||
-    pathname.startsWith('/account/')
   const showAmbientBackdrop =
     pathname === '/' ||
     pathname.startsWith('/expenses') ||
@@ -90,24 +82,18 @@ function Content() {
                   className="flex items-center gap-2 transition-transform hover:scale-105"
                   to="/"
                 >
-                  <div
-                    className="flex items-center gap-2"
-                    aria-label="Spliit Cloud"
-                  >
+                  <div className="flex items-center gap-2" aria-label="DONGY">
                     <Image
                       src={logoSrc}
-                      className="m-1 h-[45px] w-auto"
-                      width={(45 * 522) / 180}
+                      className="pixelated m-1 h-[45px] w-auto"
+                      width={(45 * 88) / 24}
                       height={45}
-                      alt="Spliit Cloud"
+                      alt="DONGY"
                     />
                   </div>
                 </Link>
                 <nav aria-label={t('Header.menu')} className="flex">
                   <ul className="flex items-center gap-1 text-sm">
-                    <li>
-                      <CurrencyConverterButton />
-                    </li>
                     <li>
                       <LocaleSwitcher />
                     </li>
@@ -130,17 +116,13 @@ function Content() {
                   data-app-header
                   className="fixed inset-x-0 top-0 z-50 flex h-(--app-header-height) items-center justify-between border-b bg-white/90 px-3 app-header-inset backdrop-blur sm:hidden dark:bg-gray-950/90"
                 >
-                  <Link
-                    to="/"
-                    aria-label="Spliit Cloud"
-                    className="flex items-center"
-                  >
+                  <Link to="/" aria-label="DONGY" className="flex items-center">
                     <Image
                       src={logoSrc}
-                      className="h-9 w-auto"
-                      width={(36 * 522) / 180}
+                      className="pixelated h-9 w-auto"
+                      width={(36 * 88) / 24}
                       height={36}
-                      alt="Spliit Cloud"
+                      alt="DONGY"
                     />
                   </Link>
                   <MobileAppHeaderActions />
@@ -162,8 +144,6 @@ function Content() {
                   <Outlet />
                 </ProfileGate>
               </div>
-
-              <ArtFooter hiddenOnMobile={hideMobileFooter} />
             </div>
             <MascotHost />
             <Toaster />

@@ -14,7 +14,7 @@ let stopping = false
 async function shutdown(server: Bun.Server<unknown>, signal: string) {
   if (stopping) return
   stopping = true
-  console.log(`Spliit Cloud API stopping (${signal})`)
+  console.log(`DONGY API stopping (${signal})`)
   const result = await runShutdown({
     stopServer: () => server.stop(true),
     stopBoss: stopApiBoss,
@@ -30,13 +30,13 @@ async function main() {
     hostname: '0.0.0.0',
     maxRequestBodySize: MAX_REQUEST_BODY_SIZE,
   })
-  console.log(`Spliit Cloud API listening on http://localhost:${env.PORT}`)
+  console.log(`DONGY API listening on http://localhost:${env.PORT}`)
   process.once('SIGINT', () => void shutdown(server, 'SIGINT'))
   process.once('SIGTERM', () => void shutdown(server, 'SIGTERM'))
 }
 
 main().catch(async (error) => {
-  console.error('Spliit Cloud API failed to start', error)
+  console.error('DONGY API failed to start', error)
   await prisma.$disconnect().catch(() => undefined)
   process.exitCode = 1
 })

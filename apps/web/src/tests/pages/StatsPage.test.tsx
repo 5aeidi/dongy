@@ -90,7 +90,7 @@ describe('Stats mobile surface hierarchy', () => {
     expect(surfaces).toHaveLength(7)
     surfaces.forEach((surface) => {
       expect(surface.parentElement?.closest('[data-stats-surface]')).toBeNull()
-      expect(surface).toHaveClass('rounded-lg', 'border', 'bg-card')
+      expect(surface).toHaveClass('rounded-lg', 'border-2', 'bg-card')
     })
   })
 })

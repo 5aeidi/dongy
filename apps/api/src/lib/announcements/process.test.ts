@@ -74,7 +74,7 @@ describe('Cloud announcement delivery', () => {
       headers: { 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click' },
     })
     expect(sendEmailMock.mock.calls[0]?.[0]?.subject).toBe(
-      'Spliit Cloud 2.5.0 is here',
+      'DONGY 2.5.0 is here',
     )
     expect(sendEmailMock.mock.calls[0]?.[0]?.html).toContain('lang="en"')
     expect(sendEmailMock.mock.calls[0]?.[0]?.html).toContain(

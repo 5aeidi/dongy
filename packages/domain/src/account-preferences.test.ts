@@ -17,7 +17,9 @@ describe('account preference schemas', () => {
   it('accepts supported themes, locales, and ISO currencies', () => {
     expect(accountThemeSchema.parse('system')).toBe('system')
     expect(accountMascotSchema.parse('bill')).toBe('bill')
-    expect(accountLocaleSchema.parse('mk-MK')).toBe('mk-MK')
+    expect(accountLocaleSchema.parse('fa-IR')).toBe('fa-IR')
+    expect(accountLocaleSchema.safeParse('mk-MK').success).toBe(false)
+    expect(supportedCurrencyCodeSchema.parse('IRT')).toBe('IRT')
     expect(supportedCurrencyCodeSchema.parse('EUR')).toBe('EUR')
   })
 

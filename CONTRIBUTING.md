@@ -1,13 +1,13 @@
-# Contributing to Spliit Cloud
+# Contributing to DONGY
 
-Spliit Cloud is a community fork of [Spliit](https://github.com/spliit-app/spliit). Contributions are welcome: bug reports, fixes, tests, docs, translations, and features.
+DONGY is a community fork of [Spliit](https://github.com/spliit-app/spliit). Contributions are welcome: bug reports, fixes, tests, docs, translations, and features.
 
 For project rules, see [AGENTS.md](./AGENTS.md). For behavior, see [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).
 
 ## Where to start
 
-- [`good first issue`](https://github.com/antonio-ivanovski/spliit-cloud/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) — approachable entry points
-- [`help wanted`](https://github.com/antonio-ivanovski/spliit-cloud/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) — scoped but unassigned
+- [`good first issue`](https://github.com/5aeidi/dongy/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22) — approachable entry points
+- [`help wanted`](https://github.com/5aeidi/dongy/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22) — scoped but unassigned
 - For larger changes, open an issue first to align on direction
 
 ## Development setup

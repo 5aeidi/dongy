@@ -5,9 +5,9 @@
  * Category, Currency, Cost, Original cost, Original currency, Conversion rate`)
  * followed by either a `Conversion source` column or directly the `Is
  * Settlement` / legacy `Is Reimbursement` alias and `Split mode`, then one
- * column per participant. This is not the Spliit Cloud export format. Current
- * Cloud recurrence columns are rejected — they are a different transport format
- * and must not become part of this importer's public schema.
+ * column per participant. This is not the DONGY export format. Current Cloud
+ * recurrence columns are rejected — they are a different transport format and
+ * must not become part of this importer's public schema.
  */
 
 import { isExactHeaderRow, normalizeHeaderLabel } from './header-map'

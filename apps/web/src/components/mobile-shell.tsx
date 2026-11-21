@@ -22,7 +22,6 @@ import { useGroupAccessSearch } from '@/app/groups/[groupId]/use-group-access-se
 import { ViewOnlyBadge } from '@/app/groups/view-only-badge'
 import { AccountMenu } from '@/components/account-menu'
 import { useSyncedAccountPreferences } from '@/components/account-preferences-sync'
-import { CurrencyConverterButton } from '@/components/currency-converter/currency-converter'
 import { useDocumentTitle } from '@/components/document-title'
 import { GroupEmojiBadge } from '@/components/group-emoji-badge'
 import { LocaleSwitcher } from '@/components/locale-switcher'
@@ -49,7 +48,6 @@ export function MobileAppHeaderActions() {
       data-mobile-header-actions
       className="flex shrink-0 items-center gap-0.5"
     >
-      <CurrencyConverterButton />
       <LocaleSwitcher />
       <ThemeToggle />
       <AccountMenu />
@@ -72,7 +70,7 @@ export function MobileAppBar() {
       ),
     [pathname, returnTo, t],
   )
-  useDocumentTitle(meta ? `Spliit Cloud · ${meta.title}` : null)
+  useDocumentTitle(meta ? `DONGY · ${meta.title}` : null)
 
   if (!meta) return null
 
@@ -114,7 +112,7 @@ export function GroupMobileAppBar() {
 
   if (!isMobileGroupTabPath(pathname)) return null
 
-  const title = displayName || group?.name || 'Spliit Cloud'
+  const title = displayName || group?.name || 'DONGY'
   const isPublicView = viewer?.source === 'PUBLIC_LINK'
 
   return (

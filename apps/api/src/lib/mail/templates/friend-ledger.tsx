@@ -13,8 +13,8 @@ export function FriendLedgerEmail(props: {
   isNewUser: boolean
   unsubscribeUrl?: string
 }): ReactElement {
-  const label = props.isNewUser ? 'Create a free account' : 'Open Spliit Cloud'
-  const preview = `${props.inviterName} started a friend ledger with you on Spliit Cloud`
+  const label = props.isNewUser ? 'Create a free account' : 'Open DONGY'
+  const preview = `${props.inviterName} started a friend ledger with you on DONGY`
   return (
     <EmailLayout
       preview={preview}
@@ -28,8 +28,8 @@ export function FriendLedgerEmail(props: {
         {props.inviterName} started a friend ledger with you
       </Heading>
       <Text className="m-0 mb-4 text-[15px] leading-[24px] text-[#0f172a]">
-        {props.inviterName} started a friend ledger with you on Spliit Cloud.
-        Use the button below to view it.
+        {props.inviterName} started a friend ledger with you on DONGY. Use the
+        button below to view it.
       </Text>
       <Section className="my-6 text-center">
         <EmailButton href={props.webBase} label={label} />
@@ -55,14 +55,14 @@ export async function renderFriendLedgerEmail(input: {
   unsubscribeUrl?: string
 }): Promise<RenderedEmail> {
   const webBase = getWebBaseUrl()
-  const subject = `${input.inviterName} started a friend ledger with you on Spliit Cloud`
+  const subject = `${input.inviterName} started a friend ledger with you on DONGY`
 
   const text = input.isNewUser
     ? `${input.inviterName} started a friend ledger with you.\n\n` +
-      `Create a free Spliit Cloud account to get started:\n${webBase}\n\n` +
+      `Create a free DONGY account to get started:\n${webBase}\n\n` +
       `If you don't recognize this request, you can safely ignore this email.`
     : `${input.inviterName} started a friend ledger with you.\n\n` +
-      `Open Spliit Cloud to see your new friend ledger:\n${webBase}\n\n` +
+      `Open DONGY to see your new friend ledger:\n${webBase}\n\n` +
       `If you don't recognize this request, you can safely ignore this email.`
 
   return renderTemplate(

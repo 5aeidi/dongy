@@ -614,10 +614,10 @@ describe('expense file import UI', () => {
     expect(currencyPicker).toHaveTextContent('INR')
 
     await user.click(currencyPicker)
-    await user.click(await screen.findByRole('option', { name: /EUR/ }))
+    await user.click(await screen.findByRole('option', { name: /IRT/ }))
     await user.click(screen.getByRole('button', { name: 'Save mapping' }))
 
-    expect(savedCurrency).toBe('EUR')
+    expect(savedCurrency).toBe('IRT')
   })
 
   it('shows mapped issue rows and keeps income amounts positive', async () => {

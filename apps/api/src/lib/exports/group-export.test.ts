@@ -184,7 +184,7 @@ describe('createGroupExportArtifact', () => {
     })
 
     expect(artifact).toMatchObject({
-      fileName: 'Spliit Cloud Export - Trip to Paris - 2026-08-10.spliit.zip',
+      fileName: 'DONGY Export - Trip to Paris - 2026-08-10.spliit.zip',
       mediaType: 'application/zip',
       scope: { type: 'GROUP', sourceId: 'grp-1' },
       exportedAt: EXPORTED_AT.toISOString(),

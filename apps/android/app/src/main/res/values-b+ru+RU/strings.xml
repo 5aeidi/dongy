@@ -9,14 +9,14 @@
     <string name="check_updates">Проверить обновления</string>
     <string name="checking">Проверка обновлений…</string>
     <string name="connection_settings">Настройки подключения</string>
-    <string name="continue_app">Открыть Spliit Cloud</string>
+    <string name="continue_app">Открыть DONGY</string>
     <string name="expenses">Расходы</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">Позже</string>
     <string name="new_group">Новая группа</string>
     <string name="obtainium_note">Если установлен Obtainium, он также может управлять обновлениями из наших выпусков на GitHub.</string>
     <string name="offline_message">Для первого запуска нужно подключение к интернету, чтобы подготовить доступ офлайн. Переданные файлы не были удалены. Подключитесь и повторите попытку.</string>
-    <string name="offline_title">Подключитесь, чтобы открыть Spliit Cloud</string>
+    <string name="offline_title">Подключитесь, чтобы открыть DONGY</string>
     <string name="open_play">Открыть Google Play</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">Этой установкой управляет Google Play. Проверяйте обновления пакета для Android в Google Play.</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Обновления приложения для Android</string>
     <string name="version">Пакет для Android %1$s (%2$d)</string>
     <string name="view_update">Посмотреть обновление</string>
-    <string name="web_version_note">Функции сайта обновляются отдельно. Расходы хранятся в Spliit Cloud и в офлайн-хранилище этого браузера.</string>
+    <string name="web_version_note">Функции сайта обновляются отдельно. Расходы хранятся в DONGY и в офлайн-хранилище этого браузера.</string>
 </resources>

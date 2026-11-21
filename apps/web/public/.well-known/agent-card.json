@@ -6,8 +6,8 @@
   },
   "defaultInputModes": ["text"],
   "defaultOutputModes": ["text"],
-  "description": "Spliit Cloud tracks shared expenses: groups, participants, balances, and expenses. Agents authenticate with OAuth 2.1 against the Spliit authorization server, discover scopes and endpoints from standard metadata, and call the API or the MCP assistant. Default grants are read-only; writes need explicit scopes.",
-  "name": "Spliit Cloud",
+  "description": "DONGY tracks shared expenses: groups, participants, balances, and expenses. Agents authenticate with OAuth 2.1 against the Spliit authorization server, discover scopes and endpoints from standard metadata, and call the API or the MCP assistant. Default grants are read-only; writes need explicit scopes.",
+  "name": "DONGY",
   "preferredTransport": "HTTP+JSON",
   "protocolVersion": "0.3.0",
   "skills": [

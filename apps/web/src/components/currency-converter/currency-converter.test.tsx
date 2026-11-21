@@ -178,8 +178,8 @@ describe('CurrencyConverter stale rate gating', () => {
 })
 
 describe('CurrencyConverter localized amount editing', () => {
-  it('keeps a German decimal separator visible throughout editing', async () => {
-    await setUserLocale('de-DE', { notify: false, persist: false })
+  it('keeps a Persian decimal separator visible throughout editing', async () => {
+    await setUserLocale('fa-IR', { notify: false, persist: false })
     useCurrencyRateSpy.mockReturnValue({
       data: 1,
       via: undefined,
@@ -191,11 +191,11 @@ describe('CurrencyConverter localized amount editing', () => {
     render(<ConverterContent />)
 
     const amountInput = screen.getByRole('textbox')
-    fireEvent.change(amountInput, { target: { value: '1,' } })
-    expect(amountInput).toHaveValue('1,')
+    fireEvent.change(amountInput, { target: { value: '۱٫' } })
+    expect(amountInput).toHaveValue('۱٫')
 
-    fireEvent.change(amountInput, { target: { value: '1,50' } })
-    expect(amountInput).toHaveValue('1,50')
+    fireEvent.change(amountInput, { target: { value: '۱٫۵۰' } })
+    expect(amountInput).toHaveValue('۱٫۵۰')
   })
 })
 

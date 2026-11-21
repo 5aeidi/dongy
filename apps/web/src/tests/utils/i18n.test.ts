@@ -40,18 +40,14 @@ function mockBrowserLocales(...locales: string[]) {
 
 describe('matchSupportedLocale', () => {
   it.each([
-    ['fr-FR', 'fr-FR'],
-    ['FR-fr', 'fr-FR'],
-    ['en-GB', 'en-GB'],
-    ['fr-CA', 'fr-FR'],
-    ['de-AT', 'de-DE'],
-    ['es-MX', 'es'],
-    ['pt-BR', 'pt-BR'],
-    ['pt-PT', 'pt'],
-    ['pt-AO', 'pt'],
-    ['zh-Hant', 'zh-TW'],
-    ['zh-HK', 'zh-TW'],
-    ['zh-SG', 'zh-CN'],
+    ['fa-IR', 'fa-IR'],
+    ['FA-ir', 'fa-IR'],
+    ['fa', 'fa-IR'],
+    ['fa-AF', 'fa-IR'],
+    ['en-US', 'en-US'],
+    ['en-GB', 'en-US'],
+    ['fr-CA', undefined],
+    ['de-AT', undefined],
     ['xx-XX', undefined],
     ['not_a_locale', undefined],
   ])('matches %s to %s', (browserLocale, expected) => {
@@ -59,8 +55,15 @@ describe('matchSupportedLocale', () => {
   })
 
   it('uses the first supported browser preference', () => {
-    mockBrowserLocales('xx-XX', 'fr-CA', 'de-DE')
-    expect(detectBrowserLocale()).toBe('fr-FR')
+    mockBrowserLocales('xx-XX', 'fa', 'en-US')
+    expect(detectBrowserLocale()).toBe('fa-IR')
+  })
+
+  it('skips languages DONGY does not offer', () => {
+    mockBrowserLocales('fr-CA', 'de-DE', 'en-US')
+    expect(detectBrowserLocale()).toBe('en-US')
+    mockBrowserLocales('fr-CA')
+    expect(detectBrowserLocale()).toBeUndefined()
   })
 })
 
@@ -77,20 +80,20 @@ describe('detectLocale', () => {
   })
 
   it('reads locale from cookie first', () => {
-    document.cookie = `${COOKIE_NAME}=fr-FR;path=/`
-    expect(detectLocale()).toBe('fr-FR')
+    document.cookie = `${COOKIE_NAME}=fa-IR;path=/`
+    expect(detectLocale()).toBe('fa-IR')
   })
 
   it('favors cookie over navigator.language', () => {
     // Set both — cookie should win
-    document.cookie = `${COOKIE_NAME}=de-DE;path=/`
+    document.cookie = `${COOKIE_NAME}=fa-IR;path=/`
     mockBrowserLocales('en-US')
-    expect(detectLocale()).toBe('de-DE')
+    expect(detectLocale()).toBe('fa-IR')
   })
 
   it('falls back to the closest navigator locale when no cookie is set', () => {
-    mockBrowserLocales('fr-CA')
-    expect(detectLocale()).toBe('fr-FR')
+    mockBrowserLocales('fa-AF')
+    expect(detectLocale()).toBe('fa-IR')
   })
 
   it('falls back to defaultLocale when navigator.language is not supported', () => {
@@ -113,7 +116,7 @@ describe('loadLocale', () => {
   })
 
   it('adds resource bundle to i18next for a new locale', async () => {
-    const locale = 'fr-FR'
+    const locale = 'fa-IR'
 
     // Should not have the bundle yet
     expect(i18n.hasResourceBundle(locale, 'translation')).toBe(false)
@@ -124,7 +127,7 @@ describe('loadLocale', () => {
   })
 
   it('is idempotent when called twice with the same locale', async () => {
-    const locale = 'de-DE'
+    const locale = 'fa-IR'
 
     // First call
     await loadLocale(locale)
@@ -140,11 +143,11 @@ describe('loadLocale', () => {
     // import rejects, and the screen must still render through the loaded
     // fallback bundle instead of throwing.
     const modules = {
-      '/locales/fr-FR.json': () => Promise.reject(new Error('Network offline')),
+      '/locales/fa-IR.json': () => Promise.reject(new Error('Network offline')),
       '/locales/en-US.json': () =>
         Promise.resolve({ default: { offlineProbe: 'online-value' } }),
     }
-    await expect(loadLocale('fr-FR', modules as never)).resolves.toBeUndefined()
+    await expect(loadLocale('fa-IR', modules as never)).resolves.toBeUndefined()
     // The fallback bundle still loads so i18next resolves through it.
     expect(i18n.getResource('en-US', 'translation', 'offlineProbe')).toBe(
       'online-value',
@@ -166,91 +169,33 @@ describe('setUserLocale', () => {
   })
 
   it('sets cookie with the locale', async () => {
-    await setUserLocale('fr-FR')
+    await setUserLocale('fa-IR')
 
-    expect(getCookie(COOKIE_NAME)).toBe('fr-FR')
+    expect(getCookie(COOKIE_NAME)).toBe('fa-IR')
   })
 
   it('loads the locale resources and changes language', async () => {
-    await setUserLocale('fr-FR')
+    await setUserLocale('fa-IR')
 
-    expect(i18n.hasResourceBundle('fr-FR', 'translation')).toBe(true)
-    expect(i18n.language).toBe('fr-FR')
+    expect(i18n.hasResourceBundle('fa-IR', 'translation')).toBe(true)
+    expect(i18n.language).toBe('fa-IR')
   })
 
   it('can switch between multiple locales', async () => {
-    await setUserLocale('fr-FR')
-    expect(i18n.language).toBe('fr-FR')
+    await setUserLocale('fa-IR')
+    expect(i18n.language).toBe('fa-IR')
 
-    await setUserLocale('de-DE')
-    expect(i18n.language).toBe('de-DE')
-    expect(getCookie(COOKIE_NAME)).toBe('de-DE')
+    await setUserLocale('en-US')
+    expect(i18n.language).toBe('en-US')
+    expect(getCookie(COOKIE_NAME)).toBe('en-US')
   })
 })
 
 // ── fallback chains ────────────────────────────────────────────────────
 
 describe('buildFallbackLng', () => {
-  it('maps sparse overlays to their parent bundle(s)', () => {
-    expect(buildFallbackLng()).toEqual({
-      default: ['en-US'],
-      'pt-BR': ['pt', 'en-US'],
-    })
-  })
-})
-
-describe('sparse overlay fallback', () => {
-  // Test-only key outside the typed translation keys.
-  const probeKey = '__fallbackProbe' as unknown as 'Tools.title'
-
-  afterEach(async () => {
-    await resetLocale()
-  })
-
-  it('loads the fallback chain bundles alongside the locale', async () => {
-    await loadLocale('pt-BR')
-
-    expect(i18n.hasResourceBundle('pt-BR', 'translation')).toBe(true)
-    expect(i18n.hasResourceBundle('pt', 'translation')).toBe(true)
-    expect(i18n.hasResourceBundle('en-US', 'translation')).toBe(true)
-  })
-
-  it('resolves missing en-GB keys from en-US', async () => {
-    await loadLocale('en-GB')
-    i18n.addResourceBundle(
-      'en-US',
-      'translation',
-      { __fallbackProbe: 'probe-value' },
-      true,
-      true,
-    )
-    expect(i18n.getResource('en-GB', 'translation', probeKey)).toBe(undefined)
-
-    await i18n.changeLanguage('en-GB')
-
-    expect(i18n.t(probeKey)).toBe('probe-value')
-  })
-
-  it('resolves missing pt-BR keys from pt before en-US', async () => {
-    await loadLocale('pt-BR')
-    i18n.addResourceBundle(
-      'pt',
-      'translation',
-      { __fallbackProbe: 'valor-pt' },
-      true,
-      true,
-    )
-    i18n.addResourceBundle(
-      'en-US',
-      'translation',
-      { __fallbackProbe: 'probe-value' },
-      true,
-      true,
-    )
-
-    await i18n.changeLanguage('pt-BR')
-
-    expect(i18n.t(probeKey)).toBe('valor-pt')
+  it('falls back to en-US only', () => {
+    expect(buildFallbackLng()).toEqual({ default: ['en-US'] })
   })
 })
 
@@ -280,8 +225,8 @@ describe('I18nProvider document locale metadata', () => {
     expect(document.documentElement.lang).toBe('he')
     expect(document.documentElement.dir).toBe('rtl')
 
-    await act(() => i18n.changeLanguage('fr-FR'))
-    expect(document.documentElement.lang).toBe('fr-FR')
+    await act(() => i18n.changeLanguage('en-US'))
+    expect(document.documentElement.lang).toBe('en-US')
     expect(document.documentElement.dir).toBe('ltr')
   })
 })

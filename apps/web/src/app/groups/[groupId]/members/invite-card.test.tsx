@@ -151,7 +151,7 @@ describe('InviteCard responsive navigation', () => {
     await user.click(screen.getByRole('option', { name: 'No account' }))
 
     expect(
-      screen.getByText(/without inviting them to Spliit/i),
+      screen.getByText(/without inviting them to DONGY/i),
     ).toBeInTheDocument()
     expect(
       screen.getByRole('textbox', { name: 'Temporary name' }),

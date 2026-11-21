@@ -3,9 +3,17 @@ import path from 'node:path'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vitest/config'
 
-const alias = {
-  '@': path.resolve(import.meta.dirname, './src'),
-}
+const alias = [
+  // DONGY: swap lucide icons for pixel-art ones (see the shim).
+  {
+    find: /^lucide-react$/,
+    replacement: path.resolve(
+      import.meta.dirname,
+      './src/components/pixel-icons/lucide-shim.tsx',
+    ),
+  },
+  { find: '@', replacement: path.resolve(import.meta.dirname, './src') },
+]
 
 const sharedTest = {
   globals: true as const,

@@ -68,9 +68,6 @@ vi.mock('@/components/locale-switcher', () => ({
 vi.mock('@/components/mobile-shell', () => ({
   MobileAppBar: () => (
     <header data-testid="focused-mobile-app-bar">
-      <button type="button" data-testid="currency-converter">
-        Currency converter
-      </button>
       <button type="button" data-testid="locale-switcher">
         Locale
       </button>
@@ -78,9 +75,6 @@ vi.mock('@/components/mobile-shell', () => ({
   ),
   MobileAppHeaderActions: () => (
     <div>
-      <button type="button" data-testid="currency-converter">
-        Currency converter
-      </button>
       <button type="button" data-testid="locale-switcher">
         Locale
       </button>
@@ -139,7 +133,7 @@ describe('AppShell locale switcher placement', () => {
     for (const enabled of [false, true, false]) {
       appearance.halloweenEnabled = enabled
       rerender(<AppShell />)
-      for (const logo of screen.getAllByRole('img', { name: 'Spliit Cloud' })) {
+      for (const logo of screen.getAllByRole('img', { name: 'DONGY' })) {
         expect(logo).toHaveAttribute(
           'src',
           enabled ? '/logo-with-text-hallowen.svg' : '/logo-with-text.svg',
@@ -153,16 +147,13 @@ describe('AppShell locale switcher placement', () => {
     render(<AppShell />)
 
     expect(screen.getAllByTestId('locale-switcher')).toHaveLength(2)
-    expect(screen.getAllByTestId('currency-converter')).toHaveLength(2)
+    expect(screen.queryAllByTestId('currency-converter')).toHaveLength(0)
     expect(
       screen.getByRole('navigation', { name: 'Header.menu' }),
     ).toBeInTheDocument()
     expect(
       screen.queryByTestId('focused-mobile-app-bar'),
     ).not.toBeInTheDocument()
-    expect(
-      screen.getByRole('link', { name: 'Feedback.navigationLabel' }),
-    ).toHaveAttribute('href', '/feedback')
   })
 
   it('renders the locale switcher in the desktop and focused mobile headers', () => {
@@ -170,7 +161,7 @@ describe('AppShell locale switcher placement', () => {
     render(<AppShell />)
 
     expect(screen.getAllByTestId('locale-switcher')).toHaveLength(2)
-    expect(screen.getAllByTestId('currency-converter')).toHaveLength(2)
+    expect(screen.queryAllByTestId('currency-converter')).toHaveLength(0)
     expect(
       screen.getByRole('navigation', { name: 'Header.menu' }),
     ).toBeInTheDocument()

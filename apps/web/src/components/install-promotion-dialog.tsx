@@ -21,9 +21,9 @@ import {
 } from '@/lib/use-install-prompt'
 
 /**
- * Auto-opening promotion dialog that nudges the user to install Spliit Cloud as
- * a PWA. Replaces the previous toolbar icon button so the affordance is visible
- * on every browser that supports installation, not just Chromium (which alone
+ * Auto-opening promotion dialog that nudges the user to install DONGY as a PWA.
+ * Replaces the previous toolbar icon button so the affordance is visible on
+ * every browser that supports installation, not just Chromium (which alone
  * fires `beforeinstallprompt`).
  *
  * Browser-adaptive content: - Chrome / Edge / Brave / Samsung / Arc (Chromium,

@@ -312,6 +312,30 @@
     "aliases": ["ریال"]
   },
   {
+    "code": "IRT",
+    "symbol": "Toman",
+    "localizedSymbols": { "fa": "تومان" },
+    "suffixSymbol": true,
+    "rounding": 0,
+    "rounding_gap_minor": 1,
+    "decimal_digits": 0,
+    "aliases": ["تومان", "تومن"],
+    "aliasOf": "IRR",
+    "aliasScale": 10
+  },
+  {
+    "code": "IRM",
+    "symbol": "M Toman",
+    "localizedSymbols": { "fa": "میلیون تومان" },
+    "suffixSymbol": true,
+    "rounding": 0,
+    "rounding_gap_minor": 1,
+    "decimal_digits": 3,
+    "aliases": ["میلیون تومان", "Million Toman"],
+    "aliasOf": "IRR",
+    "aliasScale": 10000000
+  },
+  {
     "code": "ISK",
     "symbol": "Ikr",
     "rounding": 0,

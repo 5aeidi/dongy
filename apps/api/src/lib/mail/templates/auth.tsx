@@ -24,18 +24,18 @@ export function PasswordRecoveryEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="Reset your Spliit Cloud password"
+      preview="Reset your DONGY password"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
         as="h1"
         className="m-0 mb-4 text-[24px] font-semibold tracking-tight text-[#0f172a]"
       >
-        Reset your Spliit Cloud password
+        Reset your DONGY password
       </Heading>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
-        We received a request to reset the password for your Spliit Cloud
-        account. Click the button below to choose a new password.
+        We received a request to reset the password for your DONGY account.
+        Click the button below to choose a new password.
       </Text>
       <Section className="my-6 text-center">
         <EmailButton href={props.resetUrl} label="Reset password" />
@@ -66,20 +66,17 @@ export function SignInGuidanceEmail(props: {
   methods: string
 }): ReactElement {
   return (
-    <EmailLayout
-      preview="Sign in to Spliit Cloud"
-      brandBaseUrl={props.brandBaseUrl}
-    >
+    <EmailLayout preview="Sign in to DONGY" brandBaseUrl={props.brandBaseUrl}>
       <Heading
         as="h1"
         className="m-0 mb-4 text-[24px] font-semibold tracking-tight text-[#0f172a]"
       >
-        Sign in to Spliit Cloud
+        Sign in to DONGY
       </Heading>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
-        We received a password reset request for this Spliit Cloud account, but
-        it does not have a password sign-in method. Please use one of the other
-        sign-in methods instead.
+        We received a password reset request for this DONGY account, but it does
+        not have a password sign-in method. Please use one of the other sign-in
+        methods instead.
       </Text>
       <Section className="my-4 rounded-md border border-solid border-[#e5e7eb] bg-[#f8fafc] px-5 py-4">
         <Text className="m-0 text-[14px] leading-[20px] text-[#0f172a]">
@@ -99,18 +96,18 @@ export function VerificationEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="Verify your Spliit Cloud account"
+      preview="Verify your DONGY account"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
         as="h1"
         className="m-0 mb-4 text-[24px] font-semibold tracking-tight text-[#0f172a]"
       >
-        Verify your Spliit Cloud account
+        Verify your DONGY account
       </Heading>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
         Tap the button below to confirm your email and finish creating your
-        Spliit Cloud account.
+        DONGY account.
       </Text>
       <Section className="my-6 text-center">
         <EmailButton href={props.verificationUrl} label="Verify my email" />
@@ -124,8 +121,7 @@ export function VerificationEmail(props: {
         </Link>
       </Text>
       <Text className="m-0 text-[13px] leading-[20px] text-[#64748b]">
-        If you did not create a Spliit Cloud account, you can safely ignore this
-        email.
+        If you did not create a DONGY account, you can safely ignore this email.
       </Text>
     </EmailLayout>
   )
@@ -138,7 +134,7 @@ export function EmailChangeOtpEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="Your Spliit Cloud email confirmation code"
+      preview="Your DONGY email confirmation code"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
@@ -148,8 +144,8 @@ export function EmailChangeOtpEmail(props: {
         Confirm your email
       </Heading>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
-        Use this code in Spliit Cloud to confirm your email address. It expires
-        in {props.expiresInMinutes} minutes.
+        Use this code in DONGY to confirm your email address. It expires in{' '}
+        {props.expiresInMinutes} minutes.
       </Text>
       <Section className="my-6 rounded-md border border-solid border-[#e5e7eb] bg-[#f8fafc] px-5 py-5 text-center">
         <Text className="m-0 font-mono text-[32px] leading-[40px] font-semibold tracking-[0.35em] text-[#0f172a]">
@@ -169,7 +165,7 @@ export function EmailChangedNoticeEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="Your Spliit Cloud email address was changed"
+      preview="Your DONGY email address was changed"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
@@ -179,11 +175,11 @@ export function EmailChangedNoticeEmail(props: {
         Your email address was changed
       </Heading>
       <Text className="m-0 mb-4 text-[15px] leading-[24px] text-[#0f172a]">
-        The email on your Spliit Cloud account is now {props.newEmail}.
+        The email on your DONGY account is now {props.newEmail}.
       </Text>
       <Text className="m-0 mb-4 text-[15px] leading-[24px] text-[#0f172a]">
         If you made this change, you can ignore this message. If you did not,
-        sign in to Spliit Cloud and change the email back from account settings.
+        sign in to DONGY and change the email back from account settings.
       </Text>
       <Text className="m-0 text-[13px] leading-[20px] text-[#64748b]">
         This notice was sent to the previous address on the account.
@@ -198,7 +194,7 @@ export function PasswordSetNoticeEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="A password was added to your Spliit Cloud account"
+      preview="A password was added to your DONGY account"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
@@ -208,8 +204,8 @@ export function PasswordSetNoticeEmail(props: {
         A password was added to your account
       </Heading>
       <Text className="m-0 mb-4 text-[15px] leading-[24px] text-[#0f172a]">
-        A password was added to your Spliit Cloud account. You can now sign in
-        with your email and password.
+        A password was added to your DONGY account. You can now sign in with
+        your email and password.
       </Text>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
         If you made this change, you can ignore this message. If you did not,
@@ -236,7 +232,7 @@ export function PasswordRemovedNoticeEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="A password was removed from your Spliit Cloud account"
+      preview="A password was removed from your DONGY account"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
@@ -246,9 +242,8 @@ export function PasswordRemovedNoticeEmail(props: {
         A password was removed from your account
       </Heading>
       <Text className="m-0 mb-4 text-[15px] leading-[24px] text-[#0f172a]">
-        The password on your Spliit Cloud account was removed. You can still
-        sign in with a magic link or a linked provider using your verified
-        email.
+        The password on your DONGY account was removed. You can still sign in
+        with a magic link or a linked provider using your verified email.
       </Text>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
         If you did not make this change, set a new password from account
@@ -275,7 +270,7 @@ export function PasswordChangedNoticeEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="Your Spliit Cloud password was changed"
+      preview="Your DONGY password was changed"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
@@ -285,8 +280,8 @@ export function PasswordChangedNoticeEmail(props: {
         Your password was changed
       </Heading>
       <Text className="m-0 mb-4 text-[15px] leading-[24px] text-[#0f172a]">
-        The password on your Spliit Cloud account was changed. Other sessions
-        have been signed out.
+        The password on your DONGY account was changed. Other sessions have been
+        signed out.
       </Text>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
         If you did not make this change, reset the password immediately.
@@ -312,21 +307,21 @@ export function MagicLinkEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="Your Spliit Cloud sign-in link"
+      preview="Your DONGY sign-in link"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
         as="h1"
         className="m-0 mb-4 text-[24px] font-semibold tracking-tight text-[#0f172a]"
       >
-        Your Spliit Cloud sign-in link
+        Your DONGY sign-in link
       </Heading>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
-        Click the button below to sign in to your Spliit Cloud account. The link
-        will expire once used.
+        Click the button below to sign in to your DONGY account. The link will
+        expire once used.
       </Text>
       <Section className="my-6 text-center">
-        <EmailButton href={props.signInUrl} label="Sign in to Spliit Cloud" />
+        <EmailButton href={props.signInUrl} label="Sign in to DONGY" />
       </Section>
       <Text className="m-0 mb-2 text-[14px] leading-[22px] text-[#0f172a]">
         If the button doesn't work, copy and paste this URL into your browser:
@@ -373,7 +368,7 @@ export async function renderPasswordRecoveryEmail(input: {
         ? `\n\nThis account can also sign in with: ${otherMethods.join(', ')}.`
         : ''
     const text =
-      `Click the link below to reset your Spliit Cloud password.\n\n${input.resetUrl}` +
+      `Click the link below to reset your DONGY password.\n\n${input.resetUrl}` +
       extra +
       `\n\nIf you did not request a password reset, you can safely ignore this email.`
 
@@ -383,20 +378,20 @@ export async function renderPasswordRecoveryEmail(input: {
         resetUrl={input.resetUrl}
         otherMethods={otherMethods}
       />,
-      { subject: 'Reset your Spliit Cloud password', text },
+      { subject: 'Reset your DONGY password', text },
     )
   }
 
   const methods =
     otherMethods.length > 0 ? otherMethods.join(', ') : 'an email sign-in link'
   const text =
-    `We received a password reset request for this Spliit Cloud account, but it does not have a password sign-in method.\n\n` +
+    `We received a password reset request for this DONGY account, but it does not have a password sign-in method.\n\n` +
     `Use one of these sign-in methods instead: ${methods}.\n\n` +
     `If you did not request this email, you can safely ignore it.`
 
   return renderTemplate(
     <SignInGuidanceEmail brandBaseUrl={baseUrl} methods={methods} />,
-    { subject: 'Sign in to Spliit Cloud', text },
+    { subject: 'Sign in to DONGY', text },
   )
 }
 
@@ -404,15 +399,15 @@ export async function renderVerificationEmail(input: {
   verificationUrl: string
 }): Promise<RenderedEmail> {
   const text =
-    `Click the link below to verify your email address and sign in to Spliit Cloud.\n\n${input.verificationUrl}\n\n` +
-    `If you did not create a Spliit Cloud account, you can safely ignore this email.`
+    `Click the link below to verify your email address and sign in to DONGY.\n\n${input.verificationUrl}\n\n` +
+    `If you did not create a DONGY account, you can safely ignore this email.`
 
   return renderTemplate(
     <VerificationEmail
       brandBaseUrl={authBaseUrl()}
       verificationUrl={input.verificationUrl}
     />,
-    { subject: 'Verify your Spliit Cloud account', text },
+    { subject: 'Verify your DONGY account', text },
   )
 }
 
@@ -421,7 +416,7 @@ export async function renderEmailChangeOtpEmail(input: {
   expiresInMinutes: number
 }): Promise<RenderedEmail> {
   const text =
-    `Use this code in Spliit Cloud to confirm your email address. It expires in ${input.expiresInMinutes} minutes.\n\n${input.otp}\n\n` +
+    `Use this code in DONGY to confirm your email address. It expires in ${input.expiresInMinutes} minutes.\n\n${input.otp}\n\n` +
     `If you did not request this change, you can safely ignore this email.`
 
   return renderTemplate(
@@ -430,7 +425,7 @@ export async function renderEmailChangeOtpEmail(input: {
       otp={input.otp}
       expiresInMinutes={input.expiresInMinutes}
     />,
-    { subject: 'Your Spliit Cloud email confirmation code', text },
+    { subject: 'Your DONGY email confirmation code', text },
   )
 }
 
@@ -438,34 +433,34 @@ export async function renderEmailChangedNoticeEmail(input: {
   newEmail: string
 }): Promise<RenderedEmail> {
   const text =
-    `The email on your Spliit Cloud account is now ${input.newEmail}.\n\n` +
-    `If you made this change, you can ignore this message. If you did not, sign in to Spliit Cloud and change the email back from account settings.`
+    `The email on your DONGY account is now ${input.newEmail}.\n\n` +
+    `If you made this change, you can ignore this message. If you did not, sign in to DONGY and change the email back from account settings.`
 
   return renderTemplate(
     <EmailChangedNoticeEmail
       brandBaseUrl={authBaseUrl()}
       newEmail={input.newEmail}
     />,
-    { subject: 'Your Spliit Cloud email address was changed', text },
+    { subject: 'Your DONGY email address was changed', text },
   )
 }
 
 export async function renderPasswordSetNoticeEmail(): Promise<RenderedEmail> {
   const resetUrl = `${authBaseUrl()}/auth/forgot-password`
   const text =
-    `A password was added to your Spliit Cloud account. You can now sign in with your email and password.\n\n` +
+    `A password was added to your DONGY account. You can now sign in with your email and password.\n\n` +
     `If you made this change, you can ignore this message. If you did not, reset the password immediately:\n\n${resetUrl}`
 
   return renderTemplate(
     <PasswordSetNoticeEmail brandBaseUrl={authBaseUrl()} resetUrl={resetUrl} />,
-    { subject: 'A password was added to your Spliit Cloud account', text },
+    { subject: 'A password was added to your DONGY account', text },
   )
 }
 
 export async function renderPasswordRemovedNoticeEmail(): Promise<RenderedEmail> {
   const resetUrl = `${authBaseUrl()}/auth/forgot-password`
   const text =
-    `The password on your Spliit Cloud account was removed. You can still sign in with a magic link or a linked provider using your verified email.\n\n` +
+    `The password on your DONGY account was removed. You can still sign in with a magic link or a linked provider using your verified email.\n\n` +
     `If you did not make this change, set a new password from account settings or reset it immediately:\n\n${resetUrl}`
 
   return renderTemplate(
@@ -473,14 +468,14 @@ export async function renderPasswordRemovedNoticeEmail(): Promise<RenderedEmail>
       brandBaseUrl={authBaseUrl()}
       resetUrl={resetUrl}
     />,
-    { subject: 'A password was removed from your Spliit Cloud account', text },
+    { subject: 'A password was removed from your DONGY account', text },
   )
 }
 
 export async function renderPasswordChangedNoticeEmail(): Promise<RenderedEmail> {
   const resetUrl = `${authBaseUrl()}/auth/forgot-password`
   const text =
-    `The password on your Spliit Cloud account was changed. Other sessions have been signed out.\n\n` +
+    `The password on your DONGY account was changed. Other sessions have been signed out.\n\n` +
     `If you did not make this change, reset the password immediately:\n\n${resetUrl}`
 
   return renderTemplate(
@@ -488,7 +483,7 @@ export async function renderPasswordChangedNoticeEmail(): Promise<RenderedEmail>
       brandBaseUrl={authBaseUrl()}
       resetUrl={resetUrl}
     />,
-    { subject: 'Your Spliit Cloud password was changed', text },
+    { subject: 'Your DONGY password was changed', text },
   )
 }
 
@@ -496,11 +491,11 @@ export async function renderMagicLinkEmail(input: {
   signInUrl: string
 }): Promise<RenderedEmail> {
   const text =
-    `Click the link below to sign in to Spliit Cloud.\n\n${input.signInUrl}\n\n` +
+    `Click the link below to sign in to DONGY.\n\n${input.signInUrl}\n\n` +
     `If you did not request this email, you can safely ignore it.`
 
   return renderTemplate(
     <MagicLinkEmail brandBaseUrl={authBaseUrl()} signInUrl={input.signInUrl} />,
-    { subject: 'Your Spliit Cloud sign-in link', text },
+    { subject: 'Your DONGY sign-in link', text },
   )
 }

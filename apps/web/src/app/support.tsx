@@ -4,9 +4,9 @@ export default function SupportPage() {
   return (
     <LegalPage title="Support" lastUpdated="September 30, 2026">
       <p>
-        Spliit Cloud is a non-commercial, community-maintained project. For help
-        with your account, groups, or expenses, contact us and include enough
-        detail to reproduce the issue.
+        DONGY is a non-commercial, community-maintained project. For help with
+        your account, groups, or expenses, contact us and include enough detail
+        to reproduce the issue.
       </p>
 
       <section>
@@ -18,8 +18,8 @@ export default function SupportPage() {
           relevant. Never send passwords, recovery links, or one-time codes.
         </p>
         <p>
-          We aim to reply within a few days. Spliit Cloud has no paid support
-          tier and no guaranteed response time.
+          We aim to reply within a few days. DONGY has no paid support tier and
+          no guaranteed response time.
         </p>
       </section>
 
@@ -59,9 +59,9 @@ export default function SupportPage() {
         <h3>Connected applications</h3>
         <p>
           If you connected ChatGPT, Claude, or another OAuth application to your
-          Spliit Cloud account, review its access under account settings and
-          disconnect it there if you no longer use it. Mention the application
-          name and when you connected it when asking for help with a connection.
+          DONGY account, review its access under account settings and disconnect
+          it there if you no longer use it. Mention the application name and
+          when you connected it when asking for help with a connection.
         </p>
       </section>
     </LegalPage>

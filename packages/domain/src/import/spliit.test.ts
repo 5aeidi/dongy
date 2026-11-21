@@ -218,58 +218,56 @@ describe('parseSpliitExport', () => {
       }),
   )
 
-  it.effect(
-    'ignores Spliit Cloud recurrence state outside the legacy schema',
-    () =>
-      Effect.gen(function* () {
-        const source = yield* parseSpliitExport({
-          ...validExport,
-          expenses: [
-            {
-              ...validExport.expenses[0],
-              recurrence: {
-                seriesId: 'series-1',
-                frequency: 'YEARLY',
-                interval: 2,
-                end: {
-                  type: 'DATE',
-                  endDate: '2030-02-28',
-                },
-                status: 'CANCELLED',
-                anchorDate: '2026-02-28',
-                anchorSequence: 3,
-                nextOccurrenceDate: '2030-02-28',
-                nextOccurrenceOrdinal: 5,
-                template: {
-                  title: 'Current template',
-                  categoryId: 'transportation',
-                  amount: 23000,
-                  originalAmount: null,
-                  originalCurrency: null,
-                  conversionRate: null,
-                  conversionSource: null,
-                  paidBySplitMode: 'BY_AMOUNT',
-                  paidByList: [{ ledgerParticipantId: 'p-1', shares: 23000 }],
-                  paidFor: [
-                    { ledgerParticipantId: 'p-1', shares: 300 },
-                    { ledgerParticipantId: 'p-2', shares: 200 },
-                  ],
-                  splitMode: 'EVENLY',
-                  isReimbursement: false,
-                  notes: 'future state',
-                  items: [],
-                  itemizedRemainder: null,
-                },
+  it.effect('ignores DONGY recurrence state outside the legacy schema', () =>
+    Effect.gen(function* () {
+      const source = yield* parseSpliitExport({
+        ...validExport,
+        expenses: [
+          {
+            ...validExport.expenses[0],
+            recurrence: {
+              seriesId: 'series-1',
+              frequency: 'YEARLY',
+              interval: 2,
+              end: {
+                type: 'DATE',
+                endDate: '2030-02-28',
               },
-              recurrenceSequence: 3,
+              status: 'CANCELLED',
+              anchorDate: '2026-02-28',
+              anchorSequence: 3,
+              nextOccurrenceDate: '2030-02-28',
+              nextOccurrenceOrdinal: 5,
+              template: {
+                title: 'Current template',
+                categoryId: 'transportation',
+                amount: 23000,
+                originalAmount: null,
+                originalCurrency: null,
+                conversionRate: null,
+                conversionSource: null,
+                paidBySplitMode: 'BY_AMOUNT',
+                paidByList: [{ ledgerParticipantId: 'p-1', shares: 23000 }],
+                paidFor: [
+                  { ledgerParticipantId: 'p-1', shares: 300 },
+                  { ledgerParticipantId: 'p-2', shares: 200 },
+                ],
+                splitMode: 'EVENLY',
+                isReimbursement: false,
+                notes: 'future state',
+                items: [],
+                itemizedRemainder: null,
+              },
             },
-          ],
-        })
-        expect(source.expenses[0].recurrence).toBeNull()
-        expect('recurrenceSeriesId' in source.expenses[0]).toBe(false)
-        expect('recurrenceSequence' in source.expenses[0]).toBe(false)
-        expect(source.expenses[0].recurrenceRule).toBe('NONE')
-      }),
+            recurrenceSequence: 3,
+          },
+        ],
+      })
+      expect(source.expenses[0].recurrence).toBeNull()
+      expect('recurrenceSeriesId' in source.expenses[0]).toBe(false)
+      expect('recurrenceSequence' in source.expenses[0]).toBe(false)
+      expect(source.expenses[0].recurrenceRule).toBe('NONE')
+    }),
   )
 
   it.effect('parses a representative export into the normalized shape', () =>

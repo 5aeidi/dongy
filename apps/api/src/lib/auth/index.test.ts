@@ -417,7 +417,7 @@ describe('better-auth passkey config', () => {
     expect(plugin).toBeDefined()
     expect(plugin?.options).toMatchObject({
       rpID: 'localhost',
-      rpName: 'Spliit Cloud',
+      rpName: 'DONGY',
     })
     expect(plugin?.options?.origin).toContain('http://localhost:3000')
   })
@@ -480,7 +480,7 @@ describe('better-auth emailAndPassword config', () => {
     expect(sendEmailMock).toHaveBeenCalledWith(
       expect.objectContaining({
         to: 'alice@example.com',
-        subject: 'Reset your Spliit Cloud password',
+        subject: 'Reset your DONGY password',
         text: expect.stringContaining(
           'This account can also sign in with: Google, email sign-in link.',
         ),
@@ -502,7 +502,7 @@ describe('better-auth emailAndPassword config', () => {
     expect(sendEmailMock).toHaveBeenCalledWith(
       expect.objectContaining({
         to: 'alice@example.com',
-        subject: 'Sign in to Spliit Cloud',
+        subject: 'Sign in to DONGY',
         text: expect.stringContaining(
           'Use one of these sign-in methods instead: Google, email sign-in link.',
         ),
@@ -521,7 +521,7 @@ describe('better-auth emailAndPassword config', () => {
     expect(sendEmailMock).toHaveBeenCalledWith(
       expect.objectContaining({
         to: 'alice@example.com',
-        subject: 'Sign in to Spliit Cloud',
+        subject: 'Sign in to DONGY',
         text: expect.stringContaining(
           'Use one of these sign-in methods instead: Test SSO.',
         ),
@@ -856,7 +856,7 @@ describe('password change notice after hook', () => {
     expect(sendEmailMock).toHaveBeenCalledWith(
       expect.objectContaining({
         to: 'alice@example.com',
-        subject: 'Your Spliit Cloud password was changed',
+        subject: 'Your DONGY password was changed',
         text: expect.stringContaining('Other sessions have been signed out'),
       }),
     )

@@ -304,7 +304,7 @@ describe.skipIf(!apiReachable || !maildevReachable)(
       })
       const mailContent = captured.text
       expect(mailContent).toContain('Click the link below to sign in to Spliit')
-      expect(captured.html).toContain('Sign in to Spliit Cloud')
+      expect(captured.html).toContain('Sign in to DONGY')
 
       // Parse the email to extract the magic link URL
       // The email body lines after the header contain the URL.

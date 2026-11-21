@@ -54,7 +54,7 @@ const report = {
 describe('ReportPrintPage', () => {
   beforeEach(() => {
     vi.clearAllMocks()
-    document.title = 'Spliit Cloud'
+    document.title = 'DONGY'
     globalThis.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: () => Promise.resolve(report),
@@ -96,7 +96,7 @@ describe('ReportPrintPage', () => {
 
     await waitFor(() =>
       expect(document.title).toBe(
-        'Spliit Cloud - Trip to Lisbon - Expense report (2026-07-01 to 2026-07-31)',
+        'DONGY - Trip to Lisbon - Expense report (2026-07-01 to 2026-07-31)',
       ),
     )
   })

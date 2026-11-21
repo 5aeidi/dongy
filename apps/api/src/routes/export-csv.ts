@@ -177,7 +177,7 @@ export async function exportGroupCsv(request: Request, groupId: string) {
 
   const csv = new Parser({ fields }).parse(rows)
   const date = new Date().toISOString().split('T')[0]
-  const filename = `Spliit Cloud Export - ${group.name} - ${date}.csv`
+  const filename = `DONGY Export - ${group.name} - ${date}.csv`
 
   return new Response(`\uFEFF${csv}`, {
     headers: {

@@ -63,7 +63,7 @@ describe('GroupEmailActivityNotificationDispatcher', () => {
       'Alice (admin) invited you to join "Roadtrip 2026"',
     )
     expect(email.html).toContain('You&#x27;re invited to')
-    expect(email.html).toContain('Open Spliit Cloud')
+    expect(email.html).toContain('Open DONGY')
     expect(email.html).toContain('href="http://localhost:3000/groups/group-1"')
   })
 
@@ -98,7 +98,7 @@ describe('GroupEmailActivityNotificationDispatcher', () => {
     expect(sendEmailMock).toHaveBeenCalledTimes(1)
     const email = sendEmailMock.mock.calls[0][0]
     expect(email.subject).toBe(
-      '[Spliit Cloud] Group details were updated in Roadtrip 2026',
+      '[DONGY] Group details were updated in Roadtrip 2026',
     )
     expect(email.text).toContain('View the group here:')
     expect(email.html).toContain('Group details were updated')
@@ -120,10 +120,10 @@ describe('GroupEmailActivityNotificationDispatcher', () => {
     expect(sendEmailMock).toHaveBeenCalledTimes(1)
     const email = sendEmailMock.mock.calls[0][0]
     expect(email.subject).toBe(
-      'Alice started a friend ledger with you on Spliit Cloud',
+      'Alice started a friend ledger with you on DONGY',
     )
     expect(email.text).toContain('Alice started a friend ledger with you')
     expect(email.html).toContain('Alice started a friend ledger with you')
-    expect(email.html).toContain('Open Spliit Cloud')
+    expect(email.html).toContain('Open DONGY')
   })
 })

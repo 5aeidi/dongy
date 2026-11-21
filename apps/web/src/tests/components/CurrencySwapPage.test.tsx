@@ -91,6 +91,7 @@ vi.mock('@/trpc/client', () => ({
 }))
 
 vi.mock('@/lib/currency', () => ({
+  getCurrency: () => undefined,
   useCurrencies: () => [
     {
       code: 'USD',

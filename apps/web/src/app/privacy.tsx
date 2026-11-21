@@ -4,10 +4,9 @@ export default function PrivacyPage() {
   return (
     <LegalPage title="Privacy notice" lastUpdated="September 30, 2026">
       <p>
-        Spliit Cloud is a non-commercial, community-maintained project. This
-        notice explains what personal data the public Spliit Cloud instance
-        processes, why, who receives it, how long it is kept, and the controls
-        available to you.
+        DONGY is a non-commercial, community-maintained project. This notice
+        explains what personal data the public DONGY instance processes, why,
+        who receives it, how long it is kept, and the controls available to you.
       </p>
 
       <section>
@@ -55,8 +54,8 @@ export default function PrivacyPage() {
           expense context may be sent to the configured AI provider. When a
           dedicated OCR backend is configured, receipt files are additionally
           sent to that OCR provider for text extraction. Voice recordings are
-          processed transiently and are not stored by Spliit Cloud. Do not use
-          those features for material you are not comfortable sharing with that
+          processed transiently and are not stored by DONGY. Do not use those
+          features for material you are not comfortable sharing with that
           provider.
         </p>
       </section>
@@ -65,13 +64,13 @@ export default function PrivacyPage() {
         <h3>Connected applications</h3>
         <p>
           If you connect ChatGPT, Claude, or another OAuth application to your
-          Spliit Cloud account, that application can access the groups,
-          expenses, and balances your account can see, within the permissions
-          you approved. Data sent through a connected application is also
-          governed by that application&apos;s terms and privacy policy. You can
-          review and disconnect connected applications at any time from your
-          account settings; disconnecting stops future access but does not
-          delete data the application already received.
+          DONGY account, that application can access the groups, expenses, and
+          balances your account can see, within the permissions you approved.
+          Data sent through a connected application is also governed by that
+          application&apos;s terms and privacy policy. You can review and
+          disconnect connected applications at any time from your account
+          settings; disconnecting stops future access but does not delete data
+          the application already received.
         </p>
       </section>
 

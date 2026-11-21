@@ -192,7 +192,7 @@ function WheelColumn({
           data-wheel={name}
           onScroll={handleScroll}
           onKeyDown={handleKeyDown}
-          className="h-full snap-y snap-mandatory overflow-y-auto overscroll-contain rounded-lg [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)] focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
+          className="h-full snap-y snap-mandatory overflow-y-auto overscroll-contain rounded-lg pixel-mask-y focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
         >
           <div aria-hidden="true" className="h-[76px] shrink-0 snap-none" />
           {options.map((option) => {
@@ -351,7 +351,7 @@ export function ExpenseTimeQuickChips({
         aria-hidden="true"
         data-chips-indicator="left"
         className={cn(
-          'pointer-events-none absolute inset-y-0 left-0 flex w-8 items-center justify-start bg-gradient-to-r from-background to-transparent',
+          'pointer-events-none absolute inset-y-0 left-0 flex w-8 items-center justify-start pixel-fade-r',
           !canScrollChipsLeft && 'hidden',
         )}
       >
@@ -361,7 +361,7 @@ export function ExpenseTimeQuickChips({
         aria-hidden="true"
         data-chips-indicator="right"
         className={cn(
-          'pointer-events-none absolute inset-y-0 right-0 flex w-8 items-center justify-end bg-gradient-to-l from-background to-transparent',
+          'pointer-events-none absolute inset-y-0 right-0 flex w-8 items-center justify-end pixel-fade-l',
           !canScrollChipsRight && 'hidden',
         )}
       >

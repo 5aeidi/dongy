@@ -433,7 +433,7 @@ describe('CompleteProfilePage', () => {
     render(<CompleteProfilePage />)
 
     expect(
-      await screen.findByRole('button', { name: 'Start using Spliit Cloud' }),
+      await screen.findByRole('button', { name: 'Start using DONGY' }),
     ).toBeInTheDocument()
     expect(screen.queryByLabelText('Display name')).not.toBeInTheDocument()
     expect(setupMock).toHaveBeenCalled()
@@ -638,7 +638,7 @@ describe('CompleteProfilePage', () => {
     // key panel instead.
     expect(screen.queryByText('Save your sign in link')).not.toBeInTheDocument()
     expect(
-      await screen.findByRole('button', { name: 'Start using Spliit Cloud' }),
+      await screen.findByRole('button', { name: 'Start using DONGY' }),
     ).toBeInTheDocument()
     expect(setupMock).toHaveBeenCalled()
   })
@@ -666,7 +666,7 @@ describe('CompleteProfilePage', () => {
     // Link pre-selected: its setup shows below the group, no extra click.
     // Embedded link setup hides the duplicate heading; the key panel shows.
     expect(
-      await screen.findByRole('button', { name: 'Start using Spliit Cloud' }),
+      await screen.findByRole('button', { name: 'Start using DONGY' }),
     ).toBeInTheDocument()
     expect(screen.queryByText('Save your sign in link')).not.toBeInTheDocument()
     expect(setupMock).toHaveBeenCalled()
@@ -676,15 +676,13 @@ describe('CompleteProfilePage', () => {
         name: 'I copied and safely stored my sign in link.',
       }),
     )
-    await user.click(
-      screen.getByRole('button', { name: 'Start using Spliit Cloud' }),
-    )
+    await user.click(screen.getByRole('button', { name: 'Start using DONGY' }))
 
     await waitFor(() => expect(acknowledgeMock).toHaveBeenCalled())
     // Named and safeguard-acknowledged: onboarding is done, the page leaves.
     await waitFor(() =>
       expect(
-        screen.queryByRole('button', { name: 'Start using Spliit Cloud' }),
+        screen.queryByRole('button', { name: 'Start using DONGY' }),
       ).not.toBeInTheDocument(),
     )
   })
@@ -709,7 +707,7 @@ describe('CompleteProfilePage', () => {
     const { user } = render(<CompleteProfilePage />)
 
     expect(
-      await screen.findByRole('button', { name: 'Start using Spliit Cloud' }),
+      await screen.findByRole('button', { name: 'Start using DONGY' }),
     ).toBeInTheDocument()
 
     await user.click(
@@ -720,7 +718,7 @@ describe('CompleteProfilePage', () => {
       await screen.findByRole('button', { name: 'Add a passkey' }),
     ).toBeInTheDocument()
     expect(
-      screen.queryByRole('button', { name: 'Start using Spliit Cloud' }),
+      screen.queryByRole('button', { name: 'Start using DONGY' }),
     ).not.toBeInTheDocument()
 
     await user.click(
@@ -728,7 +726,7 @@ describe('CompleteProfilePage', () => {
     )
 
     expect(
-      await screen.findByRole('button', { name: 'Start using Spliit Cloud' }),
+      await screen.findByRole('button', { name: 'Start using DONGY' }),
     ).toBeInTheDocument()
   })
 

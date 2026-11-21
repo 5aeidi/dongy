@@ -1,4 +1,4 @@
-# Migration to Spliit Cloud
+# Migration to DONGY
 
 This guide covers importing a group from another expense-splitting app. The import system supports six sources: a `spliit.app` group URL that the server fetches on your behalf, a `spliit.app` JSON or CSV export, a Splitwise CSV export, a Cospend project CSV export, a Tricount share link or GDPR CSV export, and a Settle Up CSV history export.
 
@@ -8,7 +8,7 @@ This guide covers importing a group from another expense-splitting app. The impo
 
 The **Spliit** tab offers two ways in — a group link (fastest) or a downloaded export file:
 
-- **Group link**: Open the group on `spliit.app`, copy the group URL, and paste it into the import wizard. Our server fetches the group through the `spliit.app` public export endpoint on your behalf, so the browser never contacts `spliit.app` directly. Change `.app` to `.cloud` in any `spliit.app` group URL to import it into Spliit Cloud.
+- **Group link**: Open the group on `spliit.app`, copy the group URL, and paste it into the import wizard. Our server fetches the group through the `spliit.app` public export endpoint on your behalf, so the browser never contacts `spliit.app` directly. Change `.app` to `.cloud` in any `spliit.app` group URL to import it into DONGY.
 - **File export**: Open the group on `spliit.app`, open group settings, and download JSON (CSV works too). JSON preserves every amount and payer exactly and keeps recurring expenses; CSV is a fallback that rounds each per-participant amount to 2 decimals and drops recurrence.
 
 ## From Splitwise (CSV)
@@ -23,12 +23,12 @@ The import wizard dispatches the parser from the active tab — the Spliit tab u
 2. Click the gear icon at the top of the group page, then choose “Export as spreadsheet”.
 3. Download the CSV. The file contains one row per expense plus a `Total balance` summary row at the end (skipped on import).
 
-### Importing into Spliit Cloud
+### Importing into DONGY
 
-1. Sign in to Spliit Cloud and open the import page.
+1. Sign in to DONGY and open the import page.
 2. On the source step, switch to the **Splitwise** tab.
 3. Drop the CSV file (or click to select it).
-4. Map the source participants to Spliit Cloud participants in the mapping step, choose the destination group's currency, and confirm.
+4. Map the source participants to DONGY participants in the mapping step, choose the destination group's currency, and confirm.
 
 ### Multi-currency
 
@@ -69,7 +69,7 @@ For group exports, type the group name in the destination step before confirming
 
 ### Limitation
 
-One CSV file produces one Spliit Cloud group. There is no auto-grouping of multiple Splitwise groups from a single export. If you have several Splitwise groups, export each one separately and import them one at a time.
+One CSV file produces one DONGY group. There is no auto-grouping of multiple Splitwise groups from a single export. If you have several Splitwise groups, export each one separately and import them one at a time.
 
 ## From Tricount (share link or GDPR CSV)
 
@@ -125,11 +125,11 @@ Settle Up exports carry no group name in the file body, so the parser defaults t
 
 ### Limitation
 
-One CSV file produces one Spliit Cloud group. Receipt images are not part of the CSV export and are not imported. Re-upload them in the destination group if needed.
+One CSV file produces one DONGY group. Receipt images are not part of the CSV export and are not imported. Re-upload them in the destination group if needed.
 
-## From Spliit Cloud (account backup or group bundle)
+## From DONGY (account backup or group bundle)
 
-The **Spliit Cloud** tab imports a `.spliit.zip` bundle. Open Account settings → Backups & export (multiple groups) or a group's Export section (single group), choose the groups and content, then choose Download backup or Download bundle. Drop the `.spliit.zip` file onto the upload area — you'll pick which groups to import in the next step.
+The **DONGY** tab imports a `.spliit.zip` bundle. Open Account settings → Backups & export (multiple groups) or a group's Export section (single group), choose the groups and content, then choose Download backup or Download bundle. Drop the `.spliit.zip` file onto the upload area — you'll pick which groups to import in the next step.
 
 ## What gets imported
 
@@ -148,11 +148,11 @@ The **Spliit Cloud** tab imports a `.spliit.zip` bundle. Open Account settings �
 ## What you need
 
 - A `spliit.app` export file (JSON or CSV) or the group URL
-- A Spliit Cloud account to own the imported group
+- A DONGY account to own the imported group
 
 ## Import flow
 
-1. Sign in to Spliit Cloud and open the import page.
+1. Sign in to DONGY and open the import page.
 2. Upload a JSON or CSV export, paste a `spliit.app` group URL, or swap `.app` for `.cloud` in the group URL (e.g. `https://spliit.app/groups/abc123` → `https://spliit.cloud/groups/abc123`).
 3. For each source participant, choose a mapping: link to your account, invite by email, invite by link, leave unlinked, or (for existing-group imports) link to an existing participant.
 4. Confirm. The group is created under your account.
@@ -181,6 +181,6 @@ The confirm step blocks submission if any required rate is unavailable (unsuppor
 
 If you hit a problem not covered here, open an issue with the export (or a redacted version) and a description of what you saw.
 
-## Exporting from Spliit Cloud
+## Exporting from DONGY
 
-Group and user data export is available. The same JSON shape used by the import path is used for export, so migration off Spliit Cloud is possible without lock-in.
+Group and user data export is available. The same JSON shape used by the import path is used for export, so migration off DONGY is possible without lock-in.

@@ -1,6 +1,6 @@
 # Webhooks
 
-Spliit Cloud can send signed expense events to HTTPS endpoints owned by permanent,
+DONGY can send signed expense events to HTTPS endpoints owned by permanent,
 email-verified accounts. Configure endpoints in **Account settings → Webhooks**.
 Each enabled endpoint receives events from every group where its owner is an
 active member. New endpoints receive future events only.
@@ -92,7 +92,7 @@ Field conventions:
 Values currently emitted include:
 
 - `expense-file-import` — CSV import
-- `spliit-cloud-import` — import from Spliit Cloud
+- `spliit-cloud-import` — import from DONGY
 - `import` — generic import fallback when no provider is known
 - `recurring-series-update` / `recurring-series-delete` — recurring-series edits
 - `recurring-catch-up` — recurring-expense materialization
@@ -384,7 +384,7 @@ snapshot shape as the singular events plus its own `changedFields`:
 
 ## Verify signatures
 
-Spliit Cloud uses the Standard Webhooks header format:
+DONGY uses the Standard Webhooks header format:
 
 - `webhook-id`: the envelope event ID
 - `webhook-timestamp`: Unix time in seconds
@@ -462,7 +462,7 @@ used in trusted networks.
 Direct delivery reveals the server IP to every webhook destination. Relay mode
 sends each delivery — including `webhook.test` events — through a Cloudflare
 Worker first, so destinations only ever see the Cloudflare source IP. The relay
-only forwards: retries, history, and webhook signatures stay in Spliit Cloud, and the
+only forwards: retries, history, and webhook signatures stay in DONGY, and the
 original body and `webhook-*` headers reach the destination unchanged (verify
 signatures exactly as in direct mode).
 
@@ -475,7 +475,7 @@ leak the server IP and deliver events twice.
 
 The relay is a small Cloudflare Worker in `apps/webhook-relay`, and any
 self-hoster can deploy and operate their own instance of it — there is no
-Spliit Cloud-hosted relay involved. The setup below is how this is solved for the
+DONGY-hosted relay involved. The setup below is how this is solved for the
 public spliit.cloud instance; self-hosters follow the same steps with their
 own Cloudflare account, worker name, and URLs:
 
@@ -487,7 +487,7 @@ own Cloudflare account, worker name, and URLs:
    `BETTER_AUTH_SECRET`) via secret storage, never in `wrangler.jsonc`:
    `bunx wrangler secret put RELAY_SECRET`.
 3. Set `WEBHOOK_RELAY_URL` (the full `.../forward` URL) and
-   `WEBHOOK_RELAY_SECRET` (same value) on the Spliit Cloud **api and worker**
+   `WEBHOOK_RELAY_SECRET` (same value) on the DONGY **api and worker**
    services (the background job runner — the Cloudflare Worker itself only
    needs `RELAY_SECRET` from step 2), then restart both.
 4. Send a test event to a request-inspection endpoint and confirm the
@@ -510,13 +510,13 @@ with `WEBHOOK_ALLOW_PRIVATE_ENDPOINTS=true`, because the relay cannot reach
 private networks. Relayed destinations must be public HTTPS (explicit ports
 allowed); IP literals and credential-bearing URLs are rejected.
 
-The envelope is documented in `apps/webhook-relay/src/index.ts`: Spliit Cloud signs
+The envelope is documented in `apps/webhook-relay/src/index.ts`: DONGY signs
 `version`, canonical destination, 60-second expiry, attempt ID, and the
 sha256 of the raw body. The worker accepts envelopes up to 30 seconds past
 expiry for clock skew. The worker returns the destination status verbatim and
-answers any relay-side failure with `502`, which Spliit Cloud retries.
+answers any relay-side failure with `502`, which DONGY retries.
 
-Limitations: Spliit Cloud still resolves destination hostnames during validation, so
+Limitations: DONGY still resolves destination hostnames during validation, so
 the DNS resolver sees them — the relay hides the server IP from the
 _destination_, nothing more. Relay logs contain only the attempt ID and
 outcome, and only for failures and upstream error statuses. Roll back by

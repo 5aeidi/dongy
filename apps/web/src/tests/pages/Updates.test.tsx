@@ -71,7 +71,7 @@ describe('UpdatesPage', () => {
     expect(screen.getByText('Activity tab is now personal')).toBeInTheDocument()
     expect(screen.getByText('Previous updates')).toBeInTheDocument()
     expect(
-      screen.getByRole('link', { name: 'Spliit Cloud 2.5.0 is here' }),
+      screen.getByRole('link', { name: 'DONGY 2.5.0 is here' }),
     ).toHaveAttribute('href', '/updates/spliit-cloud-2-5-0')
   })
 
@@ -81,9 +81,7 @@ describe('UpdatesPage', () => {
     render(<UpdatesPage />)
 
     expect(screen.getByRole('heading', { name: 'Updates' })).toBeInTheDocument()
-    expect(
-      screen.queryByText('Spliit Cloud 2.5.0 is here'),
-    ).not.toBeInTheDocument()
+    expect(screen.queryByText('DONGY 2.5.0 is here')).not.toBeInTheDocument()
   })
 })
 
@@ -94,7 +92,7 @@ describe('UpdateDetailPage', () => {
     render(<UpdateDetailPage />)
 
     expect(
-      screen.getByRole('heading', { name: 'Spliit Cloud 2.5.0 is here' }),
+      screen.getByRole('heading', { name: 'DONGY 2.5.0 is here' }),
     ).toBeInTheDocument()
     expect(screen.getByText('Activity tab is now personal')).toBeInTheDocument()
     expect(

@@ -9,14 +9,14 @@
     <string name="check_updates">Periksa pembaruan</string>
     <string name="checking">Memeriksa pembaruan…</string>
     <string name="connection_settings">Pengaturan koneksi</string>
-    <string name="continue_app">Buka Spliit Cloud</string>
+    <string name="continue_app">Buka DONGY</string>
     <string name="expenses">Pengeluaran</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">Nanti</string>
     <string name="new_group">Grup baru</string>
     <string name="obtainium_note">Jika menggunakan Obtainium, aplikasi tersebut juga dapat mengelola pembaruan dari rilis GitHub kami.</string>
     <string name="offline_message">Saat pertama kali dibuka, aplikasi memerlukan koneksi internet untuk menyiapkan akses offline. File yang Anda bagikan belum dibuang. Hubungkan ke internet dan coba lagi.</string>
-    <string name="offline_title">Hubungkan ke internet untuk membuka Spliit Cloud</string>
+    <string name="offline_title">Hubungkan ke internet untuk membuka DONGY</string>
     <string name="open_play">Buka Google Play</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">Instalasi ini dikelola oleh Google Play. Periksa Google Play untuk pembaruan paket Android.</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Pembaruan aplikasi Android</string>
     <string name="version">Paket Android %1$s (%2$d)</string>
     <string name="view_update">Lihat pembaruan</string>
-    <string name="web_version_note">Fitur situs web diperbarui secara terpisah. Pengeluaran Anda disimpan oleh Spliit Cloud dan di penyimpanan offline browser ini.</string>
+    <string name="web_version_note">Fitur situs web diperbarui secara terpisah. Pengeluaran Anda disimpan oleh DONGY dan di penyimpanan offline browser ini.</string>
 </resources>

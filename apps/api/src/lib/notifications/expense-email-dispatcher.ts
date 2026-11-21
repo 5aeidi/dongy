@@ -177,13 +177,13 @@ export class ExpenseEmailActivityNotificationDispatcher implements ActivityNotif
 
     const subjectForType: Record<string, (dn: string) => string> = {
       EXPENSE_CREATED: (dn) =>
-        `[Spliit Cloud] Expense "${title}" was added by ${actorName} to ${dn}`,
+        `[DONGY] Expense "${title}" was added by ${actorName} to ${dn}`,
       RECURRING_EXPENSE_CREATED: (dn) =>
-        `[Spliit Cloud] Recurring expense "${title}" was created by ${actorName} in ${dn}`,
+        `[DONGY] Recurring expense "${title}" was created by ${actorName} in ${dn}`,
       EXPENSE_UPDATED: (dn) =>
-        `[Spliit Cloud] Expense "${title}" was updated by ${actorName} in ${dn}`,
+        `[DONGY] Expense "${title}" was updated by ${actorName} in ${dn}`,
       EXPENSE_DELETED: (dn) =>
-        `[Spliit Cloud] Expense "${title}" was removed${parsed.stopped ? ' and the recurrence was stopped' : ''} by ${actorName} from ${dn}`,
+        `[DONGY] Expense "${title}" was removed${parsed.stopped ? ' and the recurrence was stopped' : ''} by ${actorName} from ${dn}`,
     }
     const buildSubject = subjectForType[event.type]
     const buildText = (displayName: string) => {
@@ -302,7 +302,7 @@ export class ExpenseEmailActivityNotificationDispatcher implements ActivityNotif
       activityId: event.activityId ?? '',
       group,
       buildSubject: (displayName: string) =>
-        `[Spliit Cloud] ${count} ${
+        `[DONGY] ${count} ${
           count === 1 ? 'expense' : 'expenses'
         } imported in ${displayName}`,
       buildText: (displayName: string) => {
@@ -321,7 +321,7 @@ export class ExpenseEmailActivityNotificationDispatcher implements ActivityNotif
       },
       templateFor: (displayName: string): ExpenseActivityInputAny => ({
         kind: 'import_summary',
-        subject: `[Spliit Cloud] ${count} ${
+        subject: `[DONGY] ${count} ${
           count === 1 ? 'expense' : 'expenses'
         } imported in ${displayName}`,
         text: '',
@@ -372,7 +372,7 @@ export class ExpenseEmailActivityNotificationDispatcher implements ActivityNotif
       activityId: event.activityId ?? '',
       group,
       buildSubject: (displayName) =>
-        `[Spliit Cloud] Expense categories updated in ${displayName}`,
+        `[DONGY] Expense categories updated in ${displayName}`,
       buildText: (displayName) =>
         `${actorName} updated categories for ${parsed.count} ${
           parsed.count === 1 ? 'expense' : 'expenses'
@@ -527,8 +527,7 @@ export class ExpenseEmailActivityNotificationDispatcher implements ActivityNotif
       includeActorAsRecipient: false,
       activityId: event.activityId ?? '',
       group,
-      buildSubject: () =>
-        `[Spliit Cloud] Recurring expense stopped in ${displayName}`,
+      buildSubject: () => `[DONGY] Recurring expense stopped in ${displayName}`,
       buildText: () =>
         `${actorName} stopped the recurring expense${title}${recurrenceDesc} in ${displayName}.`,
       templateFor: (): ExpenseActivityInputAny => ({
@@ -583,7 +582,7 @@ export class ExpenseEmailActivityNotificationDispatcher implements ActivityNotif
     )
     const expenseUrl = `${getWebBaseUrl()}/groups/${event.groupId}/expenses/${event.subject.id}`
     const excerpt = payload.excerpt?.trim() ?? ''
-    const subject = `[Spliit Cloud] ${actorName} commented on "${title}" in ${displayName}`
+    const subject = `[DONGY] ${actorName} commented on "${title}" in ${displayName}`
     const text = [
       `${actorName} commented on "${title}" in ${displayName}.`,
       excerpt ? `\n"${excerpt}"` : '',

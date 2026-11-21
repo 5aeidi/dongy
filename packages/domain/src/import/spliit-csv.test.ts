@@ -34,7 +34,7 @@ describe('papaparse-backed CSV primitives', () => {
 })
 
 describe('parseSpliitCsv', () => {
-  it.effect('rejects Spliit Cloud recurrence columns', () =>
+  it.effect('rejects DONGY recurrence columns', () =>
     Effect.gen(function* () {
       const csv =
         '"Date","Description","Category","Currency","Cost","Original cost","Original currency","Conversion rate","Is Reimbursement","Split mode","Recurrence series ID","John ","Jane"\n' +

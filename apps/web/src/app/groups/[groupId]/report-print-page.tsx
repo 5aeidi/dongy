@@ -68,7 +68,7 @@ function buildPrintDocumentTitle(
     .replace(/\s+/g, ' ')
     .trim()
 
-  return `Spliit Cloud - ${safeGroupName || 'Group'} - ${reportTitle} (${from} to ${to})`
+  return `DONGY - ${safeGroupName || 'Group'} - ${reportTitle} (${from} to ${to})`
 }
 
 function waitForPrintImages(): Promise<void> {
@@ -362,7 +362,7 @@ export function ReportPrintPage({ groupId, from, to }: ReportPrintPageProps) {
           <img
             className="print-report-brand"
             src="/logo-with-text.svg"
-            alt="Spliit Cloud"
+            alt="DONGY"
           />
           <p className="print-report-eyebrow">{report.title}</p>
           <h1 className="print-report-title">{report.groupName}</h1>

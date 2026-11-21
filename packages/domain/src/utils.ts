@@ -95,6 +95,17 @@ export function formatCategoryForAIPrompt(category: Category) {
  *   the amount (e.g. 100 for USD 1.00). Set this to `true` if you need to pass
  *   a value with decimal fractions instead (e.g. 1.00 for USD 1.00).
  */
+/** The currency's symbol for `locale`'s language, e.g. `تومان` in Farsi. */
+export function localizedCurrencySymbol(currency: Currency, locale: string) {
+  let language = locale
+  try {
+    language = new Intl.Locale(resolveFormattingLocale(locale)).language
+  } catch {
+    // Keep the raw locale string; it will simply miss the lookup.
+  }
+  return currency.localizedSymbols?.[language] ?? currency.symbol
+}
+
 export function formatCurrency(
   currency: Currency,
   amount: number,
@@ -105,13 +116,13 @@ export function formatCurrency(
   // `style: 'currency'` throws for 4-character tickers (e.g. DOGE), so they
   // are formatted as plain numbers with trailing zeros trimmed and the
   // symbol appended (`0.5 ₿`, `5,000 sats`).
-  if (currency.crypto) {
+  if (currency.crypto || currency.suffixSymbol) {
     const value = fractions ? amount : amountAsDecimal(amount, currency)
     const formatted = new Intl.NumberFormat(resolveFormattingLocale(locale), {
       minimumFractionDigits: 0,
       maximumFractionDigits: currency.decimal_digits,
     }).format(value)
-    return `${formatted} ${currency.symbol}`
+    return `${formatted} ${localizedCurrencySymbol(currency, locale)}`
   }
   const format = new Intl.NumberFormat(resolveFormattingLocale(locale), {
     minimumFractionDigits: currency.decimal_digits,

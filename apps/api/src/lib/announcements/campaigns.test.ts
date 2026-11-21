@@ -7,7 +7,7 @@ import { selectAnnouncementRecipients } from './campaigns'
 const announcement = {
   id: 'spliit-cloud-2-5-0',
   date: '2026-10-05',
-  title: 'Spliit Cloud 2.5.0 is here',
+  title: 'DONGY 2.5.0 is here',
   channels: ['updates', 'modal', 'email'],
 } as const
 

@@ -398,7 +398,7 @@ describe('scanReceiptDocument image flow', () => {
         image,
         groupCurrency,
         {
-          locale: 'es',
+          locale: 'fa-IR',
           groupContext: {
             name: 'Madrid Trip',
             currency: '€',
@@ -421,7 +421,7 @@ describe('scanReceiptDocument image flow', () => {
 
     expect(prompt).toContain('Madrid Trip')
     expect(prompt).toContain('EUR')
-    expect(prompt).toContain("user's app language is Español")
+    expect(prompt).toContain("user's app language is فارسی")
     expect(prompt).toContain('"Mercadona" -> groceries')
     expect(prompt).toContain('soft hints')
   })
@@ -437,7 +437,7 @@ describe('scanReceiptDocument image flow', () => {
         groupCurrency,
         {
           ocrOnly: true,
-          locale: 'es',
+          locale: 'fa-IR',
           groupContext: {
             name: 'Madrid Trip',
             currency: '€',
@@ -463,7 +463,7 @@ describe('scanReceiptDocument image flow', () => {
     expect(prompt).not.toContain('"Mercadona" -> groceries')
     expect(prompt).not.toContain('Past expenses in this group')
     // OCR-relevant hints stay: locale, group currency, line items.
-    expect(prompt).toContain("user's app language is Español")
+    expect(prompt).toContain("user's app language is فارسی")
     expect(prompt).toContain('USD')
     expect(prompt).toContain('unitPrice')
     expect(prompt).toMatch(/items/i)
@@ -502,7 +502,7 @@ describe('scanReceiptDocument image flow', () => {
         image,
         groupCurrency,
         {
-          locale: 'es',
+          locale: 'fa-IR',
           translateToLocale: true,
         },
         imageDeps,
@@ -519,7 +519,7 @@ describe('scanReceiptDocument image flow', () => {
     )?.text
 
     expect(prompt).toContain('Translate the returned expense title')
-    expect(prompt).toContain('Español')
+    expect(prompt).toContain('فارسی')
     expect(prompt).toContain('every item title')
   })
 

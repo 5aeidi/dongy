@@ -10,7 +10,7 @@ const SEO_META = new Map([
   [
     '/',
     {
-      title: 'Spliit Cloud — Share expenses with friends & family',
+      title: 'DONGY — Share expenses with friends & family',
       description:
         'Track shared expenses and settle up. Free and open source, synced and secured by your account.',
     },
@@ -18,49 +18,41 @@ const SEO_META = new Map([
   [
     '/privacy',
     {
-      title: 'Privacy notice — Spliit Cloud',
+      title: 'Privacy notice — DONGY',
       description:
-        'How the public Spliit Cloud instance handles personal data when you use it.',
+        'How the public DONGY instance handles personal data when you use it.',
     },
   ],
   [
     '/terms',
     {
-      title: 'Terms of use — Spliit Cloud',
+      title: 'Terms of use — DONGY',
       description:
-        'Terms of use for Spliit Cloud, a free, non-commercial, community-maintained shared expense tracker.',
+        'Terms of use for DONGY, a free, non-commercial, community-maintained shared expense tracker.',
     },
   ],
   [
     '/imprint',
     {
-      title: 'Project notice — Spliit Cloud',
+      title: 'Project notice — DONGY',
       description:
-        'Project notice and public contact channel for Spliit Cloud, a non-commercial, community-maintained software project.',
-    },
-  ],
-  [
-    '/sponsor',
-    {
-      title: 'Support Spliit Cloud',
-      description:
-        'Spliit Cloud is a non-commercial, community-maintained project. If it helps you split expenses with friends and family, consider chipping in for hosting and development.',
+        'Project notice and public contact channel for DONGY, a non-commercial, community-maintained software project.',
     },
   ],
   [
     '/support',
     {
-      title: 'Support — Spliit Cloud',
+      title: 'Support — DONGY',
       description:
-        'How to get help with Spliit Cloud, report bugs, and contact the community maintainers.',
+        'How to get help with DONGY, report bugs, and contact the community maintainers.',
     },
   ],
   [
     '/features',
     {
-      title: 'Features — Spliit Cloud',
+      title: 'Features — DONGY',
       description:
-        'Every Spliit Cloud feature in one catalog: sign-in, smart splits, the installable app, imports, and an open developer platform.',
+        'Every DONGY feature in one catalog: sign-in, smart splits, the installable app, imports, and an open developer platform.',
     },
   ],
 ])
@@ -74,7 +66,6 @@ const MARKDOWN_PAGES = new Map([
   ['/terms', '/terms.md'],
   ['/privacy', '/privacy.md'],
   ['/imprint', '/imprint.md'],
-  ['/sponsor', '/sponsor.md'],
   ['/support', '/support.md'],
   ['/features', '/features.md'],
 ])
@@ -146,27 +137,27 @@ function seoJsonLd(seoPath, meta, canonicalUrl) {
       '@graph': [
         {
           '@type': 'WebSite',
-          name: 'Spliit Cloud',
+          name: 'DONGY',
           url: `${SITE_ORIGIN}/`,
           inLanguage: 'en',
         },
         {
           '@type': 'Organization',
-          name: 'Spliit Cloud',
+          name: 'DONGY',
           url: `${SITE_ORIGIN}/`,
           logo: `${SITE_ORIGIN}/logo.svg`,
-          sameAs: ['https://github.com/antonio-ivanovski/spliit-cloud'],
+          sameAs: ['https://github.com/5aeidi/dongy'],
         },
         {
           '@type': 'WebApplication',
-          name: 'Spliit Cloud',
+          name: 'DONGY',
           url: `${SITE_ORIGIN}/`,
           applicationCategory: 'FinanceApplication',
           operatingSystem: 'Web',
           inLanguage: 'en',
           description: meta.description,
           offers: { '@type': 'Offer', price: '0' },
-          sameAs: ['https://github.com/antonio-ivanovski/spliit-cloud'],
+          sameAs: ['https://github.com/5aeidi/dongy'],
         },
       ],
     }
@@ -179,7 +170,7 @@ function seoJsonLd(seoPath, meta, canonicalUrl) {
     url: canonicalUrl,
     isPartOf: {
       '@type': 'WebSite',
-      name: 'Spliit Cloud',
+      name: 'DONGY',
       url: `${SITE_ORIGIN}/`,
     },
   }
@@ -247,7 +238,7 @@ function injectSeoMeta(html, seoPath, meta) {
   if (/<link\s+rel="alternate"\s+type="text\/markdown"/s.test(next)) {
     next = next.replace(
       /<link\s+rel="alternate"\s+type="text\/markdown"[^>]*>/s,
-      `<link rel="alternate" type="text/markdown" title="Spliit Cloud in plain text" href="${markdownHref}">`,
+      `<link rel="alternate" type="text/markdown" title="DONGY in plain text" href="${markdownHref}">`,
     )
   }
   const jsonLd = JSON.stringify(seoJsonLd(seoPath, meta, canonicalUrl)).replace(
@@ -360,9 +351,9 @@ function shareOgTags(share, preview, pageUrl) {
   const imageUrl = shareCardImageUrl(share)
   if (preview.usable === false) {
     return {
-      title: 'Spliit Cloud — Share expenses with friends & family',
+      title: 'DONGY — Share expenses with friends & family',
       description: 'This invite link is no longer valid.',
-      imageAlt: 'Spliit Cloud group invitation',
+      imageAlt: 'DONGY group invitation',
       url: pageUrl,
       imageUrl,
     }
@@ -374,25 +365,23 @@ function shareOgTags(share, preview, pageUrl) {
     const isFriend = preview.group?.groupType === 'FRIEND'
     const temporaryName = truncateShareText(preview.temporaryName, 40)
     return {
-      title: isFriend
-        ? `${groupName} on Spliit Cloud`
-        : `Join ${groupName} on Spliit Cloud`,
+      title: isFriend ? `${groupName} on DONGY` : `Join ${groupName} on DONGY`,
       description:
         (inviter ? `${inviter} invited you to join ${groupName}. ` : '') +
         (temporaryName ? `You'll join as ${temporaryName}. ` : '') +
-        'Open the link to accept on Spliit Cloud.',
-      imageAlt: `Invitation to join ${groupName} on Spliit Cloud`,
+        'Open the link to accept on DONGY.',
+      imageAlt: `Invitation to join ${groupName} on DONGY`,
       url: pageUrl,
       imageUrl,
     }
   }
   return {
-    title: `${groupName} on Spliit Cloud`,
+    title: `${groupName} on DONGY`,
     description:
       memberCount === null
-        ? `A shared read-only expense group on Spliit Cloud.`
-        : `${groupName}: ${memberCount} ${memberCount === 1 ? 'member' : 'members'} · shared read-only view on Spliit Cloud.`,
-    imageAlt: `Shared view of ${groupName} on Spliit Cloud`,
+        ? `A shared read-only expense group on DONGY.`
+        : `${groupName}: ${memberCount} ${memberCount === 1 ? 'member' : 'members'} · shared read-only view on DONGY.`,
+    imageAlt: `Shared view of ${groupName} on DONGY`,
     url: pageUrl,
     imageUrl,
   }

@@ -15,9 +15,7 @@ describe('AccountImportProgress', () => {
       />,
     )
 
-    expect(
-      screen.getByText('Import Spliit Cloud account backup'),
-    ).toBeInTheDocument()
+    expect(screen.getByText('Import DONGY account backup')).toBeInTheDocument()
     expect(screen.getByText('Group 2 of 4: Summer trip')).toBeInTheDocument()
     expect(screen.getByRole('progressbar')).toHaveAttribute(
       'aria-valuetext',

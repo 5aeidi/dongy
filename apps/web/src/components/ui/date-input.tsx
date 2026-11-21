@@ -71,6 +71,7 @@ function getPresetValue(today: string, preset: DateInputPreset) {
 
 function getNumerals(locale: string): Numerals {
   if (locale === 'ar-SA') return 'arab'
+  if (locale === 'fa-IR') return 'arabext'
   if (locale === 'bn-BD') return 'beng'
   return 'latn'
 }

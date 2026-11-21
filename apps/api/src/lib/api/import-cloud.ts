@@ -1620,7 +1620,7 @@ export async function importCloudGroup(
         actor: { type: 'ACCOUNT', id: actor.accountId },
         subject: { type: 'GROUP', id: group.id },
         data: buildImportSummaryActivityData({
-          summary: 'Imported from Spliit Cloud',
+          summary: 'Imported from DONGY',
           count: manifest.expenses.length,
           totalAmount,
           currencyCode: ledger.currencyCode,

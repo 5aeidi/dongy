@@ -1,6 +1,6 @@
 # Roadmap
 
-This page is the companion to the [Roadmap section in the README](./README.md#roadmap). It adds links to design docs and the status of active work.
+This page adds links to design docs and the status of active work.
 
 Each roadmap item also references the upstream [`spliit-app/spliit`](https://github.com/spliit-app/spliit) issue or PR that motivated it, so it's clear which community demands we're tracking and where the work originated. Upstream links in **bold** mark issues with the highest community signal (top reactions, longest-standing, or already-merged-in-spirit work in someone's open PR).
 
@@ -66,7 +66,7 @@ Each roadmap item also references the upstream [`spliit-app/spliit`](https://git
 
 ### Trust-building bug sweep
 
-These are upstream issues that affect every user of Spliit Cloud too. Each one is a small PR and a meaningful trust return.
+These are upstream issues that affect every user of DONGY too. Each one is a small PR and a meaningful trust return.
 
 - [x] **Rounding drops a cent when splitting evenly** — upstream [#374](https://github.com/spliit-app/spliit/issues/374), [#375](https://github.com/spliit-app/spliit/issues/375), [#393](https://github.com/spliit-app/spliit/issues/393), fix PR [#427](https://github.com/spliit-app/spliit/pull/427)
 - [ ] **"Mark as paid" selects all group members as recipients** — upstream [#197](https://github.com/spliit-app/spliit/issues/197) (2-year-old bug, embarrassingly visible)
@@ -95,7 +95,7 @@ These are upstream issues that affect every user of Spliit Cloud too. Each one i
 - **Migrations & imports** — every frustrated Splitwise / Tricount user is a potential customer
   - [x] Tricount import (GDPR CSV, multi-group) — upstream PR [#526](https://github.com/spliit-app/spliit/pull/526)
   - [x] Splitwise (CSV) import — upstream [#22](https://github.com/spliit-app/spliit/issues/22), PR [#483](https://github.com/spliit-app/spliit/pull/483)
-  - [x] Spliit Cloud bundle import and export — group, account, and friend-ledger ZIP round-trip, including documents, plus CSV and printable PDF reports
+  - [x] DONGY bundle import and export — group, account, and friend-ledger ZIP round-trip, including documents, plus CSV and printable PDF reports
 - **Self-hosting polish** — turn the README's "self-hosting is supported" into "self-hosting is easy"
   - [x] Versioned GHCR images (CI on tag, `:vX.Y.Z` + `:latest`, `SPLIIT_TAG` pinning) — upstream [#60](https://github.com/spliit-app/spliit/issues/60). A Docker Hub mirror remains open.
   - [x] SSO-only instances (`ENABLE_EMAIL_AUTH=false`, SMTP optional)

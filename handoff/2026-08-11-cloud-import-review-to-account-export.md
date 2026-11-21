@@ -5,7 +5,7 @@ Status: Cloud Import review closed (no findings). Next = account export review.
 
 ## Requirements and decisions
 
-- [Decided] Spliit Cloud **group** import: unified `ImportGroupWizard`; dedicated `groups.importCloudBundle`; lossless manifest restore; new-group-only; currency step present but forced no-op; docs exact-byte staging.
+- [Decided] DONGY **group** import: unified `ImportGroupWizard`; dedicated `groups.importCloudBundle`; lossless manifest restore; new-group-only; currency step present but forced no-op; docs exact-byte staging.
 - [Decided] Wrong-importer handoff retains `File`; account-scoped Cloud bundles rejected with “not available yet.”
 - [Constraint] Bun only; do not start API/compose/storage unless user asks. DB-backed API suite needs existing Postgres.
 - [Constraint] Never hand-edit `apps/web/src/messages/*` — use `bun i18n`.

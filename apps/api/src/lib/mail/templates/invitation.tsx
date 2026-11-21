@@ -45,11 +45,11 @@ export function InvitationEmail(
     ? props.acceptUrl
     : props.signInUrl
   const primaryLabel = props.recipientIsExistingUser
-    ? 'Open Spliit Cloud'
+    ? 'Open DONGY'
     : 'Create an account'
   const fallbackHref = primaryHref
 
-  const preview = `${props.inviterDisplayName} invited you to ${props.groupName} on Spliit Cloud`
+  const preview = `${props.inviterDisplayName} invited you to ${props.groupName} on DONGY`
 
   const roleSentence = props.recipientIsExistingUser
     ? `${props.inviterDisplayName} (${props.inviterRole.toLowerCase()}) invited you to join "${props.groupName}".`
@@ -129,8 +129,8 @@ export async function renderInvitationEmail(
 
   const subject =
     !input.recipientIsExistingUser && input.temporaryName
-      ? `${input.inviterDisplayName} invited you to ${input.groupName} on Spliit Cloud as ${input.temporaryName}`
-      : `${input.inviterDisplayName} invited you to ${input.groupName} on Spliit Cloud`
+      ? `${input.inviterDisplayName} invited you to ${input.groupName} on DONGY as ${input.temporaryName}`
+      : `${input.inviterDisplayName} invited you to ${input.groupName} on DONGY`
 
   const text = buildInvitationText(input, { acceptUrl, signInUrl })
 
@@ -151,13 +151,13 @@ function buildInvitationText(
 ): string {
   const lines: string[] = input.recipientIsExistingUser
     ? [
-        `${input.inviterDisplayName} (${input.inviterRole.toLowerCase()}) invited you to join "${input.groupName}" on Spliit Cloud.`,
+        `${input.inviterDisplayName} (${input.inviterRole.toLowerCase()}) invited you to join "${input.groupName}" on DONGY.`,
         '',
-        `Open Spliit Cloud to accept or decline the invitation:`,
+        `Open DONGY to accept or decline the invitation:`,
         urls.acceptUrl,
       ]
     : [
-        `${input.inviterDisplayName} invited you to join "${input.groupName}" on Spliit Cloud.`,
+        `${input.inviterDisplayName} invited you to join "${input.groupName}" on DONGY.`,
         ...(input.temporaryName
           ? [`You will appear as "${input.temporaryName}" in this group.`]
           : []),

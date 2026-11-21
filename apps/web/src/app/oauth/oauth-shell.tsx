@@ -26,7 +26,7 @@ export function OAuthShell({
       width="full"
       className="relative min-h-[calc(100vh-5rem)] items-center justify-center overflow-hidden py-4 md:py-6"
     >
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,hsl(var(--primary)/0.1),transparent_42%)]" />
+      <div className="absolute inset-0 -z-10 pixel-wash-top" />
       <div className="grid w-full max-w-4xl gap-3.5">
         <section className="flex min-w-0 items-center justify-between gap-4 rounded-lg border border-primary/15 bg-primary/[0.045] px-3.5 py-3 sm:px-4">
           <div className="flex min-w-0 items-center gap-3">

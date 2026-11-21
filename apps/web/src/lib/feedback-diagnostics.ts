@@ -90,7 +90,7 @@ export function formatFeedbackDiagnostics({
   standalone,
 }: FeedbackDiagnosticsInput): string {
   return [
-    'Spliit Cloud diagnostics',
+    'DONGY diagnostics',
     `Instance: ${origin}`,
     formatVersionLine(buildVersion),
     `Screen: ${sanitizeFeedbackRoute(pathname)}`,

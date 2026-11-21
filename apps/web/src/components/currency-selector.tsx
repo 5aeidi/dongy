@@ -28,17 +28,17 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
-import { type DisplayCurrency } from '@/lib/currency'
+import { type DisplayCurrency, getCurrency } from '@/lib/currency'
 import { useMediaQuery } from '@/lib/hooks'
 import { cn } from '@/lib/utils'
 
 /** Static fallback for non-expense selectors and failed recommendation queries. */
 const STATIC_COMMON_CURRENCY_CODES = [
+  'IRT',
+  'IRM',
   'USD',
   'EUR',
-  'JPY',
-  'GBP',
-  'CNY',
+  'IRR',
 ] as const
 
 type Props = {
@@ -109,9 +109,14 @@ export function CurrencySelector({
   const { t } = useTranslation()
   // No match (e.g. an empty value before the user picks) renders the
   // placeholder — never the first catalog entry (AED) as a fake selection.
-  const selectedCurrency = currencies.find(
-    (currency) => (currency.code ?? '') === defaultValue,
-  )
+  // DONGY only offers toman currencies, but data saved in another currency
+  // (e.g. IRR) must still show its value instead of an empty picker.
+  const catalogFallback = defaultValue ? getCurrency(defaultValue) : undefined
+  const selectedCurrency =
+    currencies.find((currency) => (currency.code ?? '') === defaultValue) ??
+    (catalogFallback
+      ? { ...catalogFallback, name: catalogFallback.code }
+      : undefined)
 
   const command = (
     <CurrencyCommand

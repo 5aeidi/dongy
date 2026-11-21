@@ -38,7 +38,7 @@ function CreateBudgetCard({ groupId }: { groupId: string }) {
       to="/groups/$groupId/budgets/create"
       params={{ groupId }}
       aria-label={t('createCard.title')}
-      className="motion-surface motion-surface-interactive relative min-h-[5.5rem] w-full overflow-hidden rounded-lg border border-primary/25 bg-linear-to-br from-primary/8 via-background to-background text-start text-base text-foreground no-underline shadow-[0_1px_0_0_hsl(var(--primary)/0.08)] outline-hidden transition-colors hover:border-primary/35 hover:bg-primary/5 focus-visible:bg-primary/5 focus-visible:ring-2 focus-visible:ring-ring"
+      className="motion-surface motion-surface-interactive relative min-h-[5.5rem] w-full overflow-hidden rounded-lg border border-primary/25 bg-background pixel-wash text-start text-base text-foreground no-underline shadow-[0_1px_0_0_hsl(var(--primary)/0.08)] outline-hidden transition-colors hover:border-primary/35 hover:bg-primary/5 focus-visible:bg-primary/5 focus-visible:ring-2 focus-visible:ring-ring"
     >
       <div
         aria-hidden

@@ -20,9 +20,7 @@ describe('DoneStep', () => {
     )
 
     expect(screen.getAllByText('Import complete')).toHaveLength(1)
-    expect(
-      screen.getByText('Import Spliit Cloud account backup'),
-    ).toBeInTheDocument()
+    expect(screen.getByText('Import DONGY account backup')).toBeInTheDocument()
     expect(screen.getByText('Summer trip')).toBeInTheDocument()
     expect(screen.getByText('Old ledger')).toHaveClass('line-through')
     expect(

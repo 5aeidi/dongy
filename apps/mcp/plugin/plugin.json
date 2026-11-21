@@ -2,23 +2,23 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "spliit-cloud",
   "version": "1.0.1",
-  "description": "Create and review shared Spliit Cloud group expenses from conversation, with a safe confirmation preview.",
+  "description": "Create and review shared DONGY group expenses from conversation, with a safe confirmation preview.",
   "author": {
-    "name": "Spliit Cloud",
+    "name": "DONGY",
     "email": "contact@spliit.cloud",
     "url": "https://spliit.cloud"
   },
   "homepage": "https://spliit.cloud",
-  "repository": "https://github.com/antonio-ivanovski/spliit-cloud",
+  "repository": "https://github.com/5aeidi/dongy",
   "license": "MIT",
   "keywords": ["expenses", "split bills", "groups", "productivity"],
   "extensions": {
     "com.openai": {
       "interface": {
-        "displayName": "Spliit Cloud",
+        "displayName": "DONGY",
         "shortDescription": "Split group expenses fairly",
-        "longDescription": "Create flat or receipt-itemized shared expenses in your Spliit Cloud groups from conversation. Every expense is validated against your connected account and shown as a non-editable confirmation preview before anything is created. You can also inspect group balances and recent expenses. Spliit Cloud only accesses groups available to your connected account.",
-        "developerName": "Spliit Cloud",
+        "longDescription": "Create flat or receipt-itemized shared expenses in your DONGY groups from conversation. Every expense is validated against your connected account and shown as a non-editable confirmation preview before anything is created. You can also inspect group balances and recent expenses. DONGY only accesses groups available to your connected account.",
+        "developerName": "DONGY",
         "category": "Productivity",
         "capabilities": ["Track shared expenses", "Split bills fairly"],
         "websiteURL": "https://spliit.cloud",

@@ -21,7 +21,7 @@ export function AccountDeletionRequestedEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="Your Spliit Cloud account deletion is scheduled"
+      preview="Your DONGY account deletion is scheduled"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
@@ -31,9 +31,9 @@ export function AccountDeletionRequestedEmail(props: {
         Your account deletion is scheduled
       </Heading>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
-        Your Spliit Cloud account is scheduled for permanent deletion after a
-        48-hour cancellation period. Your account stays active until deletion
-        starts, on or after {props.executeAtLabel}.
+        Your DONGY account is scheduled for permanent deletion after a 48-hour
+        cancellation period. Your account stays active until deletion starts, on
+        or after {props.executeAtLabel}.
       </Text>
       <Section className="my-4 rounded-md border border-solid border-[#e5e7eb] bg-[#f8fafc] px-5 py-4">
         <Text className="m-0 text-[14px] leading-[20px] text-[#0f172a]">
@@ -91,7 +91,7 @@ export function AccountDeletionCancelledEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="Your Spliit Cloud account deletion was cancelled"
+      preview="Your DONGY account deletion was cancelled"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
@@ -101,8 +101,8 @@ export function AccountDeletionCancelledEmail(props: {
         Your account deletion was cancelled
       </Heading>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
-        The pending deletion of your Spliit Cloud account was cancelled. Your
-        account remains active and nothing was deleted.
+        The pending deletion of your DONGY account was cancelled. Your account
+        remains active and nothing was deleted.
       </Text>
       <Text className="m-0 text-[13px] leading-[20px] text-[#64748b]">
         If you did not cancel this, your account may be compromised — review
@@ -120,7 +120,7 @@ export function AccountDeletionExecutedEmail(props: {
 }): ReactElement {
   return (
     <EmailLayout
-      preview="Your Spliit Cloud account was deleted"
+      preview="Your DONGY account was deleted"
       brandBaseUrl={props.brandBaseUrl}
     >
       <Heading
@@ -130,9 +130,9 @@ export function AccountDeletionExecutedEmail(props: {
         Your account was deleted
       </Heading>
       <Text className="m-0 mb-6 text-[15px] leading-[24px] text-[#0f172a]">
-        Your Spliit Cloud account and all of its sign-in methods have been
-        permanently deleted. Shared expense history in other members' groups was
-        kept without your personal details.
+        Your DONGY account and all of its sign-in methods have been permanently
+        deleted. Shared expense history in other members' groups was kept
+        without your personal details.
       </Text>
       <Text className="m-0 text-[13px] leading-[20px] text-[#64748b]">
         If you did not request this, reply to this email to contact support.
@@ -151,7 +151,7 @@ export async function renderAccountDeletionRequestedEmail(input: {
   const feedbackUrl = `${baseUrl}/feedback`
   const exportUrl = `${baseUrl}/account/settings#account-export`
   const text =
-    `Your Spliit Cloud account is scheduled for permanent deletion after a 48-hour cancellation period. ` +
+    `Your DONGY account is scheduled for permanent deletion after a 48-hour cancellation period. ` +
     `Your account stays active until deletion starts, on or after ${input.executeAtLabel}.\n\n` +
     `When deletion runs: your profile, sessions, and personal settings are deleted. ` +
     `Expenses you shared with others stay in their groups so their balances keep working, but your name is ` +
@@ -174,7 +174,7 @@ export async function renderAccountDeletionRequestedEmail(input: {
       feedbackUrl={feedbackUrl}
       exportUrl={exportUrl}
     />,
-    { subject: 'Your Spliit Cloud account deletion is scheduled', text },
+    { subject: 'Your DONGY account deletion is scheduled', text },
   )
 }
 
@@ -185,7 +185,7 @@ export async function renderAccountDeletionCancelledEmail(
 ): Promise<RenderedEmail> {
   const url = input.settingsUrl ?? settingsUrl()
   const text =
-    `The pending deletion of your Spliit Cloud account was cancelled. ` +
+    `The pending deletion of your DONGY account was cancelled. ` +
     `Your account remains active and nothing was deleted.\n\n` +
     `If you did not cancel this, review your sign-in methods immediately from account settings: ${url}`
 
@@ -194,18 +194,18 @@ export async function renderAccountDeletionCancelledEmail(
       brandBaseUrl={getWebBaseUrl()}
       settingsUrl={url}
     />,
-    { subject: 'Your Spliit Cloud account deletion was cancelled', text },
+    { subject: 'Your DONGY account deletion was cancelled', text },
   )
 }
 
 export async function renderAccountDeletionExecutedEmail(): Promise<RenderedEmail> {
   const text =
-    `Your Spliit Cloud account and all of its sign-in methods have been permanently deleted. ` +
+    `Your DONGY account and all of its sign-in methods have been permanently deleted. ` +
     `Shared expense history in other members' groups was kept without your personal details.\n\n` +
     `If you did not request this, reply to this email to contact support.`
 
   return renderTemplate(
     <AccountDeletionExecutedEmail brandBaseUrl={getWebBaseUrl()} />,
-    { subject: 'Your Spliit Cloud account was deleted', text },
+    { subject: 'Your DONGY account was deleted', text },
   )
 }

@@ -9,14 +9,14 @@
     <string name="check_updates">Caută actualizări</string>
     <string name="checking">Se caută actualizări…</string>
     <string name="connection_settings">Setările conexiunii</string>
-    <string name="continue_app">Deschide Spliit Cloud</string>
+    <string name="continue_app">Deschide DONGY</string>
     <string name="expenses">Cheltuieli</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">Mai târziu</string>
     <string name="new_group">Grup nou</string>
     <string name="obtainium_note">Dacă folosești Obtainium, acesta poate gestiona și actualizările din versiunile noastre publicate pe GitHub.</string>
     <string name="offline_message">Prima pornire necesită o conexiune la internet pentru a pregăti accesul offline. Fișierele pe care le-ai partajat au fost păstrate. Conectează-te și încearcă din nou.</string>
-    <string name="offline_title">Conectează-te la internet pentru a deschide Spliit Cloud</string>
+    <string name="offline_title">Conectează-te la internet pentru a deschide DONGY</string>
     <string name="open_play">Deschide Google Play</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">Această instalare este gestionată de Google Play. Caută actualizări ale pachetului Android în Google Play.</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Actualizările aplicației Android</string>
     <string name="version">Pachet Android %1$s (%2$d)</string>
     <string name="view_update">Vezi actualizarea</string>
-    <string name="web_version_note">Funcțiile site-ului web se actualizează separat. Cheltuielile tale sunt stocate de Spliit Cloud și în spațiul de stocare offline al acestui browser.</string>
+    <string name="web_version_note">Funcțiile site-ului web se actualizează separat. Cheltuielile tale sunt stocate de DONGY și în spațiul de stocare offline al acestui browser.</string>
 </resources>

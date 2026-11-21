@@ -1,36 +1,6 @@
 export const localeLabels = {
-  'ar-SA': 'العربية',
-  'bn-BD': 'বাংলা',
-  'en-GZ': 'English (Gen Z)',
-  'hi-IN': 'हिन्दी',
-  id: 'Bahasa Indonesia',
-  ca: 'Català',
-  'cs-CZ': 'Česky',
-  'de-DE': 'Deutsch',
-  'en-GB': 'English (UK)',
-  'en-US': 'English (US)',
-  es: 'Español',
-  eu: 'Euskera',
-  'fr-FR': 'Français',
-  'it-IT': 'Italiano',
-  'nl-NL': 'Nederlands',
-  'pl-PL': 'Polski',
-  pt: 'Português',
-  'pt-BR': 'Português Brasileiro',
-  ro: 'Română',
-  fi: 'Suomi',
-  'sv-SE': 'Svenska',
-  'tr-TR': 'Türkçe',
-  'ru-RU': 'Русский',
-  'uk-UA': 'Українська',
-  he: 'עברית',
-  ko: '한국어',
-  'mk-MK': 'Македонски',
-  'ja-JP': '日本語',
-  'ur-PK': 'اردو',
-  vi: 'Tiếng Việt',
-  'zh-CN': '简体中文',
-  'zh-TW': '正體中文',
+  'en-US': 'English',
+  'fa-IR': 'فارسی',
 } as const
 
 export const locales = Object.keys(localeLabels) as Array<
@@ -52,10 +22,9 @@ export const defaultLocale: Locale = 'en-US'
  * Keep entries minimal — chains resolve transitively, so `'en-AU': ['en-GB']`
  * already implies `en-AU → en-GB → en-US`.
  */
-export const localeFallbacks = {
-  'en-GB': ['en-US'],
-  'pt-BR': ['pt', 'en-US'],
-} as const satisfies Partial<Record<Locale, readonly Locale[]>>
+export const localeFallbacks = {} as const satisfies Partial<
+  Record<Locale, readonly Locale[]>
+>
 
 /** Sparse overlay locale: ships only overrides, inherits the rest. */
 export function isSparseLocale(locale: string): boolean {
@@ -98,7 +67,7 @@ export function fallbackChain(locale: Locale): Locale[] {
  * Resolve them to the regional locale whose formatting conventions match the
  * flag/region presented in the locale picker before using Intl APIs.
  */
-const formattingLocaleByLocale: Partial<Record<Locale, string>> = {
+const formattingLocaleByLocale: Readonly<Record<string, string>> = {
   id: 'id-ID',
   ca: 'ca-ES',
   es: 'es-ES',
@@ -115,7 +84,7 @@ const formattingLocaleByLocale: Partial<Record<Locale, string>> = {
 }
 
 export function resolveFormattingLocale(locale: string): string {
-  const mapped = formattingLocaleByLocale[locale as Locale]
+  const mapped = formattingLocaleByLocale[locale]
   if (mapped) return mapped
   try {
     return new Intl.Locale(locale).toString()
@@ -148,7 +117,7 @@ export function firstDayOfWeek(locale: string): number {
 
 export function isRtlLocale(locale: string): boolean {
   try {
-    return new Set(['ar', 'he', 'ur']).has(
+    return new Set(['ar', 'fa', 'he', 'ur']).has(
       new Intl.Locale(resolveFormattingLocale(locale)).language,
     )
   } catch {

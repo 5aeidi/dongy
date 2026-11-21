@@ -1,6 +1,6 @@
 # Privacy
 
-Spliit Cloud is a community fork of [Spliit](https://github.com/spliit-app/spliit). The published privacy notice for the public instance lives at [spliit.cloud/privacy](https://spliit.cloud/privacy) (source: [`apps/web/src/app/privacy.tsx`](./apps/web/src/app/privacy.tsx), mirrored in [`apps/web/public/privacy.md`](./apps/web/public/privacy.md)). This page summarizes the same data handling for contributors and self-hosters.
+DONGY is a community fork of [Spliit](https://github.com/spliit-app/spliit). The published privacy notice for the public instance lives at [spliit.cloud/privacy](https://spliit.cloud/privacy) (source: [`apps/web/src/app/privacy.tsx`](./apps/web/src/app/privacy.tsx), mirrored in [`apps/web/public/privacy.md`](./apps/web/public/privacy.md)). This page summarizes the same data handling for contributors and self-hosters.
 
 ## Data we store
 
@@ -10,7 +10,7 @@ Spliit Cloud is a community fork of [Spliit](https://github.com/spliit-app/splii
 
 ## Optional integrations
 
-- **Configured AI provider**: when receipt scanning, category extraction, or voice expense extraction is enabled, relevant receipt files (photos or documents), expense text, or voice recordings/transcripts are sent to the configured provider. When a dedicated OCR backend is configured (`AI_OCR_PROVIDER`), receipt files are additionally sent to that OCR provider for text extraction. Voice recordings are processed transiently and are not stored by Spliit Cloud.
+- **Configured AI provider**: when receipt scanning, category extraction, or voice expense extraction is enabled, relevant receipt files (photos or documents), expense text, or voice recordings/transcripts are sent to the configured provider. When a dedicated OCR backend is configured (`AI_OCR_PROVIDER`), receipt files are additionally sent to that OCR provider for text extraction. Voice recordings are processed transiently and are not stored by DONGY.
 - **S3 storage**: uploaded files are stored in the configured bucket
 
 ## What we do not do

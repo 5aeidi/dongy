@@ -75,7 +75,7 @@ export async function loadLocale(
 }
 
 /**
- * Match a browser locale tag to the closest locale supported by Spliit Cloud.
+ * Match a browser locale tag to the closest locale supported by DONGY.
  *
  * Browser preferences commonly include a region that differs from the
  * translation bundle (for example fr-CA), so exact matching alone is not
@@ -92,23 +92,7 @@ export function matchSupportedLocale(localeTag: string): Locale | undefined {
   const exact = canonicalLocaleMap.get(browserLocale.toString())
   if (exact) return exact
 
-  if (browserLocale.language === 'pt') {
-    return browserLocale.region === 'BR' ? 'pt-BR' : 'pt'
-  }
-
-  if (browserLocale.language === 'zh') {
-    const maximized = browserLocale.maximize()
-    const isTraditional =
-      browserLocale.script === 'Hant' ||
-      maximized.script === 'Hant' ||
-      ['TW', 'HK', 'MO'].includes(
-        browserLocale.region ?? maximized.region ?? '',
-      )
-    return isTraditional ? 'zh-TW' : 'zh-CN'
-  }
-
-  // Keep generic English browser preferences on the default locale. The
-  // playful en-GZ bundle is opt-in through an exact locale or user choice.
+  // Any English or Persian browser preference maps to the one bundle we ship.
   if (browserLocale.language === 'en') return 'en-US'
 
   const languageMatches = locales.filter(

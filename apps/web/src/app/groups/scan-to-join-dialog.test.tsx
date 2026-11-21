@@ -105,7 +105,7 @@ describe('ScanToJoinDialog', () => {
       expect(assignSpy).not.toHaveBeenCalled()
       expect(
         await screen.findByRole('alertdialog', {
-          name: 'This code points to another Spliit Cloud',
+          name: 'This code points to another DONGY',
         }),
       ).toBeInTheDocument()
       expect(screen.getByText(/spliit\.example/)).toBeInTheDocument()
@@ -113,14 +113,14 @@ describe('ScanToJoinDialog', () => {
       await user.click(screen.getByRole('button', { name: 'Go back' }))
       expect(
         screen.queryByRole('alertdialog', {
-          name: 'This code points to another Spliit Cloud',
+          name: 'This code points to another DONGY',
         }),
       ).not.toBeInTheDocument()
       expect(assignSpy).not.toHaveBeenCalled()
 
       await simulateScan(foreignUrl)
       await screen.findByRole('alertdialog', {
-        name: 'This code points to another Spliit Cloud',
+        name: 'This code points to another DONGY',
       })
       await user.click(screen.getByRole('button', { name: 'Open link' }))
       expect(assignSpy).toHaveBeenCalledWith(foreignUrl)
@@ -136,7 +136,7 @@ describe('ScanToJoinDialog', () => {
 
     await simulateScan(foreignUrl)
     await screen.findByRole('alertdialog', {
-      name: 'This code points to another Spliit Cloud',
+      name: 'This code points to another DONGY',
     })
 
     // Frames keep arriving while the guest decides: no duplicate dialog and
@@ -146,7 +146,7 @@ describe('ScanToJoinDialog', () => {
     await waitFor(() =>
       expect(
         screen.getAllByRole('alertdialog', {
-          name: 'This code points to another Spliit Cloud',
+          name: 'This code points to another DONGY',
         }),
       ).toHaveLength(1),
     )
@@ -155,7 +155,7 @@ describe('ScanToJoinDialog', () => {
     await user.click(screen.getByRole('button', { name: 'Go back' }))
     expect(
       screen.queryByRole('alertdialog', {
-        name: 'This code points to another Spliit Cloud',
+        name: 'This code points to another DONGY',
       }),
     ).not.toBeInTheDocument()
     expect(mocks.navigate).not.toHaveBeenCalled()

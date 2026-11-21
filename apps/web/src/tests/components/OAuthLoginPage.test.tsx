@@ -74,7 +74,7 @@ describe('OAuthLoginPage', () => {
 
     expect(
       screen.getByText(
-        'Use your usual Spliit Cloud sign-in method. The application never receives your password or sign-in credentials.',
+        'Use your usual DONGY sign-in method. The application never receives your password or sign-in credentials.',
       ),
     ).toBeVisible()
     const panel = screen.getByTestId('regular-auth-panel')
@@ -90,9 +90,7 @@ describe('OAuthLoginPage', () => {
 
     render(<OAuthLoginPage />)
 
-    expect(
-      screen.getByText('Checking your Spliit Cloud session…'),
-    ).toBeInTheDocument()
+    expect(screen.getByText('Checking your DONGY session…')).toBeInTheDocument()
     expect(screen.queryByTestId('regular-auth-panel')).not.toBeInTheDocument()
   })
 

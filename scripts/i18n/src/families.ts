@@ -14,51 +14,9 @@ export type LanguageFamily = {
  */
 export const LANGUAGE_FAMILIES: LanguageFamily[] = [
   {
-    id: 'romance',
-    label: 'Romance',
-    locales: ['ca', 'es', 'eu', 'fr-FR', 'it-IT', 'pt', 'pt-BR', 'ro'],
-    refsHint: 'es,fr-FR',
-  },
-  {
-    id: 'germanic',
-    label: 'Germanic + Nordic',
-    locales: ['de-DE', 'en-GB', 'en-GZ', 'fi', 'nl-NL', 'sv-SE'],
-    refsHint: 'de-DE,nl-NL',
-  },
-  {
-    id: 'slavic',
-    label: 'Slavic',
-    locales: ['cs-CZ', 'mk-MK', 'pl-PL', 'ru-RU', 'uk-UA'],
-    refsHint: 'pl-PL,ru-RU',
-  },
-  {
-    id: 'east-asian',
-    label: 'East Asian',
-    locales: ['ja-JP', 'ko', 'zh-CN', 'zh-TW'],
-    refsHint: 'zh-CN,ja-JP',
-  },
-  {
-    id: 'indic',
-    label: 'Indic',
-    locales: ['bn-BD', 'hi-IN', 'ur-PK'],
-    refsHint: 'hi-IN,ur-PK',
-  },
-  {
-    id: 'semitic',
-    label: 'Semitic',
-    locales: ['ar-SA', 'he'],
-    refsHint: 'ar-SA',
-  },
-  {
-    id: 'southeast-asian',
-    label: 'Southeast Asian',
-    locales: ['id', 'vi'],
-    refsHint: 'id',
-  },
-  {
-    id: 'turkic',
-    label: 'Turkic',
-    locales: ['tr-TR'],
+    id: 'iranian',
+    label: 'Iranian',
+    locales: ['fa-IR'],
     refsHint: '',
   },
 ]

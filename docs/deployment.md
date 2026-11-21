@@ -44,7 +44,7 @@ docker compose --env-file container.env up -d
 The web port binds to `127.0.0.1:3000`. Point Caddy, nginx, Traefik, HAProxy, or
 another TLS-terminating reverse proxy at that address. The proxy should preserve
 the public `Host` header and set `X-Forwarded-For`, `X-Real-IP`, and
-`X-Forwarded-Proto`. Spliit Cloud's web gateway preserves those values for the API.
+`X-Forwarded-Proto`. DONGY's web gateway preserves those values for the API.
 
 Useful checks:
 
@@ -96,7 +96,7 @@ used.
 When the browser is online but the API cannot be reached, the web app shows a
 server-down warning instead of claiming the user is offline. Build the SPA with
 `VITE_STATUS_PAGE_URL` set to link that warning (and the matching empty
-states) to a status page — Spliit Cloud uses `https://status.spliit.cloud/`.
+states) to a status page — DONGY uses `https://status.spliit.cloud/`.
 Leave it unset on self-hosted instances without a status page: the warning
 still appears, just without an external link.
 

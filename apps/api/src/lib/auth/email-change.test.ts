@@ -149,7 +149,7 @@ describe('email change plugin', () => {
     expect(sendEmailMock).toHaveBeenCalledWith(
       expect.objectContaining({
         to: 'new@example.com',
-        subject: 'Your Spliit Cloud email confirmation code',
+        subject: 'Your DONGY email confirmation code',
       }),
     )
   })
@@ -318,7 +318,7 @@ describe('email change plugin', () => {
     expect(sendEmailMock).toHaveBeenCalledWith(
       expect.objectContaining({
         to: 'user@example.com',
-        subject: 'Your Spliit Cloud email address was changed',
+        subject: 'Your DONGY email address was changed',
       }),
     )
     expect(prismaMock.session.deleteMany).not.toHaveBeenCalled()

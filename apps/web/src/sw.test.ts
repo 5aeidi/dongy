@@ -185,11 +185,11 @@ describe('service worker locale chunk runtime cache', () => {
 
   it('serves a cached locale chunk offline without touching the network', async () => {
     runtimeEntries.set(
-      `${origin}/assets/fr-FR-AbC123.js`,
+      `${origin}/assets/fa-IR-AbC123.js`,
       new Response('locale-bundle'),
     )
 
-    const { response, lifetime } = dispatchFetch('/assets/fr-FR-AbC123.js')
+    const { response, lifetime } = dispatchFetch('/assets/fa-IR-AbC123.js')
     const result = await Promise.allSettled([response, ...lifetime])
     if (result[0]?.status === 'rejected') throw result[0].reason
     expect(await (await response)?.text()).toBe('locale-bundle')
@@ -199,7 +199,7 @@ describe('service worker locale chunk runtime cache', () => {
   it('caches a locale chunk on first online load for later offline use', async () => {
     fetchNetwork.mockResolvedValueOnce(new Response('fresh-bundle'))
 
-    const first = dispatchFetch('/assets/de-DE-XyZ789.js')
+    const first = dispatchFetch('/assets/fa-IR-XyZ789.js')
     const firstResult = await Promise.allSettled([
       first.response,
       ...first.lifetime,
@@ -209,7 +209,7 @@ describe('service worker locale chunk runtime cache', () => {
 
     // Offline again: the stored chunk serves without the network.
     fetchNetwork.mockClear()
-    const second = dispatchFetch('/assets/de-DE-XyZ789.js')
+    const second = dispatchFetch('/assets/fa-IR-XyZ789.js')
     const secondResult = await Promise.allSettled([
       second.response,
       ...second.lifetime,
@@ -233,13 +233,13 @@ describe('service worker locale chunk runtime cache', () => {
   it('bounds the runtime cache so stale hashes cannot grow without limit', async () => {
     for (let i = 0; i < 50; i += 1) {
       runtimeEntries.set(
-        `${origin}/assets/fr-FR-hash${i}.js`,
+        `${origin}/assets/fa-IR-hash${i}.js`,
         new Response(`bundle-${i}`),
       )
     }
     fetchNetwork.mockResolvedValueOnce(new Response('new-bundle'))
 
-    const { response, lifetime } = dispatchFetch('/assets/fr-FR-new.js')
+    const { response, lifetime } = dispatchFetch('/assets/fa-IR-new.js')
     const result = await Promise.allSettled([response, ...lifetime])
     if (result[0]?.status === 'rejected') throw result[0].reason
     expect(await (await response)?.text()).toBe('new-bundle')

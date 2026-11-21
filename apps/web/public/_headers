@@ -21,10 +21,6 @@
   Cache-Control: public, max-age=0, must-revalidate
   Content-Type: text/markdown; charset=utf-8
 
-/sponsor.md
-  Cache-Control: public, max-age=0, must-revalidate
-  Content-Type: text/markdown; charset=utf-8
-
 /support.md
   Cache-Control: public, max-age=0, must-revalidate
   Content-Type: text/markdown; charset=utf-8

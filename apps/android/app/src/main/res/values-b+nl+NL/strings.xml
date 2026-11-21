@@ -9,14 +9,14 @@
     <string name="check_updates">Controleren op updates</string>
     <string name="checking">Controleren op updates…</string>
     <string name="connection_settings">Verbindingsinstellingen</string>
-    <string name="continue_app">Spliit Cloud openen</string>
+    <string name="continue_app">DONGY openen</string>
     <string name="expenses">Uitgaven</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">Niet nu</string>
     <string name="new_group">Nieuwe groep</string>
     <string name="obtainium_note">Als je Obtainium gebruikt, kan het ook updates uit onze GitHub-releases beheren.</string>
     <string name="offline_message">Bij de eerste start is een internetverbinding nodig om offline toegang voor te bereiden. Je gedeelde bestanden zijn niet verwijderd. Maak verbinding en probeer het opnieuw.</string>
-    <string name="offline_title">Maak verbinding om Spliit Cloud te openen</string>
+    <string name="offline_title">Maak verbinding om DONGY te openen</string>
     <string name="open_play">Google Play openen</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">Deze installatie wordt beheerd door Google Play. Controleer Google Play op updates van het Android-pakket.</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Updates van de Android-app</string>
     <string name="version">Android-pakket %1$s (%2$d)</string>
     <string name="view_update">Update bekijken</string>
-    <string name="web_version_note">Websitefuncties worden afzonderlijk bijgewerkt. Je uitgaven worden opgeslagen bij Spliit Cloud en in de offline opslag van deze browser.</string>
+    <string name="web_version_note">Websitefuncties worden afzonderlijk bijgewerkt. Je uitgaven worden opgeslagen bij DONGY en in de offline opslag van deze browser.</string>
 </resources>

@@ -100,7 +100,7 @@ describe('SourceStep — initialError (prefill) handling', () => {
     renderSourceStep()
     expect(screen.getAllByRole('tab').map((tab) => tab.textContent)).toEqual([
       'Spliit',
-      'Spliit Cloud',
+      'DONGY / Spliit Cloud',
       'Splitwise',
       'Cospend',
       'Tricount',
@@ -147,7 +147,7 @@ describe('SourceStep — initialError (prefill) handling', () => {
 
     expect(
       screen.getAllByText(
-        /Spliit Cloud account backup containing multiple groups.*single group export/i,
+        /DONGY account backup containing multiple groups.*single group export/i,
       ),
     ).toHaveLength(2)
   })
@@ -161,7 +161,7 @@ describe('SourceStep — initialError (prefill) handling', () => {
     }> = [
       {
         source: 'spliit-cloud',
-        trigger: /Where do I find my Spliit Cloud bundle\?/i,
+        trigger: /Where do I find my DONGY bundle\?/i,
         step: /Backups & export/i,
       },
       {
@@ -212,7 +212,7 @@ describe('SourceStep — initialError (prefill) handling', () => {
   it('offers a retained Cloud bundle without requiring another file selection', async () => {
     const onResume = vi.fn()
     renderSourceStep({ retainedCloudBundle: { onResume } })
-    expect(screen.getByText(/Spliit Cloud bundle ready/i)).toBeInTheDocument()
+    expect(screen.getByText(/DONGY bundle ready/i)).toBeInTheDocument()
     await userEvent
       .setup()
       .click(screen.getByRole('button', { name: /continue with this bundle/i }))
@@ -236,7 +236,7 @@ describe('SourceStep — initialError (prefill) handling', () => {
     })
 
     expect(
-      await screen.findByText(/belongs in the Spliit Cloud importer/i),
+      await screen.findByText(/belongs in the DONGY importer/i),
     ).toBeInTheDocument()
   })
 
@@ -266,31 +266,29 @@ describe('SourceStep — initialError (prefill) handling', () => {
     })
 
     await new Promise((resolve) => setTimeout(resolve, 0))
-    expect(onError).toHaveBeenCalledWith(
-      'Choose a Spliit Cloud .spliit.zip bundle.',
-    )
+    expect(onError).toHaveBeenCalledWith('Choose a DONGY .spliit.zip bundle.')
   })
 
   it('renders the prefill error inline when no own serverUrlError is set', () => {
     renderSourceStep({
-      initialError: 'Spliit Cloud did not find this group',
+      initialError: 'DONGY did not find this group',
     })
     expect(
-      screen.getByText('Spliit Cloud did not find this group'),
+      screen.getByText('DONGY did not find this group'),
     ).toBeInTheDocument()
   })
 
   it('hides the prefill error after the user types in the URL input', async () => {
     const user = userEvent.setup()
     renderSourceStep({
-      initialError: 'Spliit Cloud did not find this group',
+      initialError: 'DONGY did not find this group',
     })
 
     const urlInput = screen.getByPlaceholderText(/spliit\.app.*groups/i)
     await user.type(urlInput, 'a')
 
     expect(
-      screen.queryByText('Spliit Cloud did not find this group'),
+      screen.queryByText('DONGY did not find this group'),
     ).not.toBeInTheDocument()
   })
 

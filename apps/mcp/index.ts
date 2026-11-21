@@ -63,12 +63,12 @@ oauth.verifyToken = async (token) =>
 
 const server = new MCPServer({
   name: 'spliit-cloud',
-  title: 'Spliit Cloud',
+  title: 'DONGY',
   version: '1.0.1',
   description:
-    'Create flat or receipt-itemized Spliit Cloud expenses from one conversational request with a safe, interactive confirmation preview. Also inspect the connected account’s groups, participants, balances, and recent expenses.',
+    'Create flat or receipt-itemized DONGY expenses from one conversational request with a safe, interactive confirmation preview. Also inspect the connected account’s groups, participants, balances, and recent expenses.',
   instructions: [
-    'This server is already scoped to the Spliit Cloud account identified by its OAuth bearer token. Treat every returned group, participant, balance, and expense as belonging to that connected account; never use ChatGPT or Claude identity metadata for authorization.',
+    'This server is already scoped to the DONGY account identified by its OAuth bearer token. Treat every returned group, participant, balance, and expense as belonging to that connected account; never use ChatGPT or Claude identity metadata for authorization.',
     'For expense requests, act instead of merely describing a draft. Call get-expense-context when the group ID is not already known. It returns complete group, participant, currency, caller, and category context for one-shot preparation. Match group and participant names case-insensitively. If exactly one stable ID matches the user’s words or context, continue without asking. Ask one short clarification only when genuinely distinct IDs remain plausible, using disambiguationLabel.',
     'Choose the closest valid category from get-expense-context when the description clearly supports one, such as dining-out for restaurant, bar, drinks, or pizza purchases. Otherwise omit category for General. Call get-group-summary only for balances, recent expenses, or deeper group context; participant mapping no longer requires it.',
     'Always pass monetary values as decimal strings. If the user states a currency, pass its uppercase ISO code; otherwise omit currencyCode to use the group currency. Interpret a bare dollar sign as the group currency when its ISO code is a dollar currency (USD, CAD, AUD, NZD, SGD, HKD, or MXN); otherwise use USD. Never invent participant IDs, exchange rates, or category IDs.',
@@ -220,7 +220,7 @@ function safeError(cause: unknown) {
       return cause.message
     }
   }
-  return 'Spliit Cloud could not complete this request. Please try again.'
+  return 'DONGY could not complete this request. Please try again.'
 }
 
 const decimalString = z
@@ -263,9 +263,9 @@ const expenseItem = z.object({
 server.tool(
   {
     name: 'get-expense-context',
-    title: 'Get Spliit Cloud expense context',
+    title: 'Get DONGY expense context',
     description:
-      "Start here for one-shot expense preparation. Lists only the OAuth-connected Spliit Cloud account's active, visible, non-archived groups. Each group includes stable IDs, currency, caller participant ID, every eligible participant with name/status/disambiguation label, and the response includes the complete valid category catalog. Exact duplicate rows are removed. Resolve unique group and participant names here, continue immediately, and ask only when multiple stable IDs remain plausible. Responses are capped; when truncated is true, pass a case-insensitive groupHint (part of the group name) to narrow the list.",
+      "Start here for one-shot expense preparation. Lists only the OAuth-connected DONGY account's active, visible, non-archived groups. Each group includes stable IDs, currency, caller participant ID, every eligible participant with name/status/disambiguation label, and the response includes the complete valid category catalog. Exact duplicate rows are removed. Resolve unique group and participant names here, continue immediately, and ask only when multiple stable IDs remain plausible. Responses are capped; when truncated is true, pass a case-insensitive groupHint (part of the group name) to narrow the list.",
     schema: z.object({
       groupHint: z
         .string()
@@ -339,9 +339,9 @@ server.tool(
 server.tool(
   {
     name: 'prepare-expense',
-    title: 'Preview a Spliit Cloud expense',
+    title: 'Preview a DONGY expense',
     description:
-      "Required final step for every conversational expense request. Call it in the same turn as soon as group, amount, and title are known; it validates the authenticated account's access and renders the non-editable confirmation UI. Supports flat splits and receipt-itemized expenses with a different split per item. Omit payer, flat split, item splits, date, category, and currency only when the corresponding Spliit Cloud defaults should apply. A different supported ISO currency uses Spliit Cloud's date-based exchange rate while preserving entered item and total values.",
+      "Required final step for every conversational expense request. Call it in the same turn as soon as group, amount, and title are known; it validates the authenticated account's access and renders the non-editable confirmation UI. Supports flat splits and receipt-itemized expenses with a different split per item. Omit payer, flat split, item splits, date, category, and currency only when the corresponding DONGY defaults should apply. A different supported ISO currency uses DONGY's date-based exchange rate while preserving entered item and total values.",
     schema: z.object({
       groupId: z
         .string()
@@ -361,7 +361,7 @@ server.tool(
       category: z
         .string()
         .optional()
-        .describe('Spliit Cloud category ID; omit for General'),
+        .describe('DONGY category ID; omit for General'),
       notes: z
         .string()
         .max(10_000)
@@ -373,7 +373,7 @@ server.tool(
         .max(4)
         .optional()
         .describe(
-          "ISO 4217 or crypto expense currency. Omit for the group's currency; a different supported code is converted using Spliit Cloud's authoritative rate.",
+          "ISO 4217 or crypto expense currency. Omit for the group's currency; a different supported code is converted using DONGY's authoritative rate.",
         ),
       paidBy: z
         .array(allocation)
@@ -468,7 +468,7 @@ server.prompt(
   {
     name: 'add-spliit-expense',
     description:
-      'Guide the assistant through the lowest-friction safe workflow for creating a Spliit Cloud expense with an interactive confirmation preview.',
+      'Guide the assistant through the lowest-friction safe workflow for creating a DONGY expense with an interactive confirmation preview.',
     schema: z.object({
       request: z
         .string()
@@ -480,12 +480,12 @@ server.prompt(
   async ({ request }) =>
     text(
       [
-        `Fulfil this Spliit Cloud expense request: ${request}`,
-        'Resolve the group with get-expense-context. Results are already restricted to the OAuth-connected Spliit Cloud account.',
+        `Fulfil this DONGY expense request: ${request}`,
+        'Resolve the group with get-expense-context. Results are already restricted to the OAuth-connected DONGY account.',
         'Resolve unique group and participant names case-insensitively from that one response. Ask one concise clarification only for multiple distinct matching IDs.',
         'Choose the closest valid category when the title clearly supports one; otherwise use General. Treat bare $ as the group currency for dollar-currency groups and USD otherwise.',
         'If the request contains a receipt image, extract only clearly readable total, currency, merchant/title, date, category, items, quantities, and assignments. Ask one focused question for unreadable or contradictory values. Do not pass or store the image.',
-        'Then call prepare-expense in the same turn; do not stop at a prose draft. Omit unspecified payer, split, date, category, and currency only where Spliit Cloud should apply its defaults.',
+        'Then call prepare-expense in the same turn; do not stop at a prose draft. Omit unspecified payer, split, date, category, and currency only where DONGY should apply its defaults.',
         'The returned card is the only confirmation surface. Never call create-expense yourself.',
       ].join('\n'),
     ),
@@ -496,5 +496,5 @@ if (mcpEnv.nodeEnv === 'production') {
 }
 
 void server.listen(mcpEnv.port).then(() => {
-  console.log('Spliit Cloud Assistant MCP server is running')
+  console.log('DONGY Assistant MCP server is running')
 })

@@ -296,7 +296,7 @@ describe('AccountSettingsPage', () => {
     expect(screen.getByText(/ledgers selected/i)).toBeInTheDocument()
   })
 
-  it('opens the Spliit Cloud importer from the backup section', () => {
+  it('opens the DONGY importer from the backup section', () => {
     render(<AccountSettingsPage />)
 
     const importLink = screen.getByRole('button', { name: /^import$/i })

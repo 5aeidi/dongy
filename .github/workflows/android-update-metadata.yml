@@ -49,7 +49,7 @@ jobs:
           metadata = json.loads((root / 'android-update.json').read_text())
           latest = metadata['latest']
           tag = os.environ['RELEASE_TAG']
-          expected = 'https://github.com/antonio-ivanovski/spliit-cloud/releases/'
+          expected = 'https://github.com/5aeidi/dongy/releases/'
           assert metadata['schemaVersion'] == 1 and metadata['packageName'] == 'cloud.spliit.twa'
           assert latest['releaseUrl'] == expected + 'tag/' + tag
           assert latest['apkUrl'] == expected + 'download/' + tag + '/spliit-cloud.apk'

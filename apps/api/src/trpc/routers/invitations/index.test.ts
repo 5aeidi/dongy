@@ -2225,7 +2225,7 @@ describe('invitationsRouter.updatePending', () => {
     expect(sendEmailMock).toHaveBeenCalledTimes(1)
     const call = sendEmailMock.mock.calls[0][0]
     expect(call.to).toBe('carol@example.com')
-    expect(call.text).toMatch(/open spliit cloud/i)
+    expect(call.text).toMatch(/open dongy/i)
     expect(call.text).not.toContain('You will appear as')
     expect(call.text).not.toContain('Submitted Name')
     expect(call.subject).not.toContain('as Submitted Name')

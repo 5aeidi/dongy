@@ -168,13 +168,13 @@ describe('reorderSiblings', () => {
 describe('addString', () => {
   it('writes only to en-US and creates intermediate objects', async () => {
     await seedFile('en-US', { Existing: 'v' })
-    await seedFile('fr-FR', { Existing: 'v' })
+    await seedFile('fa-IR', { Existing: 'v' })
     await addString('New.deep.key', 'hello')
     expect(await readFileJson('en-US')).toEqual({
       Existing: 'v',
       New: { deep: { key: 'hello' } },
     })
-    expect(await readFileJson('fr-FR')).toEqual({ Existing: 'v' })
+    expect(await readFileJson('fa-IR')).toEqual({ Existing: 'v' })
   })
 
   it('preserves the original 2-space indent + trailing newline', async () => {
@@ -188,9 +188,9 @@ describe('addString', () => {
 describe('setString', () => {
   it('sets in any locale', async () => {
     await seedFile('en-US', { a: 'a' })
-    await seedFile('fr-FR', { a: 'a' })
-    await setString('fr-FR', 'a', 'A')
-    expect((await readFileJson('fr-FR')).a).toBe('A')
+    await seedFile('fa-IR', { a: 'a' })
+    await setString('fa-IR', 'a', 'A')
+    expect((await readFileJson('fa-IR')).a).toBe('A')
   })
 
   it('appends to en-US without reordering (matches en-US convention)', async () => {
@@ -201,9 +201,9 @@ describe('setString', () => {
 
   it('inserts into a non-en-US locale at en-US-relative position', async () => {
     await seedFile('en-US', { A: 'a', B: 'b', C: 'c', D: 'd' })
-    await seedFile('fr-FR', { A: 'A', C: 'C', X: 'X' })
-    await setString('fr-FR', 'B', 'B-fr')
-    expect(Object.keys(await readFileJson('fr-FR'))).toEqual([
+    await seedFile('fa-IR', { A: 'A', C: 'C', X: 'X' })
+    await setString('fa-IR', 'B', 'B-fr')
+    expect(Object.keys(await readFileJson('fa-IR'))).toEqual([
       'A',
       'B',
       'C',
@@ -213,48 +213,43 @@ describe('setString', () => {
 
   it('appends at end when the new key is last in en-US', async () => {
     await seedFile('en-US', { A: 'a', B: 'b' })
-    await seedFile('fr-FR', { A: 'A' })
-    await setString('fr-FR', 'B', 'B-fr')
-    expect(Object.keys(await readFileJson('fr-FR'))).toEqual(['A', 'B'])
+    await seedFile('fa-IR', { A: 'A' })
+    await setString('fa-IR', 'B', 'B-fr')
+    expect(Object.keys(await readFileJson('fa-IR'))).toEqual(['A', 'B'])
   })
 
   it('inserts at start when the new key is first in en-US and missing in target', async () => {
     await seedFile('en-US', { A: 'a', B: 'b' })
-    await seedFile('fr-FR', { B: 'B' })
-    await setString('fr-FR', 'A', 'A-fr')
-    expect(Object.keys(await readFileJson('fr-FR'))).toEqual(['A', 'B'])
+    await seedFile('fa-IR', { B: 'B' })
+    await setString('fa-IR', 'A', 'A-fr')
+    expect(Object.keys(await readFileJson('fa-IR'))).toEqual(['A', 'B'])
   })
 })
 
 describe('removeString', () => {
   it('removes the key from en-US and from any locale that has it', async () => {
     await seedFile('en-US', { a: 'a', b: 'b' })
-    await seedFile('fr-FR', { a: 'a', b: 'b' })
-    await seedFile('de-DE', { a: 'a' })
+    await seedFile('fa-IR', { a: 'a', b: 'b' })
     const count = await removeString('b')
     expect(count).toBe(2)
     expect(await readFileJson('en-US')).toEqual({ a: 'a' })
-    expect(await readFileJson('fr-FR')).toEqual({ a: 'a' })
-    expect(await readFileJson('de-DE')).toEqual({ a: 'a' })
+    expect(await readFileJson('fa-IR')).toEqual({ a: 'a' })
   })
 
   it('removes locale orphans when the key is already absent from en-US', async () => {
     await seedFile('en-US', { group: { source: 'source' } })
-    await seedFile('fr-FR', {
+    await seedFile('fa-IR', {
       group: { before: 'avant', obsolete: 'ancien', after: 'après' },
     })
-    await seedFile('de-DE', { group: { obsolete: 'alt' } })
-
     const count = await removeString('group.obsolete')
 
-    expect(count).toBe(2)
+    expect(count).toBe(1)
     expect(await readFileJson('en-US')).toEqual({
       group: { source: 'source' },
     })
-    expect(await readFileJson('fr-FR')).toEqual({
+    expect(await readFileJson('fa-IR')).toEqual({
       group: { before: 'avant', after: 'après' },
     })
-    expect(await readFileJson('de-DE')).toEqual({})
   })
 
   it('cleans up empty parents recursively', async () => {
@@ -278,14 +273,14 @@ describe('removeString', () => {
 describe('missingKeys', () => {
   it('lists all en-US keys not present in target, sorted', async () => {
     await seedFile('en-US', { a: 'a', b: 'b', c: { d: 'd' } })
-    await seedFile('fr-FR', { a: 'A', c: {} })
-    expect(await missingKeys('fr-FR')).toEqual(['b', 'c.d'])
+    await seedFile('fa-IR', { a: 'A', c: {} })
+    expect(await missingKeys('fa-IR')).toEqual(['b', 'c.d'])
   })
 
   it('returns [] when target is complete', async () => {
     await seedFile('en-US', { a: 'a', b: { c: 'c' } })
-    await seedFile('fr-FR', { a: 'A', b: { c: 'C' } })
-    expect(await missingKeys('fr-FR')).toEqual([])
+    await seedFile('fa-IR', { a: 'A', b: { c: 'C' } })
+    expect(await missingKeys('fa-IR')).toEqual([])
   })
 })
 
@@ -299,13 +294,13 @@ describe('validateAllMessages', () => {
 
   it('fails with a descriptive error for orphan keys', async () => {
     await seedFile('en-US', { good: 'g' })
-    await seedFile('fr-FR', { good: 'G', orphan: 'O' })
+    await seedFile('fa-IR', { good: 'G', orphan: 'O' })
     const result = await validateAllMessages()
     expect(result.valid).toBe(false)
     expect(result.errors).toHaveLength(1)
     expect(result.errors[0]).toContain('orphan')
     expect(result.errors[0]).toContain('orphan')
-    expect(result.errors[0]).toContain('fr-FR.json')
+    expect(result.errors[0]).toContain('fa-IR.json')
   })
 
   it('rejects empty and non-string message values', async () => {
@@ -319,15 +314,15 @@ describe('validateAllMessages', () => {
 
   it('compares interpolation placeholder sets and permits repetition', async () => {
     await seedFile('en-US', { greeting: 'Hello {name}, total {amount}' })
-    await seedFile('fr-FR', {
+    await seedFile('fa-IR', {
       greeting: '{name}, bonjour {name}, total {extra}',
     })
     const result = await validateAllMessages()
     expect(result.errors).toContain(
-      'fr-FR.json: greeting: missing placeholder(s): amount',
+      'fa-IR.json: greeting: missing placeholder(s): amount',
     )
     expect(result.errors).toContain(
-      'fr-FR.json: greeting: unknown placeholder(s): extra',
+      'fa-IR.json: greeting: unknown placeholder(s): extra',
     )
     expect(
       result.errors.some((error) =>
@@ -338,31 +333,23 @@ describe('validateAllMessages', () => {
 
   it('rejects doubled interpolation braces', async () => {
     await seedFile('en-US', { greeting: 'Hello {name}' })
-    await seedFile('fr-FR', { greeting: 'Bonjour {{name}}' })
-    const result = await validateAllMessages('fr-FR')
+    await seedFile('fa-IR', { greeting: 'Bonjour {{name}}' })
+    const result = await validateAllMessages('fa-IR')
     expect(result.errors).toContain(
-      'fr-FR.json: greeting: interpolation placeholder {name} must use single braces, not {{name}}',
+      'fa-IR.json: greeting: interpolation placeholder {name} must use single braces, not {{name}}',
     )
 
     await seedFile('en-US', { greeting: 'Hello {{name}}' })
-    await seedFile('fr-FR', { greeting: 'Bonjour {name}' })
-    const sourceResult = await validateAllMessages('fr-FR')
+    await seedFile('fa-IR', { greeting: 'Bonjour {name}' })
+    const sourceResult = await validateAllMessages('fa-IR')
     expect(sourceResult.errors).toContain(
       'en-US.json: greeting: interpolation placeholder {name} must use single braces, not {{name}}',
     )
   })
 
-  it('can restrict structural validation to one locale', async () => {
-    await seedFile('en-US', { greeting: 'Hello' })
-    await seedFile('fr-FR', { greeting: 'Bonjour' })
-    await seedFile('de-DE', { orphan: 'Hallo' })
-    const result = await validateAllMessages('fr-FR')
-    expect(result.valid).toBe(true)
-  })
-
   it('rejects malformed, mismatched, and source-incompatible rich-text tags', async () => {
     await seedFile('en-US', { first: '<strong>Hello</strong>', second: 'Hi' })
-    await seedFile('fr-FR', {
+    await seedFile('fa-IR', {
       first: '<em>Bonjour</strong>',
       second: '<em>Salut</em>',
     })
@@ -384,18 +371,18 @@ describe('validateAllMessages', () => {
       nested: '<strong><em>Delete</em></strong>',
       named: 'Delete <strong>{name}</strong>',
     })
-    await seedFile('fr-FR', {
+    await seedFile('fa-IR', {
       nested: '<em><strong>Supprimer</strong></em>',
       named: '<strong>Supprimer</strong> {name}',
     })
 
-    const result = await validateAllMessages('fr-FR')
+    const result = await validateAllMessages('fa-IR')
 
     expect(result.errors).toContain(
-      'fr-FR.json: nested: rich-text tag nesting differs from en-US',
+      'fa-IR.json: nested: rich-text tag nesting differs from en-US',
     )
     expect(result.errors).toContain(
-      'fr-FR.json: named: placeholder {name} must remain inside <strong>',
+      'fa-IR.json: named: placeholder {name} must remain inside <strong>',
     )
   })
 
@@ -431,20 +418,17 @@ describe('validateAllMessages', () => {
       )
       await seedFile(locale, localized)
     }
-    await seedFile('he', {
+    await seedFile('fa-IR', {
       itemCount_one: 'one without count',
       itemCount_other: '{count} others',
     })
 
     const result = await validateAllMessages()
     expect(result.errors).toContain(
-      'he.json: itemCount_two: missing required plural form',
+      'fa-IR.json: itemCount_one: missing placeholder(s): count',
     )
     expect(result.errors).toContain(
-      'he.json: itemCount_one: missing placeholder(s): count',
-    )
-    expect(result.errors).toContain(
-      'he.json: itemCount_one: plural form must contain {count}',
+      'fa-IR.json: itemCount_one: plural form must contain {count}',
     )
   })
 })
@@ -462,58 +446,37 @@ describe('diffMessages', () => {
 
   it('classifies modified values separately from pure additions', async () => {
     await seedFile('en-US', { same: 'SAME', changed: 'NEW' })
-    await seedFile('fr-FR', { same: 'IDENTIQUE', changed: 'TRADUIT' })
+    await seedFile('fa-IR', { same: 'IDENTIQUE', changed: 'TRADUIT' })
     const result = await diffMessages({
-      locale: 'fr-FR',
+      locale: 'fa-IR',
       readOldEn: async () => ({ same: 'SAME', changed: 'OLD' }),
     })
     expect(result.thisChange.added).toEqual([])
     expect(result.thisChange.modified).toEqual(['changed'])
-    expect(result.translationWork['fr-FR'].present).toEqual(['changed'])
-  })
-
-  it('reports changed plural forms only where the locale uses that category', async () => {
-    const source = Object.fromEntries(
-      ['zero', 'one', 'two', 'few', 'many', 'other'].map((suffix) => [
-        `count_${suffix}`,
-        suffix === 'one' ? 'new {count}' : '{count}',
-      ]),
-    )
-    await seedFile('en-US', source)
-    await seedFile('ja-JP', { count_other: '{count}' })
-    const result = await diffMessages({
-      locale: 'ja-JP',
-      readOldEn: async () => ({ ...source, count_one: 'old {count}' }),
-    })
-    expect(result.thisChange.modified).toEqual(['count_one'])
-    expect(result.translationWork['ja-JP']).toEqual({
-      missing: [],
-      present: [],
-      covered: [],
-    })
+    expect(result.translationWork['fa-IR'].present).toEqual(['changed'])
   })
 
   it('partitions translation work into translationWork vs legacyMissing', async () => {
     await seedFile('en-US', { old: 'o', new1: 'n1', new2: 'n2' })
-    await seedFile('fr-FR', { old: 'o', new1: 'N1' })
+    await seedFile('fa-IR', { old: 'o', new1: 'N1' })
     const result = await diffMessages({
-      locale: 'fr-FR',
+      locale: 'fa-IR',
       readOldEn: async () => ({ old: 'o' }),
     })
-    expect(result.translationWork['fr-FR'].missing).toEqual(['new2'])
-    expect(result.translationWork['fr-FR'].present).toEqual(['new1'])
-    expect(result.legacyMissing['fr-FR']).toBe(0)
+    expect(result.translationWork['fa-IR'].missing).toEqual(['new2'])
+    expect(result.translationWork['fa-IR'].present).toEqual(['new1'])
+    expect(result.legacyMissing['fa-IR']).toBe(0)
   })
 
   it('counts legacyMissing for pre-existing missing keys', async () => {
     await seedFile('en-US', { kept: 'k', lost1: 'l1', lost2: 'l2', new1: 'n1' })
-    await seedFile('fr-FR', { kept: 'K' })
+    await seedFile('fa-IR', { kept: 'K' })
     const result = await diffMessages({
-      locale: 'fr-FR',
+      locale: 'fa-IR',
       readOldEn: async () => ({ kept: 'k', lost1: 'l1', lost2: 'l2' }),
     })
-    expect(result.translationWork['fr-FR'].missing).toEqual(['new1'])
-    expect(result.legacyMissing['fr-FR']).toBe(2)
+    expect(result.translationWork['fa-IR'].missing).toEqual(['new1'])
+    expect(result.legacyMissing['fa-IR']).toBe(2)
   })
 })
 
@@ -527,11 +490,9 @@ describe('getMessagesDir / setMessagesDir', () => {
 describe('missingKeysByLocale', () => {
   it('reports missing keys for every non-en-US locale', async () => {
     await seedFile('en-US', { a: 'a', b: 'b', c: { d: 'd' } })
-    await seedFile('fr-FR', { a: 'A', c: { d: 'D' } })
-    await seedFile('de-DE', { a: 'A' })
+    await seedFile('fa-IR', { a: 'A', c: { d: 'D' } })
     const result = await missingKeysByLocale()
-    expect(result['fr-FR']).toEqual(['b'])
-    expect(result['de-DE']).toEqual(['b', 'c.d'])
+    expect(result['fa-IR']).toEqual(['b'])
     for (const locale of Object.keys(result)) {
       expect(locale).not.toBe('en-US')
     }
@@ -545,11 +506,14 @@ describe('missingKeysByLocale', () => {
       ]),
     )
     await seedFile('en-US', source)
-    await seedFile('ja-JP', { count_other: '{count}' })
+    await seedFile('fa-IR', {
+      count_one: '{count}',
+      count_other: '{count}',
+    })
 
     const result = await missingKeysByLocale()
 
-    expect(result['ja-JP']).toEqual([])
+    expect(result['fa-IR']).toEqual([])
   })
 })
 
@@ -566,8 +530,7 @@ describe('auditMessages', () => {
   it('reports per-locale coverage and counts total keys from en-US', async () => {
     await seedFile('en-US', { a: 'a', b: 'b', c: 'c' })
     await seedNonEnLocales({ a: 'A', b: 'B', c: 'C' })
-    await seedFile('fr-FR', { a: 'A', b: 'B' })
-    await seedFile('de-DE', { a: 'A', b: 'B', c: 'C' })
+    await seedFile('fa-IR', { a: 'A', b: 'B' })
     const result = await auditMessages({
       // Snapshot current en-US so introducedKeys is empty (unit-test isolation
       // from the real git ref). Production check uses git HEAD.
@@ -581,19 +544,12 @@ describe('auditMessages', () => {
     expect(result.summary.localesWithMissing).toBe(1)
     expect(result.summary.totalMissing).toBe(1)
     expect(result.summary.totalUntranslatedEnglish).toBe(0)
-    expect(result.locales['fr-FR']).toMatchObject({
+    expect(result.locales['fa-IR']).toMatchObject({
       total: 3,
       present: 2,
       missing: 1,
       missingKeys: ['c'],
       coverage: 2 / 3,
-    })
-    expect(result.locales['de-DE']).toMatchObject({
-      total: 3,
-      present: 3,
-      missing: 0,
-      missingKeys: [],
-      coverage: 1,
     })
   })
 
@@ -609,32 +565,20 @@ describe('auditMessages', () => {
   it('restricts to --locale when provided', async () => {
     await seedFile('en-US', { a: 'a', b: 'b' })
     await seedNonEnLocales({ a: 'A' })
-    await seedFile('fr-FR', { a: 'A' })
-    await seedFile('de-DE', { a: 'A' })
+    await seedFile('fa-IR', { a: 'A' })
     const result = await auditMessages({
-      locale: 'fr-FR',
+      locale: 'fa-IR',
       readOldEn: async () => ({ a: 'a', b: 'b' }),
     })
     expect(result.summary.localesAudited).toBe(1)
-    expect(Object.keys(result.locales)).toEqual(['fr-FR'])
-    expect(result.locales['fr-FR'].missing).toBe(1)
-  })
-
-  it('restricts structural validation to --locale', async () => {
-    await seedFile('en-US', { a: 'a' })
-    await seedFile('fr-FR', { a: 'A' })
-    await seedFile('de-DE', { orphan: 'O' })
-    const result = await auditMessages({
-      locale: 'fr-FR',
-      readOldEn: async () => ({ a: 'a' }),
-    })
-    expect(result.valid).toBe(true)
+    expect(Object.keys(result.locales)).toEqual(['fa-IR'])
+    expect(result.locales['fa-IR'].missing).toBe(1)
   })
 
   it('reports orphan keys via the embedded validation result', async () => {
     await seedFile('en-US', { a: 'a' })
     await seedNonEnLocales({ a: 'A' })
-    await seedFile('fr-FR', { a: 'A', orphan: 'O' })
+    await seedFile('fa-IR', { a: 'A', orphan: 'O' })
     const result = await auditMessages({
       readOldEn: async () => ({ a: 'a' }),
     })
@@ -653,7 +597,7 @@ describe('auditMessages', () => {
     expect(result.summary.totalUntranslatedEnglish).toBe(
       locales.filter((l) => l !== 'en-US').length,
     )
-    expect(result.locales['fr-FR'].untranslatedEnglishKeys).toEqual([
+    expect(result.locales['fa-IR'].untranslatedEnglishKeys).toEqual([
       'brandNew',
     ])
   })
@@ -666,7 +610,7 @@ describe('auditMessages', () => {
     })
     expect(result.introducedKeys).toEqual(['brandNew'])
     expect(result.summary.totalUntranslatedEnglish).toBe(0)
-    expect(result.locales['fr-FR'].untranslatedEnglishKeys).toEqual([])
+    expect(result.locales['fa-IR'].untranslatedEnglishKeys).toEqual([])
   })
 
   it('auto-allows brand identical values on introduced keys', async () => {
@@ -678,34 +622,20 @@ describe('auditMessages', () => {
     expect(result.summary.totalUntranslatedEnglish).toBe(0)
   })
 
-  it('suppresses documented locale cognates on introduced keys', async () => {
-    await seedFile('en-US', { color: 'Orange' })
-    await seedNonEnLocales({ color: 'Orange' })
-    const result = await auditMessages({
-      readOldEn: async () => ({}),
-    })
-    expect(result.locales['fr-FR'].untranslatedEnglishKeys).toEqual([])
-    expect(result.locales['de-DE'].untranslatedEnglishKeys).toEqual(['color'])
-    expect(result.summary.totalUntranslatedEnglish).toBe(
-      locales.filter((locale) => locale !== 'en-US' && locale !== 'fr-FR')
-        .length,
-    )
-  })
-
   it('changesOnly mode: only flags keys the diff introduced', async () => {
     await seedFile('en-US', { kept: 'k', pre: 'p', brandNew: 'b' })
     await seedNonEnLocales({ kept: 'K', pre: 'P' })
-    await seedFile('fr-FR', { kept: 'K' })
+    await seedFile('fa-IR', { kept: 'K' })
     const result = await auditMessages({
       changesOnly: true,
       readOldEn: async () => ({ kept: 'k', pre: 'p' }),
     })
     expect(result.changesOnly).toBe(true)
     expect(result.introducedKeys).toEqual(['brandNew'])
-    // fr-FR has no "brandNew" but is missing the unchanged "pre" — that
+    // fa-IR has no "brandNew" but is missing the unchanged "pre" — that
     // is legacy debt and must not appear in changesOnly output.
-    expect(result.locales['fr-FR'].missingKeys).toEqual(['brandNew'])
-    expect(result.locales['fr-FR'].missing).toBe(1)
+    expect(result.locales['fa-IR'].missingKeys).toEqual(['brandNew'])
+    expect(result.locales['fa-IR'].missing).toBe(1)
     // Every full locale that lacks the introduced key is flagged once for
     // it; no locale should be flagged for legacy debt ("pre", "kept").
     // Sparse overlays (en-GB, pt-BR) inherit the key — nothing to flag.
@@ -720,14 +650,14 @@ describe('auditMessages', () => {
 
   it('changesOnly with no diff: all locales are clean even if behind', async () => {
     await seedFile('en-US', { kept: 'k', brandNew: 'b' })
-    await seedFile('fr-FR', {})
+    await seedFile('fa-IR', {})
     const result = await auditMessages({
       changesOnly: true,
       readOldEn: async () => ({ kept: 'k', brandNew: 'b' }),
     })
     expect(result.introducedKeys).toEqual([])
     expect(result.summary.totalMissing).toBe(0)
-    expect(result.locales['fr-FR'].missing).toBe(0)
+    expect(result.locales['fa-IR'].missing).toBe(0)
   })
 
   it('handles empty en-US as fully covered', async () => {
@@ -750,15 +680,18 @@ describe('auditMessages', () => {
       ]),
     )
     await seedFile('en-US', source)
-    await seedFile('ja-JP', { count_other: '{count}' })
+    await seedFile('fa-IR', {
+      count_one: '{count}',
+      count_other: '{count}',
+    })
     const result = await auditMessages({
-      locale: 'ja-JP',
+      locale: 'fa-IR',
       readOldEn: async () => source,
     })
     expect(result.totalKeys).toBe(6)
-    expect(result.locales['ja-JP'].total).toBe(1)
-    expect(result.locales['ja-JP'].present).toBe(1)
-    expect(result.locales['ja-JP'].coverage).toBe(1)
-    expect(result.locales['ja-JP'].missingKeys).toEqual([])
+    expect(result.locales['fa-IR'].total).toBe(2)
+    expect(result.locales['fa-IR'].present).toBe(2)
+    expect(result.locales['fa-IR'].coverage).toBe(1)
+    expect(result.locales['fa-IR'].missingKeys).toEqual([])
   })
 })

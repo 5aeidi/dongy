@@ -171,7 +171,7 @@ function BrandFooter({ logoDataUri }: { logoDataUri: string | null }) {
     return (
       <img
         src={logoDataUri}
-        alt="Spliit Cloud"
+        alt="DONGY"
         width={OG_LOGO_WIDTH}
         height={OG_LOGO_HEIGHT}
         style={{ width: OG_LOGO_WIDTH, height: OG_LOGO_HEIGHT }}
@@ -196,9 +196,7 @@ function BrandFooter({ logoDataUri }: { logoDataUri: string | null }) {
       >
         S
       </div>
-      <div style={{ fontSize: 28, fontWeight: 700, color: INK }}>
-        Spliit Cloud
-      </div>
+      <div style={{ fontSize: 28, fontWeight: 700, color: INK }}>DONGY</div>
     </div>
   )
 }

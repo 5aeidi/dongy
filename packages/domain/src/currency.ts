@@ -38,6 +38,16 @@ export type Currency = {
   aliasOf?: string
   aliasScale?: number
   /**
+   * Format as `<number> <symbol>` instead of through `Intl`'s currency style.
+   * Used for non-ISO display units such as the Iranian toman.
+   */
+  suffixSymbol?: boolean
+  /**
+   * Symbol per language subtag (e.g. `{ fa: 'تومان' }`); falls back to
+   * `symbol`.
+   */
+  localizedSymbols?: Readonly<Record<string, string>>
+  /**
    * Statutory fixed conversion for a withdrawn currency (e.g. BGN → EUR). The
    * code keeps market quotes before `effectiveFrom`; from that date on the
    * provider publishes no quotes and conversions resolve through `anchor` at
@@ -117,6 +127,10 @@ export const CurrencySchema = Schema.Struct({
   intermediaries: Schema.optional(Schema.Array(Schema.String)),
   aliasOf: Schema.optional(Schema.String),
   aliasScale: Schema.optional(Schema.Number),
+  suffixSymbol: Schema.optional(Schema.Boolean),
+  localizedSymbols: Schema.optional(
+    Schema.Record(Schema.String, Schema.String),
+  ),
   fixedConversion: Schema.optional(FixedConversionSchema),
 })
 
@@ -316,6 +330,12 @@ export const supportedCurrencyCodes = currencyList.map(
   (c) => c.code,
 ) as ReadonlyArray<(typeof currencyList)[number]['code']>
 export type SupportedCurrencyCode = (typeof supportedCurrencyCodes)[number]
+
+/**
+ * DONGY: the only currencies users can pick. The rest of the catalog stays so
+ * existing data and conversions keep working, but it is never offered.
+ */
+export const pickableCurrencyCodes = ['IRT', 'IRM'] as const
 
 const byCode = new Map<string, Currency>(currencyList.map((c) => [c.code, c]))
 

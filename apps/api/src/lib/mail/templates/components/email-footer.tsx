@@ -5,16 +5,16 @@ type EmailFooterProps = {
 }
 
 /**
- * Subtle footer at the bottom of every email. Spliit Cloud wordmark + the
- * default "you received this email because…" copy. Most transactional emails
- * include something here for inbox-trust reasons.
+ * Subtle footer at the bottom of every email. DONGY wordmark + the default "you
+ * received this email because…" copy. Most transactional emails include
+ * something here for inbox-trust reasons.
  */
 export function EmailFooter({ unsubscribeUrl }: EmailFooterProps) {
   return (
     <Section className="mt-8">
       <Hr className="my-4 border-t border-none border-solid border-[#e5e7eb]" />
       <Text className="m-0 text-[12px] leading-[18px] text-[#64748b]">
-        Spliit Cloud · split expenses with friends and groups.
+        DONGY · split expenses with friends and groups.
       </Text>
       {unsubscribeUrl ? (
         <Text className="m-0 mt-2 text-[12px] leading-[18px] text-[#64748b]">

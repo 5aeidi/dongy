@@ -41,7 +41,7 @@ export class GroupPushActivityNotificationDispatcher implements ActivityNotifica
       activityId: intent.activity.activityId ?? '',
       title: isFriendAdded ? 'New friend ledger' : 'Group activity',
       body: isFriendAdded
-        ? 'A friend ledger is ready in Spliit Cloud.'
+        ? 'A friend ledger is ready in DONGY.'
         : 'Your group has new activity.',
       url: `${getWebBaseUrl()}/groups/${intent.activity.groupId}`,
       tag: `activity:${intent.activity.activityId ?? ''}`,

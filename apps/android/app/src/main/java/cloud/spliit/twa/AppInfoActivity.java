@@ -23,7 +23,7 @@ public final class AppInfoActivity extends Activity {
         String webVersion = getIntent().getData() == null || !getIntent().getData().isHierarchical()
                 ? null : getIntent().getData().getQueryParameter("web-version");
         if (webVersion != null && webVersion.matches("[A-Za-z0-9.+_-]{1,64}")) {
-            NativeScreen.text(this, content, "Spliit Cloud " + webVersion);
+            NativeScreen.text(this, content, "DONGY " + webVersion);
         }
         NativeScreen.text(this, content, getString(R.string.web_version_note));
         NativeScreen.text(this, content, getString(R.string.update_source));

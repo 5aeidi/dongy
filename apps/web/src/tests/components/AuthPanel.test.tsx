@@ -172,7 +172,7 @@ describe('AuthPanel', () => {
 
   it('renders sign-in title by default', () => {
     render(<AuthPanel />)
-    expect(screen.getByText('Sign in to Spliit Cloud')).toBeInTheDocument()
+    expect(screen.getByText('Sign in to DONGY')).toBeInTheDocument()
   })
 
   it('switch mode button switches to sign-up', async () => {
@@ -180,9 +180,7 @@ describe('AuthPanel', () => {
 
     await switchToSignUp(user)
 
-    expect(
-      screen.getByText('Create your Spliit Cloud account'),
-    ).toBeInTheDocument()
+    expect(screen.getByText('Create your DONGY account')).toBeInTheDocument()
     // The switch text should now say "Sign in"
     expect(screen.getByText('Sign in')).toBeInTheDocument()
   })
@@ -410,9 +408,7 @@ describe('AuthPanel', () => {
       },
       {},
     )
-    expect(
-      screen.queryByText('Sign in to Spliit Cloud'),
-    ).not.toBeInTheDocument()
+    expect(screen.queryByText('Sign in to DONGY')).not.toBeInTheDocument()
   })
 
   it('OIDC button appears and signs in with social', async () => {
@@ -522,9 +518,7 @@ describe('AuthPanel', () => {
 
     const { user } = render(<AuthPanel />)
 
-    expect(
-      screen.getByText('Create your Spliit Cloud account'),
-    ).toBeInTheDocument()
+    expect(screen.getByText('Create your DONGY account')).toBeInTheDocument()
     await user.click(screen.getByText('Sign in'))
     expect(screen.getByText('Create an account')).toBeInTheDocument()
   })
@@ -537,9 +531,7 @@ describe('AuthPanel', () => {
 
     render(<AuthPanel />)
 
-    expect(
-      screen.getByText('Create your Spliit Cloud account'),
-    ).toBeInTheDocument()
+    expect(screen.getByText('Create your DONGY account')).toBeInTheDocument()
     expect(
       screen.getByText('Use the email address you were invited with.'),
     ).toBeInTheDocument()
@@ -659,9 +651,7 @@ describe('AuthPanel', () => {
     ])
     expect(screen.getAllByRole('button')[0]).toBe(methods[0])
     expect(screen.getByText('Or use an account')).toBeInTheDocument()
-    expect(
-      screen.getByText('Get started with Spliit Cloud'),
-    ).toBeInTheDocument()
+    expect(screen.getByText('Get started with DONGY')).toBeInTheDocument()
   })
 
   it('uses one divider when email is the only account sign-in method', () => {

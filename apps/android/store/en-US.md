@@ -1,4 +1,4 @@
-# Spliit Cloud
+# DONGY
 
 Short description: Split shared expenses with friends and family. Free and open source.
 
@@ -11,9 +11,9 @@ Track shared expenses, see who owes whom, and organize trips, households, and ev
 - Import and export your data.
 - Use optional notifications and receipt extraction when configured.
 
-Spliit Cloud is free, without ads. This Android application connects to https://spliit.cloud using your browser. An up-to-date compatible browser is required; an internet connection is required for first setup, sign-in, synchronization, and online features.
+DONGY is free, without ads. This Android application connects to https://spliit.cloud using your browser. An up-to-date compatible browser is required; an internet connection is required for first setup, sign-in, synchronization, and online features.
 
-Recording a settlement does not transfer money. Spliit Cloud is an expense-tracking tool, not a bank, wallet, or payment service.
+Recording a settlement does not transfer money. DONGY is an expense-tracking tool, not a bank, wallet, or payment service.
 
 Support: https://spliit.cloud/support
 Privacy: https://spliit.cloud/privacy

@@ -1,10 +1,10 @@
 /**
  * Resolve the public status-page URL, if the deployment configured one.
  *
- * Spliit Cloud builds set `VITE_STATUS_PAGE_URL=https://status.spliit.cloud/`.
+ * DONGY builds set `VITE_STATUS_PAGE_URL=https://status.spliit.cloud/`.
  * Self-hosters can point it at their own status page — or leave it unset, in
  * which case server-down UI shows a retry action with no external link (linking
- * a self-hosted outage to Spliit Cloud's status page would be wrong).
+ * a self-hosted outage to DONGY's status page would be wrong).
  */
 export function getStatusPageUrl(): string | null {
   const configured = import.meta.env.VITE_STATUS_PAGE_URL?.trim()

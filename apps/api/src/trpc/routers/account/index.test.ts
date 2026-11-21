@@ -129,13 +129,13 @@ describe('accountRouter account preferences', () => {
     prismaMock.accountPreference.findUnique.mockResolvedValue({
       defaultCurrencyCode: 'USD',
       timeZone: 'Europe/Skopje',
-      locale: 'mk-MK',
+      locale: 'fa-IR',
       theme: 'dark',
       mascot: 'off',
     } as never)
 
     const result = await makeCaller('acct-1').initializePreferences({
-      locale: 'mk-MK',
+      locale: 'fa-IR',
       theme: 'dark',
       timeZone: 'Europe/Skopje',
     })
@@ -145,7 +145,7 @@ describe('accountRouter account preferences', () => {
         where: { accountId: 'acct-1' },
         create: expect.objectContaining({
           accountId: 'acct-1',
-          locale: 'mk-MK',
+          locale: 'fa-IR',
           theme: 'dark',
           timeZone: 'Europe/Skopje',
         }),
@@ -154,7 +154,7 @@ describe('accountRouter account preferences', () => {
     )
     expect(prismaMock.accountPreference.updateMany).toHaveBeenCalledWith({
       where: { accountId: 'acct-1', locale: null },
-      data: { locale: 'mk-MK' },
+      data: { locale: 'fa-IR' },
     })
     expect(prismaMock.accountPreference.updateMany).toHaveBeenCalledWith({
       where: { accountId: 'acct-1', theme: null },
@@ -167,7 +167,7 @@ describe('accountRouter account preferences', () => {
     expect(result.preferences).toEqual({
       defaultCurrencyCode: 'USD',
       timeZone: 'Europe/Skopje',
-      locale: 'mk-MK',
+      locale: 'fa-IR',
       theme: 'dark',
       mascot: 'off',
       notificationsEnabled: true,
@@ -391,7 +391,7 @@ describe('accountRouter account preferences', () => {
     prismaMock.accountPreference.upsert.mockResolvedValue({
       defaultCurrencyCode: 'EUR',
       timeZone: 'Europe/Paris',
-      locale: 'fr-FR',
+      locale: 'en-US',
       theme: 'system',
     } as never)
 

@@ -5,6 +5,7 @@ import {
   type Currency,
   type SupportedCurrencyCode,
   currencyList,
+  pickableCurrencyCodes,
 } from '@spliit/domain/currency'
 
 /**
@@ -36,7 +37,8 @@ const nameKey = (code: SupportedCurrencyCode): CurrencyNameKey =>
  *   custom currency's actual value rather than a generic "Custom".
  */
 export function useCurrencies(
-  customChoiceLabel: string,
+  // Kept for call-site compatibility; DONGY no longer offers a custom choice.
+  _customChoiceLabel: string,
   currentCustomValue?: string,
 ): DisplayCurrency[] {
   const { t } = useTranslation()
@@ -47,33 +49,28 @@ export function useCurrencies(
     const translated = t(nameKey(code), { defaultValue: code })
     return (translated as string) ?? code
   }
-  const items: DisplayCurrency[] = currencyList.map((c) => ({
-    ...c,
-    name: nameFor(c.code as SupportedCurrencyCode),
-  }))
+  // DONGY offers only toman and million toman.
+  const pickable = new Set<string>(pickableCurrencyCodes)
+  const items: DisplayCurrency[] = currencyList
+    .filter((c) => pickable.has(c.code))
+    .map((c) => ({
+      ...c,
+      name: nameFor(c.code as SupportedCurrencyCode),
+    }))
 
-  if (!customChoiceLabel && !currentCustomValue) {
+  // No "custom currency" choice; a custom value saved earlier still shows.
+  if (!currentCustomValue) {
     return items
   }
 
-  // The custom entry sits first so it's easy to find. When a saved custom
-  // value exists we render it (preserving the user's typed text); otherwise
-  // we render the option label.
-  const customEntry: DisplayCurrency = currentCustomValue
-    ? {
-        code: '',
-        symbol: currentCustomValue,
-        rounding: 0,
-        decimal_digits: 2,
-        name: currentCustomValue,
-      }
-    : {
-        code: '',
-        symbol: '',
-        rounding: 0,
-        decimal_digits: 2,
-        name: customChoiceLabel,
-      }
+  // Keep the saved custom value visible (first, so it's easy to find).
+  const customEntry: DisplayCurrency = {
+    code: '',
+    symbol: currentCustomValue,
+    rounding: 0,
+    decimal_digits: 2,
+    name: currentCustomValue,
+  }
   items.unshift(customEntry)
   return items
 }

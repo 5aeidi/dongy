@@ -13,7 +13,7 @@ import { getApiBaseUrl } from '@/lib/api-url'
 import { FEATURE_SECTIONS } from './feature-registry'
 import { FEATURE_ILLUSTRATIONS } from './illustrations/illustration-registry'
 
-const GITHUB_URL = 'https://github.com/antonio-ivanovski/spliit-cloud'
+const GITHUB_URL = 'https://github.com/5aeidi/dongy'
 
 const footerLinkClassName =
   'inline-flex min-h-11 w-full items-center justify-between gap-3 rounded-lg border bg-background px-3.5 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-hidden'

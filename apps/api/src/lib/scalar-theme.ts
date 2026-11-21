@@ -3,8 +3,8 @@
  *
  * Centralizes Scalar's universal config so `app.ts` stays a wiring file. The
  * custom CSS overrides Scalar's `--scalar-color-accent` (and a few siblings)
- * with Spliit Cloud's emerald brand color so the docs don't visually clash with
- * the rest of the app.
+ * with DONGY's emerald brand color so the docs don't visually clash with the
+ * rest of the app.
  *
  * Brand assets (favicon, logo) live on the **web** app, not the API. Scalar's
  * `favicon` value becomes a `<link rel="icon">` in the served HTML, so the
@@ -22,7 +22,7 @@ const SPLIIT_ACCENT_DARK = '#14E1A4'
 const webBaseUrl = webOrigins[0]
 
 const CUSTOM_CSS = `
-/* Spliit Cloud brand overrides — emerald accent on top of Scalar's default theme. */
+/* DONGY brand overrides — emerald accent on top of Scalar's default theme. */
 :root {
   --scalar-radius: 8px;
   --scalar-font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -47,7 +47,7 @@ const CUSTOM_CSS = `
   --scalar-sidebar-item-hover-color: var(--scalar-color-accent);
 }
 
-/* Deprioritise the Scalar branding link — Spliit Cloud is the brand here. */
+/* Deprioritise the Scalar branding link — DONGY is the brand here. */
 .darklight-reference a[href*='scalar.com'] {
   opacity: 0.4;
 }
@@ -55,7 +55,7 @@ const CUSTOM_CSS = `
 
 export function buildScalarConfig(): Partial<ApiReferenceConfiguration> {
   return {
-    pageTitle: 'Spliit Cloud API Reference',
+    pageTitle: 'DONGY API Reference',
     // Browser fetches this directly from the web origin — keeps the
     // API image free of bundled web assets. `webOrigins[0]` is the
     // primary web origin configured via `WEB_ORIGINS` env var. We use
@@ -63,7 +63,7 @@ export function buildScalarConfig(): Partial<ApiReferenceConfiguration> {
     // references) for visual consistency.
     favicon: `${webBaseUrl}/logo.svg`,
     customCss: CUSTOM_CSS,
-    // Hides the dark-mode toggle: Spliit Cloud's docs are always dark, matches
+    // Hides the dark-mode toggle: DONGY's docs are always dark, matches
     // the web app's default. Remove `forceDarkModeState` to let users
     // pick; keep `hideDarkModeToggle` if you want a single look.
     darkMode: true,

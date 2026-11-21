@@ -5,7 +5,6 @@ import {
   getLocalizedLocaleLabels,
   localeFlags,
   localeRegions,
-  popularLocales,
 } from '@/components/locale-switcher-data'
 import { localeLabels, locales } from '@/i18n/request'
 import * as i18nSetup from '@/i18n/setup'
@@ -44,20 +43,16 @@ describe('LocaleSwitcher', () => {
   it('has exhaustive flags and geographic assignments', () => {
     expect(Object.keys(localeFlags)).toEqual(locales)
     expect(Object.keys(localeRegions)).toEqual(locales)
-    expect(localeFlags['en-GZ']).toBe('💀')
     for (const locale of locales) {
       expect(localeFlags[locale]).not.toBe('')
       expect(localeRegions[locale]).toBeTruthy()
     }
   })
 
-  it('keeps Gen Z at the bottom of Popular with standard language labels', () => {
-    expect(popularLocales.at(-1)).toBe('en-GZ')
-
-    const labels = getLocalizedLocaleLabels('en-GZ')
-    const displayNames = new Intl.DisplayNames(['en-GZ'], { type: 'language' })
+  it('uses standard language labels', () => {
+    const labels = getLocalizedLocaleLabels('fa-IR')
+    const displayNames = new Intl.DisplayNames(['fa-IR'], { type: 'language' })
     expect(labels['en-US']).toBe(displayNames.of('en-US'))
-    expect(labels['fr-FR']).toBe(displayNames.of('fr-FR'))
   })
 
   it('supports controlled selection without changing language itself', async () => {
@@ -70,9 +65,9 @@ describe('LocaleSwitcher', () => {
     await user.click(
       screen.getByRole('button', { name: localeLabels['en-US'] }),
     )
-    await user.click(screen.getByRole('option', { name: /Français/ }))
+    await user.click(screen.getByRole('option', { name: /فارسی/ }))
 
-    expect(onValueChange).toHaveBeenCalledWith('fr-FR')
+    expect(onValueChange).toHaveBeenCalledWith('fa-IR')
     expect(i18nSetup.setUserLocale).not.toHaveBeenCalled()
   })
 
@@ -91,7 +86,7 @@ describe('LocaleSwitcher', () => {
     expect(trigger).toHaveTextContent(localeLabels['en-US'])
   })
 
-  it('shows every locale once in prioritized, regional groups', async () => {
+  it('offers only Farsi and English', async () => {
     mockViewport(true)
     const { user } = render(<LocaleSwitcher />)
 
@@ -99,106 +94,24 @@ describe('LocaleSwitcher', () => {
       name: localeLabels['en-US'],
     })
     expect(trigger).toHaveTextContent(localeFlags['en-US'])
-    expect(trigger).toHaveTextContent(localeLabels['en-US'])
     expect(trigger).not.toHaveClass('bg-primary')
 
     await user.click(trigger)
 
     const listbox = screen.getByRole('listbox')
-    expect(within(listbox).getAllByRole('option')).toHaveLength(locales.length)
-
-    const content = listbox.textContent ?? ''
-    const headings = [
-      'Suggested',
-      'Popular',
-      'Asia-Pacific',
-      'Europe',
-      'Middle East & North Africa',
-    ]
-    for (let index = 1; index < headings.length; index += 1) {
-      expect(content.indexOf(headings[index - 1])).toBeLessThan(
-        content.indexOf(headings[index]),
-      )
-    }
-    expect(content).not.toContain('Americas')
-
+    const options = within(listbox).getAllByRole('option')
+    expect(options).toHaveLength(locales.length)
+    expect(listbox).toHaveTextContent('فارسی')
+    expect(listbox).not.toHaveTextContent('Français')
     expect(
-      within(listbox).getByRole('option', { name: /English \(US\)/ }),
+      within(listbox).getByRole('option', { name: /English/ }),
     ).toHaveAttribute('aria-current', 'true')
-  })
-
-  it('sorts the remaining regional entries by localized language name', async () => {
-    mockViewport(true)
-    const { user } = render(<LocaleSwitcher />)
-    await user.click(
-      screen.getByRole('button', { name: localeLabels['en-US'] }),
-    )
-
-    const europeHeading = screen.getByText('Europe')
-    const europeGroup = europeHeading.parentElement
-    expect(europeGroup).not.toBeNull()
-
-    const actual = within(europeGroup as HTMLElement)
-      .getAllByRole('option')
-      .map((option) =>
-        locales.find((locale) =>
-          option.textContent?.includes(localeLabels[locale]),
-        ),
-      )
-
-    const excluded = new Set([
-      'en-US',
-      'en-GZ',
-      'es',
-      'fr-FR',
-      'de-DE',
-      'pt-BR',
-      'hi-IN',
-    ])
-    const displayNames = new Intl.DisplayNames(['en-US'], { type: 'language' })
-    const collator = new Intl.Collator('en-US', { sensitivity: 'base' })
-    const expected = locales
-      .filter(
-        (locale) => localeRegions[locale] === 'europe' && !excluded.has(locale),
-      )
-      .toSorted((a, b) =>
-        collator.compare(
-          displayNames.of(a) ?? localeLabels[a],
-          displayNames.of(b) ?? localeLabels[b],
-        ),
-      )
-
-    expect(actual).toEqual(expected)
-  })
-
-  it('searches native names, localized names, and locale codes', async () => {
-    mockViewport(true)
-    const { user } = render(<LocaleSwitcher />)
-    await user.click(
-      screen.getByRole('button', { name: localeLabels['en-US'] }),
-    )
 
     const search = screen.getByPlaceholderText('Search languages...')
-
-    await user.type(search, '日本語')
-    expect(
-      screen.getByRole('option', { name: /日本語.*Japanese/i }),
-    ).toBeVisible()
-
+    await user.type(search, 'Persian')
+    expect(screen.getByRole('option', { name: /فارسی/ })).toBeVisible()
     await user.clear(search)
     await user.type(search, 'Japanese')
-    expect(
-      screen.getByRole('option', { name: /日本語.*Japanese/i }),
-    ).toBeVisible()
-
-    await user.clear(search)
-    await user.type(search, 'pt-BR')
-    expect(
-      screen.getByRole('option', { name: /Português Brasileiro/i }),
-    ).toBeVisible()
-
-    await user.clear(search)
-    await user.type(search, 'Klingon')
     expect(screen.getByText('No language found.')).toBeVisible()
   })
 
@@ -221,27 +134,7 @@ describe('LocaleSwitcher', () => {
     ).toBeVisible()
     expect(within(drawer).getAllByRole('option')).toHaveLength(locales.length)
     expect(
-      within(drawer).getByRole('option', { name: /English \(US\)/ }),
-    ).toHaveAttribute('aria-current', 'true')
-  })
-
-  it('keeps a non-popular active locale in Suggested', async () => {
-    await i18nSetup.i18n.changeLanguage('mk-MK')
-    mockBrowserLocales('en-US')
-    mockViewport(true)
-    const { user } = render(<LocaleSwitcher />)
-
-    await user.click(
-      screen.getByRole('button', { name: localeLabels['mk-MK'] }),
-    )
-
-    const suggestedHeading = screen.getByText('Suggested')
-    const suggestedGroup = suggestedHeading.parentElement
-    expect(suggestedGroup).not.toBeNull()
-    expect(
-      within(suggestedGroup as HTMLElement).getByRole('option', {
-        name: /Македонски/,
-      }),
+      within(drawer).getByRole('option', { name: /English/ }),
     ).toHaveAttribute('aria-current', 'true')
   })
 
@@ -252,9 +145,9 @@ describe('LocaleSwitcher', () => {
     await user.click(
       screen.getByRole('button', { name: localeLabels['en-US'] }),
     )
-    await user.click(screen.getByRole('option', { name: /Français/ }))
+    await user.click(screen.getByRole('option', { name: /فارسی/ }))
 
-    expect(i18nSetup.setUserLocale).toHaveBeenCalledWith('fr-FR')
+    expect(i18nSetup.setUserLocale).toHaveBeenCalledWith('fa-IR')
   })
 
   it('selects a mobile locale and closes the drawer', async () => {
@@ -265,11 +158,9 @@ describe('LocaleSwitcher', () => {
       screen.getByRole('button', { name: localeLabels['en-US'] }),
     )
     const drawer = screen.getByRole('dialog', { name: 'Choose language' })
-    await user.click(
-      within(drawer).getByRole('option', { name: /日本語.*Japanese/i }),
-    )
+    await user.click(within(drawer).getByRole('option', { name: /فارسی/ }))
 
-    expect(i18nSetup.setUserLocale).toHaveBeenCalledWith('ja-JP')
+    expect(i18nSetup.setUserLocale).toHaveBeenCalledWith('fa-IR')
     await waitFor(() => {
       expect(drawer).toHaveAttribute('data-closed')
     })

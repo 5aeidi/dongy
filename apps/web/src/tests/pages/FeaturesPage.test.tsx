@@ -84,10 +84,7 @@ describe('FeaturesPage', () => {
     )?.toMatch(/\/docs$/)
     expect(
       screen.getByRole('link', { name: 'View on GitHub' }),
-    ).toHaveAttribute(
-      'href',
-      'https://github.com/antonio-ivanovski/spliit-cloud',
-    )
+    ).toHaveAttribute('href', 'https://github.com/5aeidi/dongy')
     expect(screen.getByRole('link', { name: 'Get started' })).toHaveAttribute(
       'href',
       '/',

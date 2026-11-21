@@ -17,9 +17,9 @@ export function BrandHeader({ brandBaseUrl }: BrandHeaderProps) {
     <Section className="mb-6 border-b border-solid border-[#e5e7eb] pb-4">
       <Img
         src={`${brandBaseUrl}/logo-with-text-email.png`}
-        alt="Spliit Cloud"
+        alt="DONGY"
         width="160"
-        height="48"
+        height="44"
         style={{
           display: 'block',
           outline: 'none',

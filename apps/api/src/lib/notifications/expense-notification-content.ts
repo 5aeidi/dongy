@@ -83,19 +83,19 @@ export function buildRecurringSummaryContent(params: {
   switch (operation) {
     case 'create':
       return {
-        subject: `[Spliit Cloud] ${count} recurring ${noun} caught up in ${displayName}`,
+        subject: `[DONGY] ${count} recurring ${noun} caught up in ${displayName}`,
         body: `${actorName} created ${count} recurring ${noun}${titleStr}${recurrenceDesc} in ${displayName} for ${period}.`,
         title: 'Recurring expenses caught up',
       }
     case 'update':
       return {
-        subject: `[Spliit Cloud] ${count} ${noun} updated in ${displayName}`,
+        subject: `[DONGY] ${count} ${noun} updated in ${displayName}`,
         body: `${actorName} updated ${count} recurring ${noun}${titleStr}${recurrenceDesc} in ${displayName} for ${period}${stoppedPart}.`,
         title: 'Recurring expenses updated',
       }
     case 'delete':
       return {
-        subject: `[Spliit Cloud] ${count} ${noun} removed from ${displayName}`,
+        subject: `[DONGY] ${count} ${noun} removed from ${displayName}`,
         body: `${actorName} removed ${count} recurring ${noun}${titleStr}${recurrenceDesc} from ${displayName} for ${period}${stoppedPart}.`,
         title: 'Recurring expenses removed',
       }

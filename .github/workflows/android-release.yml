@@ -117,7 +117,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$RELEASE_TAG" apps/android/release/spliit-cloud.apk apps/android/release/android-update.json apps/android/release/SHA256SUMS apps/android/release/signature.txt apps/android/release/source-commit.txt --verify-tag --draft --title "Spliit Cloud Android ${RELEASE_TAG#android/v}" --notes-file apps/android/store/release-notes.md
+          gh release create "$RELEASE_TAG" apps/android/release/spliit-cloud.apk apps/android/release/android-update.json apps/android/release/SHA256SUMS apps/android/release/signature.txt apps/android/release/source-commit.txt --verify-tag --draft --title "DONGY Android ${RELEASE_TAG#android/v}" --notes-file apps/android/store/release-notes.md
       - name: Remove temporary signing keys
         if: always()
         run: rm -f "$RUNNER_TEMP/spliit-app.jks" "$RUNNER_TEMP/spliit-upload.jks"

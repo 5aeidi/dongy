@@ -9,14 +9,14 @@
     <string name="check_updates">Bilatu eguneraketak</string>
     <string name="checking">Eguneraketak bilatzen…</string>
     <string name="connection_settings">Konexioaren ezarpenak</string>
-    <string name="continue_app">Ireki Spliit Cloud</string>
+    <string name="continue_app">Ireki DONGY</string>
     <string name="expenses">Gastuak</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">Geroago</string>
     <string name="new_group">Talde berria</string>
     <string name="obtainium_note">Obtainium erabiltzen baduzu, gure GitHub bertsioen eguneraketak ere kudea ditzake.</string>
     <string name="offline_message">Lehen aldiz abiaraztean interneteko konexioa behar da lineaz kanpoko sarbidea prestatzeko. Partekatutako fitxategiak ez dira baztertu. Konektatu eta saiatu berriro.</string>
-    <string name="offline_title">Konektatu Spliit Cloud irekitzeko</string>
+    <string name="offline_title">Konektatu DONGY irekitzeko</string>
     <string name="open_play">Ireki Google Play</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">Instalazio hau Google Play-k kudeatzen du. Bilatu Android paketearen eguneraketak Google Play-n.</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Android aplikazioaren eguneraketak</string>
     <string name="version">Android paketea: %1$s (%2$d)</string>
     <string name="view_update">Ikusi eguneraketa</string>
-    <string name="web_version_note">Webgunearen eginbideak bereiz eguneratzen dira. Zure gastuak Spliit Cloud-en eta nabigatzaile honen lineaz kanpoko biltegian gordetzen dira.</string>
+    <string name="web_version_note">Webgunearen eginbideak bereiz eguneratzen dira. Zure gastuak DONGY-en eta nabigatzaile honen lineaz kanpoko biltegian gordetzen dira.</string>
 </resources>

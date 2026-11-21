@@ -49,7 +49,7 @@ for (const filename of (await readdir(messages)).filter((name) =>
   ]
   if (locale === 'en-US') {
     lines.push(
-      '    <string name="app_name" translatable="false">Spliit Cloud</string>',
+      '    <string name="app_name" translatable="false">DONGY</string>',
     )
     lines.push(
       '    <string name="asset_statements" translatable="false">[{\\"relation\\":[\\"delegate_permission/common.handle_all_urls\\"],\\"target\\":{\\"namespace\\":\\"web\\",\\"site\\":\\"https://spliit.cloud\\"}}]</string>',

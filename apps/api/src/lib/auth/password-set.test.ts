@@ -11,14 +11,14 @@ import { Prisma } from '@spliit/db'
 // fast. Subjects must match the real templates — other tests assert on them.
 vi.mock('../mail/templates', () => ({
   renderPasswordSetNoticeEmail: vi.fn(async () => ({
-    subject: 'A password was added to your Spliit Cloud account',
-    html: '<p>A password was added to your Spliit Cloud account</p>',
-    text: 'A password was added to your Spliit Cloud account',
+    subject: 'A password was added to your DONGY account',
+    html: '<p>A password was added to your DONGY account</p>',
+    text: 'A password was added to your DONGY account',
   })),
   renderPasswordRemovedNoticeEmail: vi.fn(async () => ({
-    subject: 'A password was removed from your Spliit Cloud account',
-    html: '<p>A password was removed from your Spliit Cloud account</p>',
-    text: 'A password was removed from your Spliit Cloud account',
+    subject: 'A password was removed from your DONGY account',
+    html: '<p>A password was removed from your DONGY account</p>',
+    text: 'A password was removed from your DONGY account',
   })),
 }))
 
@@ -311,7 +311,7 @@ describe('password-set plugin', () => {
       expect(sendEmailMock).toHaveBeenCalledWith(
         expect.objectContaining({
           to: 'user@example.com',
-          subject: 'A password was added to your Spliit Cloud account',
+          subject: 'A password was added to your DONGY account',
         }),
       )
     })
@@ -548,7 +548,7 @@ describe('password-set plugin', () => {
       expect(sendEmailMock).toHaveBeenCalledWith(
         expect.objectContaining({
           to: 'user@example.com',
-          subject: 'A password was removed from your Spliit Cloud account',
+          subject: 'A password was removed from your DONGY account',
         }),
       )
     })
@@ -575,7 +575,7 @@ describe('password-set plugin', () => {
       ).resolves.toEqual({ success: true })
       expect(sendEmailMock).toHaveBeenCalledWith(
         expect.objectContaining({
-          subject: 'A password was removed from your Spliit Cloud account',
+          subject: 'A password was removed from your DONGY account',
         }),
       )
     })

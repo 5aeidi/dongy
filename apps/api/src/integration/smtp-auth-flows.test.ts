@@ -91,7 +91,7 @@ describe.skipIf(!maildevReachable)('SMTP auth flows — real MailDev', () => {
       })
     })
 
-    it('sends "Reset your Spliit Cloud password" email and the reset link redirects', async () => {
+    it('sends "Reset your DONGY password" email and the reset link redirects', async () => {
       const forgotRes = await app.request('/auth/request-password-reset', {
         method: 'POST',
         headers: {
@@ -107,7 +107,7 @@ describe.skipIf(!maildevReachable)('SMTP auth flows — real MailDev', () => {
 
       const captured = await expectEmailEventually({
         recipient: email,
-        subject: 'Reset your Spliit Cloud password',
+        subject: 'Reset your DONGY password',
         consume: true,
       })
       expect(captured!.text).toContain('/auth/reset-password')
@@ -155,7 +155,7 @@ describe.skipIf(!maildevReachable)('SMTP auth flows — real MailDev', () => {
       })
     })
 
-    it('sends "Sign in to Spliit Cloud" email for users with only magic-link identity', async () => {
+    it('sends "Sign in to DONGY" email for users with only magic-link identity', async () => {
       const forgotRes = await app.request('/auth/request-password-reset', {
         method: 'POST',
         headers: {
@@ -171,7 +171,7 @@ describe.skipIf(!maildevReachable)('SMTP auth flows — real MailDev', () => {
 
       const captured = await expectEmailEventually({
         recipient: mlEmail,
-        subject: 'Sign in to Spliit Cloud',
+        subject: 'Sign in to DONGY',
         consume: true,
       })
       expect(captured!.text).toContain('email sign-in link')
@@ -209,7 +209,7 @@ describe.skipIf(!maildevReachable)('SMTP auth flows — real MailDev', () => {
 
       const captured = await expectEmailEventually({
         recipient: verifyEmail,
-        subject: 'Verify your Spliit Cloud account',
+        subject: 'Verify your DONGY account',
         consume: true,
       })
       expect(captured!.text).toContain('/auth/verify-email')

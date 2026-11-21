@@ -1,5 +1,5 @@
 name: Bug report
-description: Report a reproducible problem in Spliit Cloud
+description: Report a reproducible problem in DONGY
 title: '[Bug] '
 labels:
   - bug
@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for helping improve Spliit Cloud. GitHub issues are public. Remove names, email addresses, amounts, receipts, group links, invitation tokens, and other private data before submitting.
+        Thanks for helping improve DONGY. GitHub issues are public. Remove names, email addresses, amounts, receipts, group links, invitation tokens, and other private data before submitting.
 
   - type: dropdown
     id: area

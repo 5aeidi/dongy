@@ -11,10 +11,9 @@ import {
 
 describe('resolveLanguageName', () => {
   it('returns the native name for known locales', () => {
-    expect(resolveLanguageName('es')).toBe('Español')
-    expect(resolveLanguageName('en-US')).toBe('English (US)')
-    expect(resolveLanguageName('ja-JP')).toBe('日本語')
-    expect(resolveLanguageName('zh-CN')).toBe('简体中文')
+    expect(resolveLanguageName('fa-IR')).toBe('فارسی')
+    expect(resolveLanguageName('en-US')).toBe('English')
+    expect(resolveLanguageName('es')).toBeUndefined()
   })
 
   it('returns undefined for unknown locales', () => {
@@ -25,8 +24,8 @@ describe('resolveLanguageName', () => {
 
 describe('buildLocaleHint', () => {
   it('frames the locale as a soft hint, not a rule', () => {
-    const hint = buildLocaleHint('es')
-    expect(hint).toContain('Español')
+    const hint = buildLocaleHint('fa-IR')
+    expect(hint).toContain('فارسی')
     expect(hint).toContain("user's app language")
     expect(hint).toContain('may be written in')
     expect(hint).toContain('hint, not a rule')
@@ -102,8 +101,8 @@ describe('buildRecentExpensesSection', () => {
 
 describe('buildTranslationDirective', () => {
   it('returns empty string when translation is not requested', () => {
-    expect(buildTranslationDirective('es', false)).toBe('')
-    expect(buildTranslationDirective('es', undefined)).toBe('')
+    expect(buildTranslationDirective('fa-IR', false)).toBe('')
+    expect(buildTranslationDirective('fa-IR', undefined)).toBe('')
   })
 
   it('returns empty string when locale is missing', () => {
@@ -116,20 +115,20 @@ describe('buildTranslationDirective', () => {
   })
 
   it('names the resolved language and targets title and item titles', () => {
-    const directive = buildTranslationDirective('es', true)
-    expect(directive).toContain('Español')
+    const directive = buildTranslationDirective('fa-IR', true)
+    expect(directive).toContain('فارسی')
     expect(directive).toContain('expense title')
     expect(directive).toContain('every item title')
   })
 
   it('instructs preserving proper names', () => {
-    const directive = buildTranslationDirective('fr-FR', true)
-    expect(directive).toContain('Français')
+    const directive = buildTranslationDirective('fa-IR', true)
+    expect(directive).toContain('فارسی')
     expect(directive).toContain('proper names')
   })
 
   it('forbids original text and annotations', () => {
-    const directive = buildTranslationDirective('de-DE', true)
+    const directive = buildTranslationDirective('fa-IR', true)
     expect(directive).toContain('do not include the original text')
     expect(directive).toContain('Do not change any non-title fields')
   })

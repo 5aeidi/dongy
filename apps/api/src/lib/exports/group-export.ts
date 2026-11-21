@@ -50,7 +50,7 @@ export function createGroupExportArtifact(
   const date = exportedAt.slice(0, 10)
   const displayName = groupDisplayNameForViewer(group, options.viewerAccountId)
   return {
-    fileName: `Spliit Cloud Export - ${displayName} - ${date}.spliit.zip`,
+    fileName: `DONGY Export - ${displayName} - ${date}.spliit.zip`,
     mediaType: 'application/zip',
     scope: manifest.scope,
     exportedAt,

@@ -5,7 +5,7 @@ title: Receipt scanning is 5× faster — and reads PDFs now
 channels: [updates, modal, email]
 ---
 
-Spliit Cloud 2.7.0 overhauls receipt scanning from top to bottom: scans run about 5× faster, categories come out smarter, and receipts no longer have to be photos. Details are in the [v2.7.0](https://github.com/antonio-ivanovski/spliit-cloud/releases/tag/v2.7.0) notes.
+DONGY 2.7.0 overhauls receipt scanning from top to bottom: scans run about 5× faster, categories come out smarter, and receipts no longer have to be photos. Details are in the [v2.7.0](https://github.com/5aeidi/dongy/releases/tag/v2.7.0) notes.
 
 ## Faster scans
 
@@ -21,4 +21,4 @@ When scanned line items don't sum to the receipt total, the preview now asks whi
 
 ## Tell us what misreads
 
-This new pipeline already handles every scan on Spliit Cloud, so your receipts are the real test suite. If a scan misreads an item, picks a wrong category, or gives you an odd total, please [report it](https://github.com/antonio-ivanovski/spliit-cloud/issues/new?template=bug_report.yml) with the receipt if you can share it.
+This new pipeline already handles every scan on DONGY, so your receipts are the real test suite. If a scan misreads an item, picks a wrong category, or gives you an odd total, please [report it](https://github.com/5aeidi/dongy/issues/new?template=bug_report.yml) with the receipt if you can share it.

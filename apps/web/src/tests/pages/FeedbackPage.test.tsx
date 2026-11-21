@@ -21,7 +21,7 @@ vi.mock('@tanstack/react-router', () => ({
 }))
 
 const diagnostics = [
-  'Spliit Cloud diagnostics',
+  'DONGY diagnostics',
   'Instance: https://example.test',
   'Screen: /groups/:groupId/expenses/:expenseId',
 ].join('\n')
@@ -39,7 +39,7 @@ describe('FeedbackPage', () => {
     render(<FeedbackPage />)
 
     expect(
-      screen.getByRole('heading', { name: 'Help shape Spliit Cloud' }),
+      screen.getByRole('heading', { name: 'Help shape DONGY' }),
     ).toBeInTheDocument()
     expect(screen.getByText('Reports are public on GitHub')).toBeVisible()
     expect(screen.getByText('Protect your privacy')).toBeVisible()
@@ -54,15 +54,15 @@ describe('FeedbackPage', () => {
       const link = screen.getByRole('link', { name })
       expect(link).toHaveAttribute(
         'href',
-        `https://github.com/antonio-ivanovski/spliit-cloud/issues/new?template=${template}`,
+        `https://github.com/5aeidi/dongy/issues/new?template=${template}`,
       )
       expect(link).toHaveAttribute('target', '_blank')
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     }
 
     expect(
-      screen.getByRole('link', { name: 'Become a sponsor' }),
-    ).toHaveAttribute('href', '/sponsor')
+      screen.queryByRole('link', { name: /sponsor/i }),
+    ).not.toBeInTheDocument()
   })
 
   it('copies the visible safe diagnostics', async () => {
@@ -72,7 +72,7 @@ describe('FeedbackPage', () => {
       .mockResolvedValue(undefined)
     render(<FeedbackPage />)
 
-    expect(screen.getByText(/Spliit Cloud diagnostics/)).toBeVisible()
+    expect(screen.getByText(/DONGY diagnostics/)).toBeVisible()
     await user.click(screen.getByRole('button', { name: 'Copy diagnostics' }))
 
     expect(writeText).toHaveBeenCalledWith(diagnostics)
@@ -91,6 +91,6 @@ describe('FeedbackPage', () => {
     expect(screen.getByRole('alert')).toHaveTextContent(
       'Clipboard access failed. Select and copy the diagnostics manually.',
     )
-    expect(screen.getByText(/Spliit Cloud diagnostics/)).toBeVisible()
+    expect(screen.getByText(/DONGY diagnostics/)).toBeVisible()
   })
 })

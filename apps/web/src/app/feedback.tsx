@@ -1,4 +1,3 @@
-import { Link } from '@tanstack/react-router'
 import type { LucideIcon } from 'lucide-react'
 import {
   AlertTriangle,
@@ -9,7 +8,7 @@ import {
   ShieldCheck,
 } from 'lucide-react'
 import { useMemo } from 'react'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 
 import {
   CopyButton,
@@ -19,27 +18,26 @@ import {
   SupportPageShell,
   useCopyToClipboard,
 } from '@/components/support'
-import { isAndroidApp } from '@/lib/android-app'
 import { getBrowserFeedbackDiagnostics } from '@/lib/feedback-diagnostics'
 
 const issueForms = [
   {
     key: 'bug',
-    href: 'https://github.com/antonio-ivanovski/spliit-cloud/issues/new?template=bug_report.yml',
+    href: 'https://github.com/5aeidi/dongy/issues/new?template=bug_report.yml',
     icon: Bug,
     accent:
       'border-rose-200/80 bg-rose-50/60 text-rose-700 dark:border-rose-900/70 dark:bg-rose-950/25 dark:text-rose-300',
   },
   {
     key: 'idea',
-    href: 'https://github.com/antonio-ivanovski/spliit-cloud/issues/new?template=idea.yml',
+    href: 'https://github.com/5aeidi/dongy/issues/new?template=idea.yml',
     icon: Lightbulb,
     accent:
       'border-amber-200/80 bg-amber-50/60 text-amber-700 dark:border-amber-900/70 dark:bg-amber-950/25 dark:text-amber-300',
   },
   {
     key: 'feedback',
-    href: 'https://github.com/antonio-ivanovski/spliit-cloud/issues/new?template=feedback.yml',
+    href: 'https://github.com/5aeidi/dongy/issues/new?template=feedback.yml',
     icon: MessageSquareText,
     accent:
       'border-emerald-200/80 bg-emerald-50/60 text-emerald-700 dark:border-emerald-900/70 dark:bg-emerald-950/25 dark:text-emerald-300',
@@ -62,23 +60,7 @@ export default function FeedbackPage() {
         icon={MessageSquareText}
         title={t('title')}
         description={t('description')}
-      >
-        {!isAndroidApp() && (
-          <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
-            <Trans
-              i18nKey="Feedback.sponsorLink"
-              components={{
-                cta: (
-                  <Link
-                    to="/sponsor"
-                    className="font-medium text-primary underline underline-offset-2"
-                  />
-                ),
-              }}
-            />
-          </p>
-        )}
-      </SupportPageHeader>
+      ></SupportPageHeader>
 
       <section
         aria-label={t('categoriesLabel')}

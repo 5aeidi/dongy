@@ -22,28 +22,20 @@ function messageLocales(): string[] {
 }
 
 describe('locale chunk precache policy', () => {
-  it('derives ignore entries for every non-default locale bundle', () => {
-    expect(buildLocaleChunkIgnores(ALL_LOCALES)).toContain('assets/bn-BD-*.js')
-    expect(buildLocaleChunkIgnores(ALL_LOCALES)).toContain('assets/pt-BR-*.js')
-    for (const keep of PRECACHED_LOCALES) {
-      expect(buildLocaleChunkIgnores(ALL_LOCALES)).not.toContain(
-        `assets/${keep}-*.js`,
-      )
-    }
-    expect(buildLocaleChunkIgnores(ALL_LOCALES)).toHaveLength(
-      ALL_LOCALES.length - PRECACHED_LOCALES.length,
-    )
+  it('precaches every shipped locale bundle', () => {
+    expect([...PRECACHED_LOCALES].sort()).toEqual([...ALL_LOCALES].sort())
+    expect(buildLocaleChunkIgnores(ALL_LOCALES)).toEqual([])
+    expect(buildLocaleChunkIgnores(['en-US', 'fa-IR', 'xx-XX'])).toEqual([
+      'assets/xx-XX-*.js',
+    ])
   })
 
   it('matches hashed locale chunks without colliding with app chunks', () => {
-    expect(isLocaleChunkPath('/assets/bn-BD-Bsijys88.js', ALL_LOCALES)).toBe(
+    expect(isLocaleChunkPath('/assets/fa-IR-Bsijys88.js', ALL_LOCALES)).toBe(
       true,
     )
     // The chunk hash itself may contain dashes.
-    expect(isLocaleChunkPath('/assets/en-GB-DWiwjUG-.js', ALL_LOCALES)).toBe(
-      true,
-    )
-    expect(isLocaleChunkPath('/assets/pt-BR-CBfwzmwR.js', ALL_LOCALES)).toBe(
+    expect(isLocaleChunkPath('/assets/fa-IR-DWiwjUG-.js', ALL_LOCALES)).toBe(
       true,
     )
     expect(isLocaleChunkPath('/assets/en-US-BSvLEO2F.js', ALL_LOCALES)).toBe(

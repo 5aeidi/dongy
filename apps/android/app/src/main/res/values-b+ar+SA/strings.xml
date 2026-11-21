@@ -9,14 +9,14 @@
     <string name="check_updates">التحقق من التحديثات</string>
     <string name="checking">جارٍ التحقق من التحديثات…</string>
     <string name="connection_settings">إعدادات الاتصال</string>
-    <string name="continue_app">فتح Spliit Cloud</string>
+    <string name="continue_app">فتح DONGY</string>
     <string name="expenses">المصروفات</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">لاحقًا</string>
     <string name="new_group">مجموعة جديدة</string>
     <string name="obtainium_note">إذا كنت تستخدم Obtainium، فيمكنه أيضًا إدارة التحديثات من إصداراتنا على GitHub.</string>
     <string name="offline_message">يتطلب التشغيل الأول اتصالًا بالإنترنت لتهيئة الوصول دون اتصال. لم يتم تجاهل ملفاتك المشتركة. اتصل بالإنترنت وأعد المحاولة.</string>
-    <string name="offline_title">اتصل بالإنترنت لفتح Spliit Cloud</string>
+    <string name="offline_title">اتصل بالإنترنت لفتح DONGY</string>
     <string name="open_play">فتح Google Play</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">يدير Google Play هذا التثبيت. تحقّق من Google Play للحصول على تحديثات حزمة Android.</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">تحديثات تطبيق Android</string>
     <string name="version">حزمة Android بالإصدار %1$s (%2$d)</string>
     <string name="view_update">عرض التحديث</string>
-    <string name="web_version_note">تُحدَّث ميزات الموقع بشكل منفصل. تُحفَظ مصروفاتك في Spliit Cloud وفي مساحة التخزين دون اتصال في هذا المتصفح.</string>
+    <string name="web_version_note">تُحدَّث ميزات الموقع بشكل منفصل. تُحفَظ مصروفاتك في DONGY وفي مساحة التخزين دون اتصال في هذا المتصفح.</string>
 </resources>

@@ -14,7 +14,7 @@ const BRAND_TOKENS = new Set([
   'GitHub / Obtainium',
   'Google Play',
   'Spliit',
-  'Spliit Cloud',
+  'DONGY',
   'Splitwise',
   'Cospend',
   'Tricount',

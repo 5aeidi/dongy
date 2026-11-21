@@ -50,7 +50,7 @@ import {
 type Endpoint = AppRouterOutput['webhooks']['list'][number]
 
 const WEBHOOK_DOCS_URL =
-  'https://github.com/antonio-ivanovski/spliit-cloud/blob/main/docs/webhooks.md'
+  'https://github.com/5aeidi/dongy/blob/main/docs/webhooks.md'
 
 type FormState = {
   mode: WebhookFormMode

@@ -9,14 +9,14 @@
     <string name="check_updates">Провери за ажурирања</string>
     <string name="checking">Се проверува за ажурирања…</string>
     <string name="connection_settings">Поставки за поврзување</string>
-    <string name="continue_app">Отвори Spliit Cloud</string>
+    <string name="continue_app">Отвори DONGY</string>
     <string name="expenses">Трошоци</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">Подоцна</string>
     <string name="new_group">Нова група</string>
     <string name="obtainium_note">Ако користите Obtainium, може да управува и со ажурирањата од нашите изданија на GitHub.</string>
     <string name="offline_message">За првото отворање е потребна интернет-врска за да се подготви пристапот без интернет. Вашите споделени датотеки не се отфрлени. Поврзете се и обидете се повторно.</string>
-    <string name="offline_title">Поврзете се за да го отворите Spliit Cloud</string>
+    <string name="offline_title">Поврзете се за да го отворите DONGY</string>
     <string name="open_play">Отвори Google Play</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">Со оваа инсталација управува Google Play. Проверете во Google Play за ажурирања на пакетот за Android.</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Ажурирања на апликацијата за Android</string>
     <string name="version">Пакет за Android %1$s (%2$d)</string>
     <string name="view_update">Погледни го ажурирањето</string>
-    <string name="web_version_note">Функциите на веб-страницата се ажурираат одделно. Вашите трошоци се чуваат во Spliit Cloud и во складиштето за пристап без интернет на овој прелистувач.</string>
+    <string name="web_version_note">Функциите на веб-страницата се ажурираат одделно. Вашите трошоци се чуваат во DONGY и во складиштето за пристап без интернет на овој прелистувач.</string>
 </resources>

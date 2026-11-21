@@ -407,13 +407,13 @@ describe('HomePage (signed-out)', () => {
     expect(teaser).toHaveTextContent("What's new")
     // Latest entry only, with its title, excerpt, a link to its detail page,
     // and a link to /updates.
-    expect(teaser).toHaveTextContent('Spliit Cloud 2.5.0 is here')
-    expect(teaser).toHaveTextContent('Spliit Cloud 2.5.0 is out')
+    expect(teaser).toHaveTextContent('DONGY 2.5.0 is here')
+    expect(teaser).toHaveTextContent('DONGY 2.5.0 is out')
     expect(
       screen.getByRole('link', { name: 'See all updates' }),
     ).toHaveAttribute('href', '/updates')
     expect(
-      screen.getByRole('link', { name: 'Spliit Cloud 2.5.0 is here' }),
+      screen.getByRole('link', { name: 'DONGY 2.5.0 is here' }),
     ).toHaveAttribute('href', '/updates/$announcementId')
   })
 

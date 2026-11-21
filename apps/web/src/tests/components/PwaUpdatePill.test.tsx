@@ -80,9 +80,7 @@ describe('PwaUpdatePill', () => {
     const { stub, user } = await renderPill()
     act(() => stub.setSnapshot({ status: 'failed', dismissed: false }))
 
-    expect(
-      screen.getByText("Spliit Cloud couldn't apply the update."),
-    ).toBeVisible()
+    expect(screen.getByText("DONGY couldn't apply the update.")).toBeVisible()
     await user.click(screen.getByRole('button', { name: 'Retry' }))
     await user.click(screen.getByRole('button', { name: 'Dismiss' }))
     expect(stub.manager.retry).toHaveBeenCalledOnce()

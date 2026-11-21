@@ -113,7 +113,7 @@ export function RecoverAnonymousAccountPage() {
   return (
     <PageShell width="full" className="items-center justify-center py-10">
       <Card className="w-full max-w-lg overflow-hidden border-primary/15 shadow-lg">
-        <div className="h-1.5 bg-linear-to-r from-emerald-500 via-primary to-teal-400" />
+        <div className="h-1.5 pixel-stripe" />
         <CardHeader className="space-y-3 text-center">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
             <KeyRound className="h-6 w-6" />

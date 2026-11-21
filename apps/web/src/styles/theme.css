@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Unixel';
+  src: url('../assets/fonts/unixel/unixel-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
 @theme {
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
@@ -44,9 +50,18 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
+  /* DONGY 8-bit look: Unixel is a pixel font with both Persian and Latin
+     letters (OFL-1.1, src/assets/fonts/unixel). Vazirmatn only fills in any
+     glyph Unixel lacks. */
+  --font-sans:
+    'Unixel', 'Vazirmatn Variable', system-ui, -apple-system, sans-serif;
   --font-rounded:
-    'Nunito Variable', system-ui, -apple-system, 'Segoe UI', Roboto,
-    'Noto Sans', sans-serif;
+    'Unixel', 'Vazirmatn Variable', system-ui, -apple-system, sans-serif;
+
+  /* Hard, offset "pixel" shadows instead of soft blurs. */
+  --shadow-pixel: 3px 3px 0 0 hsl(var(--foreground) / 0.85);
+  --shadow-pixel-sm: 1px 1px 0 0 hsl(var(--foreground) / 0.85);
+  --shadow-pixel-card: 4px 4px 0 0 hsl(var(--border));
 }
 
 @layer base {
@@ -72,7 +87,7 @@
     --ring: 142.1 76.2% 36.3%;
     /* Money status green — same emerald as the primary, but independent. */
     --financial-positive: 163 94% 24%;
-    --radius: 0.5rem;
+    --radius: 0px;
   }
 
   .dark {

@@ -7,10 +7,10 @@ export type ParsedInviteLink = {
 const INVITE_TOKEN_PATTERN = /^[A-Za-z0-9_-]{16,128}$/
 
 /**
- * Parse scanned QR / pasted text into a Spliit Cloud group invite. Accepts any
- * http(s) origin (nearby hosts may run another instance) as long as the path
- * holds `/groups/<groupId>` and `?invite=` carries a well-formed token. Returns
- * null for anything else — never navigate blindly to a scanned URL.
+ * Parse scanned QR / pasted text into a DONGY group invite. Accepts any http(s)
+ * origin (nearby hosts may run another instance) as long as the path holds
+ * `/groups/<groupId>` and `?invite=` carries a well-formed token. Returns null
+ * for anything else — never navigate blindly to a scanned URL.
  */
 export function parseScannedInviteLink(text: string): ParsedInviteLink | null {
   const trimmed = text.trim()

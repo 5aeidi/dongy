@@ -256,7 +256,9 @@ describe('CurrencySelector', () => {
     openSelectorWith()
 
     const codes = itemCodesInOrder()
-    expect(codes.slice(0, 5)).toEqual(['USD', 'EUR', 'JPY', 'GBP', 'CNY'])
+    // The fixture has no toman/rial rows, so only USD and EUR of the static
+    // picks (IRT, IRM, USD, EUR, IRR) appear before the alphabetical rest.
+    expect(codes.slice(0, 2)).toEqual(['USD', 'EUR'])
     expect(separatorCount()).toBe(1)
   })
 

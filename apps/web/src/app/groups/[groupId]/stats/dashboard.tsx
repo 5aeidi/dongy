@@ -77,7 +77,7 @@ function SummaryCard({
   return (
     <Card
       data-stats-surface="summary"
-      className="relative overflow-hidden border-primary/10 bg-linear-to-br from-primary/7 via-card to-card shadow-none"
+      className="relative overflow-hidden border-primary/10 pixel-wash shadow-none"
     >
       <CardContent spacing="standalone">
         <Icon
@@ -275,7 +275,7 @@ export function StatsDashboard() {
     <div className="space-y-4" data-testid="stats-dashboard">
       <Card
         data-stats-surface="period"
-        className="border-primary/10 bg-linear-to-br from-primary/8 via-background to-background shadow-none"
+        className="border-primary/10 pixel-wash shadow-none"
       >
         <CardContent
           spacing="standalone"

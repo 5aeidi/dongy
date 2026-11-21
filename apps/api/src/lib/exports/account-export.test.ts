@@ -132,7 +132,7 @@ describe('createAccountExportArtifact', () => {
     )
 
     expect(artifact).toMatchObject({
-      fileName: 'Spliit Cloud Account Export - 2026-08-10T12-00-00Z.spliit.zip',
+      fileName: 'DONGY Account Export - 2026-08-10T12-00-00Z.spliit.zip',
       mediaType: 'application/zip',
       scope: { type: 'ACCOUNT', sourceId: 'acct-1' },
     })

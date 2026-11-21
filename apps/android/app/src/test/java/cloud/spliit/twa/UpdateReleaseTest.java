@@ -14,7 +14,7 @@ public class UpdateReleaseTest {
 
     @Test public void comparesInstalledCodeAndDeviceCompatibility() throws Exception {
         UpdateRelease update = UpdateRelease.parse(metadata(release("1.2.0",
-                "https://github.com/antonio-ivanovski/spliit-cloud/releases/tag/android/v1.2.0")));
+                "https://github.com/5aeidi/dongy/releases/tag/android/v1.2.0")));
         assertTrue(update.canUpdate(11, 29));
         assertFalse(update.canUpdate(12, 36));
         assertFalse(update.canUpdate(13, 36));
@@ -27,13 +27,13 @@ public class UpdateReleaseTest {
 
     @Test public void rejectsUntrustedOrMismatchedReleaseDestinations() {
         String[] urls = {
-            "http://github.com/antonio-ivanovski/spliit-cloud/releases/tag/android/v1.2.0",
+            "http://github.com/5aeidi/dongy/releases/tag/android/v1.2.0",
             "https://github.com.evil.example/antonio-ivanovski/spliit-cloud/releases/tag/android/v1.2.0",
             "https://github.com/another/repo/releases/tag/android/v1.2.0",
-            "https://github.com/antonio-ivanovski/spliit-cloud/releases/tag/v1.2.0",
-            "https://github.com/antonio-ivanovski/spliit-cloud/releases/tag/android/v1.2.1",
-            "https://github.com/antonio-ivanovski/spliit-cloud/releases/tag/android/v1.2.0?redirect=evil",
-            "https://user@github.com/antonio-ivanovski/spliit-cloud/releases/tag/android/v1.2.0"
+            "https://github.com/5aeidi/dongy/releases/tag/v1.2.0",
+            "https://github.com/5aeidi/dongy/releases/tag/android/v1.2.1",
+            "https://github.com/5aeidi/dongy/releases/tag/android/v1.2.0?redirect=evil",
+            "https://user@github.com/5aeidi/dongy/releases/tag/android/v1.2.0"
         };
         for (String url : urls) {
             assertThrows(url, Exception.class, () -> UpdateRelease.parse(metadata(release("1.2.0", url))));

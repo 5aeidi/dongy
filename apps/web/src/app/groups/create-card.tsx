@@ -51,7 +51,7 @@ export function CreateCard({
           data-testid={dataTestId}
           title={disabledReason}
           className={cn(
-            'relative h-full min-h-[5.5rem] w-full cursor-not-allowed overflow-hidden rounded-lg border border-primary/25 bg-linear-to-br from-primary/8 via-background to-background text-base opacity-60 shadow-[0_1px_0_0_hsl(var(--primary)/0.08)]',
+            'relative h-full min-h-[5.5rem] w-full cursor-not-allowed overflow-hidden rounded-lg border border-primary/25 bg-background pixel-wash text-base opacity-60 shadow-[0_1px_0_0_hsl(var(--primary)/0.08)]',
             className,
           )}
         >
@@ -99,7 +99,7 @@ export function CreateCard({
     <li className="min-w-0">
       <div
         className={cn(
-          'motion-surface motion-surface-interactive relative h-full min-h-[5.5rem] w-full overflow-hidden rounded-lg border border-primary/25 bg-linear-to-br from-primary/8 via-background to-background text-base shadow-[0_1px_0_0_hsl(var(--primary)/0.08)] hover:border-primary/35',
+          'motion-surface motion-surface-interactive relative h-full min-h-[5.5rem] w-full overflow-hidden rounded-lg border border-primary/25 bg-background pixel-wash text-base shadow-[0_1px_0_0_hsl(var(--primary)/0.08)] hover:border-primary/35',
           className,
         )}
       >

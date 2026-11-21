@@ -9,8 +9,8 @@
  * unreachable offline (`i18n/setup.ts`).
  */
 
-/** Bundles kept in the precache: default + tiny opt-in overlay. */
-export const PRECACHED_LOCALES = ['en-US', 'en-GB'] as const
+/** Bundles kept in the precache: DONGY ships only English and Farsi. */
+export const PRECACHED_LOCALES = ['en-US', 'fa-IR'] as const
 
 /** Versioned runtime cache for on-demand locale chunks (bump to reset). */
 export const LOCALE_CHUNK_CACHE_NAME = 'spliit-locale-chunks-v1'

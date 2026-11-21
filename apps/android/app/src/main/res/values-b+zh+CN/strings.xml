@@ -9,14 +9,14 @@
     <string name="check_updates">检查更新</string>
     <string name="checking">正在检查更新…</string>
     <string name="connection_settings">连接设置</string>
-    <string name="continue_app">打开 Spliit Cloud</string>
+    <string name="continue_app">打开 DONGY</string>
     <string name="expenses">支出</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">稍后</string>
     <string name="new_group">新建群组</string>
     <string name="obtainium_note">如果您使用 Obtainium，也可以通过它管理我们在 GitHub 上发布的更新。</string>
     <string name="offline_message">首次启动需要连接互联网，以便准备离线访问。您分享的文件尚未被丢弃。请连接网络后重试。</string>
-    <string name="offline_title">连接网络以打开 Spliit Cloud</string>
+    <string name="offline_title">连接网络以打开 DONGY</string>
     <string name="open_play">打开 Google Play</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">此应用由 Google Play 管理。请前往 Google Play 检查 Android 安装包更新。</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Android 应用更新</string>
     <string name="version">Android 安装包 %1$s（%2$d）</string>
     <string name="view_update">查看更新</string>
-    <string name="web_version_note">网站功能会单独更新。您的支出保存在 Spliit Cloud 和此浏览器的离线存储中。</string>
+    <string name="web_version_note">网站功能会单独更新。您的支出保存在 DONGY 和此浏览器的离线存储中。</string>
 </resources>

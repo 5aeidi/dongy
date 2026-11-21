@@ -28,8 +28,10 @@ describe('account preference bootstrap inputs', () => {
   })
 
   it('only adopts a supported explicit locale cookie', () => {
+    document.cookie = 'SPLIIT_LOCALE=fa-IR;path=/'
+    expect(getExplicitLocaleCookie()).toBe('fa-IR')
     document.cookie = 'SPLIIT_LOCALE=fr-FR;path=/'
-    expect(getExplicitLocaleCookie()).toBe('fr-FR')
+    expect(getExplicitLocaleCookie()).toBeUndefined()
     document.cookie = 'SPLIIT_LOCALE=not-a-locale;path=/'
     expect(getExplicitLocaleCookie()).toBeUndefined()
   })
@@ -38,7 +40,7 @@ describe('account preference bootstrap inputs', () => {
     const first = {
       defaultCurrencyCode: 'EUR',
       timeZone: 'Europe/Paris',
-      locale: 'fr-FR' as const,
+      locale: 'fa-IR' as const,
       theme: 'dark' as const,
       notificationsEnabled: true,
       aiFeaturesEnabled: true,

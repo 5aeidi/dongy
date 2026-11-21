@@ -1,4 +1,4 @@
-# Spliit Cloud ChatGPT plugin package
+# DONGY ChatGPT plugin package
 
 Source of truth for the OpenAI Platform plugin submission ZIP. The dashboard
 reads listing, review, and publication details from `plugin.json` on upload;

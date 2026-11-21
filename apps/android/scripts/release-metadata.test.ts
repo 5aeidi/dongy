@@ -12,7 +12,7 @@ describe('Android release publication contract', () => {
     )
     expect(result.latest.versionCode).toBe(12)
     expect(result.latest.apkUrl).toBe(
-      'https://github.com/antonio-ivanovski/spliit-cloud/releases/download/android/v1.2.0/spliit-cloud.apk',
+      'https://github.com/5aeidi/dongy/releases/download/android/v1.2.0/spliit-cloud.apk',
     )
     expect(result.latest.sha256).toBe('ab'.repeat(32))
   })

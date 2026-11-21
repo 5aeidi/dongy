@@ -1,17 +1,17 @@
 ---
-title: Terms of use — Spliit Cloud
-description: Terms of use for Spliit Cloud, a free, non-commercial, community-maintained shared expense tracker.
+title: Terms of use — DONGY
+description: Terms of use for DONGY, a free, non-commercial, community-maintained shared expense tracker.
 ---
 
 # Terms of use
 
 Last updated: July 10, 2026
 
-Spliit Cloud is a free, non-commercial, community-maintained project. By accessing or using it, you agree to these terms.
+DONGY is a free, non-commercial, community-maintained project. By accessing or using it, you agree to these terms.
 
 ## Use at your own discretion
 
-Spliit Cloud is provided as-is and as available. It is a convenience tool for recording shared expenses, not a bank, payment service, accounting system, escrow service, or source of financial advice. Balances, calculations, imports, exports, notifications, and other outputs may be incomplete, delayed, inaccurate, unavailable, or lost. You are responsible for checking records and settling money directly with the people involved.
+DONGY is provided as-is and as available. It is a convenience tool for recording shared expenses, not a bank, payment service, accounting system, escrow service, or source of financial advice. Balances, calculations, imports, exports, notifications, and other outputs may be incomplete, delayed, inaccurate, unavailable, or lost. You are responsible for checking records and settling money directly with the people involved.
 
 ## No guarantee
 

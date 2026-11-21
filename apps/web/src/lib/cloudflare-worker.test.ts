@@ -101,7 +101,6 @@ describe('Cloudflare Pages worker markdown negotiation', () => {
       { page: '/terms', asset: '/terms.md' },
       { page: '/privacy', asset: '/privacy.md' },
       { page: '/imprint', asset: '/imprint.md' },
-      { page: '/sponsor', asset: '/sponsor.md' },
       { page: '/support', asset: '/support.md' },
       { page: '/features', asset: '/features.md' },
     ])
@@ -293,7 +292,7 @@ describe('Cloudflare Pages worker SEO head injection', () => {
 
     const html = await response.text()
     expect(html).toContain(
-      '<title>Spliit Cloud — Share expenses with friends &amp; family</title>',
+      '<title>DONGY — Share expenses with friends &amp; family</title>',
     )
     expect(html).toContain(
       '<meta name="description" content="Track shared expenses and settle up. Free and open source, synced and secured by your account.">',
@@ -322,8 +321,8 @@ describe('Cloudflare Pages worker SEO head injection', () => {
     })
 
     const html = await response.text()
-    expect(html).toContain('<title>Privacy notice — Spliit Cloud</title>')
-    expect(html).toContain('How the public Spliit Cloud instance handles')
+    expect(html).toContain('<title>Privacy notice — DONGY</title>')
+    expect(html).toContain('How the public DONGY instance handles')
     expect(html).toContain(
       '<link rel="canonical" href="https://spliit.cloud/privacy">',
     )
@@ -342,16 +341,16 @@ describe('Cloudflare Pages worker SEO head injection', () => {
     })
 
     const html = await response.text()
-    expect(html).toContain('<title>Features — Spliit Cloud</title>')
-    expect(html).toContain('Every Spliit Cloud feature in one catalog')
+    expect(html).toContain('<title>Features — DONGY</title>')
+    expect(html).toContain('Every DONGY feature in one catalog')
     expect(html).toContain(
       '<link rel="canonical" href="https://spliit.cloud/features">',
     )
     expect(html).toContain('"@type":"WebPage"')
     expect(html).toContain('href="/features.md"')
-    expect(html).toContain('<h1 data-seo="title">Features — Spliit Cloud</h1>')
+    expect(html).toContain('<h1 data-seo="title">Features — DONGY</h1>')
     expect(html).toContain(
-      '<p data-seo="description">Every Spliit Cloud feature in one catalog',
+      '<p data-seo="description">Every DONGY feature in one catalog',
     )
     expect(html).toContain('<a data-seo="markdown" href="/features.md">')
     expect(html).not.toContain('href="/old.md"')
@@ -369,9 +368,9 @@ describe('Cloudflare Pages worker SEO head injection', () => {
     })
 
     const html = await response.text()
-    expect(html).toContain('<title>Support — Spliit Cloud</title>')
+    expect(html).toContain('<title>Support — DONGY</title>')
     expect(html).toContain('<noscript id="crawler-fallback">')
-    expect(html).toContain('<h1 data-seo="title">Support — Spliit Cloud</h1>')
+    expect(html).toContain('<h1 data-seo="title">Support — DONGY</h1>')
     expect(html).toContain('<a data-seo="markdown" href="/support.md">')
   })
 
@@ -386,7 +385,7 @@ describe('Cloudflare Pages worker SEO head injection', () => {
     })
 
     const html = await response.text()
-    expect(html).toContain('<title>Terms of use — Spliit Cloud</title>')
+    expect(html).toContain('<title>Terms of use — DONGY</title>')
     expect(html).toContain(
       '<link rel="canonical" href="https://spliit.cloud/terms">',
     )
@@ -429,7 +428,7 @@ describe('Cloudflare Pages worker SEO head injection', () => {
 
 describe('Cloudflare Pages worker group share unfurls', () => {
   const groupShell = () =>
-    `<!doctype html><html lang="en"><head><title>Spliit Cloud — Share expenses with friends &amp; family</title><meta property="og:title" content="Spliit Cloud"><meta property="og:description" content="Spliit Cloud"><meta property="og:url" content="https://spliit.cloud/"><meta name="twitter:title" content="Spliit Cloud"><meta name="twitter:description" content="Spliit Cloud"><meta property="og:image" content="https://spliit.cloud/screenshots/desktop-overview-1280x720.png"><meta property="og:image:width" content="1280"><meta property="og:image:height" content="720"><meta property="og:image:alt" content="Spliit Cloud group overview"><meta name="twitter:image" content="https://spliit.cloud/screenshots/desktop-overview-1280x720.png"><link rel="canonical" href="https://spliit.cloud/"></head><body><div id="root"></div></body></html>`
+    `<!doctype html><html lang="en"><head><title>DONGY — Share expenses with friends &amp; family</title><meta property="og:title" content="DONGY"><meta property="og:description" content="DONGY"><meta property="og:url" content="https://spliit.cloud/"><meta name="twitter:title" content="DONGY"><meta name="twitter:description" content="DONGY"><meta property="og:image" content="https://spliit.cloud/screenshots/desktop-overview-1280x720.png"><meta property="og:image:width" content="1280"><meta property="og:image:height" content="720"><meta property="og:image:alt" content="DONGY group overview"><meta name="twitter:image" content="https://spliit.cloud/screenshots/desktop-overview-1280x720.png"><link rel="canonical" href="https://spliit.cloud/"></head><body><div id="root"></div></body></html>`
 
   function crawlerRequestFor(pathname: string) {
     return new Request(`https://spliit.cloud${pathname}`, {
@@ -488,7 +487,7 @@ describe('Cloudflare Pages worker group share unfurls', () => {
     )
 
     const html = await response.text()
-    expect(html).toContain('<title>Join Summer Trip on Spliit Cloud</title>')
+    expect(html).toContain('<title>Join Summer Trip on DONGY</title>')
     expect(html).toContain('Alice invited you to join Summer Trip')
     expect(html).toContain(`You'll join as Bob`)
     expect(html).toContain(
@@ -521,7 +520,7 @@ describe('Cloudflare Pages worker group share unfurls', () => {
     )
 
     const html = await response.text()
-    expect(html).toContain('<title>Apartment on Spliit Cloud</title>')
+    expect(html).toContain('<title>Apartment on DONGY</title>')
     expect(html).toContain('2 members · shared read-only view')
     expect(html).toContain('groupId=grp-1&amp;viewKey=view-secret')
   })
@@ -544,7 +543,7 @@ describe('Cloudflare Pages worker group share unfurls', () => {
 
     const html = await response.text()
     expect(html).toContain(
-      '<title>Spliit Cloud — Share expenses with friends &amp; family</title>',
+      '<title>DONGY — Share expenses with friends &amp; family</title>',
     )
     expect(html).toContain('This invite link is no longer valid.')
     expect(html).not.toContain('Join Summer Trip')
@@ -561,7 +560,7 @@ describe('Cloudflare Pages worker group share unfurls', () => {
 
     const html = await response.text()
     expect(html).toContain(
-      '<title>Spliit Cloud — Share expenses with friends &amp; family</title>',
+      '<title>DONGY — Share expenses with friends &amp; family</title>',
     )
     expect(html).not.toContain('/api/og/group-card.png')
     expect(apiFetch).not.toHaveBeenCalled()
@@ -582,7 +581,7 @@ describe('Cloudflare Pages worker group share unfurls', () => {
 
     const html = await response.text()
     expect(html).toContain(
-      '<title>Spliit Cloud — Share expenses with friends &amp; family</title>',
+      '<title>DONGY — Share expenses with friends &amp; family</title>',
     )
     expect(html).toContain(
       'https://spliit.cloud/screenshots/desktop-overview-1280x720.png',

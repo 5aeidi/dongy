@@ -105,7 +105,7 @@ describe('AccountPreferencesSync cached account switching', () => {
     cacheAccountPreferences('account-a', {
       defaultCurrencyCode: 'EUR',
       timeZone: 'Europe/Paris',
-      locale: 'fr-FR',
+      locale: 'fa-IR',
       theme: 'dark',
       aiCategoryExtractEnabled: null,
       aiReceiptScanEnabled: null,
@@ -132,7 +132,7 @@ describe('AccountPreferencesSync cached account switching', () => {
       notify: false,
       persist: true,
     })
-    expect(mocks.setUserLocale).toHaveBeenLastCalledWith('fr-FR', {
+    expect(mocks.setUserLocale).toHaveBeenLastCalledWith('fa-IR', {
       notify: false,
       persist: true,
     })
@@ -261,7 +261,7 @@ describe('AccountPreferencesSync cached account switching', () => {
     mocks.update.mockResolvedValue({
       preferences: {
         ...mocks.queryData.preferences,
-        locale: 'fr-FR',
+        locale: 'fa-IR',
       },
     })
     render(
@@ -274,7 +274,7 @@ describe('AccountPreferencesSync cached account switching', () => {
     act(() => {
       window.dispatchEvent(
         new CustomEvent('spliit:account-locale-changed', {
-          detail: 'fr-FR',
+          detail: 'fa-IR',
         }),
       )
     })
@@ -282,7 +282,7 @@ describe('AccountPreferencesSync cached account switching', () => {
     await waitFor(() => {
       expect(mocks.update).toHaveBeenCalledTimes(1)
     })
-    expect(mocks.update).toHaveBeenCalledWith({ locale: 'fr-FR' })
+    expect(mocks.update).toHaveBeenCalledWith({ locale: 'fa-IR' })
     expect(mocks.setData).toHaveBeenCalled()
   })
 
@@ -353,7 +353,7 @@ describe('AccountPreferencesSync cached account switching', () => {
       )
       window.dispatchEvent(
         new CustomEvent('spliit:account-locale-changed', {
-          detail: 'fr-FR',
+          detail: 'fa-IR',
         }),
       )
     })
@@ -364,7 +364,7 @@ describe('AccountPreferencesSync cached account switching', () => {
     releaseFirst?.()
 
     await waitFor(() => expect(mocks.update).toHaveBeenCalledTimes(2))
-    expect(mocks.update).toHaveBeenNthCalledWith(2, { locale: 'fr-FR' })
+    expect(mocks.update).toHaveBeenNthCalledWith(2, { locale: 'fa-IR' })
   })
 
   it('does not expose or cache device overlays while initialization is pending', async () => {

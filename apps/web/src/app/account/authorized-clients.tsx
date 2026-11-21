@@ -49,7 +49,7 @@ function isKnownScope(scope: string): scope is KnownScope {
   return scope in SCOPE_LABELS
 }
 
-/** OIDC scopes say nothing about what an app can reach in Spliit Cloud. */
+/** OIDC scopes say nothing about what an app can reach in DONGY. */
 function meaningfulScopes(scopes: string[]): string[] {
   return scopes.filter((scope) => scope.startsWith('spliit:'))
 }

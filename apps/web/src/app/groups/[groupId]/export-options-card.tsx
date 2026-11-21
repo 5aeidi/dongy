@@ -98,9 +98,9 @@ function ExportOption({
 
 /**
  * Settings export card content: three equal-format actions (PDF report, CSV
- * spreadsheet, native Spliit Cloud bundle) with explicit buttons instead of the
- * legacy dropdown. CSV and bundle keep their direct download URLs; the print
- * report opens the date dialog.
+ * spreadsheet, native DONGY bundle) with explicit buttons instead of the legacy
+ * dropdown. CSV and bundle keep their direct download URLs; the print report
+ * opens the date dialog.
  */
 export function ExportOptionsCard({ groupId }: { groupId: string }) {
   const { t } = useTranslation(undefined, { keyPrefix: 'Expenses' })

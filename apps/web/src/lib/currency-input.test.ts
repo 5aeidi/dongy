@@ -24,11 +24,16 @@ describe('enforceCurrencyPattern (shared sanitizer)', () => {
     expect(enforceCurrencyPattern('12,34,567', 2, 'hi-IN')).toBe('1234567')
   })
 
+  it('accepts Persian digits and keeps rial amounts as typed', () => {
+    expect(enforceCurrencyPattern('۲۸۹۰۰۰', 0, 'fa-IR')).toBe('289000')
+    expect(enforceCurrencyPattern('۱٬۷۵۳٬۰۰۰', 0, 'fa-IR')).toBe('1753000')
+    expect(localizeCurrencyInput('289000', 'fa-IR')).toBe('۲۸۹۰۰۰')
+  })
+
   it('keeps the editing string localized while canonical state remains ASCII', () => {
-    expect(localizeCurrencyInput('1.50', 'de-DE')).toBe('1,50')
-    expect(localizeCurrencyInput('1.', 'de-DE')).toBe('1,')
-    expect(localizeCurrencyInput('1234.50', 'ar-SA')).toBe('١٢٣٤٫٥٠')
-    expect(enforceCurrencyPattern('١٢٣٤٫٥٠', 2, 'ar-SA')).toBe('1234.50')
+    expect(localizeCurrencyInput('1.50', 'fa-IR')).toBe('۱٫۵۰')
+    expect(localizeCurrencyInput('1.', 'fa-IR')).toBe('۱٫')
+    expect(enforceCurrencyPattern('۱۲۳۴٫۵۰', 2, 'fa-IR')).toBe('1234.50')
   })
 
   it('preserves a trailing decimal typed with the non-locale separator (issue #115)', () => {

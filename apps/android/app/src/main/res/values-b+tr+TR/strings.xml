@@ -9,14 +9,14 @@
     <string name="check_updates">Güncellemeleri kontrol et</string>
     <string name="checking">Güncellemeler kontrol ediliyor…</string>
     <string name="connection_settings">Bağlantı ayarları</string>
-    <string name="continue_app">Spliit Cloud\'u aç</string>
+    <string name="continue_app">DONGY\'u aç</string>
     <string name="expenses">Harcamalar</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">Daha sonra</string>
     <string name="new_group">Yeni grup</string>
     <string name="obtainium_note">Obtainium kullanıyorsanız GitHub sürümlerimizden gelen güncellemeleri de onunla yönetebilirsiniz.</string>
     <string name="offline_message">Çevrimdışı erişimi hazırlamak için ilk açılışta internet bağlantısı gerekir. Paylaştığınız dosyalar silinmedi. İnternete bağlanıp yeniden deneyin.</string>
-    <string name="offline_title">Spliit Cloud\'u açmak için internete bağlanın</string>
+    <string name="offline_title">DONGY\'u açmak için internete bağlanın</string>
     <string name="open_play">Google Play\'i aç</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">Bu yükleme Google Play tarafından yönetiliyor. Android paketi güncellemeleri için Google Play\'i kontrol edin.</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Android uygulaması güncellemeleri</string>
     <string name="version">Android paketi %1$s (%2$d)</string>
     <string name="view_update">Güncellemeyi görüntüle</string>
-    <string name="web_version_note">Web sitesi özellikleri ayrı olarak güncellenir. Harcamalarınız Spliit Cloud\'da ve bu tarayıcının çevrimdışı depolama alanında saklanır.</string>
+    <string name="web_version_note">Web sitesi özellikleri ayrı olarak güncellenir. Harcamalarınız DONGY\'da ve bu tarayıcının çevrimdışı depolama alanında saklanır.</string>
 </resources>

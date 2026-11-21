@@ -101,7 +101,7 @@ export class GroupEmailActivityNotificationDispatcher implements ActivityNotific
       : (labels[intent.activity.type] ?? 'Group activity')
     const actorName = actor?.name ?? 'Someone'
     const text = isFriendAdded
-      ? `${actorName} created a friend ledger with you on Spliit Cloud.${summary ? `\n\n${summary}` : ''}\n\nOpen Spliit Cloud to view your friend ledger:\n${getWebBaseUrl()}`
+      ? `${actorName} created a friend ledger with you on DONGY.${summary ? `\n\n${summary}` : ''}\n\nOpen DONGY to view your friend ledger:\n${getWebBaseUrl()}`
       : `${label} in ${group.name} by ${actorName}.${summary ? `\n\n${summary}` : ''}\n\nView the group here:\n${getWebBaseUrl()}/groups/${intent.activity.groupId}`
     const unsubscribe = await buildEmailUnsubscribeMetadata({
       accountId: intent.recipientAccountId,
@@ -130,8 +130,8 @@ export class GroupEmailActivityNotificationDispatcher implements ActivityNotific
       const subject =
         renderedInvitation?.subject ??
         (isFriendAdded
-          ? `[Spliit Cloud] ${label}`
-          : `[Spliit Cloud] ${label} in ${group.name}`)
+          ? `[DONGY] ${label}`
+          : `[DONGY] ${label} in ${group.name}`)
       const rendered = renderedInvitation
         ? renderedInvitation
         : isFriendAdded

@@ -1,5 +1,5 @@
 import { Link, useLocation } from '@tanstack/react-router'
-import { ArrowLeftRight, FileSpreadsheet, Sparkles } from 'lucide-react'
+import { FileSpreadsheet, Sparkles } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
 import { useCurrentGroupOrNull } from '@/app/groups/[groupId]/current-group-context'
@@ -26,25 +26,6 @@ const IMPORT_STEPS = [
   {
     titleKey: 'Tools.import.steps.review.title',
     detailKey: 'Tools.import.steps.review.detail',
-  },
-] as const
-
-const SWAP_STEPS = [
-  {
-    titleKey: 'Tools.swap.steps.target.title',
-    detailKey: 'Tools.swap.steps.target.detail',
-  },
-  {
-    titleKey: 'Tools.swap.steps.rates.title',
-    detailKey: 'Tools.swap.steps.rates.detail',
-  },
-  {
-    titleKey: 'Tools.swap.steps.review.title',
-    detailKey: 'Tools.swap.steps.review.detail',
-  },
-  {
-    titleKey: 'Tools.swap.steps.confirm.title',
-    detailKey: 'Tools.swap.steps.confirm.detail',
   },
 ] as const
 
@@ -205,67 +186,6 @@ export default function GroupToolsPage() {
                 }
               >
                 {t('Tools.categorize.start')}
-              </Button>
-              {!canMutate ? (
-                <p className="text-xs text-muted-foreground">
-                  {!isOnline
-                    ? t('OfflineReadOnly.reconnectToEdit')
-                    : group?.archived
-                      ? t('Tools.import.archivedNotice')
-                      : t('Tools.import.readOnlyNotice')}
-                </p>
-              ) : null}
-            </div>
-          </CardContent>
-        </Card>
-      )}
-      {currentMember?.role === 'ADMIN' && (
-        <Card id="tools-swap" className="scroll-mt-4">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-base">
-              <ArrowLeftRight
-                className="size-5 text-muted-foreground"
-                aria-hidden="true"
-              />
-              {t('Tools.swap.title')}
-            </CardTitle>
-            <CardDescription>{t('Tools.swap.description')}</CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-5">
-            <ol className="grid gap-3 text-sm">
-              {SWAP_STEPS.map((step, index) => (
-                <li key={step.titleKey} className="flex items-start gap-3">
-                  <span
-                    aria-hidden="true"
-                    className="flex size-6 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold"
-                  >
-                    {index + 1}
-                  </span>
-                  <p>
-                    <span className="font-medium">{t(step.titleKey)}</span>
-                    <span className="text-muted-foreground">
-                      {' — '}
-                      {t(step.detailKey)}
-                    </span>
-                  </p>
-                </li>
-              ))}
-            </ol>
-            <div className="space-y-2 border-t border-border/70 pt-5">
-              <Button
-                type="button"
-                disabled={!canMutate}
-                nativeButton={!canMutate || !resolvedGroupId}
-                render={
-                  canMutate && resolvedGroupId ? (
-                    <Link
-                      to="/groups/$groupId/tools/swap"
-                      params={{ groupId: resolvedGroupId }}
-                    />
-                  ) : undefined
-                }
-              >
-                {t('Tools.swap.start')}
               </Button>
               {!canMutate ? (
                 <p className="text-xs text-muted-foreground">

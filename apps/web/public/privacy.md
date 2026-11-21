@@ -1,13 +1,13 @@
 ---
-title: Privacy notice — Spliit Cloud
-description: How the public Spliit Cloud instance handles personal data when you use it.
+title: Privacy notice — DONGY
+description: How the public DONGY instance handles personal data when you use it.
 ---
 
 # Privacy notice
 
 Last updated: September 30, 2026
 
-Spliit Cloud is a non-commercial, community-maintained project. This notice explains what personal data the public Spliit Cloud instance processes, why, who receives it, how long it is kept, and the controls available to you.
+DONGY is a non-commercial, community-maintained project. This notice explains what personal data the public DONGY instance processes, why, who receives it, how long it is kept, and the controls available to you.
 
 ## Categories of personal data
 
@@ -22,11 +22,11 @@ We use this data to provide accounts, shared expense tracking, invitations, expo
 
 ## Recipients and service providers
 
-The service runs on hosting, database, backup, object-storage, and email infrastructure (currently Cloudflare Pages, a Hetzner-hosted API and PostgreSQL database, Cloudflare R2 backups and uploads, and a configured SMTP provider). These providers process data only to operate the service. If you choose receipt extraction or expense categorisation, relevant receipt files (photos or documents), voice recordings, transcripts, expense text, currency context, and recent expense context may be sent to the configured AI provider. When a dedicated OCR backend is configured, receipt files are additionally sent to that OCR provider for text extraction. Voice recordings are processed transiently and are not stored by Spliit Cloud. Do not use those features for material you are not comfortable sharing with that provider.
+The service runs on hosting, database, backup, object-storage, and email infrastructure (currently Cloudflare Pages, a Hetzner-hosted API and PostgreSQL database, Cloudflare R2 backups and uploads, and a configured SMTP provider). These providers process data only to operate the service. If you choose receipt extraction or expense categorisation, relevant receipt files (photos or documents), voice recordings, transcripts, expense text, currency context, and recent expense context may be sent to the configured AI provider. When a dedicated OCR backend is configured, receipt files are additionally sent to that OCR provider for text extraction. Voice recordings are processed transiently and are not stored by DONGY. Do not use those features for material you are not comfortable sharing with that provider.
 
 ## Connected applications
 
-If you connect ChatGPT, Claude, or another OAuth application to your Spliit Cloud account, that application can access the groups, expenses, and balances your account can see, within the permissions you approved. Data sent through a connected application is also governed by that application's terms and privacy policy. You can review and disconnect connected applications at any time from your account settings; disconnecting stops future access but does not delete data the application already received.
+If you connect ChatGPT, Claude, or another OAuth application to your DONGY account, that application can access the groups, expenses, and balances your account can see, within the permissions you approved. Data sent through a connected application is also governed by that application's terms and privacy policy. You can review and disconnect connected applications at any time from your account settings; disconnecting stops future access but does not delete data the application already received.
 
 ## Cookies and local storage
 

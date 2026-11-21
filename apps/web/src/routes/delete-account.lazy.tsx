@@ -5,17 +5,14 @@ import { LegalPage } from '@/app/legal-page'
 
 function DeleteAccountPage() {
   return (
-    <LegalPage
-      title="Delete your Spliit Cloud account"
-      lastUpdated="October 15, 2026"
-    >
+    <LegalPage title="Delete your DONGY account" lastUpdated="October 15, 2026">
       <section>
         <h3>Request deletion online</h3>
         <p>
           You can request deletion without the Android app. Sign in on this
           website, open <Link to="/account/delete">account deletion</Link>,
           review what happens to your groups, and confirm the request. Deleting
-          the Android app alone does not delete your Spliit Cloud account.
+          the Android app alone does not delete your DONGY account.
         </p>
       </section>
       <section>

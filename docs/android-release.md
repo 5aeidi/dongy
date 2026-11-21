@@ -1,4 +1,4 @@
-# Spliit Cloud Android: setup, testing, and publication
+# DONGY Android: setup, testing, and publication
 
 The maintained project is `apps/android`. It produces an Android 10+ TWA for
 `https://spliit.cloud`, package `cloud.spliit.twa`. The web application continues
@@ -35,7 +35,7 @@ below before distributing a production APK. Debug builds use
    Use an account you control long term, enable strong two-factor authentication,
    and complete identity/contact/device verification.
 2. Review what publisher information Google makes public before submitting it.
-3. Create the app as **Spliit Cloud**, free, without ads, with the permanent
+3. Create the app as **DONGY**, free, without ads, with the permanent
    application ID `cloud.spliit.twa` when uploading its first bundle.
 4. Complete any required Android developer verification and package registration
    for both the Play-delivered and independently signed APK certificate.
@@ -350,8 +350,8 @@ AGENTS.md. Do not start those services just to follow this packaging guide.
    launcher/manual check. The prompt opens the release page; Android still asks
    the user to approve installation from their browser. No silent installer or
    “install unknown apps” permission is embedded in Spliit.
-6. For Obtainium, add `https://github.com/antonio-ivanovski/spliit-cloud` and use:
-   - Release-title regular expression: `^Spliit Cloud Android [0-9]+\.[0-9]+\.[0-9]+$`.
+6. For Obtainium, add `https://github.com/5aeidi/dongy` and use:
+   - Release-title regular expression: `^DONGY Android [0-9]+\.[0-9]+\.[0-9]+$`.
    - APK filename regular expression: `^spliit-cloud\.apk$`.
    - Include prereleases: off. Verify latest tag: off, since the repository's
      overall latest release can be a web release. Enable fallback to older

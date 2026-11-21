@@ -639,7 +639,7 @@ export async function prepareAssistantExpense(
     addDefault(
       'exchange-rate',
       'Exchange rate',
-      'Spliit Cloud rate for the expense date',
+      'DONGY rate for the expense date',
     )
   }
 

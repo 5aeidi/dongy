@@ -26,7 +26,7 @@ const configuredWidgetDomain = widgetRuntimeEnv.MCP_PUBLIC_URL
 
 export const widgetMetadata: WidgetMetadata = {
   description:
-    'A non-editable Spliit Cloud expense preview with an explicit confirmation action.',
+    'A non-editable DONGY expense preview with an explicit confirmation action.',
   props: propSchema,
   exposeAsTool: false,
   metadata: {
@@ -161,7 +161,7 @@ export function ExpensePreview() {
         <header className="card-header">
           <div className="brand-lockup">
             <span className="logo-frame">
-              <img src={spliitLogo} alt="Spliit Cloud logo" />
+              <img src={spliitLogo} alt="DONGY logo" />
             </span>
             <div className="title-lockup">
               <p className="eyebrow">Ready to add in {preview.group.name}</p>
@@ -317,7 +317,7 @@ export function ExpensePreview() {
                 className="open-link"
                 onClick={() => openExternal(created.expenseUrl)}
               >
-                Open in Spliit Cloud
+                Open in DONGY
               </button>
             </output>
           ) : (

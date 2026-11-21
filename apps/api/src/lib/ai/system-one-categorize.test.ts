@@ -53,7 +53,7 @@ describe('suggestCategoryWithSystemOne', () => {
       apiKey: 'test-key',
       model: 'jev-latest',
       timeoutSeconds: 10,
-      locale: 'es',
+      locale: 'fa-IR',
       groupContext: { name: 'Trip', currency: '$', currencyCode: 'EUR' },
       recentExpenses: [{ title: 'Mercadona', categoryId: 'groceries' }],
     })
@@ -75,7 +75,7 @@ describe('suggestCategoryWithSystemOne', () => {
     const body = JSON.parse(init.body as string)
     expect(body.model).toBe('jev-latest')
     expect(body.state.expenseTitle).toBe('Mercadona weekly shop')
-    expect(body.state.appLanguage).toBe('Español')
+    expect(body.state.appLanguage).toBe('فارسی')
     expect(body.state.group).toEqual({ name: 'Trip', currency: 'EUR' })
     expect(body.state.recentExpenses).toEqual([
       { title: 'Mercadona', categoryId: 'groceries' },

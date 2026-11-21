@@ -5,7 +5,7 @@ title: Bring your Tricount and Settle Up groups with you
 channels: [updates]
 ---
 
-Spliit Cloud 2.9.0 adds built-in Tricount and Settle Up imports, so you can bring your existing groups with you. Details are in the [v2.9.0](https://github.com/antonio-ivanovski/spliit-cloud/releases/tag/v2.9.0) notes.
+DONGY 2.9.0 adds built-in Tricount and Settle Up imports, so you can bring your existing groups with you. Details are in the [v2.9.0](https://github.com/5aeidi/dongy/releases/tag/v2.9.0) notes.
 
 ## From Tricount, two ways in
 

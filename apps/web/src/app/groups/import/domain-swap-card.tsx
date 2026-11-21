@@ -12,7 +12,7 @@ export function DomainSwapCard({ title, description }: DomainSwapCardProps) {
   return (
     <Card
       data-import-source-card="domain-swap"
-      className="relative overflow-hidden border-primary/30 bg-linear-to-br from-primary/8 via-background to-background shadow-[0_1px_0_0_hsl(var(--primary)/0.1)]"
+      className="relative overflow-hidden border-primary/30 bg-background pixel-wash shadow-[0_1px_0_0_hsl(var(--primary)/0.1)]"
     >
       <div
         aria-hidden

@@ -222,7 +222,7 @@ describe('createCloudflareEmailSender', () => {
   const baseConfig = {
     accountId: 'acct-123',
     apiToken: 'cf-token',
-    from: 'Spliit Cloud <noreply@test>',
+    from: 'DONGY <noreply@test>',
   }
 
   const message = {
@@ -319,7 +319,7 @@ describe('createCloudflareEmailSender', () => {
     })
     expect(init.signal).toBeInstanceOf(AbortSignal)
     expect(JSON.parse(init.body as string)).toEqual({
-      from: { address: 'noreply@test', name: 'Spliit Cloud' },
+      from: { address: 'noreply@test', name: 'DONGY' },
       to: ['recipient@example.com'],
       subject: 'Test subject',
       text: 'plain text body',

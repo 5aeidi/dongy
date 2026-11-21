@@ -30,7 +30,7 @@
     },
     "button": {
       "github": "GitHub",
-      "signIn": "Sign in to Spliit Cloud",
+      "signIn": "Sign in to DONGY",
       "createAccount": "Create an account",
       "createGroup": "Create a group",
       "importGroup": "Import group from another service",
@@ -59,8 +59,8 @@
       "scanning": "Looking for a QR code…",
       "noCamera": "No camera found on this device. Scan the code with your phone's camera app instead.",
       "permissionDenied": "Camera access was denied. Allow camera access in your browser settings, or scan with your phone's camera app instead.",
-      "invalidCode": "That code is not a Spliit Cloud group invite. Try scanning the host's QR code again.",
-      "foreignTitle": "This code points to another Spliit Cloud",
+      "invalidCode": "That code is not a DONGY group invite. Try scanning the host's QR code again.",
+      "foreignTitle": "This code points to another DONGY",
       "foreignDescription": "It will open {origin} in this browser. Only continue if you trust the host who showed it.",
       "foreignConfirm": "Open link",
       "foreignCancel": "Go back"
@@ -110,17 +110,6 @@
     "dark": "Dark",
     "system": "System default",
     "halloweenEffects": "Halloween effects"
-  },
-  "Footer": {
-    "madeIn": "Made by the <github>open-source community</github> with love ❤️",
-    "legalNavigation": "Legal links",
-    "privacy": "Privacy",
-    "terms": "Terms",
-    "imprint": "Project notice",
-    "sponsor": "Sponsor",
-    "timeLabel": "Time of day",
-    "status": "Status",
-    "features": "Features"
   },
   "Expenses": {
     "title": "Expenses",
@@ -235,7 +224,7 @@
     "exportPdfError": "Could not open the print report. Please try again.",
     "exportPdfSuccess": "Print report opened.",
     "exportPdfRetryBounds": "Retry",
-    "exportBundleTitle": "Spliit Cloud backup bundle",
+    "exportBundleTitle": "DONGY backup bundle",
     "exportBundlePurpose": "Portable group data with expenses, settings, and attached documents.",
     "exportBundleAction": "Download bundle",
     "globalArchived": "archived",
@@ -422,7 +411,7 @@
     },
     "Importable": {
       "title": "Found this group on spliit.app",
-      "description": "\"{name}\" is reachable on spliit.app. Would you like to import it into Spliit Cloud?",
+      "description": "\"{name}\" is reachable on spliit.app. Would you like to import it into DONGY?",
       "cta": "Import this group",
       "backToHome": "Go to home"
     },
@@ -443,7 +432,7 @@
       "unknownGroup": "Unknown group",
       "sentOn": "Sent {date}"
     },
-    "linkInvitationBannerDescription": "{inviter} invited you to join {groupName} on Spliit Cloud.",
+    "linkInvitationBannerDescription": "{inviter} invited you to join {groupName} on DONGY.",
     "linkInvitationSingleUse": "This link can only be used once. After you accept, it will stop working.",
     "linkInvitationTemporaryName": "You'll join as {name}.",
     "linkInvitationAlreadyMemberTitle": "You're already in {groupName}",
@@ -478,11 +467,11 @@
         "cospend": "Cospend",
         "tricount": "Tricount",
         "settleUp": "Settle Up",
-        "spliitDescription": "Bring an existing spliit.app group into Spliit Cloud. We read the group name, participants, and every expense.",
+        "spliitDescription": "Bring an existing spliit.app group into DONGY. We read the group name, participants, and every expense.",
         "splitwiseComingTitle": "Splitwise import is on the way",
-        "splitwiseComingDescription": "We're working on bringing Splitwise CSV exports into Spliit Cloud. The flow will be available here once it ships — no need to re-import anything in the meantime.",
+        "splitwiseComingDescription": "We're working on bringing Splitwise CSV exports into DONGY. The flow will be available here once it ships — no need to re-import anything in the meantime.",
         "dropFile": "Drop a JSON or CSV file, or click to select",
-        "dropFileDescription": "JSON preserves every amount and payer exactly. CSV is a fallback — Spliit Cloud rounds each per-participant amount to 2 decimals.",
+        "dropFileDescription": "JSON preserves every amount and payer exactly. CSV is a fallback — DONGY rounds each per-participant amount to 2 decimals.",
         "or": "or",
         "pasteUrl": "Paste a spliit.app URL",
         "urlDescription": "Our server fetches the group through the spliit.app public export endpoint on your behalf.",
@@ -492,15 +481,15 @@
         "receiptWarningTitle": "Receipt images are not imported.",
         "receiptWarningDescription": "The spliit.app export does not include receipt images. Re-upload them in the destination group if you need them.",
         "invalidUrl": "Please paste a valid spliit.app group URL",
-        "notFoundUrl": "Spliit Cloud did not find this group",
+        "notFoundUrl": "DONGY did not find this group",
         "fetchUrlError": "Failed to fetch the source",
         "fileReadError": "Failed to read the file",
-        "appToCloudDescription": "Change .app to .cloud in any spliit.app group URL to import it into Spliit Cloud.",
+        "appToCloudDescription": "Change .app to .cloud in any spliit.app group URL to import it into DONGY.",
         "appToCloudTitle": "Swap .app for .cloud",
-        "splitwiseDescription": "Drop a Splitwise CSV export to import its expenses into Spliit Cloud. The file must come from Splitwise's group export — the per-group CSV available from the group's settings.",
+        "splitwiseDescription": "Drop a Splitwise CSV export to import its expenses into DONGY. The file must come from Splitwise's group export — the per-group CSV available from the group's settings.",
         "receiptWarningTitleSplitwise": "Receipt images are not imported.",
         "receiptWarningDescriptionSplitwise": "The Splitwise export does not include receipt images. Re-upload them in the destination group if you need them.",
-        "cospendDescription": "Drop a Cospend project CSV export to import its members, bills, and recurring schedules into Spliit Cloud. Export the project from Cospend's settings (one CSV per project). Recurring bills keep their schedule — yearly, multi-interval, and dated-end repeats are all supported.",
+        "cospendDescription": "Drop a Cospend project CSV export to import its members, bills, and recurring schedules into DONGY. Export the project from Cospend's settings (one CSV per project). Recurring bills keep their schedule — yearly, multi-interval, and dated-end repeats are all supported.",
         "receiptWarningTitleCospend": "Receipt images are not imported.",
         "receiptWarningDescriptionCospend": "The Cospend export does not include receipt images. Re-upload them in the destination group if you need them.",
         "dropFileCospend": "Drop a Cospend CSV export, or click to select",
@@ -514,20 +503,20 @@
         "splitwiseAnonymizeIssuesLink": "Open an import issue",
         "splitwiseAnonymizeError": "Could not anonymize this file. Make sure it's a Splitwise CSV export.",
         "csvRecurrenceLimitation": "CSV exports do not include recurrence. Use a JSON export from spliit.app to import recurring expenses.",
-        "fromSpliitCloud": "Spliit Cloud",
-        "cloudZipRequired": "Choose a Spliit Cloud .spliit.zip bundle.",
-        "wrongImporterCloudTitle": "This belongs in the Spliit Cloud importer",
-        "wrongImporterCloudDescription": "The selected file is a Spliit Cloud bundle or manifest. Open the Spliit Cloud tab to continue.",
+        "fromSpliitCloud": "DONGY / Spliit Cloud",
+        "cloudZipRequired": "Choose a DONGY .spliit.zip bundle.",
+        "wrongImporterCloudTitle": "This belongs in the DONGY importer",
+        "wrongImporterCloudDescription": "The selected file is a DONGY bundle or manifest. Open the DONGY tab to continue.",
         "wrongImporterSpliitTitle": "This belongs in the Spliit importer",
         "wrongImporterSpliitDescription": "The selected file is a legacy spliit.app export. Open the Spliit tab to continue.",
-        "openCloudImporter": "Open Spliit Cloud importer",
+        "openCloudImporter": "Open DONGY importer",
         "openSpliitImporter": "Open Spliit importer",
-        "cloudBundleReadyTitle": "Spliit Cloud bundle ready",
+        "cloudBundleReadyTitle": "DONGY bundle ready",
         "cloudBundleReadyDescription": "This inspected bundle is ready to import. You can continue without selecting the file again.",
         "resumeCloudBundle": "Continue with this bundle",
-        "spliitCloudScopeDescription": "Import a Spliit Cloud account backup containing multiple groups, or a single group export, from a .spliit.zip file.",
+        "spliitCloudScopeDescription": "Import a DONGY account backup containing multiple groups, or a single group export, from a .spliit.zip file.",
         "legacyExportTitle": "A newer Spliit export is available",
-        "legacyExportDescription": "This older export requires Spliit Cloud to search spliit.app for documents. For the most reliable import, copy the group link from spliit.app or download a new JSON export and attach it here.",
+        "legacyExportDescription": "This older export requires DONGY to search spliit.app for documents. For the most reliable import, copy the group link from spliit.app or download a new JSON export and attach it here.",
         "dropFileDescriptionTricount": "Upload the GDPR CSV export you received from Tricount support. Dumps with several groups let you pick which ones to import.",
         "dropFileTricount": "Drop your Tricount CSV file",
         "tricountGroupStats": "{participants} participants · {expenses} expenses · {currency}",
@@ -570,7 +559,7 @@
           "spliitCloudStep2": "Choose the groups and content, then choose Download backup or Download bundle.",
           "spliitCloudStep3": "Drop the .spliit.zip file below.",
           "spliitCloudTip": "You'll pick which groups to import in the next step.",
-          "spliitCloudTitle": "How to get your Spliit Cloud bundle",
+          "spliitCloudTitle": "How to get your DONGY bundle",
           "spliitFileStep1": "Open the group on spliit.app, open group settings, and download JSON (CSV works too).",
           "spliitFileStep2": "Drop the file below. JSON keeps recurring expenses; CSV does not.",
           "spliitFileTitle": "File export — works offline",
@@ -587,7 +576,7 @@
           "tricountDescription": "Import a group from a Tricount GDPR data export. All expenses keep their original currency; conversion to your group's currency happens during the import.",
           "cospendTrigger": "Where do I export my Cospend project?",
           "settleUpTrigger": "Where do I get the Settle Up CSV?",
-          "spliitCloudTrigger": "Where do I find my Spliit Cloud bundle?",
+          "spliitCloudTrigger": "Where do I find my DONGY bundle?",
           "spliitFileTrigger": "Where do I find the JSON or CSV export?",
           "spliitLinkTrigger": "Where do I find my Spliit group link?",
           "splitwiseTrigger": "Where do I export my Splitwise group?",
@@ -715,8 +704,8 @@
         "shareAriaLabel": "Share invite link",
         "emailInvitesTitle": "Email invites sent",
         "emailInvitesDescription": "The server emailed the following people. They'll see an Accept/Decline banner in the group page when they sign in.",
-        "shareTitle": "Join my group on Spliit Cloud",
-        "shareText": "Join our expense group on Spliit Cloud — {name}. Open this link to accept: {url}",
+        "shareTitle": "Join my group on DONGY",
+        "shareText": "Join our expense group on DONGY — {name}. Open this link to accept: {url}",
         "copyLink": "Copy invite link",
         "copied": "Copied"
       },
@@ -739,7 +728,7 @@
       },
       "Documents": {
         "title": "Bring your receipts with you",
-        "description": "Spliit Cloud can securely copy receipt images from the original spliit.app group and store normalized JPEG versions in your Cloud storage.",
+        "description": "DONGY can securely copy receipt images from the original spliit.app group and store normalized JPEG versions in your Cloud storage.",
         "fetchFailed": "Could not download the source image.",
         "tooLarge": "The normalized image is still larger than {maxSize}.",
         "uploadFailed": "Could not upload the normalized image.",
@@ -760,7 +749,7 @@
         "confirmSkip": "Yes, continue without documents",
         "skip": "Continue without documents",
         "continueWithMissing": "Continue with missing documents",
-        "cloudDescription": "Restore the original document files embedded in this Spliit Cloud backup to your Cloud storage.",
+        "cloudDescription": "Restore the original document files embedded in this DONGY backup to your Cloud storage.",
         "cloudStart": "Restore {count} document(s) from this backup.",
         "cloudNoDocuments": "This backup contains no documents to restore.",
         "cloudNoDocumentsAvailable": "None of the documents in this backup are available to restore."
@@ -769,7 +758,7 @@
         "importFailed": "Cloud import failed",
         "importFailedDescription": "Please try the bundle again or choose another file.",
         "doneTitle": "Group restored",
-        "doneDescription": "The Spliit Cloud group bundle was restored as a new group.",
+        "doneDescription": "The DONGY group bundle was restored as a new group.",
         "importAnother": "Import another bundle",
         "summary": "Restore {participants} participants and {expenses} expenses as a new group.",
         "incompleteTitle": "This backup is incomplete",
@@ -791,7 +780,7 @@
         "executeImport": "Restore group",
         "stagingDocuments": "Preparing document files for restore…",
         "friendSourceWarning": "This backup came from a friend ledger. It will be restored as a friend ledger with the mapped peer.",
-        "accountTitle": "Import Spliit Cloud account backup",
+        "accountTitle": "Import DONGY account backup",
         "accountProgress": "Group {current} of {total}: {name}",
         "continueToGroups": "Continue to group imports",
         "continueToNextGroup": "Continue to next group",
@@ -852,8 +841,8 @@
     "linkInvitationSharedUse": "This link can be used by several people, within its join limit and expiry."
   },
   "Auth": {
-    "title": "Sign in to Spliit Cloud",
-    "signUpTitle": "Create your Spliit Cloud account",
+    "title": "Sign in to DONGY",
+    "signUpTitle": "Create your DONGY account",
     "subtitle": "Use your account to access your groups across devices.",
     "signUpSubtitle": "Create an account to save and sync your groups across devices.",
     "email": "Email",
@@ -916,7 +905,7 @@
     "lastUsed": "Last used",
     "emailAuthDisabled": "Sign-in with email is disabled. Please use single sign-on.",
     "signInWithPasskey": "Sign in with passkey",
-    "getStartedTitle": "Get started with Spliit Cloud",
+    "getStartedTitle": "Get started with DONGY",
     "getStartedSubtitle": "Start without signing up, or use an account to access your groups across devices.",
     "orUseAccount": "Or use an account"
   },
@@ -949,7 +938,7 @@
     },
     "notifications": {
       "title": "Notifications",
-      "description": "Choose where Spliit Cloud sends activity notifications.",
+      "description": "Choose where DONGY sends activity notifications.",
       "enable": "Enable push notifications",
       "disable": "Disable push notifications",
       "enabled": "Push notifications are enabled on this device.",
@@ -957,7 +946,7 @@
       "unsupported": "Push notifications aren't supported by this browser or context.",
       "notConfigured": "Push notifications aren't available on this deployment.",
       "permissionDenied": "Notifications are blocked. Allow them in your browser or device settings, then try again.",
-      "iosInstall": "On iPhone or iPad, add Spliit Cloud to your Home Screen before enabling push notifications.",
+      "iosInstall": "On iPhone or iPad, add DONGY to your Home Screen before enabling push notifications.",
       "error": "Could not update push notification settings. Please try again.",
       "preferencesTitle": "Notification preferences",
       "preferencesDescription": "These choices apply to future group and expense activity.",
@@ -1022,7 +1011,7 @@
           "description": "A weekly summary of activity across your groups."
         },
         "cloudNews": {
-          "title": "Spliit Cloud news and updates",
+          "title": "DONGY news and updates",
           "description": "Product news, tips, and service updates."
         },
         "budgetAlert": {
@@ -1131,12 +1120,12 @@
     },
     "export": {
       "sectionTitle": "Backups & export",
-      "sectionDescription": "Export or restore a portable backup of your Spliit Cloud data.",
+      "sectionDescription": "Export or restore a portable backup of your DONGY data.",
       "sectionRowLabel": "Account backup",
-      "sectionRowDescription": "Download selected groups and preferences, or restore a Spliit Cloud bundle.",
+      "sectionRowDescription": "Download selected groups and preferences, or restore a DONGY bundle.",
       "open": "Export",
       "title": "Export account backup",
-      "description": "Choose what to include in this Spliit Cloud backup. Your selection is used for this download only.",
+      "description": "Choose what to include in this DONGY backup. Your selection is used for this download only.",
       "contentTitle": "Include",
       "content": {
         "documents": "Document files",
@@ -1412,7 +1401,7 @@
   },
   "AccountAuthorizedClients": {
     "title": "Connected apps",
-    "description": "Apps and agents you have allowed to use your Spliit Cloud account.",
+    "description": "Apps and agents you have allowed to use your DONGY account.",
     "loading": "Loading connected apps…",
     "empty": "No app is connected to your account.",
     "unnamedClient": "Unnamed app",
@@ -1461,7 +1450,7 @@
   },
   "ResetPassword": {
     "title": "Choose a new password",
-    "subtitle": "Enter the new password for your Spliit Cloud account.",
+    "subtitle": "Enter the new password for your DONGY account.",
     "newPassword": "New password",
     "confirmPassword": "Confirm new password",
     "passwordMismatch": "Passwords don't match.",
@@ -2644,6 +2633,12 @@
       },
       "XRP": {
         "name": "XRP"
+      },
+      "IRT": {
+        "name": "Iranian Toman"
+      },
+      "IRM": {
+        "name": "Million Toman"
       }
     }
   },
@@ -2714,8 +2709,8 @@
         "created": "Invite link ready. Copy and share it before the group leaves this page.",
         "intro": "Here's your single-use invite link for {groupName}. Send it to the person you want to join — the first one to use it becomes a member, then the link stops working.",
         "share": "Share invite link",
-        "shareTitle": "Join {groupName} on Spliit Cloud",
-        "shareText": "I just created {groupName} for our shared expenses on Spliit Cloud. Here's a one-time invite link — open it to join:\n{inviteUrl}",
+        "shareTitle": "Join {groupName} on DONGY",
+        "shareText": "I just created {groupName} for our shared expenses on DONGY. Here's a one-time invite link — open it to join:\n{inviteUrl}",
         "generateNew": "Generate new link",
         "copyLink": "Copy link",
         "mode": "Who can use this link?",
@@ -2742,7 +2737,7 @@
         "sharedCreated": "Shared link ready. Copy it and post it wherever your people are.",
         "sharedIntro": "Here is your shared link for {groupName}. Up to {maxUses} members can join with it, within the limits below.",
         "sharedCopyAgain": "Members can copy this link again from Pending invitations.",
-        "sharedShareText": "Join {groupName} on Spliit Cloud — open this link to join:\n{inviteUrl}",
+        "sharedShareText": "Join {groupName} on DONGY — open this link to join:\n{inviteUrl}",
         "invalidJoinLimit": "Enter a join limit between 2 and 1000, or choose unlimited.",
         "invalidExpiry": "Enter an expiry between 1 hour and 1 year, or choose never.",
         "summaryExpiryOnly": "Unlimited joins · expires in {expiry} ({expiryDate}).",
@@ -2782,7 +2777,7 @@
       "friendAlreadyMember": "Already a member",
       "noFriends": "No friends yet. Invite from the Email tab.",
       "friendAlreadyInvited": "Already invited",
-      "noAccountDescription": "Add someone to expenses without inviting them to Spliit Cloud. You can link them to an account later.",
+      "noAccountDescription": "Add someone to expenses without inviting them to DONGY. You can link them to an account later.",
       "temporaryNameRequired": "Temporary name",
       "noAccountNameDescription": "Shown in expenses and balances until this participant is linked to an account.",
       "addParticipant": "Add participant",
@@ -2848,7 +2843,7 @@
         },
         "unsettled": {
           "title": "You have unsettled balances",
-          "description": "Spliit Cloud will create settlement payments for balances involving you before you leave. Other participants’ balances will not change."
+          "description": "DONGY will create settlement payments for balances involving you before you leave. Other participants’ balances will not change."
         }
       },
       "cancel": "Cancel",
@@ -2936,7 +2931,7 @@
       "emailPlaceholder": "account@example.com",
       "emailChangeWarning": "The current recipient won't be able to accept this invitation anymore.",
       "nameLabel": "Display name",
-      "profileNameNote": "Uses their Spliit Cloud profile name",
+      "profileNameNote": "Uses their DONGY profile name",
       "saveChanges": "Save changes",
       "updateSend": "Update & send",
       "switchToEmailSend": "Switch & send invitation",
@@ -3154,7 +3149,7 @@
   },
   "OfflineBanner": {
     "message": "You're offline. You can browse, but changes need a connection.",
-    "serverUnavailable": "Can't reach Spliit Cloud right now. Showing downloaded data.",
+    "serverUnavailable": "Can't reach DONGY right now. Showing downloaded data.",
     "reconnecting": "Reconnecting… You can keep reading downloaded data."
   },
   "InstallPromotion": {
@@ -3162,33 +3157,33 @@
     "remindLater": "Not now",
     "dismiss": "Don't ask again",
     "chrome": {
-      "title": "Install Spliit Cloud",
-      "description": "Add Spliit Cloud to your home screen for faster expense tracking — works like a native app. Your groups download for offline reading after you sign in."
+      "title": "Install DONGY",
+      "description": "Add DONGY to your home screen for faster expense tracking — works like a native app. Your groups download for offline reading after you sign in."
     },
     "ios": {
-      "title": "Install Spliit Cloud",
-      "description": "Add Spliit Cloud to your home screen for one-tap access. Your groups download for offline reading after you sign in.",
+      "title": "Install DONGY",
+      "description": "Add DONGY to your home screen for one-tap access. Your groups download for offline reading after you sign in.",
       "step1": "Tap the Share button",
       "step2": "Scroll down and tap Add to Home Screen",
       "step3": "Tap Add in the top-right corner"
     },
     "firefox": {
-      "title": "Install Spliit Cloud",
-      "description": "Add Spliit Cloud to your home screen from the browser menu.",
+      "title": "Install DONGY",
+      "description": "Add DONGY to your home screen from the browser menu.",
       "step1": "Tap the menu button (⋮) at the top right",
       "step2": "Tap Install"
     },
     "safari": {
-      "title": "Install Spliit Cloud",
-      "description": "Add Spliit Cloud to your dock for one-click access.",
+      "title": "Install DONGY",
+      "description": "Add DONGY to your dock for one-click access.",
       "step1": "In Safari, open the File menu",
       "step2": "Choose Add to Dock, then click Add"
     }
   },
   "PushOnboarding": {
     "title": "Choose how to stay up to date",
-    "description": "Spliit Cloud can alert you about group and expense activity as it happens.",
-    "pushBenefit": "Push notifications arrive on this device even when Spliit Cloud is not open.",
+    "description": "DONGY can alert you about group and expense activity as it happens.",
+    "pushBenefit": "Push notifications arrive on this device even when DONGY is not open.",
     "emailFallback": "Email is available for notifications you choose to receive there; Push-only choices are not rerouted.",
     "settingsHint": "You can change these choices any time in Settings. Push notifications are enabled separately for each device.",
     "enable": "Enable push notifications",
@@ -3212,7 +3207,7 @@
     "activeFriendExpensesSection": "Active friend expenses",
     "alreadyInvited": "(already invited)",
     "alreadyHasLedger": "(already shares expenses with you)",
-    "inviteSent": "Invitation sent. Your friend will be added when they join Spliit Cloud.",
+    "inviteSent": "Invitation sent. Your friend will be added when they join DONGY.",
     "inviteLinkTitle": "Share this link",
     "inviteLinkDescription": "Share this link so your friend can join your shared expenses.",
     "copy": "Copy",
@@ -3566,25 +3561,25 @@
   },
   "OAuth": {
     "shell": {
-      "label": "Spliit Cloud authorization",
+      "label": "DONGY authorization",
       "mobileDescription": "Review the requested account access",
-      "title": "Connect an application to your Spliit Cloud account.",
+      "title": "Connect an application to your DONGY account.",
       "previewBullet": "You can disconnect it from account settings",
       "authorityBullet": "You choose what this application can access",
       "validationBullet": "Existing validation, balances and notifications stay intact"
     },
     "consent": {
-      "title": "Connect Spliit Cloud to {client}?",
+      "title": "Connect DONGY to {client}?",
       "description": "Review the account and permissions this application is requesting.",
       "connectionDetails": "Connection details",
-      "spliitAccount": "Spliit Cloud account",
+      "spliitAccount": "DONGY account",
       "connectingTo": "Connecting to",
       "assistantVia": "OAuth application",
       "defaultClient": "this application",
-      "defaultUser": "Spliit Cloud user",
+      "defaultUser": "DONGY user",
       "sessionUnavailable": "Session unavailable. Return and sign in again.",
       "sharedData": "What will be shared",
-      "identityTitle": "Your Spliit Cloud identity",
+      "identityTitle": "Your DONGY identity",
       "identityDescription": "Your name and email identify the account being connected. Your password and sign-in method are never shared.",
       "groupsTitle": "Group and spending context",
       "groupsDescription": "Group details, participants, saved splits, balances, statistics and activity.",
@@ -3592,7 +3587,7 @@
       "expensesDescription": "This application may create only the exact expense shown in the preview after you press Create expense.",
       "privacyTitle": "A quick privacy note",
       "privacyDescription": "Financial group details can be sensitive. They become available to {client} for as long as it stays connected. You can disconnect it at any time from your account settings.",
-      "authorityNote": "Spliit Cloud remains the source of truth. Existing validation, balances, activity history and notifications still apply.",
+      "authorityNote": "DONGY remains the source of truth. Existing validation, balances, activity history and notifications still apply.",
       "allow": "Allow and connect",
       "cancel": "Cancel",
       "missingRequest": "The authorization request is missing. Return to the application and start the connection again.",
@@ -3606,8 +3601,8 @@
       "expensesManageDescription": "Add expenses and change existing ones directly, without showing you a preview first.",
       "expensesDeleteTitle": "Delete expenses",
       "expensesDeleteDescription": "Permanently delete expenses, and make edits that drop data such as shortening a recurring series. This cannot be undone.",
-      "unknownScopes": "This app is asking for a permission Spliit Cloud does not recognise ({scopes}), so it cannot be approved here. Ask the app author to check the permissions it requests.",
-      "clientUnavailable": "Spliit Cloud could not verify this application. Return to the application and start the connection again.",
+      "unknownScopes": "This app is asking for a permission DONGY does not recognise ({scopes}), so it cannot be approved here. Ask the app author to check the permissions it requests.",
+      "clientUnavailable": "DONGY could not verify this application. Return to the application and start the connection again.",
       "clientWebsite": "Application website",
       "privacyPolicy": "Privacy policy",
       "redirectsTo": "Redirects to",
@@ -3617,13 +3612,13 @@
     "login": {
       "missingTitle": "Authorization request missing",
       "missingDescription": "Return to the application and start the connection again.",
-      "missingError": "Spliit Cloud did not receive the OAuth authorization details.",
+      "missingError": "DONGY did not receive the OAuth authorization details.",
       "connectingTitle": "Connecting your account",
-      "connectingDescription": "Your existing Spliit Cloud session was found. No additional sign-in is required.",
-      "checkingSession": "Checking your Spliit Cloud session…",
+      "connectingDescription": "Your existing DONGY session was found. No additional sign-in is required.",
+      "checkingSession": "Checking your DONGY session…",
       "continuing": "Continuing securely…",
       "signInTitle": "Sign in to connect",
-      "signInDescription": "Use your usual Spliit Cloud sign-in method. The application never receives your password or sign-in credentials."
+      "signInDescription": "Use your usual DONGY sign-in method. The application never receives your password or sign-in credentials."
     },
     "manualCallback": {
       "title": "Finish connecting your agent",
@@ -3635,7 +3630,7 @@
       "copied": "Copied to clipboard",
       "codeLabel": "Authorization code",
       "stateLabel": "State",
-      "warning": "Only paste this into the agent or app you trust. Anyone holding it can connect to your Spliit Cloud account until it expires.",
+      "warning": "Only paste this into the agent or app you trust. Anyone holding it can connect to your DONGY account until it expires.",
       "expiryNote": "This code expires 10 minutes after it was issued.",
       "errorTitle": "Connection did not complete",
       "errorDescription": "The authorization server returned an error instead of a code.",
@@ -3786,7 +3781,7 @@
   },
   "AIExpense": {
     "title": "Review AI expense",
-    "description": "Check what Spliit Cloud understood before adding this expense.",
+    "description": "Check what DONGY understood before adding this expense.",
     "created": "Expense created.",
     "createError": "Could not create the expense.",
     "missing": "Not detected",
@@ -3843,7 +3838,7 @@
   },
   "Feedback": {
     "navigationLabel": "Feedback",
-    "title": "Help shape Spliit Cloud",
+    "title": "Help shape DONGY",
     "description": "Report a problem, suggest an improvement, or tell us about your experience. Choose a category to continue on GitHub.",
     "categoriesLabel": "Feedback categories",
     "categories": {
@@ -3854,7 +3849,7 @@
       },
       "idea": {
         "title": "Suggest an idea",
-        "description": "Describe a problem worth solving or an improvement that would make Spliit Cloud more useful.",
+        "description": "Describe a problem worth solving or an improvement that would make DONGY more useful.",
         "action": "Open idea form"
       },
       "feedback": {
@@ -3877,8 +3872,7 @@
       "copy": "Copy diagnostics",
       "copied": "Copied",
       "copyFailed": "Clipboard access failed. Select and copy the diagnostics manually."
-    },
-    "sponsorLink": "Want to support Spliit Cloud financially? <cta>Become a sponsor</cta>."
+    }
   },
   "ExpenseReport": {
     "title": "Expense report",
@@ -3954,7 +3948,7 @@
     "hintTapToCreateGroup": "I'm {name} — tap me to create a group.",
     "billName": "Bill",
     "offlineMessage": "I can't create anything while you're offline.",
-    "serverUnreachableMessage": "I can't reach the Spliit Cloud server right now — your connection looks fine, so this one's on us."
+    "serverUnreachableMessage": "I can't reach the DONGY server right now — your connection looks fine, so this one's on us."
   },
   "CreateSettlement": {
     "description": "Review the payment before recording it.",
@@ -3982,7 +3976,7 @@
     "signup": {
       "title": "Anonymous account",
       "description": "Create a new anonymous account or use a saved sign in link.",
-      "warning": "Use Spliit Cloud without email, password, or social sign-in. Before you start, you will need to save a permanent sign in link.",
+      "warning": "Use DONGY without email, password, or social sign-in. Before you start, you will need to save a permanent sign in link.",
       "cancel": "Cancel",
       "recoverDescription": "Paste your complete saved sign in link to access it.",
       "recoveryOnlyHelp": "New anonymous accounts are not available here. Paste your complete saved sign in link to continue.",
@@ -4025,12 +4019,12 @@
       "unavailableDescription": "Generate a replacement link explicitly, then save it before continuing.",
       "generateReplacement": "Generate replacement link",
       "error": "Something went wrong. Please try again.",
-      "start": "Start using Spliit Cloud"
+      "start": "Start using DONGY"
     },
     "recovery": {
       "warningTitle": "Save this somewhere safe",
       "warning": "This link never expires or changes unless you replace it. Anyone who has it can access your anonymous account.",
-      "storedDataNote": "Anonymous means the account is not connected to a sign-in identity. Your account data is still stored in Spliit Cloud.",
+      "storedDataNote": "Anonymous means the account is not connected to a sign-in identity. Your account data is still stored in DONGY.",
       "linkLabel": "Sign in link",
       "copyLink": "Copy link",
       "copied": "Copied",
@@ -4107,7 +4101,7 @@
     "retry": "Try again"
   },
   "PwaUpdate": {
-    "waitingFailed": "Spliit Cloud couldn't apply the update.",
+    "waitingFailed": "DONGY couldn't apply the update.",
     "retry": "Retry",
     "dismiss": "Dismiss",
     "available": "An app update is available",
@@ -4606,7 +4600,7 @@
       "fallbackTo": "fallback to {label}",
       "fields": {
         "categorySource": {
-          "description": "Read the bank category so each unique value can be mapped to a Spliit Cloud category.",
+          "description": "Read the bank category so each unique value can be mapped to a DONGY category.",
           "title": "Category source"
         },
         "dateTime": {
@@ -4763,62 +4757,12 @@
       "SPLIIT_UNSUPPORTED_SHAPE": "This file is not a supported spliit.app JSON export."
     }
   },
-  "Sponsor": {
-    "title": "Support Spliit Cloud",
-    "description": "Spliit Cloud is a non-commercial, community-maintained project. If it helps you split expenses with friends and family, consider chipping in for hosting and development.",
-    "methodsLabel": "Ways to support",
-    "github": {
-      "title": "GitHub Sponsors",
-      "description": "The best option for card payments and monthly support. Sponsorship tiers are billed in USD through GitHub.",
-      "action": "Become a sponsor"
-    },
-    "evm": {
-      "title": "Ethereum / Base",
-      "network": "Ethereum · same address works on Base",
-      "description": "Send ETH, USDC, or USDT from any EVM-compatible wallet. Make sure you are on Ethereum or Base before sending.",
-      "addressLabel": "Wallet address",
-      "copy": "Copy address",
-      "copied": "Copied",
-      "copyFailed": "Clipboard access failed. Select and copy the address manually.",
-      "qrLabel": "QR code for the Ethereum / Base donation address",
-      "contact": "Sending a different token or using another EVM chain? <email>Ask us first</email> — not every asset can be recovered."
-    },
-    "bitcoin": {
-      "title": "Bitcoin",
-      "network": "Bitcoin on-chain",
-      "description": "Send BTC to this address from any Bitcoin wallet or exchange.",
-      "addressLabel": "Wallet address",
-      "copy": "Copy address",
-      "copied": "Copied",
-      "copyFailed": "Clipboard access failed. Select and copy the address manually.",
-      "qrLabel": "QR code for the Bitcoin donation address"
-    },
-    "lightning": {
-      "title": "Lightning",
-      "network": "Bitcoin Lightning Network",
-      "description": "Instant, low-fee sats via this Lightning address.",
-      "addressLabel": "Lightning address",
-      "copy": "Copy address",
-      "copied": "Copied",
-      "copyFailed": "Clipboard access failed. Select and copy the address manually.",
-      "qrLabel": "QR code for the Lightning donation address"
-    },
-    "notice": {
-      "title": "Crypto donations are irreversible",
-      "description": "Double-check the address and network before sending, and verify you are on spliit.cloud/sponsor. Funds sent to the wrong address cannot be recovered."
-    },
-    "contact": {
-      "title": "Donated, or want another way to give?",
-      "description": "If you've donated, drop us a note — we'd love to hear from you. For questions about other donation methods, write to <email>contact@spliit.cloud</email>."
-    },
-    "feedbackLink": "Prefer to contribute ideas instead of funds? <cta>Share feedback</cta>."
-  },
   "AccountWebhooks": {
     "description": "Send signed expense events to your own services for every group you belong to.",
     "add": "Add webhook",
     "url": "Endpoint URL",
     "loading": "Loading webhooks…",
-    "empty": "No webhooks yet. Add one to start integrating Spliit Cloud with another service.",
+    "empty": "No webhooks yet. Add one to start integrating DONGY with another service.",
     "secretTitle": "Save your signing secret",
     "secretDescription": "This secret is shown only once. Store it securely before closing this dialog.",
     "copy": "Copy secret",
@@ -4900,7 +4844,7 @@
     "offlineSearchHint": "Offline search uses exact text; typo matching needs a connection.",
     "groupsNotDownloaded": "{count} group(s) not downloaded",
     "groupsNeedUpdating": "{count} need updating",
-    "storageBlocked": "Close other Spliit Cloud tabs to finish updating offline storage.",
+    "storageBlocked": "Close other DONGY tabs to finish updating offline storage.",
     "storageQuota": "Offline storage is full. Retry, or clear downloads to free space.",
     "statusBlocked": "Offline storage blocked",
     "statusQuotaError": "Offline storage full",
@@ -4919,12 +4863,12 @@
     "dataStale": "Some data may be out of date."
   },
   "ApiStatusBanner": {
-    "message": "Spliit Cloud can't be reached right now. Your connection looks fine — the problem is on our end.",
+    "message": "DONGY can't be reached right now. Your connection looks fine — the problem is on our end.",
     "statusLink": "Check status"
   },
   "ApiErrorEmptyState": {
-    "title": "Spliit Cloud is unavailable",
-    "description": "We can't reach the Spliit Cloud server right now. Your connection looks fine — please try again in a moment.",
+    "title": "DONGY is unavailable",
+    "description": "We can't reach the DONGY server right now. Your connection looks fine — please try again in a moment.",
     "retry": "Try again"
   },
   "AccountDeletionBanner": {
@@ -5003,7 +4947,7 @@
       },
       "offline-app": {
         "title": "Installable app",
-        "description": "Install Spliit Cloud as an app on any device for instant loading and a full-screen experience. Your groups stay readable offline, and new expenses queue locally, syncing on reconnect — broader offline editing is on the roadmap."
+        "description": "Install DONGY as an app on any device for instant loading and a full-screen experience. Your groups stay readable offline, and new expenses queue locally, syncing on reconnect — broader offline editing is on the roadmap."
       },
       "expenses-splits": {
         "title": "Expenses & smart splits",
@@ -5019,7 +4963,7 @@
       },
       "data-portability": {
         "title": "Import & export",
-        "description": "Bring history from Splitwise CSV, bank-statement CSVs with a mapping wizard and duplicate detection, Cospend, or Spliit Cloud bundles. Tricount and Settle Up support is on the roadmap. Take everything back out as CSV, printable PDF reports, or full ZIP archives including documents."
+        "description": "Bring history from Splitwise CSV, bank-statement CSVs with a mapping wizard and duplicate detection, Cospend, or DONGY bundles. Tricount and Settle Up support is on the roadmap. Take everything back out as CSV, printable PDF reports, or full ZIP archives including documents."
       },
       "share-identity": {
         "title": "Invites & group identity",
@@ -5229,7 +5173,7 @@
   "AndroidNative": {
     "updates_title": "Android app updates",
     "version": "Android package {version} ({code})",
-    "web_version_note": "Website features update separately. Your expenses are stored by Spliit Cloud and in this browser’s offline storage.",
+    "web_version_note": "Website features update separately. Your expenses are stored by DONGY and in this browser’s offline storage.",
     "check_updates": "Check for updates",
     "checking": "Checking for updates…",
     "up_to_date": "Your Android package is up to date.",
@@ -5244,7 +5188,7 @@
     "github_source": "GitHub / Obtainium",
     "play_source": "Google Play",
     "obtainium_note": "If you use Obtainium, it can also manage updates from our GitHub releases.",
-    "offline_title": "Connect to open Spliit Cloud",
+    "offline_title": "Connect to open DONGY",
     "offline_message": "The first launch needs an internet connection to prepare offline access. Your shared files have not been discarded. Connect and retry.",
     "browser_title": "A browser is needed",
     "browser_message": "Install or enable an up-to-date browser that supports Custom Tabs, such as Chrome, then retry.",
@@ -5254,6 +5198,6 @@
     "new_group": "New group",
     "expenses": "Expenses",
     "settings": "Settings",
-    "continue_app": "Open Spliit Cloud"
+    "continue_app": "Open DONGY"
   }
 }

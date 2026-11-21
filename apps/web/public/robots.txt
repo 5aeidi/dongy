@@ -1,4 +1,4 @@
-# Spliit Cloud crawler policy for public content.
+# DONGY crawler policy for public content.
 #
 # Keep this file in sync with sitemap.xml when public informational pages
 # change. Application and user content routes are intentionally excluded.

@@ -1,17 +1,17 @@
 ---
 name: get-started
-description: Create a Spliit Cloud shared expense from conversation with a safe confirmation preview.
+description: Create a DONGY shared expense from conversation with a safe confirmation preview.
 ---
 
-# Getting started with Spliit Cloud
+# Getting started with DONGY
 
-Spliit Cloud tracks shared group expenses. Use its tools when the user wants
+DONGY tracks shared group expenses. Use its tools when the user wants
 to record, split, or review a shared expense.
 
 ## Workflow
 
 1. Call `get-expense-context` first when the group ID is not already known.
-   Results are already restricted to the OAuth-connected Spliit Cloud account.
+   Results are already restricted to the OAuth-connected DONGY account.
 2. Resolve group and participant names case-insensitively from that response.
    Ask one short clarification only when multiple distinct IDs remain
    plausible.
@@ -25,7 +25,7 @@ to record, split, or review a shared expense.
 ## Rules
 
 - Pass monetary values as decimal strings in major currency units.
-- Omit payer, split, date, category, and currency only when Spliit Cloud defaults
+- Omit payer, split, date, category, and currency only when DONGY defaults
   should apply.
 - Use `get-group-summary` for balances and recent expenses, not for
   participant mapping.

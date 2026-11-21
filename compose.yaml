@@ -22,7 +22,7 @@ services:
       - spliit
 
   migrate:
-    image: ghcr.io/antonio-ivanovski/spliit-cloud-migrate:${SPLIIT_TAG:-latest}
+    image: ghcr.io/5aeidi/dongy-migrate:${SPLIIT_TAG:-latest}
     pull_policy: always
     restart: 'no'
     environment:
@@ -34,7 +34,7 @@ services:
       - spliit
 
   api:
-    image: ghcr.io/antonio-ivanovski/spliit-cloud-api:${SPLIIT_TAG:-latest}
+    image: ghcr.io/5aeidi/dongy-api:${SPLIIT_TAG:-latest}
     pull_policy: always
     restart: unless-stopped
     expose:
@@ -146,7 +146,7 @@ services:
       - spliit
 
   worker:
-    image: ghcr.io/antonio-ivanovski/spliit-cloud-worker:${SPLIIT_TAG:-latest}
+    image: ghcr.io/5aeidi/dongy-worker:${SPLIIT_TAG:-latest}
     pull_policy: always
     restart: unless-stopped
     stop_grace_period: 40s
@@ -203,7 +203,7 @@ services:
       - spliit
 
   web:
-    image: ghcr.io/antonio-ivanovski/spliit-cloud-web:${SPLIIT_TAG:-latest}
+    image: ghcr.io/5aeidi/dongy-web:${SPLIIT_TAG:-latest}
     pull_policy: always
     restart: unless-stopped
     ports:

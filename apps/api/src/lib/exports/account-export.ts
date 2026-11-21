@@ -253,7 +253,7 @@ export function createAccountExportArtifact(
 
   const stamp = exportedAt.replace(/\.\d{3}Z$/, 'Z').replace(/[:]/g, '-')
   return {
-    fileName: `Spliit Cloud Account Export - ${stamp}.spliit.zip`,
+    fileName: `DONGY Account Export - ${stamp}.spliit.zip`,
     mediaType: 'application/zip',
     scope: accountManifest.scope,
     exportedAt,

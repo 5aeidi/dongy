@@ -64,9 +64,7 @@ describe('OAuthConsentPage', () => {
   it('explains the account, client, shared data and light risk', async () => {
     render(<OAuthConsentPage />)
 
-    expect(
-      await screen.findByText('Connect Spliit Cloud to ChatGPT?'),
-    ).toBeVisible()
+    expect(await screen.findByText('Connect DONGY to ChatGPT?')).toBeVisible()
     expect(screen.getByText('Antonio Example')).toBeVisible()
     expect(screen.getByText('antonio@example.com')).toBeVisible()
     expect(screen.getByText('chatgpt')).toBeVisible()
@@ -126,7 +124,7 @@ describe('OAuthConsentPage', () => {
     render(<OAuthConsentPage />)
 
     expect(await screen.findByRole('alert')).toHaveTextContent(
-      'Spliit Cloud could not verify this application',
+      'DONGY could not verify this application',
     )
     expect(
       screen.getByRole('button', { name: 'Allow and connect' }),

@@ -9,14 +9,14 @@
     <string name="check_updates">Check for updates</string>
     <string name="checking">Checking for updates…</string>
     <string name="connection_settings">Connection settings</string>
-    <string name="continue_app">Open Spliit Cloud</string>
+    <string name="continue_app">Open DONGY</string>
     <string name="expenses">Expenses</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">Later</string>
     <string name="new_group">New group</string>
     <string name="obtainium_note">If you use Obtainium, it can also manage updates from our GitHub releases.</string>
     <string name="offline_message">The first launch needs an internet connection to prepare offline access. Your shared files have not been discarded. Connect and retry.</string>
-    <string name="offline_title">Connect to open Spliit Cloud</string>
+    <string name="offline_title">Connect to open DONGY</string>
     <string name="open_play">Open Google Play</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">This installation is managed by Google Play. Check Google Play for Android package updates.</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Android app updates</string>
     <string name="version">Android package %1$s (%2$d)</string>
     <string name="view_update">View update</string>
-    <string name="web_version_note">Website features update separately. Your expenses are stored by Spliit Cloud and in this browser’s offline storage.</string>
+    <string name="web_version_note">Website features update separately. Your expenses are stored by DONGY and in this browser’s offline storage.</string>
 </resources>

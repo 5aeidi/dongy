@@ -849,7 +849,7 @@ export const invitationsRouter = createTRPCRouter({
         })
       }
       // Differentiate the email body by whether the recipient already has an
-      // account on this Spliit Cloud instance. The DB row is the source of
+      // account on this DONGY instance. The DB row is the source of
       // truth: the in-app UI will surface the invitation to existing users
       // regardless of email delivery, so we never fail the mutation on send.
       const existingAccount = await prisma.user.findFirst({

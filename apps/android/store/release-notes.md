@@ -1,4 +1,4 @@
-Spliit Cloud for Android packages the existing web application with launcher shortcuts, receipt sharing, notification delegation, and verified website links.
+DONGY for Android packages the existing web application with launcher shortcuts, receipt sharing, notification delegation, and verified website links.
 
 Independent installations can check for Android package updates from the app's settings or the launcher’s Android app updates shortcut. Website features continue to update separately.
 

@@ -9,14 +9,14 @@
     <string name="check_updates">اپ ڈیٹس کی جانچ کریں</string>
     <string name="checking">اپ ڈیٹس کی جانچ ہو رہی ہے…</string>
     <string name="connection_settings">کنکشن کی ترتیبات</string>
-    <string name="continue_app">Spliit Cloud کھولیں</string>
+    <string name="continue_app">DONGY کھولیں</string>
     <string name="expenses">اخراجات</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">بعد میں</string>
     <string name="new_group">نیا گروپ</string>
     <string name="obtainium_note">اگر آپ Obtainium استعمال کرتے ہیں تو یہ ہماری GitHub ریلیزز سے اپ ڈیٹس کا انتظام بھی کر سکتا ہے۔</string>
     <string name="offline_message">آف لائن رسائی تیار کرنے کے لیے پہلی بار کھولتے وقت انٹرنیٹ کنکشن درکار ہے۔ آپ کی شیئر کردہ فائلیں ضائع نہیں کی گئی ہیں۔ منسلک ہوں اور دوبارہ کوشش کریں۔</string>
-    <string name="offline_title">Spliit Cloud کھولنے کے لیے منسلک ہوں</string>
+    <string name="offline_title">DONGY کھولنے کے لیے منسلک ہوں</string>
     <string name="open_play">Google Play کھولیں</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">اس تنصیب کا انتظام Google Play کرتا ہے۔ Android پیکیج کی اپ ڈیٹس کے لیے Google Play دیکھیں۔</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Android ایپ کی اپ ڈیٹس</string>
     <string name="version">Android پیکیج %1$s (%2$d)</string>
     <string name="view_update">اپ ڈیٹ دیکھیں</string>
-    <string name="web_version_note">ویب سائٹ کی خصوصیات الگ سے اپ ڈیٹ ہوتی ہیں۔ آپ کے اخراجات Spliit Cloud اور اس براؤزر کی آف لائن اسٹوریج میں محفوظ کیے جاتے ہیں۔</string>
+    <string name="web_version_note">ویب سائٹ کی خصوصیات الگ سے اپ ڈیٹ ہوتی ہیں۔ آپ کے اخراجات DONGY اور اس براؤزر کی آف لائن اسٹوریج میں محفوظ کیے جاتے ہیں۔</string>
 </resources>

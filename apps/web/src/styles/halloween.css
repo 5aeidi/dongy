@@ -107,9 +107,9 @@ html[data-season='halloween'] {
   --halloween-moonbeam: rgb(255 226 160 / 0.4);
   --halloween-moon-x: 82%;
   --halloween-hero-gradient: linear-gradient(
-    100deg,
-    #3a2340 0%,
-    #7d3a2a 42%,
+    to right,
+    #3a2340 0% 42%,
+    #7d3a2a 42% 100%,
     #a94719 100%
   );
 
@@ -172,9 +172,9 @@ html[data-season='halloween'].dark {
   --halloween-header-edge: rgb(255 209 138 / 0.18);
   --halloween-moonbeam: rgb(186 158 236 / 0.32);
   --halloween-hero-gradient: linear-gradient(
-    100deg,
-    #f6e7c8 0%,
-    #ffc15e 58%,
+    to right,
+    #f6e7c8 0% 58%,
+    #ffc15e 58% 100%,
     #f77e45 100%
   );
 
@@ -241,45 +241,41 @@ html[data-season='halloween'].dark {
 html[data-season='halloween']
   .ambient-backdrop:not([data-group-tinted='true'])
   .ambient-backdrop__orb--emerald {
-  background: radial-gradient(
-    circle,
-    hsl(268 62% 58% / 0.16) 0%,
-    hsl(268 58% 50% / 0.06) 46%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(hsl(268 62% 58% / 0.16), hsl(268 62% 58% / 0.16)) center /
+      63.9% 63.9% no-repeat,
+    linear-gradient(hsl(268 58% 50% / 0.06), hsl(268 58% 50% / 0.06)) center /
+      100% 100% no-repeat;
 }
 
 html[data-season='halloween']
   .ambient-backdrop:not([data-group-tinted='true'])
   .ambient-backdrop__orb--coral {
-  background: radial-gradient(
-    circle,
-    hsl(36 92% 62% / 0.14) 0%,
-    hsl(26 88% 54% / 0.05) 48%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(hsl(36 92% 62% / 0.14), hsl(36 92% 62% / 0.14)) center /
+      66.7% 66.7% no-repeat,
+    linear-gradient(hsl(26 88% 54% / 0.05), hsl(26 88% 54% / 0.05)) center /
+      100% 100% no-repeat;
 }
 
 html[data-season='halloween'].dark
   .ambient-backdrop:not([data-group-tinted='true'])
   .ambient-backdrop__orb--emerald {
-  background: radial-gradient(
-    circle,
-    hsl(268 66% 52% / 0.18) 0%,
-    hsl(268 60% 44% / 0.05) 46%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(hsl(268 66% 52% / 0.18), hsl(268 66% 52% / 0.18)) center /
+      63.9% 63.9% no-repeat,
+    linear-gradient(hsl(268 60% 44% / 0.05), hsl(268 60% 44% / 0.05)) center /
+      100% 100% no-repeat;
 }
 
 html[data-season='halloween'].dark
   .ambient-backdrop:not([data-group-tinted='true'])
   .ambient-backdrop__orb--coral {
-  background: radial-gradient(
-    circle,
-    hsl(34 90% 58% / 0.12) 0%,
-    hsl(26 84% 50% / 0.04) 48%,
-    transparent 72%
-  );
+  background:
+    linear-gradient(hsl(34 90% 58% / 0.12), hsl(34 90% 58% / 0.12)) center /
+      66.7% 66.7% no-repeat,
+    linear-gradient(hsl(26 84% 50% / 0.04), hsl(26 84% 50% / 0.04)) center /
+      100% 100% no-repeat;
 }
 
 /* ══ 3. The scenery plates ═══════════════════════════════════════════ */
@@ -310,7 +306,7 @@ html[data-season='halloween'] .halloween-scenery {
   position: absolute;
   inset: 0;
   background-image: radial-gradient(
-    var(--halloween-grain) 0.5px,
+    var(--halloween-grain) 0.5px 0.8px,
     transparent 0.8px
   );
   background-size: 5px 5px;
@@ -378,12 +374,14 @@ html[data-season='halloween'].dark .halloween-scenery__stars {
   width: clamp(112px, 17vw, 224px);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(
-    circle at 36% 30%,
-    var(--halloween-moon-core) 0%,
-    var(--halloween-moon-mid) 54%,
-    var(--halloween-moon-edge) 100%
-  );
+  background:
+    linear-gradient(circle at, circle at) center / 30% 30% no-repeat,
+    linear-gradient(var(--halloween-moon-core), var(--halloween-moon-core))
+      center / 54% 54% no-repeat,
+    linear-gradient(var(--halloween-moon-mid), var(--halloween-moon-mid)) center
+      / 100% 100% no-repeat,
+    linear-gradient(var(--halloween-moon-edge), var(--halloween-moon-edge))
+      center / 100% 100% no-repeat;
   box-shadow:
     0 0 0 1px rgb(255 255 255 / 0.07),
     0 0 70px 14px var(--halloween-moon-glow);

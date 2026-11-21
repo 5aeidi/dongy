@@ -5,7 +5,7 @@ title: One invite link for the whole group
 channels: [updates]
 ---
 
-Spliit Cloud 2.10.0 makes inviting people easier: share one link with your whole group, start anonymously, and keep your invitation through sign-in. Details are in the [v2.10.0](https://github.com/antonio-ivanovski/spliit-cloud/releases/tag/v2.10.0) notes.
+DONGY 2.10.0 makes inviting people easier: share one link with your whole group, start anonymously, and keep your invitation through sign-in. Details are in the [v2.10.0](https://github.com/5aeidi/dongy/releases/tag/v2.10.0) notes.
 
 ## One link for several people
 

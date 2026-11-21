@@ -41,10 +41,10 @@ describe('document title', () => {
     const { rerender } = render(
       <>
         <Title title="🏖️ Trip · Expenses" />
-        <Title title="Spliit Cloud · New expense" />
+        <Title title="DONGY · New expense" />
       </>,
     )
-    expect(document.title).toBe('Spliit Cloud · New expense')
+    expect(document.title).toBe('DONGY · New expense')
 
     rerender(<Title title="🏖️ Trip · Expenses" />)
     expect(document.title).toBe('🏖️ Trip · Expenses')
@@ -54,19 +54,19 @@ describe('document title', () => {
     const { rerender } = render(
       <>
         <Title title="🏖️ Trip · Expenses" />
-        <Title title="Spliit Cloud · New expense" />
+        <Title title="DONGY · New expense" />
       </>,
     )
-    expect(document.title).toBe('Spliit Cloud · New expense')
+    expect(document.title).toBe('DONGY · New expense')
 
     // e.g. the group query resolving or the locale changing must not
     // promote the parent entry above the nested page.
     rerender(
       <>
         <Title title="🏖️ Trip · Balances" />
-        <Title title="Spliit Cloud · New expense" />
+        <Title title="DONGY · New expense" />
       </>,
     )
-    expect(document.title).toBe('Spliit Cloud · New expense')
+    expect(document.title).toBe('DONGY · New expense')
   })
 })

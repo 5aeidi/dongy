@@ -9,14 +9,14 @@
     <string name="check_updates">Cerca actualitzacions</string>
     <string name="checking">Cercant actualitzacions…</string>
     <string name="connection_settings">Configuració de la connexió</string>
-    <string name="continue_app">Obre Spliit Cloud</string>
+    <string name="continue_app">Obre DONGY</string>
     <string name="expenses">Despeses</string>
     <string name="github_source">GitHub / Obtainium</string>
     <string name="later">Més tard</string>
     <string name="new_group">Grup nou</string>
     <string name="obtainium_note">Si fas servir Obtainium, també pot gestionar les actualitzacions de les nostres versions de GitHub.</string>
     <string name="offline_message">La primera vegada que obris l\'aplicació cal connexió a internet per preparar l\'accés sense connexió. Els fitxers que has compartit no s\'han descartat. Connecta\'t i torna-ho a provar.</string>
-    <string name="offline_title">Connecta\'t per obrir Spliit Cloud</string>
+    <string name="offline_title">Connecta\'t per obrir DONGY</string>
     <string name="open_play">Obre Google Play</string>
     <string name="play_source">Google Play</string>
     <string name="play_updates">Google Play gestiona aquesta instal·lació. Cerca-hi les actualitzacions del paquet Android.</string>
@@ -28,5 +28,5 @@
     <string name="updates_title">Actualitzacions de l\'aplicació Android</string>
     <string name="version">Paquet Android %1$s (%2$d)</string>
     <string name="view_update">Mostra l\'actualització</string>
-    <string name="web_version_note">Les funcions del lloc web s\'actualitzen per separat. Les teves despeses es desen a Spliit Cloud i a l\'emmagatzematge sense connexió d\'aquest navegador.</string>
+    <string name="web_version_note">Les funcions del lloc web s\'actualitzen per separat. Les teves despeses es desen a DONGY i a l\'emmagatzematge sense connexió d\'aquest navegador.</string>
 </resources>

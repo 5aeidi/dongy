@@ -23,15 +23,15 @@ describe('email templates', () => {
         resetUrl: 'https://spliit.test/reset?token=abc',
         methodLabels: ['email and password'],
       })
-      expect(r.subject).toBe('Reset your Spliit Cloud password')
+      expect(r.subject).toBe('Reset your DONGY password')
       expect(r.text).toContain(
-        'Click the link below to reset your Spliit Cloud password.',
+        'Click the link below to reset your DONGY password.',
       )
       expect(r.text).toContain('https://spliit.test/reset?token=abc')
       expect(r.text).toContain(
         'If you did not request a password reset, you can safely ignore this email.',
       )
-      expect(r.html).toContain('Reset your Spliit Cloud password')
+      expect(r.html).toContain('Reset your DONGY password')
       expect(r.html).toContain('https://spliit.test/reset?token=abc')
     })
 
@@ -51,11 +51,11 @@ describe('email templates', () => {
         resetUrl: 'https://spliit.test/reset?token=abc',
         methodLabels: ['Google', 'email sign-in link'],
       })
-      expect(r.subject).toBe('Sign in to Spliit Cloud')
+      expect(r.subject).toBe('Sign in to DONGY')
       expect(r.text).toContain(
         'Use one of these sign-in methods instead: Google, email sign-in link.',
       )
-      expect(r.html).toContain('Sign in to Spliit Cloud')
+      expect(r.html).toContain('Sign in to DONGY')
     })
   })
 
@@ -64,12 +64,12 @@ describe('email templates', () => {
       const r = await renderVerificationEmail({
         verificationUrl: 'https://spliit.test/verify?token=abc',
       })
-      expect(r.subject).toBe('Verify your Spliit Cloud account')
+      expect(r.subject).toBe('Verify your DONGY account')
       expect(r.text).toContain(
-        'Click the link below to verify your email address and sign in to Spliit Cloud.',
+        'Click the link below to verify your email address and sign in to DONGY.',
       )
-      expect(r.text).toContain('If you did not create a Spliit Cloud account')
-      expect(r.html).toContain('Verify your Spliit Cloud account')
+      expect(r.text).toContain('If you did not create a DONGY account')
+      expect(r.html).toContain('Verify your DONGY account')
     })
   })
 
@@ -78,14 +78,12 @@ describe('email templates', () => {
       const r = await renderMagicLinkEmail({
         signInUrl: 'https://spliit.test/auth/verify?token=abc',
       })
-      expect(r.subject).toBe('Your Spliit Cloud sign-in link')
-      expect(r.text).toContain(
-        'Click the link below to sign in to Spliit Cloud.',
-      )
+      expect(r.subject).toBe('Your DONGY sign-in link')
+      expect(r.text).toContain('Click the link below to sign in to DONGY.')
       expect(r.text).toContain(
         'If you did not request this email, you can safely ignore it.',
       )
-      expect(r.html).toContain('Your Spliit Cloud sign-in link')
+      expect(r.html).toContain('Your DONGY sign-in link')
     })
   })
 
@@ -95,7 +93,7 @@ describe('email templates', () => {
         otp: '482917',
         expiresInMinutes: 10,
       })
-      expect(r.subject).toBe('Your Spliit Cloud email confirmation code')
+      expect(r.subject).toBe('Your DONGY email confirmation code')
       expect(r.text).toContain('482917')
       expect(r.text).toContain('expires in 10 minutes')
       expect(r.html).toContain('482917')
@@ -108,7 +106,7 @@ describe('email templates', () => {
       const r = await renderEmailChangedNoticeEmail({
         newEmail: 'new@example.com',
       })
-      expect(r.subject).toBe('Your Spliit Cloud email address was changed')
+      expect(r.subject).toBe('Your DONGY email address was changed')
       expect(r.text).toContain('new@example.com')
       expect(r.html).toContain('new@example.com')
     })
@@ -117,12 +115,8 @@ describe('email templates', () => {
   describe('renderPasswordSetNoticeEmail', () => {
     it('points at forgot-password in both email formats', async () => {
       const r = await renderPasswordSetNoticeEmail()
-      expect(r.subject).toBe(
-        'A password was added to your Spliit Cloud account',
-      )
-      expect(r.text).toContain(
-        'A password was added to your Spliit Cloud account',
-      )
+      expect(r.subject).toBe('A password was added to your DONGY account')
+      expect(r.text).toContain('A password was added to your DONGY account')
       expect(r.text).toContain('/auth/forgot-password')
       expect(r.html).toContain('A password was added to your account')
       expect(r.html).toContain('/auth/forgot-password')
@@ -132,12 +126,8 @@ describe('email templates', () => {
   describe('renderPasswordRemovedNoticeEmail', () => {
     it('points at forgot-password in both email formats', async () => {
       const r = await renderPasswordRemovedNoticeEmail()
-      expect(r.subject).toBe(
-        'A password was removed from your Spliit Cloud account',
-      )
-      expect(r.text).toContain(
-        'The password on your Spliit Cloud account was removed',
-      )
+      expect(r.subject).toBe('A password was removed from your DONGY account')
+      expect(r.text).toContain('The password on your DONGY account was removed')
       expect(r.text).toContain('/auth/forgot-password')
       expect(r.html).toContain('A password was removed from your account')
       expect(r.html).toContain('/auth/forgot-password')
@@ -147,10 +137,8 @@ describe('email templates', () => {
   describe('renderPasswordChangedNoticeEmail', () => {
     it('points at forgot-password and notes signed-out sessions', async () => {
       const r = await renderPasswordChangedNoticeEmail()
-      expect(r.subject).toBe('Your Spliit Cloud password was changed')
-      expect(r.text).toContain(
-        'The password on your Spliit Cloud account was changed',
-      )
+      expect(r.subject).toBe('Your DONGY password was changed')
+      expect(r.text).toContain('The password on your DONGY account was changed')
       expect(r.text).toContain('Other sessions have been signed out')
       expect(r.text).toContain('/auth/forgot-password')
       expect(r.html).toContain('Your password was changed')
@@ -170,12 +158,10 @@ describe('email templates', () => {
         recipientEmail: 'bob@example.com',
         recipientIsExistingUser: true,
       })
-      expect(r.subject).toBe(
-        'Alice invited you to Roadtrip 2026 on Spliit Cloud',
-      )
-      expect(r.text.toLowerCase()).toContain('open spliit cloud')
+      expect(r.subject).toBe('Alice invited you to Roadtrip 2026 on DONGY')
+      expect(r.text.toLowerCase()).toContain('open dongy')
       expect(r.text).toContain('/groups/grp-1')
-      expect(r.html).toContain('Open Spliit Cloud')
+      expect(r.html).toContain('Open DONGY')
       expect(r.html).toContain('/groups/grp-1')
     })
 
@@ -190,9 +176,7 @@ describe('email templates', () => {
         recipientIsExistingUser: true,
         temporaryName: 'Bob Profile',
       })
-      expect(r.subject).toBe(
-        'Alice invited you to Roadtrip 2026 on Spliit Cloud',
-      )
+      expect(r.subject).toBe('Alice invited you to Roadtrip 2026 on DONGY')
       expect(r.subject).not.toContain('as Bob Profile')
       expect(r.text).not.toContain('You will appear as')
       expect(r.html).not.toContain('You will appear as')
@@ -209,9 +193,7 @@ describe('email templates', () => {
         recipientEmail: 'newuser@example.com',
         recipientIsExistingUser: false,
       })
-      expect(r.subject).toBe(
-        'Alice invited you to Roadtrip 2026 on Spliit Cloud',
-      )
+      expect(r.subject).toBe('Alice invited you to Roadtrip 2026 on DONGY')
       expect(r.text.toLowerCase()).toContain('create an account')
       expect(r.text).toContain('/?invitation=inv-new')
       expect(r.html).toContain('Create an account')
@@ -234,7 +216,7 @@ describe('email templates', () => {
         currencyCode: 'USD',
       })
       expect(r.subject).toBe(
-        'Alice invited you to Imported Trip on Spliit Cloud as Friend One',
+        'Alice invited you to Imported Trip on DONGY as Friend One',
       )
       expect(r.text).toContain(
         'This invitation is part of an import from a Spliit export.',
@@ -254,11 +236,9 @@ describe('email templates', () => {
         inviterName: 'Alice',
         isNewUser: false,
       })
-      expect(r.subject).toBe(
-        'Alice started a friend ledger with you on Spliit Cloud',
-      )
+      expect(r.subject).toBe('Alice started a friend ledger with you on DONGY')
       expect(r.text).toContain('Alice started a friend ledger with you')
-      expect(r.html).toContain('Open Spliit Cloud')
+      expect(r.html).toContain('Open DONGY')
     })
 
     it('uses the sign-up CTA for a new user', async () => {
@@ -274,7 +254,7 @@ describe('email templates', () => {
   describe('renderGroupActivityEmail', () => {
     it('renders generic activity details in both email bodies', async () => {
       const r = await renderGroupActivityEmail({
-        subject: '[Spliit Cloud] Group details were updated in Roadtrip 2026',
+        subject: '[DONGY] Group details were updated in Roadtrip 2026',
         text: 'Group details were updated in Roadtrip 2026 by Alice.\n\nView the group here:\nhttps://spliit.test/groups/grp-1',
         brandBaseUrl: 'https://spliit.test',
         groupDisplayName: 'Roadtrip 2026',
@@ -299,7 +279,7 @@ describe('email templates', () => {
     it('renders a trending-over alert with amounts, period, and CTA', async () => {
       const r = await renderBudgetAlertEmail({
         kind: 'budget_alert',
-        subject: '[Spliit Cloud] Budget trending over: Groceries',
+        subject: '[DONGY] Budget trending over: Groceries',
         text: 'Groceries: USD 180.00 of USD 200.00 spent in Roadtrip 2026.\n\nView budget:\nhttps://spliit.test/groups/grp-1/budgets/bgt-1',
         brandBaseUrl: 'https://spliit.test',
         budgetName: 'Groceries',
@@ -313,7 +293,7 @@ describe('email templates', () => {
         unsubscribeUrl:
           'https://spliit.test/email/unsubscribe?token=test-token',
       })
-      expect(r.subject).toBe('[Spliit Cloud] Budget trending over: Groceries')
+      expect(r.subject).toBe('[DONGY] Budget trending over: Groceries')
       expect(r.text).toContain('USD 180.00 of USD 200.00')
       expect(r.html).toContain('Budget trending over')
       expect(r.html).toContain('Groceries')
@@ -327,7 +307,7 @@ describe('email templates', () => {
     it('renders an over-limit alert with the exceeded headline', async () => {
       const r = await renderBudgetAlertEmail({
         kind: 'budget_alert',
-        subject: '[Spliit Cloud] Budget exceeded: Groceries',
+        subject: '[DONGY] Budget exceeded: Groceries',
         text: 'Groceries: USD 250.00 of USD 200.00 spent in Roadtrip 2026.\n\nView budget:\nhttps://spliit.test/groups/grp-1/budgets/bgt-1',
         brandBaseUrl: 'https://spliit.test',
         budgetName: 'Groceries',
@@ -348,7 +328,7 @@ describe('email templates', () => {
     it('renders an expense comment with excerpt and direct link', async () => {
       const r = await renderExpenseActivityEmail({
         kind: 'expense_comment',
-        subject: '[Spliit Cloud] Alice commented on "Dinner" in Test Group',
+        subject: '[DONGY] Alice commented on "Dinner" in Test Group',
         text: 'Alice commented on "Dinner" in Test Group.\n\n"Looks good"',
         brandBaseUrl: 'https://spliit.app',
         groupDisplayName: 'Test Group',
@@ -366,8 +346,7 @@ describe('email templates', () => {
     it('produces expense-created email with subject and styled html', async () => {
       const r = await renderExpenseActivityEmail({
         kind: 'expense',
-        subject:
-          '[Spliit Cloud] Expense "Dinner" was added by Alice to Test Group',
+        subject: '[DONGY] Expense "Dinner" was added by Alice to Test Group',
         text:
           'Expense "Dinner" (EUR 45.00) was added by Alice to Test Group on 2026-07-02.\n\n' +
           'View it here:\nhttps://spliit.app/groups/grp-1/expenses/exp-1',
@@ -391,8 +370,7 @@ describe('email templates', () => {
     it('produces expense-updated email with changed fields', async () => {
       const r = await renderExpenseActivityEmail({
         kind: 'expense',
-        subject:
-          '[Spliit Cloud] Expense "Dinner" was updated by Alice in Test Group',
+        subject: '[DONGY] Expense "Dinner" was updated by Alice in Test Group',
         text: 'Expense "Dinner" was updated by Alice in Test Group.\nAmount: EUR 50.00\nDate: 2026-07-02\nChanged: amount, title',
         eventType: 'EXPENSE_UPDATED',
         brandBaseUrl: 'https://spliit.app',
@@ -411,7 +389,7 @@ describe('email templates', () => {
       const r = await renderExpenseActivityEmail({
         kind: 'expense',
         subject:
-          '[Spliit Cloud] Expense "Dinner" was removed by Alice from Test Group',
+          '[DONGY] Expense "Dinner" was removed by Alice from Test Group',
         text: 'Expense "Dinner" was removed by Alice from Test Group.',
         eventType: 'EXPENSE_DELETED',
         brandBaseUrl: 'https://spliit.app',
@@ -429,7 +407,7 @@ describe('email templates', () => {
     it('produces import-summary email with the count and total', async () => {
       const r = await renderExpenseActivityEmail({
         kind: 'import_summary',
-        subject: '[Spliit Cloud] 25 expenses imported in Test Group',
+        subject: '[DONGY] 25 expenses imported in Test Group',
         text: 'Alice imported 25 expenses from Splitwise in Test Group (total EUR 1234.50).',
         brandBaseUrl: 'https://spliit.app',
         groupDisplayName: 'Test Group',
@@ -450,7 +428,7 @@ describe('email templates', () => {
     it('renders recurrence line on RECURRING_EXPENSE_STOPPED expense email', async () => {
       const r = await renderExpenseActivityEmail({
         kind: 'expense',
-        subject: '[Spliit Cloud] Recurring expense stopped in Test Group',
+        subject: '[DONGY] Recurring expense stopped in Test Group',
         text: 'Alice stopped the recurring expense "Dinner" (Every 2 months, 12 total) in Test Group.',
         eventType: 'RECURRING_EXPENSE_STOPPED',
         brandBaseUrl: 'https://spliit.app',
@@ -471,7 +449,7 @@ describe('email templates', () => {
       const r = await renderExpenseActivityEmail({
         kind: 'expense',
         subject:
-          '[Spliit Cloud] Recurring expense "Dinner" was created by Alice in Test Group',
+          '[DONGY] Recurring expense "Dinner" was created by Alice in Test Group',
         text: 'Recurring expense "Dinner" (EUR 45.00) was created by Alice in Test Group on 2026-07-02.',
         eventType: 'RECURRING_EXPENSE_CREATED',
         brandBaseUrl: 'https://spliit.app',
@@ -490,7 +468,7 @@ describe('email templates', () => {
     it('renders recurrence line on recurring_expense_summary email', async () => {
       const r = await renderExpenseActivityEmail({
         kind: 'recurring_expense_summary',
-        subject: '[Spliit Cloud] 3 recurring expenses caught up in Test Group',
+        subject: '[DONGY] 3 recurring expenses caught up in Test Group',
         text: 'Alice created 3 recurring expenses "Lunch" (Every 2 months, 12 total) in Test Group from 2026-07-01 to 2026-07-03.',
         brandBaseUrl: 'https://spliit.app',
         groupDisplayName: 'Test Group',

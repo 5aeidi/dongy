@@ -91,14 +91,11 @@ describe('planTranslations', () => {
     expect(plan.batches[0].id).toBe('oneshot')
     expect(plan.batches[0].prompt).toContain('usages')
     expect(plan.batches[0].prompt).toContain('scripts/i18n/guides/default.md')
-    expect(plan.batches[0].prompt).toContain('scripts/i18n/guides/en-GZ.md')
-    expect(plan.batches[0].guidePaths.locales['en-GZ']).toBe(
-      'scripts/i18n/guides/en-GZ.md',
+    expect(plan.batches[0].prompt).toContain('scripts/i18n/guides/fa-IR.md')
+    expect(plan.batches[0].guidePaths.locales['fa-IR']).toBe(
+      'scripts/i18n/guides/fa-IR.md',
     )
-    expect(plan.summary.missingCells).toBe(
-      // Sparse overlays (en-GB, pt-BR) inherit new keys — no work cells.
-      (nonEnLocales().length - 2) * 2,
-    )
+    expect(plan.summary.missingCells).toBe(nonEnLocales().length * 2)
   })
 
   it('uses single mode for 3–8 keys', async () => {
@@ -169,7 +166,7 @@ describe('packMessages multi-locale', () => {
       ) + '\n',
     )
     await writeFile(
-      join(dir, 'fr-FR.json'),
+      join(dir, 'fa-IR.json'),
       JSON.stringify({ Members: { title: 'Membres' } }, null, 2) + '\n',
     )
     await writeFile(
@@ -186,24 +183,21 @@ describe('packMessages multi-locale', () => {
     await rm(dir, { recursive: true, force: true })
   })
 
-  it('packs multiple locales with byLocale status and in-family values', async () => {
+  it('packs locales with byLocale status', async () => {
     const result = await packMessages({
-      locales: ['fr-FR', 'es'],
+      locales: ['fa-IR'],
       keys: ['Members.title', 'Members.remove'],
     })
-    expect(result.locales).toEqual(['fr-FR', 'es'])
+    expect(result.locales).toEqual(['fa-IR'])
     expect(result.guidePaths).toEqual({
       baseline: 'scripts/i18n/guides/default.md',
       locales: {
-        'fr-FR': 'scripts/i18n/guides/fr-FR.md',
-        es: 'scripts/i18n/guides/es.md',
+        'fa-IR': 'scripts/i18n/guides/fa-IR.md',
       },
     })
     const remove = result.keys.find((k) => k.key === 'Members.remove')
     expect(remove).toBeTruthy()
-    expect(remove!.byLocale!['fr-FR'].status).toBe('missing')
-    expect(remove!.byLocale!['es'].status).toBe('ok')
-    expect(remove!.byLocale!['fr-FR'].values.es).toBe('Eliminar')
+    expect(remove!.byLocale!['fa-IR'].status).toBe('missing')
     // title is ok in both → filtered out when using --keys that need work
     expect(result.keys.every((k) => k.key !== 'Members.title')).toBe(true)
   })
@@ -214,15 +208,15 @@ describe('packMessages multi-locale', () => {
       JSON.stringify({ Members: { title: 'Team' } }, null, 2) + '\n',
     )
     await writeFile(
-      join(dir, 'fr-FR.json'),
+      join(dir, 'fa-IR.json'),
       JSON.stringify({ Members: { title: 'Membres' } }, null, 2) + '\n',
     )
     const result = await packMessages({
-      locales: ['fr-FR'],
+      locales: ['fa-IR'],
       keys: ['Members.title'],
       readOldEn: async () => ({ Members: { title: 'Members' } }),
     })
-    expect(result.keys[0].byLocale!['fr-FR'].status).toBe('stale')
-    expect(result.keys[0].byLocale!['fr-FR'].current).toBe('Membres')
+    expect(result.keys[0].byLocale!['fa-IR'].status).toBe('stale')
+    expect(result.keys[0].byLocale!['fa-IR'].current).toBe('Membres')
   })
 })

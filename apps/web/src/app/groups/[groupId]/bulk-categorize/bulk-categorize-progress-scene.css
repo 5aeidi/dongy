@@ -12,10 +12,10 @@
   border: 1px solid hsl(var(--mascot-stroke) / 0.15);
   border-radius: 18px;
   background: linear-gradient(
-    155deg,
-    hsl(var(--mascot-paper-mid) / 0.33),
-    hsl(var(--mascot-paper-edge) / 0.18) 55%,
-    hsl(var(--mascot-paper-mid) / 0.38)
+    to bottom,
+    hsl(var(--mascot-paper-mid) / 0.33) 0% 55%,
+    hsl(var(--mascot-paper-edge) / 0.18) 55% 100%,
+    hsl(var(--mascot-paper-mid) / 0.38) 100%
   );
 }
 
@@ -31,11 +31,16 @@
   inset: 0;
   opacity: 0.55;
   background-image: repeating-linear-gradient(
-    0deg,
+    to top,
     transparent 0 29px,
     hsl(var(--mascot-rule) / 0.08) 30px 31px
   );
-  mask-image: linear-gradient(90deg, transparent, black 13% 86%, transparent);
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 13% 86%,
+    transparent
+  );
 }
 
 .bill-sort-scene__desk::after {
@@ -158,9 +163,9 @@
   border: 1.5px solid hsl(var(--mascot-stroke));
   border-radius: 4px 5px 2px 2px;
   background: linear-gradient(
-    132deg,
-    hsl(var(--mascot-paper)),
-    hsl(var(--mascot-paper-mid))
+    to right,
+    hsl(var(--mascot-paper)) 0% 100%,
+    hsl(var(--mascot-paper-mid)) 100%
   );
   box-shadow: inset -5px 0 8px hsl(var(--mascot-ink) / 0.05);
 }
@@ -172,11 +177,11 @@
   width: 52px;
   height: 29px;
   background: repeating-linear-gradient(
-    180deg,
+    to bottom,
     hsl(var(--mascot-rule) / 0.42) 0 2px,
     transparent 2px 9px
   );
-  mask-image: linear-gradient(90deg, black 68%, transparent 90%);
+  mask-image: linear-gradient(to right, black 68% 90%, transparent 90%);
   content: '';
 }
 
@@ -188,7 +193,7 @@
   height: 5px;
   border-top: 1px dashed hsl(var(--mascot-rule) / 0.55);
   background: repeating-linear-gradient(
-    90deg,
+    to right,
     transparent 0 5px,
     hsl(var(--mascot-paper-edge)) 5px 7px
   );
@@ -342,8 +347,8 @@
   border: 1px solid hsl(var(--mascot-stroke) / 0.5);
   border-radius: 7px 7px 9px 9px;
   background: linear-gradient(
-    180deg,
-    hsl(var(--mascot-paper-edge)),
+    to bottom,
+    hsl(var(--mascot-paper-edge)) 0% 72%,
     hsl(var(--mascot-paper)) 72%
   );
   box-shadow:
@@ -380,9 +385,9 @@
   border-bottom-width: 3px;
   border-radius: 3px 3px 9px 9px;
   background: linear-gradient(
-    165deg,
-    hsl(var(--mascot-paper)),
-    hsl(var(--mascot-paper-edge))
+    to bottom,
+    hsl(var(--mascot-paper)) 0% 100%,
+    hsl(var(--mascot-paper-edge)) 100%
   );
   box-shadow:
     inset 0 2px hsl(var(--mascot-paper) / 0.9),

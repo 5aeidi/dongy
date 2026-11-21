@@ -49,8 +49,8 @@ const CoercedNullableNumber = Schema.optional(
 
 /**
  * This parser accepts the original unversioned export and the upstream v3
- * extension. Keep current Spliit Cloud-only recurrence state out of this wire
- * schema; normalize only fields emitted by spliit.app.
+ * extension. Keep current DONGY-only recurrence state out of this wire schema;
+ * normalize only fields emitted by spliit.app.
  */
 export const spliitExportSchema = Schema.Struct({
   exportVersion: Schema.optional(Schema.Literal(3)),
@@ -252,7 +252,7 @@ const normalizeSpliitExport = Effect.fnUntraced(function* (
         })
       }
       // Legacy whole-share weights from spliit.app's BY_SHARES export.
-      // Spliit Cloud stores BY_SHARES as fixed units (`100 = 1 share`),
+      // DONGY stores BY_SHARES as fixed units (`100 = 1 share`),
       // so multiply legacy whole numbers once to land in the new
       // internal representation. EVENLY/PERCENTAGE/AMOUNT modes pass
       // through unchanged because the same column carries the literal
