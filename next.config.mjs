@@ -8,6 +8,12 @@ const withNextIntl = createNextIntlPlugin()
  */
 const remotePatterns = []
 
+// Origin of a custom S3 endpoint, added to the CSP below. `https:` already
+// covers AWS and most hosted providers, but a self-hosted endpoint such as
+// MinIO on http://localhost:9000 would otherwise have its uploads (connect-src)
+// and images (img-src) blocked by the browser.
+let s3CspSource = ''
+
 // S3 Storage
 if (process.env.S3_UPLOAD_ENDPOINT) {
   // custom endpoint for providers other than AWS
@@ -15,6 +21,7 @@ if (process.env.S3_UPLOAD_ENDPOINT) {
   remotePatterns.push({
     hostname: url.hostname,
   })
+  s3CspSource = ` ${url.origin}`
 } else if (process.env.S3_UPLOAD_BUCKET && process.env.S3_UPLOAD_REGION) {
   // default provider
   remotePatterns.push({
@@ -65,8 +72,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value:
-              "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' data:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+            value: `default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:${s3CspSource}; font-src 'self' data:; connect-src 'self' https:${s3CspSource}; frame-ancestors 'none'; base-uri 'self'; form-action 'self'`,
           },
         ],
       },
