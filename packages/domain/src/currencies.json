@@ -305,16 +305,22 @@
   },
   {
     "code": "IRR",
-    "symbol": "IRR",
+    "symbol": "Rial",
     "rounding": 0,
     "rounding_gap_minor": 1,
     "decimal_digits": 0,
-    "aliases": ["ریال"]
+    "aliases": ["ریال"],
+    "localizedSymbols": {
+      "fa": "ریال"
+    },
+    "suffixSymbol": true
   },
   {
     "code": "IRT",
     "symbol": "Toman",
-    "localizedSymbols": { "fa": "تومان" },
+    "localizedSymbols": {
+      "fa": "تومان"
+    },
     "suffixSymbol": true,
     "rounding": 0,
     "rounding_gap_minor": 1,
@@ -326,7 +332,9 @@
   {
     "code": "IRM",
     "symbol": "M Toman",
-    "localizedSymbols": { "fa": "میلیون تومان" },
+    "localizedSymbols": {
+      "fa": "میلیون تومان"
+    },
     "suffixSymbol": true,
     "rounding": 0,
     "rounding_gap_minor": 1,
@@ -672,7 +680,7 @@
     "decimal_digits": 0,
     "crypto": true,
     "aliasOf": "BTC",
-    "aliasScale": 0.00000001
+    "aliasScale": 1e-8
   },
   {
     "code": "SEK",

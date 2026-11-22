@@ -493,7 +493,7 @@ export const expenseItemFormInputSchema = z
       .number()
       .refine((v) => Number.isFinite(v), 'invalidNumber')
       .refine((v) => v !== 0, 'amountNotZero')
-      .refine((v) => Math.abs(v) <= 10_000_000, 'amountTenMillion'),
+      .refine((v) => Math.abs(v) <= 2_147_483_647, 'amountTenMillion'),
     quantity: z.coerce
       .number()
       .refine((v) => Number.isFinite(v), 'invalidNumber')
@@ -927,9 +927,9 @@ export function createExpenseFormInputSchema(fallbackCurrency: Currency) {
         .number()
         .refine((amount) => !Number.isNaN(amount), 'invalidNumber')
         .refine((amount) => amount != 0, 'amountNotZero')
-        // Major-unit ceiling: $10,000,000 equivalent (matches the prior
-        // 10_000_000_00 minor-unit ceiling; same error key for i18n).
-        .refine((amount) => amount <= 10_000_000, 'amountTenMillion'),
+        // DONGY: Iranian amounts are large (rials), so the form ceiling is the
+        // stored Int32 limit; the API re-checks the minor-unit value.
+        .refine((amount) => amount <= 2_147_483_647, 'amountTenMillion'),
       originalCurrency: z.union([
         z.string().min(3).max(4).nullish(),
         z.literal(''),
@@ -946,7 +946,7 @@ export function createExpenseFormInputSchema(fallbackCurrency: Currency) {
           .refine((amount) => !Number.isNaN(amount), 'invalidNumber')
           .refine((amount) => amount !== 0, 'amountNotZero')
           .refine(
-            (amount) => Math.abs(amount) <= 10_000_000,
+            (amount) => Math.abs(amount) <= 2_147_483_647,
             'amountTenMillion',
           )
           .optional(),
@@ -1213,7 +1213,7 @@ export const expenseApiSchema = z
       .int()
       .refine((amount) => amount != 0, 'amountNotZero')
       // Prisma Int max (~2.1e9). For decimal_digits=2 this is ~$21M; for BTC
-      // (8 digits) ~21 BTC. Form major-unit ceiling stays 10_000_000.
+      // (8 digits) ~21 BTC. The form uses the same ceiling (DONGY).
       .refine((amount) => amount <= 2_147_483_647, 'amountTenMillion')
       .describe(
         'Integer minor units of the expense currency (e.g. cents), not decimal. Max Int32.',

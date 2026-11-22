@@ -4,7 +4,7 @@ import {
   AiExpensePreview,
   type AiExpenseDraft,
 } from '@/app/groups/[groupId]/expenses/ai-expense-preview'
-import { act, render, screen } from '@/test/test-utils'
+import { act, fireEvent, render, screen } from '@/test/test-utils'
 import { getCurrency, getItemizedFormMinorTotals } from '@spliit/domain'
 
 vi.mock('@/app/groups/[groupId]/expenses/expense-mutation-hooks', () => ({
@@ -335,5 +335,56 @@ describe('AiExpensePreview large gap', () => {
     })
     expect(totalRadio()).toBeChecked()
     expect(itemsRadio()).not.toBeChecked()
+  })
+})
+
+describe('AiExpensePreview rial/toman unit', () => {
+  const tomanGroup = {
+    id: 'group-2',
+    name: 'Dong',
+    currency: 'Toman',
+    currencyCode: 'IRT',
+    participants: [{ id: 'p1', name: 'Ann' }],
+  } as never
+
+  it('lets the user flip a whole Iranian receipt between rials and tomans', () => {
+    render(
+      <AiExpensePreview
+        open
+        onOpenChange={() => undefined}
+        group={tomanGroup}
+        currentLedgerParticipantId={null}
+        draft={{
+          source: 'receipt',
+          title: 'Restaurant',
+          amount: 3_800_000,
+          amountUnit: 'minor',
+          currencyCode: 'IRT',
+          date: '2025-01-01',
+          categoryId: null,
+          items: [],
+          issues: [],
+        }}
+      />,
+    )
+
+    expect(linkSearches.at(-1)?.originalCurrency).toBe('IRT')
+    const rial = screen.getByRole('button', { name: 'Rial' })
+    expect(rial).toHaveAttribute('aria-pressed', 'false')
+
+    fireEvent.click(rial)
+
+    expect(screen.getByRole('button', { name: 'Rial' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
+    // The digits stay as scanned; only the unit changes.
+    expect(linkSearches.at(-1)?.originalCurrency).toBe('IRR')
+    expect(lastHandoffAmountMinor()).toBe(3_800_000)
+  })
+
+  it('does not show the unit toggle for non-Iranian receipts', () => {
+    renderPreview(receiptDraft([], 505))
+    expect(screen.queryByRole('button', { name: 'Rial' })).toBeNull()
   })
 })

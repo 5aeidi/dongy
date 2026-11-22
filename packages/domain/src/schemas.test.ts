@@ -51,6 +51,18 @@ describe('expenseFormInputSchema', () => {
     expect(result.success).toBe(true)
   })
 
+  it('accepts rial-sized amounts above ten million (DONGY)', () => {
+    expect(
+      expenseFormInputSchema.safeParse({ ...baseInput, amount: 17_950_000 })
+        .success,
+    ).toBe(true)
+    const tooBig = expenseFormInputSchema.safeParse({
+      ...baseInput,
+      amount: 2_147_483_648,
+    })
+    expect(tooBig.success).toBe(false)
+  })
+
   it('rejects malformed times but accepts DST-normalized wall times', () => {
     expect(
       expenseFormInputSchema.safeParse({ ...baseInput, expenseTime: '24:00' })

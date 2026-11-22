@@ -335,7 +335,7 @@ export type SupportedCurrencyCode = (typeof supportedCurrencyCodes)[number]
  * DONGY: the only currencies users can pick. The rest of the catalog stays so
  * existing data and conversions keep working, but it is never offered.
  */
-export const pickableCurrencyCodes = ['IRT', 'IRM'] as const
+export const pickableCurrencyCodes = ['IRT', 'IRM', 'IRR'] as const
 
 const byCode = new Map<string, Currency>(currencyList.map((c) => [c.code, c]))
 

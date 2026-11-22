@@ -80,6 +80,15 @@ function buildTitleLine(): string {
   return 'Title is the merchant name (with branch when shown); reconstruct it when garbled instead of copying the garble. If the document states a billing or validity period the payment covers, append it as `Merchant - Month YYYY`; otherwise merchant name alone.'
 }
 
+/**
+ * DONGY: Iranian receipts print rials (IRR) or tomans (IRT) and often omit the
+ * unit. The model picks the code; it never rescales the digits itself, so the
+ * app can let the user flip the unit afterwards without re-reading anything.
+ */
+function buildIranianUnitLine(): string {
+  return 'Iranian prices are in rials (IRR) or tomans (IRT), and 1 toman = 10 rials. When the receipt prints a unit (ریال, rial, IRR, تومان, toman, IRT, ت), follow it. When no unit is printed, infer it from the price level: a single restaurant dish usually costs about 150,000 to 2,000,000 toman (1,500,000 to 20,000,000 rials), a coffee or soft drink about 50,000 to 400,000 toman, a supermarket item about 20,000 to 500,000 toman, and a whole restaurant bill for a group about 1 to 20 million toman. Choose the unit under which the item prices look plausible, and return currencyCode IRR when the printed numbers are rials or IRT when they are tomans. Never rescale the digits yourself: return the numbers exactly as printed. Count the zeros carefully — 3,800,000 and 38,000,000 are different prices — and check that the items add up to the total.'
+}
+
 export function buildVisionPrompt(input: VisionPromptInput): string {
   const categories = DEFAULT_CATEGORIES
   const groupCurrency = getCurrencyFromGroup(input.groupCurrencyInput)
@@ -124,6 +133,7 @@ export function buildVisionPrompt(input: VisionPromptInput): string {
     ${buildTitleLine()}
     ${buildUnitsLine(groupCurrency)}
     Return currencyCode as the ISO 4217 code printed or implied by the receipt (language, merchant, address, tax labels, or phone). Only return an empty string when no inference is possible.
+    ${buildIranianUnitLine()}
     Return the date as yyyy-mm-dd; empty string when unreadable — never infer it.
     ${categoryLine}
     ${groupSection}
@@ -176,6 +186,7 @@ export function buildStructurePrompt(input: StructurePromptInput): string {
     ${buildTitleLine()}
     ${buildUnitsLine(groupCurrency)}
     Return currencyCode as the ISO 4217 code printed or implied by the text (language, merchant, address, tax labels, or phone). Only return an empty string when no inference is possible.
+    ${buildIranianUnitLine()}
     Return the date as yyyy-mm-dd; empty string when unreadable — never infer it.
     ${localeHint}
     ${translationDirective}

@@ -2218,7 +2218,7 @@
     "invalidNumber": "Invalid number.",
     "amountRequired": "You must enter an amount.",
     "amountNotZero": "The amount must not be zero.",
-    "amountTenMillion": "The amount must be lower than 10,000,000.",
+    "amountTenMillion": "The amount is too large.",
     "ratePositive": "The rate must be strictly greater than zero.",
     "paidByRequired": "You must select a participant.",
     "paidForMin1": "The expense must be split between at least one participant.",
@@ -3834,7 +3834,13 @@
     "itemsTotalNote": "The expense amount is set to the items total.",
     "sourceOfTruth": "Which total is correct?",
     "useExpenseTotal": "Receipt total {total}",
-    "useItemsTotal": "Items total {items}"
+    "useItemsTotal": "Items total {items}",
+    "receiptUnit": {
+      "label": "Prices on this receipt are in",
+      "rial": "Rial",
+      "toman": "Toman",
+      "hint": "1 toman = 10 rials. Pick the unit the receipt uses; the amounts are converted for your group."
+    }
   },
   "Feedback": {
     "navigationLabel": "Feedback",

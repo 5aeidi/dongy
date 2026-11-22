@@ -54,7 +54,13 @@
     "itemsTotalNote": "مبلغ هزینه برابر جمع اقلام تنظیم شد.",
     "sourceOfTruth": "کدام جمع درست است؟",
     "useExpenseTotal": "جمع رسید {total}",
-    "useItemsTotal": "جمع اقلام {items}"
+    "useItemsTotal": "جمع اقلام {items}",
+    "receiptUnit": {
+      "label": "قیمت‌های این رسید به",
+      "rial": "ریال",
+      "toman": "تومان",
+      "hint": "۱ تومان = ۱۰ ریال. واحدی را که رسید استفاده می‌کند انتخاب کنید؛ مبلغ‌ها برای گروه شما تبدیل می‌شوند."
+    }
   },
   "AccountAuthorizedClients": {
     "title": "برنامه‌های متصل",
@@ -1661,7 +1667,7 @@
         "name": "دینار عراق"
       },
       "IRR": {
-        "name": "ریال ایران"
+        "name": "ریال"
       },
       "ISK": {
         "name": "کرونای ایسلند"
@@ -4586,7 +4592,7 @@
     "invalidNumber": "عدد نامعتبر است.",
     "amountRequired": "باید مبلغی وارد کنید.",
     "amountNotZero": "مبلغ نباید صفر باشد.",
-    "amountTenMillion": "مبلغ باید کمتر از 10,000,000 باشد.",
+    "amountTenMillion": "مبلغ بیش از حد بزرگ است.",
     "ratePositive": "نرخ باید بزرگ‌تر از صفر باشد.",
     "paidByRequired": "باید یک شرکت‌کننده انتخاب کنید.",
     "paidForMin1": "هزینه باید دست‌کم بین یک شرکت‌کننده تقسیم شود.",

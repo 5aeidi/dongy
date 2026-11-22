@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
-import { ArrowLeft, Calculator } from 'lucide-react'
-import { useState, type Dispatch, type SetStateAction } from 'react'
+import { ArrowLeft } from 'lucide-react'
+import { type Dispatch, type SetStateAction } from 'react'
 import { useWatch, type UseFormReturn } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 
@@ -24,39 +24,22 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import {
-  ResponsiveDialog,
-  ResponsiveDialogContent,
-  ResponsiveDialogDescription,
-  ResponsiveDialogFooter,
-  ResponsiveDialogHeader,
-  ResponsiveDialogTitle,
-} from '@/components/ui/responsive-dialog'
 import { Textarea } from '@/components/ui/textarea'
 import { useLocale } from '@/i18n/react'
 import type { Locale } from '@/i18n/request'
 import { localizeCurrencyInput } from '@/lib/currency-input'
 import type { ExpenseCancelLink } from '@/lib/expense-navigation'
 import type { RuntimeFeatureFlags } from '@/lib/featureFlags'
-import { usePwaUpdateBlocker } from '@/lib/pwa-update-blockers'
 import { formatCurrency, formatNumber } from '@/lib/utils'
 import type { trpc } from '@/trpc/client'
 import type { AppRouterOutput } from '@spliit/api/router'
-import type {
-  Currency,
-  ExpenseFormInputValues,
-  ExpenseFormItemValues,
-} from '@spliit/domain'
+import type { Currency, ExpenseFormInputValues } from '@spliit/domain'
 import {
   DEFAULT_CATEGORIES,
   INCOME_CATEGORY_ID,
   SETTLEMENT_CATEGORY_ID,
   isSettlementCategory,
 } from '@spliit/domain'
-import {
-  formatCalculatorAmount,
-  type CalculatorItem,
-} from '@spliit/domain/calculator'
 import { getCurrencyRateWarning } from '@spliit/domain/currency'
 
 import type {
@@ -64,15 +47,12 @@ import type {
   ReceiptExtractedInfo,
   ReceiptScanContext,
 } from '../create-from-receipt-button'
-import { AmountCalculatorDialog } from './amount-calculator-dialog'
 import { AmountInput } from './amount-input'
 import {
   enforceCurrencyPattern,
   amountPlaceholder,
   parseCurrencyPaste,
 } from './currency-utils'
-import { applySplitToAll } from './default-item-split'
-import { getNeutralDefaultSplit } from './default-values'
 import { ExpenseDateTimeField } from './expense-date-time-field'
 import { expenseTabPriority } from './focus-navigation'
 import { RecurrenceSection } from './recurrence-section'
@@ -203,18 +183,6 @@ export function BasicDetailsCard(props: {
     localThresholds: props.runtimeFeatureFlags.categoryLocalThresholds,
     suggestCategoryMutation: props.suggestCategoryMutation,
   })
-  const [calculatorOpen, setCalculatorOpen] = useState(false)
-  const [calculatorExpression, setCalculatorExpression] = useState<
-    string | null
-  >(null)
-  const [pendingCalculatorItems, setPendingCalculatorItems] = useState<
-    CalculatorItem[] | null
-  >(null)
-  usePwaUpdateBlocker(
-    calculatorOpen || pendingCalculatorItems !== null,
-    'expense-calculator',
-  )
-  const watchedItems = useWatch({ control: form.control, name: 'items' }) ?? []
   const watchedCategory = useWatch({ control: form.control, name: 'category' })
   const categoryHint = isSettlementCategory(watchedCategory)
     ? t('settlementHint', {
@@ -227,12 +195,6 @@ export function BasicDetailsCard(props: {
       : null
 
   const inputCurrency = props.originalCurrency
-  const hasExistingItems = watchedItems.some(
-    (item) =>
-      item.title.trim().length > 0 ||
-      Number(item.unitPrice) !== 0 ||
-      Number(item.quantity) > 1,
-  )
   const previewFormatted =
     props.convertedAmountPreview != null
       ? formatCurrency(
@@ -242,66 +204,6 @@ export function BasicDetailsCard(props: {
           true,
         )
       : ''
-
-  const applyCalculatorItems = (items: CalculatorItem[]) => {
-    const seed = getNeutralDefaultSplit(group) as {
-      splitMode: ExpenseFormItemValues['splitMode']
-      paidFor: ExpenseFormItemValues['paidFor']
-    }
-    const formItems: ExpenseFormItemValues[] = items.map((item) => ({
-      id: crypto.randomUUID(),
-      title: '',
-      unitPrice: Number(formatCalculatorAmount(item.unitPrice, inputCurrency)),
-      quantity: item.quantity,
-      paidFor: group.participants.map((participant) => ({
-        participant: participant.id,
-        shares: 1,
-      })),
-      splitMode: 'EVENLY',
-    }))
-    const total = formItems.reduce(
-      (sum, item) => sum + Number(item.quantity) * Number(item.unitPrice),
-      0,
-    )
-    const totalDisplay = Number(formatCalculatorAmount(total, inputCurrency))
-
-    form.setValue('splitMode', 'ITEMIZED', {
-      shouldDirty: true,
-      shouldTouch: true,
-      shouldValidate: true,
-    })
-    const seeded = applySplitToAll({
-      items: formItems,
-      split: seed,
-      expenseAmount: totalDisplay,
-      groupCurrency: inputCurrency,
-    })
-    form.setValue('items', seeded.items, {
-      shouldDirty: true,
-      shouldTouch: true,
-      shouldValidate: true,
-    })
-    form.setValue('itemizedRemainder', seeded.itemizedRemainder, {
-      shouldDirty: true,
-      shouldTouch: true,
-      shouldValidate: true,
-    })
-    form.setValue('amount', totalDisplay, {
-      shouldDirty: true,
-      shouldTouch: true,
-      shouldValidate: true,
-    })
-    window.setTimeout(() => form.setFocus('items.0.title'), 0)
-  }
-
-  const handleCalculatorItems = (items: CalculatorItem[]) => {
-    if (hasExistingItems) {
-      setPendingCalculatorItems(items)
-      return
-    }
-
-    applyCalculatorItems(items)
-  }
 
   return (
     <Card>
@@ -501,7 +403,6 @@ export function BasicDetailsCard(props: {
                           inputCurrency.decimal_digits,
                           locale,
                         )
-                        setCalculatorExpression(v)
                         onChange(v)
                       }}
                       onPaste={(event) => {
@@ -511,7 +412,6 @@ export function BasicDetailsCard(props: {
                         )
                         if (!parsed) return
                         event.preventDefault()
-                        setCalculatorExpression(parsed.amount)
                         onChange(parsed.amount)
                         if (parsed.currencyCode && group.currencyCode) {
                           form.setValue(
@@ -532,42 +432,7 @@ export function BasicDetailsCard(props: {
                     />
                   </FormControl>
                 </div>
-                {!readOnly && (
-                  <Button
-                    aria-label={t('amountField.calculator.buttonLabel')}
-                    size="icon"
-                    type="button"
-                    variant="outline"
-                    className="h-10 shrink-0 rounded-none border-0 border-s border-input"
-                    onClick={() => {
-                      setCalculatorExpression(
-                        (expression) =>
-                          expression ?? String(form.getValues('amount') ?? ''),
-                      )
-                      setCalculatorOpen(true)
-                    }}
-                  >
-                    <Calculator className="h-4 w-4" />
-                  </Button>
-                )}
               </div>
-              <AmountCalculatorDialog
-                currency={inputCurrency}
-                expression={calculatorExpression ?? String(field.value ?? '')}
-                hasExistingItems={hasExistingItems}
-                open={calculatorOpen}
-                onOpenChange={setCalculatorOpen}
-                onExpressionChange={setCalculatorExpression}
-                onTransferAmount={(value) => {
-                  const sanitizedValue = enforceCurrencyPattern(
-                    value,
-                    inputCurrency.decimal_digits,
-                    locale,
-                  )
-                  onChange(sanitizedValue)
-                }}
-                onTransferItems={handleCalculatorItems}
-              />
               <FormMessage />
 
               {props.conversionRequired && (
@@ -845,43 +710,6 @@ export function BasicDetailsCard(props: {
           />
         </section>
       </CardContent>
-      <ResponsiveDialog
-        open={!!pendingCalculatorItems}
-        onOpenChange={(open) => {
-          if (!open) setPendingCalculatorItems(null)
-        }}
-      >
-        <ResponsiveDialogContent>
-          <ResponsiveDialogHeader>
-            <ResponsiveDialogTitle>
-              {t('amountField.calculator.replaceItemsTitle')}
-            </ResponsiveDialogTitle>
-            <ResponsiveDialogDescription>
-              {t('amountField.calculator.replaceItemsDescription')}
-            </ResponsiveDialogDescription>
-          </ResponsiveDialogHeader>
-          <ResponsiveDialogFooter>
-            <Button
-              type="button"
-              variant="ghost"
-              onClick={() => setPendingCalculatorItems(null)}
-            >
-              {t('cancel')}
-            </Button>
-            <Button
-              type="button"
-              onClick={() => {
-                if (pendingCalculatorItems) {
-                  applyCalculatorItems(pendingCalculatorItems)
-                }
-                setPendingCalculatorItems(null)
-              }}
-            >
-              {t('amountField.calculator.replaceItemsConfirm')}
-            </Button>
-          </ResponsiveDialogFooter>
-        </ResponsiveDialogContent>
-      </ResponsiveDialog>
     </Card>
   )
 }

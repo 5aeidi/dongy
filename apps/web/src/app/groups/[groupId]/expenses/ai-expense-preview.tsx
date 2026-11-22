@@ -148,8 +148,16 @@ export function AiExpensePreview({
   // closes while this registers on open.
   usePwaUpdateBlocker(open, 'ai-expense-preview')
   const groupCurrency = getCurrencyFromGroup(group)
+  // DONGY: Iranian receipts often omit the unit, so the user can flip the
+  // whole receipt between rials and tomans (the digits stay as printed; only
+  // their unit changes). Keyed to the draft so a new scan starts fresh.
+  const [unitPick, setUnitPick] = useState<{
+    draft: AiExpenseDraft
+    code: 'IRR' | 'IRT'
+  } | null>(null)
+  const draftCurrencyCode = draft.currencyCode?.trim().toUpperCase() || null
   const normalizedCurrencyCode =
-    draft.currencyCode?.trim().toUpperCase() || null
+    unitPick?.draft === draft ? unitPick.code : draftCurrencyCode
   const inputCurrency = normalizedCurrencyCode
     ? (getCurrency(normalizedCurrencyCode) ?? groupCurrency)
     : groupCurrency
@@ -413,6 +421,38 @@ export function AiExpensePreview({
               </div>
               <div>{title}</div>
             </div>
+            {draft.source === 'receipt' &&
+            (displayCurrency.code === 'IRR' ||
+              displayCurrency.code === 'IRT') ? (
+              <div className="col-span-2">
+                <div className="text-xs font-medium text-muted-foreground">
+                  {t('receiptUnit.label')}
+                </div>
+                <div className="mt-1 flex gap-2">
+                  {(['IRR', 'IRT'] as const).map((code) => (
+                    <Button
+                      key={code}
+                      type="button"
+                      size="sm"
+                      variant={
+                        displayCurrency.code === code ? 'default' : 'outline'
+                      }
+                      aria-pressed={displayCurrency.code === code}
+                      onClick={() => setUnitPick({ draft, code })}
+                    >
+                      {t(
+                        code === 'IRR'
+                          ? 'receiptUnit.rial'
+                          : 'receiptUnit.toman',
+                      )}
+                    </Button>
+                  ))}
+                </div>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  {t('receiptUnit.hint')}
+                </p>
+              </div>
+            ) : null}
             <div>
               <div className="text-xs font-medium text-muted-foreground">
                 {t('amount')}
