@@ -5,7 +5,7 @@ import {
   m,
   useReducedMotion,
 } from 'motion/react'
-import { useId, useSyncExternalStore } from 'react'
+import { useSyncExternalStore } from 'react'
 
 import type { MascotCharacterProps } from '../../mascot-character'
 import type { MascotReaction } from '../../mascot-context'
@@ -20,6 +20,57 @@ const spring = {
   damping: 24,
   mass: 0.72,
 } as const
+
+// DONGY 8-bit look: Bill is drawn on a pixel grid with flat fills, square
+// pixels and stepped edges. Motion (the split, clap, waves, rain) is unchanged.
+const INK = 'hsl(var(--mascot-ink))'
+const PAPER = 'hsl(var(--mascot-paper))'
+
+/** Tear down the middle of the receipt: x alternates 67/73 every 6 units. */
+function tearPath() {
+  let d = ''
+  for (let k = 0; k <= 17; k++) {
+    const x = k % 2 === 0 ? 67 : 73
+    const yTop = k === 17 ? 14 : 116 - 6 * k
+    d += `H${x}V${yTop}`
+  }
+  return d
+}
+
+const LEFT_BODY =
+  'M70 14H36V18H32V22H28V128H34V122H40V128H46V122H52V128H58V122H64V128' +
+  tearPath() +
+  'H70Z'
+const RIGHT_BODY =
+  'M70 14H104V18H108V22H112V122H106V128H100V122H94V128H88V122H82V128H76V122H70V128' +
+  tearPath() +
+  'H70Z'
+
+/** A square pixel coin. */
+function PixelCoin({ x, y, r }: { x: number; y: number; r: number }) {
+  const s2 = Math.round(r * 2)
+  const inner = Math.round(r)
+  return (
+    <>
+      <rect
+        x={x - s2 / 2}
+        y={y - s2 / 2}
+        width={s2}
+        height={s2}
+        fill={PAPER}
+        stroke="hsl(var(--mascot-stroke))"
+        strokeWidth="1.6"
+      />
+      <rect
+        x={x - inner / 2}
+        y={y - inner / 2}
+        width={inner}
+        height={inner}
+        fill="hsl(var(--mascot-accent))"
+      />
+    </>
+  )
+}
 
 export type BillSortingPhase = 'waiting' | 'catching' | 'reading' | 'filing'
 
@@ -71,7 +122,6 @@ function BillArtwork({
     getMascotResumeCycle,
     () => 0,
   )
-  const id = useId().replaceAll(':', '')
   const ambient =
     !reducedMotion && reaction === 'idle' && !open && !sortingPhase
   const clap = reaction === 'celebrate'
@@ -136,6 +186,7 @@ function BillArtwork({
           : `${reaction}-${reactionKey}`
       }
       viewBox="0 0 140 158"
+      shapeRendering="crispEdges"
       data-mascot-reaction={reaction}
       data-mascot-open={open ? 'true' : 'false'}
       data-mascot-cycle={resumeCycle}
@@ -196,78 +247,22 @@ function BillArtwork({
       }
       style={{ overflow: 'visible', transformOrigin: '70px 138px' }}
     >
-      <defs>
-        <linearGradient id={`${id}-paper`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="hsl(var(--mascot-paper))" />
-          <stop offset="0.58" stopColor="hsl(var(--mascot-paper-mid))" />
-          <stop offset="1" stopColor="hsl(var(--mascot-paper-edge))" />
-        </linearGradient>
-        <linearGradient id={`${id}-leftTint`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="hsl(var(--mascot-accent) / 0.08)" />
-          <stop offset="1" stopColor="hsl(var(--mascot-accent) / 0.2)" />
-        </linearGradient>
-        <linearGradient id={`${id}-rightTint`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="hsl(var(--mascot-ink) / 0.03)" />
-          <stop offset="1" stopColor="hsl(var(--mascot-ink) / 0.08)" />
-        </linearGradient>
-        <linearGradient id={`${id}-shine`} x1="0" y1="0" x2="1" y2="0">
-          <stop
-            offset="0"
-            stopColor="hsl(var(--mascot-paper))"
-            stopOpacity="0"
-          />
-          <stop
-            offset="0.5"
-            stopColor="hsl(var(--mascot-paper))"
-            stopOpacity="0.9"
-          />
-          <stop
-            offset="1"
-            stopColor="hsl(var(--mascot-paper))"
-            stopOpacity="0"
-          />
-        </linearGradient>
-        <filter
-          id={`${id}-shadow`}
-          x="-60%"
-          y="-100%"
-          width="220%"
-          height="300%"
-        >
-          <feGaussianBlur stdDeviation="3.4" />
-        </filter>
-        <filter
-          id={`${id}-glow`}
-          x="-100%"
-          y="-100%"
-          width="300%"
-          height="300%"
-        >
-          <feGaussianBlur stdDeviation="3" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-
-      <m.ellipse
-        cx="70"
-        cy="145"
-        rx="36"
-        ry="6"
+      <m.rect
+        x="34"
+        y="142"
+        width="72"
+        height="6"
         fill="hsl(var(--mascot-ink) / 0.22)"
-        filter={`url(#${id}-shadow)`}
-        initial={{ rx: 36, opacity: 0.18 }}
+        initial={{ scaleX: 1, opacity: 0.18 }}
         animate={{
-          rx:
+          scaleX:
             reaction === 'success' || reaction === 'celebrate'
-              ? [36, 27, 36]
+              ? [1, 0.75, 1]
               : open
-                ? 48
+                ? 1.34
                 : docked
-                  ? 28
-                  : 36,
+                  ? 0.78
+                  : 1,
           opacity:
             reaction === 'success' || reaction === 'celebrate'
               ? [0.18, 0.1, 0.18]
@@ -276,13 +271,15 @@ function BillArtwork({
                 : 0.18,
         }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
+        style={{ transformOrigin: '70px 145px' }}
       />
 
       {(reaction === 'success' || reaction === 'celebrate') && (
-        <m.circle
-          cx="70"
-          cy="76"
-          r="53"
+        <m.rect
+          x="20"
+          y="26"
+          width="100"
+          height="100"
           fill="hsl(var(--mascot-accent) / 0.14)"
           stroke="hsl(var(--mascot-accent) / 0.18)"
           strokeWidth="1"
@@ -312,7 +309,6 @@ function BillArtwork({
 
       <ReceiptHalf
         side="left"
-        id={id}
         open={open}
         clap={clap}
         splitDistance={splitDistance}
@@ -320,7 +316,6 @@ function BillArtwork({
       />
       <ReceiptHalf
         side="right"
-        id={id}
         open={open}
         clap={clap}
         splitDistance={splitDistance}
@@ -328,12 +323,11 @@ function BillArtwork({
       />
 
       <m.rect
-        x="68.55"
-        y="15.5"
-        width="2.9"
-        height="114.5"
-        rx="1.4"
-        fill={`url(#${id}-paper)`}
+        x="65"
+        y="16"
+        width="10"
+        height="104"
+        fill={PAPER}
         initial={false}
         animate={{
           opacity: open ? 0 : clap && !reducedMotion ? [1, 0, 1, 0, 1] : 1,
@@ -386,11 +380,12 @@ function BillArtwork({
             style={{ transformOrigin: '112px 25px' }}
           >
             {[0, 1, 2].map((dot) => (
-              <m.circle
+              <m.rect
                 key={dot}
-                cx={103 + dot * 8}
-                cy={29 - dot * 6}
-                r={2.1 + dot * 0.7}
+                x={101 + dot * 8}
+                y={27 - dot * 6}
+                width={4 + dot * 2}
+                height={4 + dot * 2}
                 fill="hsl(var(--mascot-accent))"
                 animate={
                   reducedMotion
@@ -449,23 +444,19 @@ function BillArtwork({
 
 function ReceiptHalf({
   side,
-  id,
   open,
   clap,
   splitDistance,
   reducedMotion,
 }: {
   side: 'left' | 'right'
-  id: string
   open: boolean
   clap: boolean
   splitDistance: number
   reducedMotion: boolean
 }) {
   const left = side === 'left'
-  const bodyPath = left
-    ? 'M70 14H42C34.3 14 28 20.3 28 28V121L34 128L41 121L48 129L55 121L62 129L70 122C67 116 73 110 70 104C67 98 73 92 70 86C67 80 73 74 70 68C67 62 73 56 70 50C67 44 73 38 70 32C67 26 73 20 70 14Z'
-    : 'M70 14H98C105.7 14 112 20.3 112 28V121L106 128L99 121L92 129L85 121L78 129L70 122C73 116 67 110 70 104C73 98 67 92 70 86C73 80 67 74 70 68C73 62 67 56 70 50C73 44 67 38 70 32C73 26 67 20 70 14Z'
+  const bodyPath = left ? LEFT_BODY : RIGHT_BODY
   const direction = left ? -1 : 1
   const clapMotion = clap && !open && !reducedMotion
 
@@ -503,71 +494,155 @@ function ReceiptHalf({
     >
       <path
         d={bodyPath}
-        fill={`url(#${id}-paper)`}
+        fill={PAPER}
         stroke="hsl(var(--mascot-stroke))"
-        strokeWidth="2.15"
-        strokeLinejoin="round"
+        strokeWidth="2"
+        strokeLinejoin="miter"
+      />
+      {/* Pixel shading: a darker band on the outer edge and above the teeth. */}
+      <rect
+        x={left ? 30 : 106}
+        y="24"
+        width="4"
+        height="92"
+        fill={
+          left
+            ? 'hsl(var(--mascot-paper-mid))'
+            : 'hsl(var(--mascot-paper-edge))'
+        }
+      />
+      <rect
+        x={left ? 30 : 76}
+        y="116"
+        width={left ? 34 : 34}
+        height="4"
+        fill="hsl(var(--mascot-paper-edge))"
       />
       <m.path
         d={bodyPath}
-        fill={`url(#${id}-${left ? 'leftTint' : 'rightTint'})`}
+        fill={
+          left
+            ? 'hsl(var(--mascot-accent) / 0.16)'
+            : 'hsl(var(--mascot-ink) / 0.06)'
+        }
         initial={false}
         animate={{ opacity: clap ? 1 : 0 }}
         transition={{ duration: reducedMotion ? 0 : 0.32 }}
       />
 
-      <path
-        d={left ? 'M36 34H62' : 'M78 34H104'}
-        stroke="hsl(var(--mascot-accent))"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      <path
-        d={left ? 'M36 42H55' : 'M85 42H104'}
-        stroke="hsl(var(--mascot-rule) / 0.7)"
-        strokeWidth="2.3"
-        strokeLinecap="round"
-      />
-
-      <g opacity={0.85}>
-        <path
-          d={left ? 'M38 91H62' : 'M78 91H102'}
-          stroke="hsl(var(--mascot-rule) / 0.75)"
-          strokeWidth="3.2"
-          strokeLinecap="round"
-        />
-        <path
-          d={left ? 'M38 100H58' : 'M82 100H102'}
-          stroke="hsl(var(--mascot-accent) / 0.7)"
-          strokeWidth="2.7"
-          strokeLinecap="round"
-        />
-        <path
-          d={left ? 'M38 109H52' : 'M88 109H102'}
-          stroke="hsl(var(--mascot-rule) / 0.6)"
-          strokeWidth="2.7"
-          strokeLinecap="round"
-        />
-      </g>
-
-      <m.path
-        d="M34 22C48 16 52 22 60 17"
-        fill="none"
-        stroke={`url(#${id}-shine)`}
-        strokeWidth="3"
-        strokeLinecap="round"
-        opacity={left ? 0.7 : 0}
-      />
+      <ReceiptPrint left={left} />
     </m.g>
   )
 }
 
-function HappyEyes() {
+/**
+ * Thermal-print look: short pixel "words" and dashed dividers instead of solid
+ * lines. The left half reads like item names, the right like prices.
+ */
+const PRINT_ROWS = [
+  { y: 29, left: [6, 4], right: [5, 3], color: 'hsl(var(--mascot-accent))' },
+  { y: 36, dashed: true, color: 'hsl(var(--mascot-rule) / 0.55)' },
+  { y: 89, left: [4, 2, 3], right: [4], color: 'hsl(var(--mascot-rule))' },
+  { y: 95, left: [3, 4], right: [3], color: 'hsl(var(--mascot-rule))' },
+  { y: 101, dashed: true, color: 'hsl(var(--mascot-rule) / 0.55)' },
+  { y: 107, left: [5, 2], right: [5], color: 'hsl(var(--mascot-accent))' },
+] as const
+
+function ReceiptPrint({ left }: { left: boolean }) {
+  const start = left ? 36 : 78
+  const end = left ? 62 : 104
+  const rects: { x: number; y: number; w: number; fill: string }[] = []
+  for (const row of PRINT_ROWS) {
+    if ('dashed' in row) {
+      for (let x = start; x + 2 <= end; x += 4) {
+        rects.push({ x, y: row.y, w: 2, fill: row.color })
+      }
+      continue
+    }
+    const words = left ? row.left : row.right
+    // Item names start at the left edge; prices are right-aligned.
+    const total = words.reduce((sum, w) => sum + w * 2 + 2, -2)
+    let x = left ? start : end - total
+    for (const w of words) {
+      rects.push({ x, y: row.y, w: w * 2, fill: row.color })
+      x += w * 2 + 2
+    }
+  }
+  return (
+    <g data-mascot-print={left ? 'left' : 'right'}>
+      {rects.map((r) => (
+        <rect
+          key={`${r.x}-${r.y}`}
+          x={r.x}
+          y={r.y}
+          width={r.w}
+          height="2"
+          fill={r.fill}
+        />
+      ))}
+    </g>
+  )
+}
+
+/**
+ * Bill's face, drawn by hand in design/mascot-face-editor.html. Rects are [x,
+ * y, width, height] in the SVG's 140×158 viewBox.
+ */
+const FACE_EYES = [
+  [52, 56, 10, 10],
+  [78, 56, 10, 10],
+] as const
+const FACE_MOUTH = [
+  [62, 72, 4, 2],
+  [74, 72, 4, 2],
+  [62, 74, 2, 10],
+  [76, 74, 2, 10],
+  [68, 78, 4, 6],
+  [64, 84, 12, 2],
+] as const
+/** The mouth's vertical span, used to flip it into a frown. */
+const MOUTH_TOP = 72
+const MOUTH_BOTTOM = 86
+
+function FaceRects({
+  rects,
+  flip = false,
+}: {
+  rects: ReadonlyArray<readonly [number, number, number, number]>
+  flip?: boolean
+}) {
   return (
     <>
-      <path d="M51 61Q57 54 63 61" strokeWidth="3.6" />
-      <path d="M77 61Q83 54 89 61" strokeWidth="3.6" />
+      {rects.map(([x, y, w, h]) => (
+        <rect
+          key={`${x}-${y}`}
+          x={x}
+          y={flip ? MOUTH_TOP + MOUTH_BOTTOM - (y + h) : y}
+          width={w}
+          height={h}
+        />
+      ))}
     </>
+  )
+}
+
+function FaceEyes() {
+  return (
+    <g fill={INK}>
+      <FaceRects rects={FACE_EYES} />
+    </g>
+  )
+}
+
+function FaceMouth({ mood = 'smile' }: { mood?: 'smile' | 'frown' | 'flat' }) {
+  return (
+    <g fill={INK} data-mascot-mouth={mood}>
+      {mood === 'flat' ? (
+        <rect x="64" y="80" width="12" height="2" />
+      ) : (
+        <FaceRects rects={FACE_MOUTH} flip={mood === 'frown'} />
+      )}
+    </g>
   )
 }
 
@@ -581,142 +656,30 @@ function FullFace({
   sortingPhase?: BillSortingPhase
 }) {
   if (sortingPhase) {
-    const reading = sortingPhase === 'reading'
-    const filing = sortingPhase === 'filing'
     return (
-      <g data-mascot-sorting-face={sortingPhase} fill="hsl(var(--mascot-ink))">
-        <ellipse
-          cx={filing ? 59 : reading ? 56 : 55}
-          cy="62"
-          rx="4.8"
-          ry="6.6"
-        />
-        <ellipse
-          cx={filing ? 85 : reading ? 83 : 81}
-          cy="62"
-          rx="4.8"
-          ry="6.6"
-        />
-        <circle
-          cx={filing ? 60 : reading ? 57 : 56}
-          cy="60"
-          r="1.3"
-          fill="hsl(var(--mascot-paper))"
-        />
-        <circle
-          cx={filing ? 86 : reading ? 84 : 82}
-          cy="60"
-          r="1.3"
-          fill="hsl(var(--mascot-paper))"
-        />
-        <path
-          d={reading ? 'M62 80Q70 84 78 80' : 'M58 78Q70 88 82 78'}
-          fill="none"
-          stroke="hsl(var(--mascot-ink))"
-          strokeWidth="3"
-          strokeLinecap="round"
-        />
-      </g>
-    )
-  }
-
-  if (reaction === 'success' || reaction === 'celebrate') {
-    return (
-      <g fill="none" stroke="hsl(var(--mascot-ink))" strokeLinecap="round">
-        <HappyEyes />
-        <path
-          d={
-            reaction === 'celebrate'
-              ? 'M56 76Q70 90 84 76'
-              : 'M57 76Q70 88 83 76'
-          }
-          strokeWidth="3"
-        />
-      </g>
-    )
-  }
-
-  if (reaction === 'welcome') {
-    return (
-      <g fill="none" stroke="hsl(var(--mascot-ink))" strokeLinecap="round">
-        <ellipse
-          cx="57"
-          cy="62"
-          rx="5.2"
-          ry="7"
-          fill="hsl(var(--mascot-ink))"
-          stroke="none"
-        />
-        <ellipse
-          cx="83"
-          cy="62"
-          rx="5.2"
-          ry="7"
-          fill="hsl(var(--mascot-ink))"
-          stroke="none"
-        />
-        <circle cx="58.5" cy="60" r="1.45" fill="hsl(var(--mascot-paper))" />
-        <circle cx="84.5" cy="60" r="1.45" fill="hsl(var(--mascot-paper))" />
-        <path d="M56 78Q70 91 84 78" strokeWidth="3" />
-      </g>
-    )
-  }
-
-  if (reaction === 'acknowledge') {
-    return (
-      <g fill="none" stroke="hsl(var(--mascot-ink))" strokeLinecap="round">
-        <ellipse
-          cx="57"
-          cy="64"
-          rx="5.2"
-          ry="6.4"
-          fill="hsl(var(--mascot-ink))"
-          stroke="none"
-        />
-        <ellipse
-          cx="83"
-          cy="64"
-          rx="5.2"
-          ry="6.4"
-          fill="hsl(var(--mascot-ink))"
-          stroke="none"
-        />
-        <path d="M60 80Q70 86 80 80" strokeWidth="3" />
+      <g data-mascot-sorting-face={sortingPhase}>
+        <FaceEyes />
+        <FaceMouth mood={sortingPhase === 'reading' ? 'flat' : 'smile'} />
       </g>
     )
   }
 
   if (reaction === 'failure') {
     return (
-      <g stroke="hsl(var(--mascot-ink))" strokeLinecap="round">
-        <path d="M50 52L62 55" strokeWidth="2.2" />
-        <path d="M78 55L90 52" strokeWidth="2.2" />
-        <ellipse
-          cx="58"
-          cy="64"
-          rx="4.3"
-          ry="5.6"
-          fill="hsl(var(--mascot-ink))"
-          stroke="none"
-        />
-        <ellipse
-          cx="82"
-          cy="64"
-          rx="4.3"
-          ry="5.6"
-          fill="hsl(var(--mascot-ink))"
-          stroke="none"
-        />
-        <path d="M59 84Q70 72 81 84" fill="none" strokeWidth="3" />
-        <m.path
-          d="M91 67C96 74 96 78 91 81C86 78 86 74 91 67Z"
-          fill="hsl(var(--mascot-accent) / 0.85)"
-          stroke="hsl(var(--mascot-stroke))"
-          strokeWidth="1.2"
+      <g>
+        <FaceEyes />
+        <FaceMouth mood="frown" />
+        <m.g
           initial={{ y: -2, opacity: 0 }}
           animate={{ y: [0, 5, 5], opacity: [0, 1, 0] }}
           transition={{ duration: 1.4, repeat: 1, ease: 'easeIn' }}
-        />
+          fill="hsl(var(--mascot-accent) / 0.85)"
+        >
+          <rect x="90" y="67" width="2" height="2" />
+          <rect x="89" y="69" width="4" height="2" />
+          <rect x="88" y="71" width="6" height="6" />
+          <rect x="89" y="77" width="4" height="2" />
+        </m.g>
       </g>
     )
   }
@@ -759,82 +722,22 @@ function FullFace({
                 }
               : { duration: 0.1 }
           }
-          style={{ transformOrigin: '70px 62px' }}
+          style={{ transformOrigin: '70px 61px' }}
         >
-          <ellipse
-            cx="57"
-            cy="62"
-            rx="5.2"
-            ry="7"
-            fill="hsl(var(--mascot-ink))"
-          />
-          <ellipse
-            cx="83"
-            cy="62"
-            rx="5.2"
-            ry="7"
-            fill="hsl(var(--mascot-ink))"
-          />
-          <circle
-            cx={thinking ? 59 : 58.5}
-            cy={thinking ? 59.5 : 60}
-            r="1.45"
-            fill="hsl(var(--mascot-paper))"
-          />
-          <circle
-            cx={thinking ? 85 : 84.5}
-            cy={thinking ? 59.5 : 60}
-            r="1.45"
-            fill="hsl(var(--mascot-paper))"
-          />
+          <FaceEyes />
         </m.g>
       </m.g>
-      {thinking && (
-        <path
-          d="M49 50Q56 46 63 50M77 50Q84 45 91 49"
-          fill="none"
-          stroke="hsl(var(--mascot-ink))"
-          strokeWidth="2"
-          strokeLinecap="round"
-        />
-      )}
-      <path
-        d={thinking ? 'M61 78Q70 82 79 77' : 'M58 76Q70 87 82 76'}
-        fill="none"
-        stroke="hsl(var(--mascot-ink))"
-        strokeWidth="3"
-        strokeLinecap="round"
-      />
-      <ellipse
-        cx="47"
-        cy="73"
-        rx="5"
-        ry="2.6"
-        fill="hsl(var(--mascot-accent) / 0.22)"
-      />
-      <ellipse
-        cx="93"
-        cy="73"
-        rx="5"
-        ry="2.6"
-        fill="hsl(var(--mascot-accent) / 0.22)"
-      />
+      <FaceMouth mood={thinking ? 'flat' : 'smile'} />
     </g>
   )
 }
 
+/** The same face at half size, on each half when Bill is torn open. */
 function TwinFace({ x }: { x: number }) {
   return (
-    <g transform={`translate(${x - 18} 0)`} fill="hsl(var(--mascot-ink))">
-      <ellipse cx="11" cy="64" rx="3.4" ry="5" />
-      <ellipse cx="25" cy="64" rx="3.4" ry="5" />
-      <path
-        d="M11 74Q18 81 25 74"
-        fill="none"
-        stroke="hsl(var(--mascot-ink))"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-      />
+    <g transform={`translate(${x} 66) scale(0.5) translate(-70 -71)`}>
+      <FaceEyes />
+      <FaceMouth />
     </g>
   )
 }
@@ -864,9 +767,9 @@ function SortingArms({
           fill="none"
           stroke="hsl(var(--mascot-ink))"
           strokeWidth="3.5"
-          strokeLinecap="round"
+          strokeLinecap="square"
         />
-        <circle cx="17" cy="65" r="3.3" fill="hsl(var(--mascot-ink))" />
+        <rect x="14" y="62" width="6" height="6" fill={INK} />
       </m.g>
       <m.g
         animate={{
@@ -880,9 +783,9 @@ function SortingArms({
           fill="none"
           stroke="hsl(var(--mascot-ink))"
           strokeWidth="3.5"
-          strokeLinecap="round"
+          strokeLinecap="square"
         />
-        <circle cx="125" cy="67" r="3.3" fill="hsl(var(--mascot-ink))" />
+        <rect x="122" y="64" width="6" height="6" fill={INK} />
       </m.g>
     </g>
   )
@@ -936,7 +839,7 @@ function StickArm({
         fill="none"
         stroke="hsl(var(--mascot-ink))"
         strokeWidth="3.4"
-        strokeLinecap="round"
+        strokeLinecap="square"
       />
     </m.g>
   )
@@ -968,7 +871,7 @@ function SuccessSparkles({ reducedMotion }: { reducedMotion: boolean }) {
             d={`M${sparkle.x - 2.4} ${sparkle.y}H${sparkle.x + 2.4}M${sparkle.x} ${sparkle.y - 2.4}V${sparkle.y + 2.4}`}
             stroke="hsl(var(--mascot-accent))"
             strokeWidth="2.2"
-            strokeLinecap="round"
+            strokeLinecap="square"
           />
         </m.g>
       ))}
@@ -1007,24 +910,7 @@ function SuccessRain({ reducedMotion }: { reducedMotion: boolean }) {
           style={{ transformOrigin: `${drop.x}px 0px` }}
         >
           {drop.kind === 'coin' ? (
-            <>
-              <circle
-                cx={drop.x}
-                cy="0"
-                r="5.4"
-                fill="hsl(var(--mascot-paper))"
-                stroke="hsl(var(--mascot-stroke))"
-                strokeWidth="1.6"
-              />
-              <circle
-                cx={drop.x}
-                cy="0"
-                r="2.8"
-                fill="none"
-                stroke="hsl(var(--mascot-accent))"
-                strokeWidth="1.1"
-              />
-            </>
+            <PixelCoin x={drop.x} y={0} r={5} />
           ) : (
             <g>
               <rect
@@ -1032,7 +918,6 @@ function SuccessRain({ reducedMotion }: { reducedMotion: boolean }) {
                 y="-4.5"
                 width="14"
                 height="9"
-                rx="1.6"
                 fill="hsl(var(--mascot-paper))"
                 stroke="hsl(var(--mascot-stroke))"
                 strokeWidth="1.3"
@@ -1041,7 +926,7 @@ function SuccessRain({ reducedMotion }: { reducedMotion: boolean }) {
                 d={`M${drop.x - 4} -1H${drop.x + 4}`}
                 stroke="hsl(var(--mascot-rule))"
                 strokeWidth="1.1"
-                strokeLinecap="round"
+                strokeLinecap="square"
               />
             </g>
           )}
@@ -1076,22 +961,7 @@ function CelebrateCoins({ reducedMotion }: { reducedMotion: boolean }) {
           transition={{ delay: index * 0.05, duration: 0.95, ease: 'easeOut' }}
           style={{ transformOrigin: `${coin.x}px ${coin.y}px` }}
         >
-          <circle
-            cx={coin.x}
-            cy={coin.y}
-            r="6.2"
-            fill="hsl(var(--mascot-paper))"
-            stroke="hsl(var(--mascot-stroke))"
-            strokeWidth="1.8"
-          />
-          <circle
-            cx={coin.x}
-            cy={coin.y}
-            r="3.4"
-            fill="none"
-            stroke="hsl(var(--mascot-accent))"
-            strokeWidth="1.2"
-          />
+          <PixelCoin x={coin.x} y={coin.y} r={6} />
         </m.g>
       ))}
     </>
@@ -1119,13 +989,13 @@ function AcknowledgeToss({ reducedMotion }: { reducedMotion: boolean }) {
           fill="hsl(var(--mascot-paper))"
           stroke="hsl(var(--mascot-stroke))"
           strokeWidth="1.8"
-          strokeLinejoin="round"
+          strokeLinejoin="miter"
         />
         <path
           d="M123 92H133M122 99H134"
           stroke="hsl(var(--mascot-rule))"
           strokeWidth="1.4"
-          strokeLinecap="round"
+          strokeLinecap="square"
         />
         <m.g
           initial={false}
@@ -1142,7 +1012,6 @@ function AcknowledgeToss({ reducedMotion }: { reducedMotion: boolean }) {
             y="81"
             width="24"
             height="4.5"
-            rx="1.4"
             fill="hsl(var(--mascot-ink))"
           />
         </m.g>
@@ -1153,7 +1022,7 @@ function AcknowledgeToss({ reducedMotion }: { reducedMotion: boolean }) {
           fill="hsl(var(--mascot-paper))"
           stroke="hsl(var(--mascot-stroke))"
           strokeWidth="1.5"
-          strokeLinejoin="round"
+          strokeLinejoin="miter"
           initial={{ x: 0, y: 0, opacity: 0, rotate: 0 }}
           animate={{
             x: [0, 4, 6],

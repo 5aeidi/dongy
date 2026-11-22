@@ -1,9 +1,10 @@
 import type { Locale } from '@/i18n/request'
 import { localeLabels, locales } from '@/i18n/request'
 
+// DONGY: short language codes instead of country flags.
 export const localeFlags = {
-  'en-US': '🇺🇸',
-  'fa-IR': '🇮🇷',
+  'en-US': 'EN',
+  'fa-IR': 'FA',
 } satisfies Record<Locale, string>
 
 export const popularLocales = [

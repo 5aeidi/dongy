@@ -80,7 +80,7 @@ describe('BillCharacter', () => {
   it('uses a closed smile for success instead of an open grin', () => {
     const { container } = render(<BillCharacter reaction="success" />)
     expect(container.innerHTML).not.toContain(CREEPY_GRIN)
-    expect(container.innerHTML).toContain('M57 76Q70 88 83 76')
+    expect(container.querySelector('[data-mascot-mouth="smile"]')).toBeTruthy()
     expect(container.querySelector('[data-mascot-fx="success"]')).toBeTruthy()
     expect(container.querySelector('[data-mascot-rain="true"]')).toBeTruthy()
     expect(container.querySelector('[data-mascot-sparkles="true"]')).toBeNull()
@@ -116,7 +116,7 @@ describe('BillCharacter', () => {
     expect(
       container.querySelector('[data-mascot-sorting-face="reading"]'),
     ).toBeTruthy()
-    expect(container.innerHTML).toContain('M70 14H42')
+    expect(container.innerHTML).toContain('M70 14H36')
 
     rerender(<BillCharacter />)
     expect(container.querySelector('[data-mascot-sorting-arms]')).toBeNull()
@@ -159,7 +159,7 @@ describe('BillCharacter', () => {
   it('keeps idle print colors when the speed-dial is open', () => {
     const { container } = render(<BillCharacter open />)
     expect(container.innerHTML).toContain('stroke="hsl(var(--mascot-stroke))"')
-    expect(container.innerHTML).toContain('stroke="hsl(var(--mascot-accent))"')
+    expect(container.innerHTML).toContain('fill="hsl(var(--mascot-accent))"')
     expect(container.querySelector('circle[r="53"]')).toBeNull()
   })
 

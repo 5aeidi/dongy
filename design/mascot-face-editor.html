@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bill face editor</title>
+    <style>
+      :root {
+        --bg: #1c1917;
+        --panel: #26221f;
+        --ink: #24242b;
+        --paper: #ebe7df;
+        --paper-edge: #d8d2c6;
+        --stroke: #4f7a68;
+        --accent: #3f8f6e;
+        --text: #f2f2f2;
+        --muted: #a8a29e;
+      }
+      * {
+        box-sizing: border-box;
+        border-radius: 0 !important;
+      }
+      body {
+        margin: 0;
+        padding: 16px;
+        background: var(--bg);
+        color: var(--text);
+        font:
+          14px/1.4 ui-monospace,
+          Menlo,
+          monospace;
+      }
+      h1 {
+        font-size: 16px;
+        margin: 0 0 4px;
+      }
+      p {
+        margin: 0 0 12px;
+        color: var(--muted);
+      }
+      .wrap {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+      .tools {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      button,
+      label.toggle {
+        background: var(--panel);
+        color: var(--text);
+        border: 2px solid #57534e;
+        padding: 6px 12px;
+        font: inherit;
+        cursor: pointer;
+        box-shadow: 3px 3px 0 #000;
+        display: inline-flex;
+        gap: 6px;
+        align-items: center;
+      }
+      button.on {
+        background: var(--accent);
+        color: #0c0a09;
+        border-color: #f2f2f2;
+      }
+      button:active {
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0 #000;
+      }
+      canvas {
+        display: block;
+        image-rendering: pixelated;
+        touch-action: none;
+      }
+      #board {
+        border: 2px solid var(--stroke);
+        cursor: crosshair;
+        max-width: 100%;
+      }
+      .preview {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .preview canvas {
+        border: 2px solid #57534e;
+        background: var(--bg);
+      }
+      .status {
+        color: var(--muted);
+        margin-top: 8px;
+        min-height: 1.4em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Bill face editor</h1>
+    <p>
+      Click or drag to paint pixels. Right-click (or use Erase) to remove.
+      Mirror copies each pixel to the other side so both eyes match. Your
+      drawing saves automatically; tell Claude "done" when you're happy.
+    </p>
+
+    <div class="tools">
+      <button id="draw" class="on">Draw</button>
+      <button id="erase">Erase</button>
+      <button id="mirror" class="on">Mirror: on</button>
+      <button id="size">Pixel size: 2</button>
+      <button id="clear">Clear</button>
+      <button id="reset">Reset to current face</button>
+      <button id="undo">Undo</button>
+    </div>
+
+    <div class="wrap">
+      <canvas id="board"></canvas>
+      <div class="preview">
+        <div>Actual size (as in the app)</div>
+        <canvas id="small"></canvas>
+        <div>Bigger preview</div>
+        <canvas id="medium"></canvas>
+      </div>
+    </div>
+    <div class="status" id="status"></div>
+
+    <script>
+      // Face area in Bill's SVG coordinates (viewBox 0 0 140 158).
+      const X0 = 30,
+        X1 = 110,
+        Y0 = 44,
+        Y1 = 90
+      const SCALE = 8 // screen px per SVG unit on the board
+      const KEY = 'dongy-bill-face-v1'
+
+      // Pixels are stored at 1-unit resolution: "x,y" in SVG units.
+      let cells = new Set()
+      let history = []
+      let mode = 'draw'
+      let mirror = true
+      let brush = 2
+
+      // The face Bill has today: two 10×10 eyes and a 7-pixel smile.
+      function currentFace() {
+        const s = new Set()
+        const fill = (x, y, w, h) => {
+          for (let i = x; i < x + w; i++)
+            for (let j = y; j < y + h; j++) s.add(`${i},${j}`)
+        }
+        fill(52, 57, 10, 10)
+        fill(78, 57, 10, 10)
+        ;[0, 1, 2, 2, 2, 1, 0].forEach((row, i) =>
+          fill(56 + i * 4, 75 + row * 4, 4, 4),
+        )
+        return s
+      }
+
+      function load() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(KEY) || 'null')
+          if (saved && Array.isArray(saved.cells))
+            return new Set(saved.cells.map((c) => c.join(',')))
+        } catch {}
+        return currentFace()
+      }
+
+      function save() {
+        const list = [...cells]
+          .map((c) => c.split(',').map(Number))
+          .sort((a, b) => a[1] - b[1] || a[0] - b[0])
+        const data = {
+          version: 1,
+          unit: 1,
+          viewBox: [0, 0, 140, 158],
+          cells: list,
+        }
+        try {
+          localStorage.setItem(KEY, JSON.stringify(data))
+        } catch {}
+        window.__billFace = data
+        document.getElementById('status').textContent =
+          `${list.length} pixel units painted · saved`
+      }
+
+      const board = document.getElementById('board')
+      const small = document.getElementById('small')
+      const medium = document.getElementById('medium')
+      board.width = (X1 - X0) * SCALE
+      board.height = (Y1 - Y0) * SCALE
+      // Previews show the whole receipt so the face is judged in context.
+      small.width = 70
+      small.height = 79
+      medium.width = 280
+      medium.height = 316
+
+      function drawReceipt(ctx, k, ox = 0, oy = 0) {
+        ctx.fillStyle = '#4f7a68'
+        ctx.fillRect(ox + 27 * k, oy + 13 * k, 86 * k, 116 * k)
+        ctx.fillStyle = getComputedStyle(
+          document.documentElement,
+        ).getPropertyValue('--paper')
+        ctx.fillRect(ox + 29 * k, oy + 15 * k, 82 * k, 112 * k)
+        ctx.fillStyle = '#d8d2c6'
+        ctx.fillRect(ox + 106 * k, oy + 24 * k, 4 * k, 92 * k)
+        // print rows for context
+        const rows = [
+          [29, '#3f8f6e'],
+          [36, '#b5aea3'],
+          [89, '#78716c'],
+          [95, '#78716c'],
+          [101, '#b5aea3'],
+          [107, '#3f8f6e'],
+        ]
+        for (const [y, c] of rows) {
+          ctx.fillStyle = c
+          ctx.fillRect(ox + 36 * k, oy + y * k, 22 * k, 2 * k)
+          ctx.fillRect(ox + 86 * k, oy + y * k, 18 * k, 2 * k)
+        }
+      }
+
+      function render() {
+        const b = board.getContext('2d')
+        b.fillStyle = '#ebe7df'
+        b.fillRect(0, 0, board.width, board.height)
+        // print rows that peek into the face area
+        b.fillStyle = 'rgba(120,113,108,.35)'
+        ;[89].forEach((y) => {
+          b.fillRect((36 - X0) * SCALE, (y - Y0) * SCALE, 22 * SCALE, 2 * SCALE)
+          b.fillRect((86 - X0) * SCALE, (y - Y0) * SCALE, 18 * SCALE, 2 * SCALE)
+        })
+        // painted pixels
+        b.fillStyle = '#24242b'
+        for (const c of cells) {
+          const [x, y] = c.split(',').map(Number)
+          b.fillRect((x - X0) * SCALE, (y - Y0) * SCALE, SCALE, SCALE)
+        }
+        // grid at the current brush size, plus the centre line
+        b.strokeStyle = 'rgba(0,0,0,.08)'
+        b.lineWidth = 1
+        for (let x = X0; x <= X1; x += brush) {
+          b.beginPath()
+          b.moveTo((x - X0) * SCALE + 0.5, 0)
+          b.lineTo((x - X0) * SCALE + 0.5, board.height)
+          b.stroke()
+        }
+        for (let y = Y0; y <= Y1; y += brush) {
+          b.beginPath()
+          b.moveTo(0, (y - Y0) * SCALE + 0.5)
+          b.lineTo(board.width, (y - Y0) * SCALE + 0.5)
+          b.stroke()
+        }
+        b.strokeStyle = 'rgba(79,122,104,.6)'
+        b.beginPath()
+        b.moveTo((70 - X0) * SCALE + 0.5, 0)
+        b.lineTo((70 - X0) * SCALE + 0.5, board.height)
+        b.stroke()
+
+        for (const [cv, k] of [
+          [small, 0.5],
+          [medium, 2],
+        ]) {
+          const c = cv.getContext('2d')
+          c.imageSmoothingEnabled = false
+          c.fillStyle = '#1c1917'
+          c.fillRect(0, 0, cv.width, cv.height)
+          drawReceipt(c, k)
+          c.fillStyle = '#24242b'
+          for (const cell of cells) {
+            const [x, y] = cell.split(',').map(Number)
+            c.fillRect(x * k, y * k, Math.max(k, 1), Math.max(k, 1))
+          }
+        }
+      }
+
+      function paintAt(evt) {
+        const r = board.getBoundingClientRect()
+        const ux =
+          X0 +
+          Math.floor((((evt.clientX - r.left) / r.width) * (X1 - X0)) / brush) *
+            brush
+        const uy =
+          Y0 +
+          Math.floor((((evt.clientY - r.top) / r.height) * (Y1 - Y0)) / brush) *
+            brush
+        const erase = mode === 'erase' || evt.buttons === 2
+        const apply = (x0) => {
+          for (let i = 0; i < brush; i++)
+            for (let j = 0; j < brush; j++) {
+              const key = `${x0 + i},${uy + j}`
+              erase ? cells.delete(key) : cells.add(key)
+            }
+        }
+        apply(ux)
+        if (mirror) apply(140 - ux - brush)
+        render()
+      }
+
+      let painting = false
+      board.addEventListener('contextmenu', (e) => e.preventDefault())
+      board.addEventListener('pointerdown', (e) => {
+        history.push(new Set(cells))
+        if (history.length > 50) history.shift()
+        painting = true
+        board.setPointerCapture(e.pointerId)
+        paintAt(e)
+      })
+      board.addEventListener('pointermove', (e) => {
+        if (painting) paintAt(e)
+      })
+      board.addEventListener('pointerup', () => {
+        painting = false
+        save()
+      })
+
+      const btn = (id) => document.getElementById(id)
+      btn('draw').onclick = () => {
+        mode = 'draw'
+        btn('draw').classList.add('on')
+        btn('erase').classList.remove('on')
+      }
+      btn('erase').onclick = () => {
+        mode = 'erase'
+        btn('erase').classList.add('on')
+        btn('draw').classList.remove('on')
+      }
+      btn('mirror').onclick = () => {
+        mirror = !mirror
+        btn('mirror').textContent = `Mirror: ${mirror ? 'on' : 'off'}`
+        btn('mirror').classList.toggle('on', mirror)
+      }
+      btn('size').onclick = () => {
+        brush = brush === 1 ? 2 : brush === 2 ? 4 : 1
+        btn('size').textContent = `Pixel size: ${brush}`
+        render()
+      }
+      btn('clear').onclick = () => {
+        history.push(new Set(cells))
+        cells = new Set()
+        render()
+        save()
+      }
+      btn('reset').onclick = () => {
+        history.push(new Set(cells))
+        cells = currentFace()
+        render()
+        save()
+      }
+      btn('undo').onclick = () => {
+        if (history.length) {
+          cells = history.pop()
+          render()
+          save()
+        }
+      }
+
+      cells = load()
+      render()
+      save()
+    </script>
+  </body>
+</html>

@@ -339,7 +339,7 @@ LocaleButton.displayName = 'LocaleButton'
 
 function LocaleFlag({ locale }: { locale: Locale }) {
   return (
-    <span className="text-lg leading-none" aria-hidden="true">
+    <span className="text-sm leading-none font-bold" aria-hidden="true">
       {localeFlags[locale]}
     </span>
   )

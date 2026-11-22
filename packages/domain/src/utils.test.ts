@@ -1,5 +1,5 @@
 import { DEFAULT_CATEGORIES } from './categories'
-import type { Currency } from './currency'
+import { type Currency, getCurrency } from './currency'
 import {
   cn,
   conversionMinorScale,
@@ -36,6 +36,23 @@ describe('hashStringToSeed / expenseIdSeed', () => {
 })
 
 describe('formatCurrency', () => {
+  it('puts the currency name to the left of the number in Farsi', () => {
+    const LRI = '\u2066'
+    const PDI = '\u2069'
+    expect(formatCurrency(getCurrency('IRT')!, 1753000, 'fa-IR')).toBe(
+      `${LRI}تومان\u200e\u00a0۱٬۷۵۳٬۰۰۰${PDI}`,
+    )
+    expect(formatCurrency(getCurrency('IRM')!, 1753, 'fa-IR')).toBe(
+      `${LRI}میلیون تومان\u200e\u00a0۱٫۷۵۳${PDI}`,
+    )
+    expect(formatCurrency(getCurrency('IRR')!, -500000, 'fa-IR')).toBe(
+      `${LRI}ریال\u200e\u00a0−۵۰۰٬۰۰۰${PDI}`,
+    )
+    expect(formatCurrency(getCurrency('IRT')!, 1753000, 'en-US')).toBe(
+      '1,753,000 Toman',
+    )
+  })
+
   it('supports custom currency symbol when currency code is empty', () => {
     const currency: Currency = {
       symbol: 'CUR',

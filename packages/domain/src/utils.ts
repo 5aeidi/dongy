@@ -106,12 +106,37 @@ export function localizedCurrencySymbol(currency: Currency, locale: string) {
   return currency.localizedSymbols?.[language] ?? currency.symbol
 }
 
+/** Left-to-right isolate (LRI … PDI): keeps the parts in visual order. */
+const LRI = '\u2066'
+const PDI = '\u2069'
+const BIDI_MARKS = /[\u200e\u200f\u061c\u2066-\u2069]/gu
+
+/**
+ * DONGY: in Farsi the currency name always sits to the LEFT of the number
+ * («تومان ۱٬۷۵۳٬۰۰۰»). The pair is wrapped in a left-to-right isolate so the
+ * order holds in RTL and LTR containers alike.
+ */
+function symbolLeft(symbol: string, number: string) {
+  // The LRM after the name stops Persian digits (bidi class AN) from joining
+  // the name's right-to-left run, which would flip them back to the left.
+  return `${LRI}${symbol}\u200e\u00a0${number.replace(BIDI_MARKS, '').trim()}${PDI}`
+}
+
+function isFarsi(locale: string) {
+  try {
+    return new Intl.Locale(resolveFormattingLocale(locale)).language === 'fa'
+  } catch {
+    return false
+  }
+}
+
 export function formatCurrency(
   currency: Currency,
   amount: number,
   locale: string,
   fractions?: boolean,
 ) {
+  const farsi = isFarsi(locale)
   // Crypto assets are not ISO 4217 codes: `Intl.NumberFormat` with
   // `style: 'currency'` throws for 4-character tickers (e.g. DOGE), so they
   // are formatted as plain numbers with trailing zeros trimmed and the
@@ -122,7 +147,8 @@ export function formatCurrency(
       minimumFractionDigits: 0,
       maximumFractionDigits: currency.decimal_digits,
     }).format(value)
-    return `${formatted} ${localizedCurrencySymbol(currency, locale)}`
+    const symbol = localizedCurrencySymbol(currency, locale)
+    return farsi ? symbolLeft(symbol, formatted) : `${formatted} ${symbol}`
   }
   const format = new Intl.NumberFormat(resolveFormattingLocale(locale), {
     minimumFractionDigits: currency.decimal_digits,
@@ -131,9 +157,30 @@ export function formatCurrency(
     // '€' will be placed in correct position
     currency: currency.code.length ? currency.code : 'EUR',
   })
-  const formatted = format.format(
-    fractions ? amount : amountAsDecimal(amount, currency),
-  )
+  const value = fractions ? amount : amountAsDecimal(amount, currency)
+  if (farsi) {
+    const parts = format.formatToParts(value)
+    const symbol = currency.code.length
+      ? parts
+          .filter((part) => part.type === 'currency')
+          .map((part) => part.value)
+          .join('')
+      : currency.symbol
+    const number = parts
+      .filter(
+        (part) =>
+          part.type !== 'currency' &&
+          !(
+            part.type === 'literal' &&
+            /^[\s\u200e\u200f\u061c]*$/u.test(part.value)
+          ),
+      )
+      .map((part) => part.value)
+      .join('')
+      .replace(BIDI_MARKS, '')
+    return symbolLeft(symbol, number)
+  }
+  const formatted = format.format(value)
   if (currency.code.length) {
     return formatted
   }
